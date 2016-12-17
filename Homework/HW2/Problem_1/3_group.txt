@@ -1,0 +1,4 @@
+neutron group structure......3 group
+1 1e-5 1  
+2 1 100000
+3 100000 2e7

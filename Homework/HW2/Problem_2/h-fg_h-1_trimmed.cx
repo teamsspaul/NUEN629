@@ -1,0 +1,73 @@
+PDT Format Material Data File created Thu Sep 17 14:07:21 2015
+
+This file is a multigroup neutron library generated from MATXS file h-fg.dat.
+1 temperatures, 1 densities, and 5 groups.
+
+13 neutron process and 5 transfer processes.
+Scattering order 3
+
+Microscopic cross sections are in units of barns.
+
+Temperatures in Kelvin:
+            296
+
+Densities in g/cc:
+              0
+
+Group boundaries in eV:
+          2e+07         100000           1000             10            0.1
+          0.001
+
+T = 296 density = 0
+---------------------------------------------------
+MT 1099
+              5.2984             4.60524             4.60524             2576.32             23796.5
+MT 1 (Total)
+             4.60248             18.2957             20.4196             22.6605            29.77991
+MT 2 (Elastic)
+             4.60244              18.295             20.4131             22.5122            29.47271
+MT 2502, Moment 0
+  Sink, first, last:     0    0    0
+             2.91518
+  Sink, first, last:     1    0    1
+             1.67039             14.0197
+  Sink, first, last:     2    0    2
+           0.0167099             4.23255             16.0183
+  Sink, first, last:     3    0    4
+         0.000166937           0.0423257             4.35086             4.53876             1.53831
+  Sink, first, last:     4    0    4
+         1.04698e-06         0.000424355           0.0439445             17.9734             27.9344
+MT 2502, Moment 1
+  Sink, first, last:     0    0    0
+             2.22643
+  Sink, first, last:     1    0    1
+            0.841377             10.2637
+  Sink, first, last:     2    0    2
+          0.00102335             1.94064             11.6427
+  Sink, first, last:     3    0    4
+         1.89352e-05          0.00248544             1.97494             4.16469            0.632739
+  Sink, first, last:     4    0    4
+         7.16936e-07          5.6271e-05          0.00257432             10.8562             10.2743
+MT 2502, Moment 2
+  Sink, first, last:     0    0    0
+             1.23843
+  Sink, first, last:     1    0    1
+           -0.080456             5.07552
+  Sink, first, last:     2    0    2
+          -0.0082542           -0.469528             5.64416
+  Sink, first, last:     3    0    4
+        -7.89681e-05          -0.0209277            -0.50636             3.49719            0.143034
+  Sink, first, last:     4    0    4
+         2.54247e-07        -0.000195325           -0.021729             2.14494             3.81567
+MT 2502, Moment 3
+  Sink, first, last:     0    0    0
+            0.424588
+  Sink, first, last:     1    0    1
+           -0.426636             1.15424
+  Sink, first, last:     2    0    2
+         -0.00152326            -1.15112             1.18556
+  Sink, first, last:     3    0    4
+        -2.66289e-05         -0.00370163            -1.18201              2.6706          -0.0074071
+  Sink, first, last:     4    0    4
+        -1.51557e-07        -7.58479e-05           -0.003834              -2.671             1.73178
+

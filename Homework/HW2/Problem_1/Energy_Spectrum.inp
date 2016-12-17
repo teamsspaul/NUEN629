@@ -1,0 +1,19 @@
+C    Graphite Natural Uranium Mixture
+C    Cell Cards
+1 1 -2.26  -1   imp:n=1
+2   0      1    imp:n=0
+
+C    SURFACE CARD
+1    SO   1                 $ FUEL REGION
+
+C    DATA CARD
+MODE N
+KCODE 1000 1.0 100 500
+KSRC  0.0 0.0 0.0
+M1   92234.70c 0.000055 92235.70c 0.0072
+     92238.70c 0.992745 6012.50c  150
+ 
+ 
+
+C F4:N 1
+C E4 0 1E-11 1E-10 20i 1E-8 20i 1E-6 20i 1E-4 20i 1E-2 20i 1 20i 10 10i 20

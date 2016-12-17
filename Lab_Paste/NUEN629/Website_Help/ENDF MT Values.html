@@ -1,0 +1,666 @@
+
+<!-- saved from url=(0036)http://t2.lanl.gov/nis/endf/mts.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ENDF MT Values</title>
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#cc0000" alink="#ff3300" vlink="#330099">
+
+<table border="0" width="580">
+<tbody><tr>
+<td width="40"><br></td>
+<td width="540">
+<center>
+<font size="6">
+ENDF MT Values
+</font>
+</center></td>
+</tr>
+<tr>
+<td width="40"><br></td>
+<td width="540"><br></td>
+</tr>
+</tbody></table>
+
+<hr width="600" align="LEFT">
+<br>
+ 
+<table border="0" width="580">
+<tbody><tr>
+<td width="40"><br></td>
+<td width="540">
+
+The ENDF format uses MT numbers to define reaction types,
+and some additional MT numbers are used for special sections,
+such as the descriptive data, or the resonance parameters.
+In the following tables, "z" stands for any of the particles,
+<i>i.e.,</i> n, p, d, t, He-3, a, or photonuclear gamma.<p>
+
+<table width="540" border="1" cellpadding="4">
+<tbody><tr>
+<td><b>MT</b></td>
+<td><b>Reaction</b></td>
+<td><b>Description</b></td>
+<td><b>Comments</b></td>
+</tr>
+<tr>
+<td>1</td>
+<td>(n,total)</td>
+<td>Neutron total cross section.  Sum of MT=2, 4, 5, 11, 16-18, 
+    22-26, 28-37, 41-42, 44-45, and 102-117.</td>
+<td>Redundant.  Undefined for incident charged particles.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>(z,z<sub>0</sub>)</td>
+<td>Elastic scattering cross section for incident particles.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>3</td>
+<td>(z,nonelastic)</td>
+<td>Nonelastic cross section.  Sum of MT=4, 5, 11, 16-18, 22-26,
+    28-37, 41-42, 44-45, 102-117.</td>
+<td>Redundant.  For photon production only.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>(z,n)</td>
+<td>Production of one neutron in the exit channel.  Sum of
+    MT=50-91.</td>
+<td>Redundant.  For incident neutrons, this is total inelastic
+    scattering (MT=50 is undefined for neutrons).</td>
+</tr>
+<tr>
+<td>5</td>
+<td>(z,anything)</td>
+<td>Sum of all reactions not given explicitly in another MT
+    number.  This is a partial reaction to be added to 
+    obtain MT=1.</td>
+<td>Each particles can be identified and its multiplicity given
+    in File 6.  Not allowed in Files 4, 5.</td>
+</tr>
+<tr>
+<td>6-9</td>
+<td><br></td>
+<td>Not allowed in version 6.</td>
+<td><sup>9</sup>Be(n,2n) in version 5.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>(z,continuum)</td>
+<td>Total continuum reaction; exclues all discrete reactions.</td>
+<td>Redundant; to be used for derived files only.</td> 
+</tr>
+<tr>
+<td>27</td>
+<td>(z,abs)</td>
+<td>Absorption.  Sum of MT=18 and MT=102-117.</td> 
+<td>Redundant.  Rarely used.</td>
+</tr>
+<tr>
+<td>101</td>
+<td>(z,disap)</td>
+<td>Disappearance.  Sum of MT=102-117.</td> 
+<td>Redundant.  Rarely used.</td>
+</tr>
+</tbody></table></p><p>
+
+</p><center>
+<b>Neutron-Producing Continuum Reactions</b>
+</center><p>
+
+<table width="540" border="1" cellpadding="4">
+<tbody><tr>
+<td><b>MT</b></td>
+<td><b>Reaction</b></td>
+<td><b>Description</b></td>
+<td><b>Comments</b></td>
+</tr>
+<tr>
+<td>11</td>
+<td>(z,2nd)</td>
+<td>Production of two neutrons and a deuteron, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>16</td>
+<td>(z,2n)</td>
+<td>Production of two neutrons, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>17</td>
+<td>(z,2n)</td>
+<td>Production of three neutrons, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>18</td>
+<td>(z,fission)</td>
+<td>Total fission.  Equal to the sum of MT=19, 20, 21, and 38,
+    if present.</td> 
+<td>Redundant if MT=19 is present.  Basic otherwise.</td>
+</tr>
+<tr>
+<td>19</td>
+<td>(z,f)</td>
+<td>First-chance fission.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>20</td>
+<td>(z,nf)</td>
+<td>Second-chance fission.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>21</td>
+<td>(z,2nf)</td>
+<td>Third-chance fission.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>22</td>
+<td>(z,na)</td>
+<td>Production of a neutron and alpha particle, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>23</td>
+<td>(z,n3a)</td>
+<td>Production of a neutron and three alpha particles, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>24</td>
+<td>(z,2na)</td>
+<td>Production of two neutrons and an alpha particle, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>25</td>
+<td>(z,3na)</td>
+<td>Production of three neutrons and an alpha particle, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>28</td>
+<td>(z,np)</td>
+<td>Production of a neutron and a proton, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>29</td>
+<td>(z,n2a)</td>
+<td>Production of a neutron and two alpha particles, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>30</td>
+<td>(z,2n2a)</td>
+<td>Production of two neutrons and two alpha particles, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>32</td>
+<td>(z,nd)</td>
+<td>Production of a neutron and a deuteron, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>33</td>
+<td>(z,nt)</td>
+<td>Production of a neutron and a triton, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>34</td>
+<td>(z,n<sup>3</sup>He)</td>
+<td>Production of a neutron and a <sup>3</sup>He particle, 
+    plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>35</td>
+<td>(z,nd2a)</td>
+<td>Production of a neutron, a deuteron, and two alpha particles, 
+    plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>36</td>
+<td>(z,nt2a)</td>
+<td>Production of a neutron, a triton, and two alpha particles, 
+    plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>37</td>
+<td>(z,4n)</td>
+<td>Production of four neutrons, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>38</td>
+<td>(z,3nf)</td>
+<td>Fourth-change fission.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>41</td>
+<td>(z,2np)</td>
+<td>Production of two neutrons and a proton, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>42</td>
+<td>(z,3np)</td>
+<td>Production of three neutrons and a proton, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>44</td>
+<td>(z,n2p)</td>
+<td>Production of a neutron and two protons, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>45</td>
+<td>(z,npa)</td>
+<td>Production of a neutron, a proton, and an alpha particle, 
+    plus a residual.</td> 
+<td><br></td>
+</tr>
+
+
+
+</tbody></table></p><p>
+
+</p><center>
+<b>Neutron-Producing Discrete Reactions</b>
+</center><p>
+
+<table width="540" border="1" cellpadding="4">
+<tbody><tr>
+<td><b>MT</b></td>
+<td><b>Reaction</b></td>
+<td><b>Description</b></td>
+<td><b>Comments</b></td>
+</tr>
+<tr>
+<td>50</td>
+<td>(z,n<sub>0</sub>)</td>
+<td>Production of a neutron, leaving the residual nucleus in the
+    ground state.</td>
+<td>Not allowed for incident neutrons.  Use MT=2.</td>
+</tr>
+<tr>
+<td>51</td>
+<td>(z,n<sub>1</sub>)</td>
+<td>Production of a neutron, leaving the residual nucleus in the
+    first excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>52</td>
+<td>(z,n<sub>2</sub>)</td>
+<td>Production of a neutron, leaving the residual nucleus in the
+    second excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+<td>...</td>
+<td><br></td>
+<td><br></td>
+</tr>
+<tr>
+<td>90</td>
+<td>(z,n<sub>40</sub>)</td>
+<td>Production of a neutron, leaving the residual nucleus in the
+    40th excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>91</td>
+<td>(z,n<sub>c</sub>)</td>
+<td>Production of a neutron in the continuum not included in the
+    above discrete representation.</td>
+<td><br></td>
+</tr>
+</tbody></table></p><p>
+
+</p><center>
+<b>Reactions That Do Not Produce Neutrons</b>
+</center><p>
+
+<table width="540" border="1" cellpadding="4">
+<tbody><tr>
+<td><b>MT</b></td>
+<td><b>Reaction</b></td>
+<td><b>Description</b></td>
+<td><b>Comments</b></td>
+</tr>
+<tr>
+<td>102</td>
+<td>(z,gamma)</td>
+<td>Radiative capture.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>103</td>
+<td>(z,p)</td>
+<td>Production of a proton, plus a residual.  Sum of MT=600-649,
+    if they are present.</td>
+<td>For incident protons, this is inelastic scattering, and MT=600 is
+    undefined (use MT=2).</td>
+</tr>
+<tr>
+<td>104</td>
+<td>(z,d)</td>
+<td>Production of a deuteron, plus a residual.  Sum of MT=650-699,
+    if they are present.</td>
+<td>For incident deuterons, this is inelastic scattering, and MT=650 is
+    undefined (use MT=2).</td>
+</tr>
+<tr>
+<td>105</td>
+<td>(z,t)</td>
+<td>Production of a triton, plus a residual.  Sum of MT=700-749,
+    if they are present.</td>
+<td>For incident tritons, this is inelastic scattering, and MT=700 is
+    undefined (use MT=2).</td>
+</tr>
+<tr>
+<td>106</td>
+<td>(z,<sup>3</sup>He)</td>
+<td>Production of a <sup3< sup="">He particles, plus a residual.  Sum 
+    of MT=750-799, if they are present.</sup3<></td>
+<td>For incident <sup>3</sup>He particles, this is inelastic scattering, 
+    and MT=750 is undefined (use MT=2).</td>
+</tr>
+<tr>
+<td>107</td>
+<td>(z,a)</td>
+<td>Production of an alpha particle, plus a residual.  Sum of MT=800-849,
+    if they are present.</td>
+<td>For incident alphas, this is inelastic scattering, and MT=800 is
+    undefined (use MT=2).</td>
+</tr>
+<tr>
+<td>108</td>
+<td>(z,2a)</td>
+<td>Production of two alphas, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>109</td>
+<td>(z,3a)</td>
+<td>Production of three alphas, plus a residual.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>111</td>
+<td>(z,2p)</td>
+<td>Production of two protons, plus a residual.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>112</td>
+<td>(z,pa)</td>
+<td>Production of a proton and an alpha particle, plus a residual.</td> 
+<td><br></td>
+</tr>
+<tr>
+<td>113</td>
+<td>(z,t2a)</td>
+<td>Production of a triton and two alphas, plus a residual.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>114</td>
+<td>(z,d2a)</td>
+<td>Production of a deuteron and two alphas, plus a residual.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>115</td>
+<td>(z,pd)</td>
+<td>Production of a proton and a deuteron, plus a residual.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>116</td>
+<td>(z,pt)</td>
+<td>Production of a proton and a triton, plus a residual.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>117</td>
+<td>(z,da)</td>
+<td>Production of a deuteron and an alpha particle, plus a residual.</td> 
+<td><br></td>
+</tr>
+</tbody></table></p><p>
+
+</p><center>
+<b>Charged-Particle-Producing Discrete Reactions</b>
+</center><p>
+
+<table width="540" border="1" cellpadding="4">
+<tbody><tr>
+<td><b>MT</b></td>
+<td><b>Reaction</b></td>
+<td><b>Description</b></td>
+<td><b>Comments</b></td>
+</tr>
+<tr>
+<td>600</td>
+<td>(z,p<sub>0</sub>)</td>
+<td>Production of a proton, leaving the residual nucleus in the
+    ground state.</td>
+<td>Not allowed for incident protons.  Use MT=2.</td>
+</tr>
+<tr>
+<td>601</td>
+<td>(z,p<sub>1</sub>)</td>
+<td>Production of a proton, leaving the residual nucleus in the
+    first excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>602</td>
+<td>(z,p<sub>2</sub>)</td>
+<td>Production of a proton, leaving the residual nucleus in the
+    second excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+<td>...</td>
+<td><br></td>
+<td><br></td>
+</tr>
+<tr>
+<td>648</td>
+<td>(z,p<sub>48</sub>)</td>
+<td>Production of a proton, leaving the residual nucleus in the
+    48th excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>649</td>
+<td>(z,p<sub>c</sub>)</td>
+<td>Production of a proton in the continuum not included in the
+    above discrete representation.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>650</td>
+<td>(z,d<sub>0</sub>)</td>
+<td>Production of a deuteron, leaving the residual nucleus in the
+    ground state.</td>
+<td>Not allowed for incident deuterons.  Use MT=2.</td>
+</tr>
+<tr>
+<td>651</td>
+<td>(z,d<sub>1</sub>)</td>
+<td>Production of a deuteron, leaving the residual nucleus in the
+    first excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+<td>...</td>
+<td><br></td>
+<td><br></td>
+</tr>
+<tr>
+<td>698</td>
+<td>(z,d<sub>48</sub>)</td>
+<td>Production of a deuteron, leaving the residual nucleus in the
+    48th excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>699</td>
+<td>(z,d<sub>c</sub>)</td>
+<td>Production of a deuteron in the continuum not included in the
+    above discrete representation.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>700</td>
+<td>(z,t<sub>0</sub>)</td>
+<td>Production of a triton, leaving the residual nucleus in the
+    ground state.</td>
+<td>Not allowed for incident tritons.  Use MT=2.</td>
+</tr>
+<tr>
+<td>701</td>
+<td>(z,t<sub>1</sub>)</td>
+<td>Production of a triton, leaving the residual nucleus in the
+    first excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+<td>...</td>
+<td><br></td>
+<td><br></td>
+</tr>
+<tr>
+<td>748</td>
+<td>(z,t<sub>48</sub>)</td>
+<td>Production of a triton, leaving the residual nucleus in the
+    48th excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>749</td>
+<td>(z,t<sub>c</sub>)</td>
+<td>Production of a triton in the continuum not included in the
+    above discrete representation.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>750</td>
+<td>(z,<sup>3</sup>He<sub>0</sub>)</td>
+<td>Production of a <sup>3</sup>He particle, leaving the residual 
+    nucleus in the ground state.</td>
+<td>Not allowed for incident <sup>3</sup>He particles.  Use MT=2.</td>
+</tr>
+<tr>
+<td>751</td>
+<td>(z,<sup>3</sup>He<sub>1</sub>)</td>
+<td>Production of a <sup>3</sup>He particle, leaving the residual 
+    nucleus in the first excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+<td>...</td>
+<td><br></td>
+<td><br></td>
+</tr>
+<tr>
+<td>798</td>
+<td>(z,<sup>3</sup>He<sub>48</sub>)</td>
+<td>Production of a <sup>3</sup>He particle, leaving the residual 
+    nucleus in the 48th excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>799</td>
+<td>(z,<sup>3</sup>He<sub>c</sub>)</td>
+<td>Production of a <sup>3</sup>He particle in the continuum not 
+    included in the above discrete representation.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>800</td>
+<td>(z,a<sub>0</sub>)</td>
+<td>Production of an alpha particle, leaving the residual 
+    nucleus in the ground state.</td>
+<td>Not allowed for incident alphas.  Use MT=2.</td>
+</tr>
+<tr>
+<td>801</td>
+<td>(z,a<sub>1</sub>)</td>
+<td>Production of an alpha particle, leaving the residual 
+    nucleus in the first excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+<td>...</td>
+<td><br></td>
+<td><br></td>
+</tr>
+<tr>
+<td>848</td>
+<td>(z,a<sub>48</sub>)</td>
+<td>Production of an alpha particle, leaving the residual 
+    nucleus in the 48th excited state.</td>
+<td><br></td>
+</tr>
+<tr>
+<td>849</td>
+<td>(z,a<sub>c</sub>)</td>
+<td>Production of an alpha particle in the continuum not 
+    included in the above discrete representation.</td>
+<td><br></td>
+</tr>
+</tbody></table></p><p>
+
+
+</p></td>
+</tr>
+</tbody></table>
+
+<table border="0" width="580" cellpadding="10">
+<tbody><tr>
+<td width="40"><br></td>
+<td width="100"><a href="http://t2.lanl.gov/nis/endf/intro01.html">NEXT</a></td>
+<td width="380"><br></td>
+<td width="100"><a href="http://t2.lanl.gov/nis/endf/theindex.html">INDEX</a></td>
+</tr>
+<tr>
+</tr></tbody></table>
+
+<hr width="600" align="LEFT">
+
+<table border="0" width="580">
+
+<tbody><tr>
+<td width="40"><br></td>
+<td width="150">23 January 1998</td>
+<td width="280" align="CENTER"><a href="http://t2.lanl.gov/">
+T-2 Nuclear Information Service</a></td>
+<td width="150" align="RIGHT"><i>ryxm@lanl.gov</i></td>
+</tr>
+</tbody></table>
+
+
+
+</body></html>
