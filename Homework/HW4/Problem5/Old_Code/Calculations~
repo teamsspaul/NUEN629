@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+
+################################################################
+##################### Import packages ##########################
+################################################################
+
+import time
+start_time = time.time()
+import Functions as fun
+import lhsmdu
+from mpmath import expint
+
+################################################################
+###################### Calculations ############################
+################################################################
+
+N=10000  #Samples
+Nbins=60 #Hist Plot
+Nstrata=10
+filename="mean2.pdf"
+
+#RandomNumbers=fun.np.random.uniform(0,1,N)
+#RandomNumbers=fun.Rstrat(N,Nstrata)  #strat sampling
+#l=lhsmdu.sample(1,N)  #Hyper cube sampling
+#RandomNumbers=l[0].A1
+#RandomNumbers=fun.Rvdc(N,7)    #Halton sequence
+
+#SamplesSigma=fun.gamma.ppf(RandomNumbers,0.1,10)
+SamplesSigma=fun.np.random.gamma(shape=10,scale=0.1,size=N)
+
+x=1
+phi=[]
+for i in range(0,len(SamplesSigma)):
+    E2=expint(2,SamplesSigma[i]*x)
+    phi.append(float(2*fun.np.pi*E2))
+    
+#Plot the data, and plot fitted PDF
+Xlabel="Distribution of flux"
+(n,bins,ax,fig)=fun.HIST(Xlabel,phi,Nbins,N)
+(ax,fig)=fun.HISTDataToPDF(n,bins,ax,fig)
+fun.plt.savefig(filename)
+
+
+###################### Time To execute #################
+
+print("--- %s seconds ---" % (time.time() - start_time))

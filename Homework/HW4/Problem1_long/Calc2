@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+
+################################################################
+##################### Import packages ##########################
+################################################################
+
+import time
+start_time = time.time()
+import Functions as fun
+
+################################################################
+###################### Calculations ############################
+################################################################
+
+#Generate Samples;        loc = mean; scale=STD
+#v=fun.np.random.normal(loc=0.5,scale=0.1,size=N)
+v=[0.5,0.6];dp=v[1]-v[0];mu=0.5;sigma=0.1;Param='v'
+#D=fun.np.random.normal(loc=0.125,scale=0.03,size=N)
+D=[0.125,0.125];#dp=D[1]-D[0];mu=0.125;sigma=0.03;Param='D'
+#w=fun.np.random.normal(loc=0.1,scale=0.05,size=N)
+w=[0.1,0.1];#dp=w[1]-w[0];mu=0.1;sigma=0.05;Param='w'
+
+
+
+#Samples, X-1 bins, t-1 time steps
+N=1;
+NX=[51,101,201,251,301,351,401,451];Vary='x';Nt=[11];l=0
+#Nt=[11,21,31,41,51,61,71,81,91,101];Vary='t';NX=[401];j=0
+
+
+Scales=[];Indice=[];dxs=[]  #The dxs could hold dts
+
+for j in range(0,len(NX)):   #Loop over space
+#for l in range(0,len(Nt)):    #Loop over time
+    
+    #Problem boundaries
+    x=fun.np.linspace(0,10,NX[j])
+    dx=x[1]-x[0]
+    t=fun.np.linspace(0,5,Nt[l])
+    dt=t[1]-t[0]
+
+    RXNs=[];
+
+    for i in range(0,2):
+        #Build A
+        A=fun.BuildA(v[i],D[i],w[i],dt,dx,NX[j])
+        #Calculate QoI
+        RXNRate=fun.SolveQoI(NX[j],Nt[l],x,t,A,dt,w[i])
+        RXNs.append(RXNRate)
+    
+    Scaled=((RXNs[1]-RXNs[0])/(dp))*mu
+    Index=((RXNs[1]-RXNs[0])/(dp))*sigma
+    
+    Scales.append(Scaled)
+    Indice.append(Index)
+    if Vary=='x':
+        dxs.append(dx)
+    elif Vary=='t':
+        dxs.append(dt)
+
+#Plot the data, and plot fitted PDF
+for i in range(0,2):
+    fig = fun.plt.figure()
+    ax = fig.add_subplot(111)
+    if i==0:
+        (fig,ax)=fun.Plot(dxs,Scales,Param,fig,ax,'k--',Vary,Scaled=True)
+        filename='scaled_'+Param+Vary+'.pdf'
+    else:
+        (fig,ax)=fun.Plot(dxs,Indice,Param,fig,ax,'k--',Vary,Scaled=False)
+        filename='index_'+Param+Vary+'.pdf'
+        
+    handles,labels=ax.get_legend_handles_labels()
+    Lfont={'family':'monospace',
+           'size':12}
+    ax.legend(handles,labels,loc='best',fontsize=12)
+    fun.plt.savefig(filename)
+
+
+###################### Time To execute #################
+
+print("--- %s seconds ---" % (time.time() - start_time))

@@ -1,0 +1,140 @@
+---
+title: "Problem1"
+author: "Paul Mendoza"
+date: "December 9, 2016"
+output: pdf_document
+---
+
+```{r,message=FALSE,warning=FALSE}
+require(magrittr)
+require(dplyr)
+require(ggplot2)
+require(glmnet)
+```
+
+Fit the data in Table 1 to a linear model using:
+
+```{r, echo=FALSE}
+x1=c(0.99,-0.75,-0.50,-1.08,0.09,-1.28,-0.79,-1.17,-0.57,-1.62,0.34,0.51,-0.91,
+ 1.85,-1.12,-0.70,1.19,1.24,-0.52,-1.41)
+x2=c(0.98,-0.76,-0.48,-1.08,0.09,-1.27,-0.79,-1.17,-0.57,-1.62,0.35,0.51,-0.92,
+ 1.86,-1.12,-0.70,1.18,1.23,-0.52,-1.44)
+y=c(6.42,0.20,0.80,-0.57,4.75,-1.42,1.07,0.20,1.08,-0.15,2.90,3.37,0.05,5.50,
+    0.17,1.72,3.97,6.38,3.29,-1.49)
+Table1=data.frame(x1,x2,y)
+```
+
+```{r}
+Table1
+```
+
+
+#1. Least  Squares
+```{r}
+LeastFit<-lm(formula = y~x1+x2,data=Table1)
+LeastFit
+```
+
+```{r}
+plotDF<-Table1
+plotDF[,'Type']<-'Train'
+plotDF$Predict<-predict(LeastFit,plotDF[,1:2])
+plotDF$Error<-plotDF$y-plotDF$Predict
+ggplot(plotDF,aes(x=y,y=Predict,size=abs(Error)))+geom_point()+
+  scale_size("Absolute Error")+geom_smooth(method="lm",se=F,size=1)
+```
+
+```{r}
+sqrt(var(data.frame(plotDF %>% filter(Type=="Train") %>% select(Error))))/20
+```
+
+```{r,message=FALSE}
+ggplot(plotDF,aes(x=Error)) + geom_histogram()
+
+```
+
+
+```{r}
+sensitivities <- coef(LeastFit)
+sensDF <- data.frame(Method = 0, Var = 0, Value=0)
+sensDF[1:length(sensitivities),'Method'] <- "Least-Squares"
+sensDF[1:length(sensitivities),'Var'] <- names(sensitivities)
+sensDF[1:length(sensitivities),'Value'] <- (sensitivities)
+rowStart <- length(sensitivities)+1
+```
+
+
+#2. Ridge Regression
+
+Ridge regression sets alpha=0, which adds damping to the coefficients
+
+```{r,warning=FALSE,message=FALSE}
+crossValid <- cv.glmnet(as.matrix(Table1[,1:2]),
+                        as.matrix(Table1$y),alpha = 0,
+                        lambda=exp(seq(-5,5,by=0.1)))
+
+plot(crossValid)
+lambda <- crossValid$lambda.min
+sensitivities <- coef(crossValid)
+plotDF <- Table1
+plotDF[,'Type'] <- 'Train'
+plotDF[,"Predict" ]<- data.frame(Predict=predict(crossValid,as.matrix(plotDF[,1:2]),
+                                                 lambda=lambda))
+plotDF$Error <- plotDF$y-plotDF$Predict
+ggplot(plotDF,aes(x=y,y=Predict,size=abs(Error))) + geom_point() +
+scale_size("Absolute Error") + geom_smooth(method="lm",se=F,size=1)
+
+
+sqrt(var(data.frame(plotDF %>% filter(Type=="Train") %>% select(Error))))/20
+ggplot(plotDF,aes(x=Error)) + geom_histogram()
+
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Method'] <- "Ridge"
+sensDF[rowStart:(rowStart+length(sensitivities)-1),'Var']<-t(t(rownames(sensitivities)))
+sensDF[rowStart:(rowStart +length(sensitivities)-1),'Value']<-as.numeric(sensitivities)
+rowStart <- rowStart + length(sensitivities)
+
+```
+
+#3. Lasso Regression
+
+Lasso regression sets alpha=1
+
+```{r,warning=FALSE,message=FALSE}
+
+crossValid <- cv.glmnet(as.matrix(Table1[,1:2]),as.matrix(Table1$y),alpha = 1)
+plot(crossValid)
+
+lambda <- crossValid$lambda.min
+sensitivities <- coef(crossValid)
+plotDF <- Table1
+plotDF[,'Type'] <- 'Train'
+plotDF[,"Predict" ]<- data.frame(Predict=predict(crossValid,as.matrix(Table1[,1:2]),
+                                                 lambda=lambda))
+
+plotDF$Error <- plotDF$y-plotDF$Predict
+ggplot(plotDF,aes(x=y,y=Predict,size=abs(Error))) + geom_point() +
+scale_size("Absolute Error") + geom_smooth(method="lm",se=F,size=1)
+
+sqrt(var(data.frame(plotDF %>% filter(Type=="Train") %>% select(Error))))/20
+
+ggplot(plotDF,aes(x=Error)) + geom_histogram()
+
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Method'] <- "Lasso"
+sensDF[rowStart:(rowStart+length(sensitivities)-1),'Var']<-t(t(rownames(sensitivities)))
+sensDF[rowStart:(rowStart +length(sensitivities)-1),'Value']<-as.numeric(sensitivities)
+rowStart <- rowStart + length(sensitivities)
+
+```
+
+# Compare Methods
+
+```{r}
+ggplot(sensDF,aes(x=reorder(Var,-Value),y=Value,color=Method,group=Method)) +
+  geom_point() + geom_line() +
+  theme(panel.grid.major = element_blank(),
+        axis.text.x = element_text(angle = 90, hjust = 1, size=8))+
+  scale_x_discrete("Variable") + scale_y_continuous("Coefficient")
+
+```
+
+The Lasso and Ridge are both more bounded in their coefficents.

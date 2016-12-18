@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+
+################################################################
+##################### Import packages ##########################
+################################################################
+
+import numpy as np
+import matplotlib.pyplot as plt
+import time
+start_time = time.time()
+from scipy.stats import norm
+import lhsmdu
+from scipy.stats import beta
+import Functions as f
+
+################################################################
+######################## Functions #############################
+################################################################
+
+#Van der Corput sequence function found online
+def vdc(n, base=2):
+    vdc, denom = 0,1
+    while n:
+        denom *= base
+        n, remainder = divmod(n, base)
+        vdc += remainder / denom
+    return vdc
+
+################################################################
+###################### Calculations ############################
+################################################################
+
+#Make sure Nstrata <= N
+
+N=50  #samples
+Nbins=15  #hist plot
+Nstrata=49
+filename="V2Norm.pdf"
+#Stratified or Normal or Van der Corput
+Xlabel="Van der Corput Sampling with base=2" 
+RandomNumbers=[]
+vanBase=2;van=True
+
+#Sampling for normal and stratified
+if not van:
+    Nloop=int(N/Nstrata)*Nstrata
+    for i in range(0,int(N/Nstrata)):
+        for j in range(0,Nstrata):
+            RandomNumbers.append(np.random.uniform(low=j/Nstrata,
+                                high=(j+1)/Nstrata,size=1))
+    #If N/Nstrata doesn't divide evenly
+    if Nloop<N:
+        for j in range(0,N-Nloop):
+            RandomNumbers.append(np.random.uniform(low=j/Nstrata,
+                            high=(j+1)/Nstrata,size=1))
+#Sampling for van
+if van:
+    for i in range(0,N):
+        RandomNumbers.append(vdc(i+1,vanBase))
+        
+#Sample the inverse of the CDF of the standard normal
+#distribution
+Samples=norm.ppf(RandomNumbers)
+
+#Generate histogram
+fig=plt.figure()
+ax=fig.add_subplot(111)
+ax.set_xlabel(Xlabel,fontsize=16)
+ax.set_ylabel('Count out of '+str(N),fontsize=18)
+ax.hist(Samples,Nbins,color='green',alpha=0.7,edgecolor='black')
+#ax.set_xlim(-500,500)
+plt.savefig(filename)
+                            
+###################### Time To execute #################
+
+print("--- %s seconds ---" % (time.time() - start_time))

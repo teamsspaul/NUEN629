@@ -1,0 +1,9 @@
+
+Min of Summed Errors: 0.42, alpha: 16.898, beta: 20.000, 
+
+x = 1:  & nan
+x = 1.5:  & nan
+x = 3:  & nan
+x = 5:  & nan
+
+--- 119.35852694511414 seconds ---

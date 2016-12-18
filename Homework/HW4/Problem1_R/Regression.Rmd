@@ -1,0 +1,111 @@
+---
+output:
+  html_document:
+    fig_width: 10
+---
+Regression and Large Dimensional Data
+========================================================
+
+let's make an example that uses a lot of variables but only a few that are important
+
+100 variables, only 5 matter
+
+```{r}
+require(magrittr)
+require(dplyr)
+require(ggplot2)
+require(glmnet)
+bigDF <- data.frame()
+N = 200
+for (i in 1:100)
+  bigDF[1:N,i] <- runif(N)
+
+Response2 = bigDF[,1] * 20 + bigDF[,2]^1.2 * 10 + bigDF[,3]^0.9*5+ bigDF[,4]*2.5+ bigDF[,5] + rowSums(0.1 * bigDF[,6:100]^0.5) + 5 + 0.01*runif(N)
+
+
+
+sensDF <- data.frame(Method = 0, Var = 0, Value=0)
+
+#ggpairs(bigDF[,c(101,1:10)], lower = list(continuous = "smooth")) 
+
+bigDF$Response <- Response2
+
+summary(bigMod<-lm(Response ~ ., data=bigDF[1:110,]))
+
+plotDF <- bigDF
+plotDF[1:110,'Type'] <- 'Train'
+plotDF[111:200,'Type'] <- 'Test'
+plotDF$Predict <- predict(bigMod,plotDF)
+plotDF$Error <- plotDF$Response-plotDF$Predict
+ggplot(plotDF,aes(x=Response,y=Predict,color=Type,size=abs(Error))) + geom_point() + scale_size("Absolute Error") + geom_smooth(method="lm",se=F,size=1)
+sqrt(var(data.frame(plotDF %>% filter(Type=="Test") %>% select(Error))))/110
+
+ggplot(plotDF,aes(x=Error)) + geom_histogram()
+
+sensitivities <- coef(bigMod)
+require(glmnet)
+
+sensDF[1:length(sensitivities),'Method'] <- "Least-Squares"
+sensDF[1:length(sensitivities),'Var'] <- names(sensitivities)
+sensDF[1:length(sensitivities),'Value'] <- (sensitivities)
+rowStart <- length(sensitivities)+1
+```
+##Lasso regression
+
+```{r}
+crossValid <- cv.glmnet(as.matrix(bigDF[1:40,1:100]),as.matrix(bigDF$Response[1:40]),alpha = 1)
+plot(crossValid)
+lambda <- crossValid$lambda.min
+sensitivities <- coef(crossValid)
+plotDF <- bigDF
+plotDF[1:40,'Type'] <- 'Train'
+plotDF[41:200,'Type'] <- 'Test'
+plotDF[,"Predict" ]<- data.frame(Predict=predict(crossValid,as.matrix(plotDF[,1:100]),lambda=lambda))
+plotDF$Error <- plotDF$Response-plotDF$Predict
+ggplot(plotDF,aes(x=Response,y=Predict,color=Type,size=abs(Error))) + geom_point() + scale_size("Absolute Error") + geom_smooth(method="lm",se=F,size=1)
+sqrt(var(data.frame(plotDF %>% filter(Type=="Test") %>% select(Error))))/40
+ggplot(plotDF,aes(x=Error)) + geom_histogram()
+
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Method'] <- "Lasso"
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Var'] <- t(t(rownames(sensitivities)))
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Value'] <- as.numeric(sensitivities)
+rowStart <- rowStart + length(sensitivities)
+```
+
+##Ridge regression
+```{r}
+crossValid <- cv.glmnet(as.matrix(bigDF[1:110,1:100]),as.matrix(bigDF$Response[1:110]),alpha = 0,lambda=exp(seq(-5,5,by=0.1)))
+plot(crossValid)
+lambda <- crossValid$lambda.min
+sensitivities <- coef(crossValid)
+plotDF <- bigDF
+plotDF[1:110,'Type'] <- 'Train'
+plotDF[111:200,'Type'] <- 'Test'
+plotDF[,"Predict" ]<- data.frame(Predict=predict(crossValid,as.matrix(plotDF[,1:100]),lambda=lambda))
+plotDF$Error <- plotDF$Response-plotDF$Predict
+ggplot(plotDF,aes(x=Response,y=Predict,color=Type,size=abs(Error))) + geom_point() + scale_size("Absolute Error") + geom_smooth(method="lm",se=F,size=1)
+sqrt(var(data.frame(plotDF %>% filter(Type=="Test") %>% select(Error))))/110
+ggplot(plotDF,aes(x=Error)) + geom_histogram()
+
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Method'] <- "Ridge"
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Var'] <- t(t(rownames(sensitivities)))
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Value'] <- as.numeric(sensitivities)
+rowStart <- rowStart + length(sensitivities)
+
+#good values
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Method'] <- "Exact"
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Var'] <- t(t(rownames(sensitivities)))
+sensDF[rowStart:(rowStart + length(sensitivities)-1),'Value'] <- c(5,20,12,5*.9,2.5,1,rep(0.1,95))
+
+sensDF$Exact = rep(c(5,20,12,5*.9,2.5,1,rep(0.1,95)),4)
+```
+
+##Compare Methods
+```{r}
+ggplot(sensDF,aes(x=reorder(Var,-Value),y=Value,color=Method,group=Method)) + geom_point() + geom_line() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle = 90, hjust = 1, size=8))+ scale_x_discrete("Variable") + scale_y_continuous("Coefficient")
+
+
+ggplot(sensDF[sensDF$Exact<1,],aes(x=reorder(Var,-Value),y=Value,color=Method,group=Method)) + geom_point() + geom_line() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle = 90, hjust = 1, size=8))+ scale_x_discrete("Variable") + scale_y_continuous("Coefficient")
+
+ggplot(sensDF,aes(x=reorder(Var,-Value),y=abs(Value-Exact),color=Method,group=Method)) + geom_point() + geom_line() + theme(panel.grid.major = element_blank(),axis.text.x = element_text(angle = 90, hjust = 1, size=8)) + scale_x_discrete("Variable") + scale_y_continuous("Abs. Error in Coefficient")
+```

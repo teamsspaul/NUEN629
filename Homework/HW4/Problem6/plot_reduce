@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+"""
+This will plot how the error behaves as a function of flux
+parameters. The error is the difference between the calculated
+1-group cross section and the x-section ORIGEN reports
+"""
+#########################################################################
+######################## Import Packages ################################
+#########################################################################
+
+import time
+start_time = time.time()
+import Functions_Plot as f
+import pandas as pd
+import copy
+
+#########################################################################
+######################## Data Frame Work ################################
+#########################################################################
+
+#Load up dataframe
+df=pd.read_csv('All_Calcs.csv',sep=',',index_col=False)
+ColumnNames=df.columns.values #Probably wont use
+
+#Set X and Y values for plotting ['alpha','beta']
+X='alpha'    #Should be one of the variables
+#ALSO IF YOU CHANGE CHANGE Xlabel!!!!!!!!!!!!!!!!!!!
+Y='SumErr'  #Should be an error term
+
+#Three variables that I am...well varying
+Variables=["alpha","beta"]
+Printing=["%.2f","%.2f"]
+
+XScale="linear"     # 'linear' or 'log'
+#'$\alpha$ Parameter'   For alpha
+#'$\beta$ Parameter'   For beta
+Xlabel='Alpha'  # X label       
+YScale="linear"  # 'linear' or 'log'
+Ylabel='Sum of Error for 4 Measurements'
+
+#Remove the one variable I am looking at, group by others
+del Printing[Variables.index(X)]
+Variables.remove(X)
+
+UniqueOther1=pd.unique(df[Variables[0]])
+
+#Set up plot
+fig=f.plt.figure(figsize=f.FigureSize)
+ax=fig.add_subplot(111)
+
+Check=0
+for U1 in UniqueOther1:
+    Label=Variables[0]+" "+Printing[0] % U1
+    #Take all rows with U1 (filter)
+    dfHold=df[df[Variables[0]] == U1]
+    #Take all rows with U2 (filter again)
+    Error=dfHold[Y].values
+    Xplot=dfHold[X].values
+    (fit,ax)=f.plot(Xplot,Error,ax,Check,Label,
+                    fig,Ylabel,Xlabel,XScale,YScale)
+    Check=Check+1
+
+ax=f.Legend(ax)
+f.plt.savefig(X+"_vs_"+Y+'.pdf')
+
+#########################################################################
+######################## Time to Execute ################################
+#########################################################################
+
+print("--- %s seconds ---" % (time.time() - start_time))

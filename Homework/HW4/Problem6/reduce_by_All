@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+"""
+This program will loop through values for three parameters for flux
+and determine the error between calculated flux and ORIGEN2 values.
+All the values will stored in a csv file named 'All_Calcs.csv'.
+Also the minimium summed error point in the paramter space will
+be printed to the screen
+"""
+#########################################################################
+######################## Import Packages ################################
+#########################################################################
+
+import time
+start_time = time.time()
+import Functions as f
+from scipy import interpolate
+from scipy import integrate
+from scipy.integrate import trapz
+
+#########################################################################
+########################## Calculations #################################
+#########################################################################
+
+#########################################################
+############### Import X-Section Data ###################
+#########################################################
+
+#Open output file
+output=open("All_Calcs.csv","w")
+
+#Get list of csv files with X-section information
+Names=f.GETcsvFiles("../X_Sections")
+Names=["Pu_239_94_a.csv",
+       "Pu_240_94_a.csv",
+       "Pu_241_94_a.csv",
+       "U_235_92_a.csv",
+       "U_238_92_a.csv",
+       #Line to Sep
+       "Pu_239_94_f.csv",
+       "Pu_240_94_f.csv",
+       "Pu_241_94_f.csv",
+       "U_235_92_f.csv",
+       "U_238_92_f.csv"]
+
+
+#Loop through all X-section files, save the data in variables
+#Also record all names
+TAPE9_XL=[]
+XsecL=[]
+AllNames=""
+for i in range(0,len(Names)):
+    NameList=Names[i].split('_')
+    Reaction=NameList[3].split('.')[0]
+    TAPE9_XL.append(float(f.LoopTAPE(NameList[2],NameList[1],Reaction)))
+    XsecL.append(f.np.genfromtxt('../X_Sections/'+Names[i],delimiter=','))
+    if i==len(Names)-1:
+        AllNames=AllNames+NameList[0]+NameList[1]+Reaction
+    else:
+        AllNames=AllNames+NameList[0]+NameList[1]+Reaction+","
+
+#Print first line to output file
+print("Emt,Eme,E0,"+AllNames+",SumErr",file=output)
+
+#Loop through all possibilities
+EmtL=f.np.linspace(0.1,1,20)  # Is it usually 0.625?
+EmeL=f.np.logspace(5,6,1)    #We have determined that 10^5 is best
+E0L=f.np.linspace(0.02,0.1722,20) #10
+
+EmtL=f.np.linspace(0.5,0.8,20)  # Is it usually 0.625?
+EmeL=f.np.logspace(5,6,1)    #We have determined that 10^5 is best
+E0L=f.np.linspace(0.06,0.1722,20) #10
+
+Ef=1.35e6
+SumErrs=[]
+
+for Emt in EmtL:
+    for Eme in EmeL:
+        for E0 in E0L:
+            Error=[] #Zero the Error variable
+            for i in range(0,len(Names)):
+                Element=Names[i].split('_')[0]
+                Isotope=Names[i].split('_')[1]
+                Protons=Names[i].split('_')[2]
+                #Find TAPE9's 1 Group X-section value for comparison
+                TAPE9_X=TAPE9_XL[i]
+                Xsec = XsecL[i]
+                #Set energy, and convert from MeV to ev
+                E=f.copy.copy(Xsec[:,0])*10**6
+                
+                F=f.flux(E,Emt,Eme,E0,Ef)
+
+                #Make function for X-Section(E) * Flux(E)
+                X_phi=interpolate.interp1d(E,F*Xsec[:,1],
+                                           fill_value=0,bounds_error=False)
+                #Perform the integral for X-Section(E) * Flux(E)
+                X_int=integrate.trapz(X_phi(E),E)
+                #Perform the integral for Flux(E)
+                Phi_int=integrate.trapz(F,E)
+                #Average X-section value
+                Avg=X_int/Phi_int
+                #Calculate the error between Avg value and
+                #TAPE9 value
+                Error.append(abs(Avg-TAPE9_X)/TAPE9_X)
+
+            strErr=",".join(str(e) for e in Error)
+            SumErrs.append(sum(Error))
+            print(str(Emt)+","+             #Emt
+                  str(Eme)+","+             #Eme
+                  str(E0)+","+             #E0
+                  strErr+","+
+                  str(SumErrs[-1]),file=output) #Isotope
+
+output.close()
+
+#Find minimium Summed Error
+Min=min(SumErrs)
+Count=0
+for Emt in EmtL:
+    for Eme in EmeL:
+        for E0 in E0L:
+            if SumErrs[Count]==Min:
+                print("Min of Summed Errors: %.2f, " % Min +
+                      "Emt: %.2f, " % Emt +
+                      'Eme: %.3e, ' % Eme +
+                      'E0: %.4f, '  % E0)
+
+            Count=Count+1
+
+#########################################################################
+######################## Time to Execute ################################
+#########################################################################
+
+print("--- %s seconds ---" % (time.time() - start_time))

@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+
+################################################################
+##################### Import packages ##########################
+################################################################
+
+import time
+start_time = time.time()
+import Functions as fun
+import lhsmdu
+from random import shuffle
+
+################################################################
+###################### Calculations ############################
+################################################################
+
+N=100  #Samples
+Nbins=30 #Hist Plot
+Nstrata=10
+filename="HaltonStrat.pdf"
+
+Xlabel="Halton Sampling"
+#RandomNumbersX=fun.np.random.uniform(0,1,N)
+#RandomNumbersY=fun.np.random.uniform(0,1,N)
+#RandomNumbersX=fun.Rstrat(N,Nstrata)  #strat sampling
+#RandomNumbersY=fun.Rstrat(N,Nstrata)
+#l=lhsmdu.sample(2,N)  #Hyper cube sampling
+#RandomNumbersX=l[0].A1
+#RandomNumbersY=l[1].A1
+RandomNumbersX=fun.Rvdc(N,2)    #Halton sequence
+RandomNumbersY=fun.Rvdc(N,3)    #shuffled the list (tried notto)
+#shuffle(RandomNumbersX)
+#shuffle(RandomNumbersY)
+
+Samplest=fun.beta.ppf(RandomNumbersX,3,2)
+Sampless=fun.beta.ppf(RandomNumbersY,1.1,2)
+
+X=fun.X(Samplest)
+Y=fun.Y(Sampless)
+
+f=fun.Rosen(X,Y)
+
+#Plot the data for Rosenbrok, and plot fitted PDF
+Xlabel="Rosenbrock Function Histogram"
+(n,bins,ax,fig)=fun.HIST(Xlabel,f,Nbins,N)
+(ax,fig)=fun.HISTDataToPDF(n,bins,ax,fig)
+fun.plt.savefig(filename)
+
+#Find the probability of f being less than 10
+PGreater=sum(i<10 for i in f)/N
+
+print("The probability of being less than 10 is: "+str(PGreater))
+
+
+###################### Time To execute #################
+
+print("--- %s seconds ---" % (time.time() - start_time))

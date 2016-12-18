@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+
+################################################################
+##################### Import packages ##########################
+################################################################
+
+import time
+start_time = time.time()
+import Functions as fun
+from mpmath import expint
+
+################################################################
+######################## Function ##############################
+################################################################
+
+def Determine_cn(n=0,alpha=1,beta=2,x=0):
+    """
+    This function will determin the cn constant
+    dont forget to change the first function dude
+    to your function
+    """
+    diff=5;tol=0.000001;nprime=1;Sum=1000
+    Cprefix=fun.fact(n)/(fun.gamma(n+alpha+1))
+    while diff>tol:
+        roots=fun.Lroots(nprime,alpha)
+        weights=fun.weight(nprime,alpha,roots)
+        function=fun.np.cos(roots/beta) #Change me
+        function=function*fun.LagEval(n,alpha,roots)
+        WF=weights*function
+        Sumhold=sum(WF)
+        cn=Cprefix*Sumhold
+        diff=abs(Sum-Sumhold)
+        Sum=copy.copy(Sumhold)
+        #print(np,cn)
+        nprime=nprime+1
+        if nprime==100:
+            print("Did not converge on quadrature")
+            quit()
+    return(cn)
+
+################################################################
+###################### Calculations ############################
+################################################################
+
+
+for i in range(0,6):
+    cn=Determine_cn(n=i)
+    print(i,cn)
+
+
+
+###################### Time To execute #################
+
+print("--- %s seconds ---" % (time.time() - start_time))

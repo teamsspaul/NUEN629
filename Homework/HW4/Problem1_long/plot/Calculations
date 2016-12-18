@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+
+################################################################
+##################### Import packages ##########################
+################################################################
+
+import time
+start_time = time.time()
+import numpy as np
+import Functions as fun
+
+################################################################
+######################## Calculations ##########################
+################################################################
+N=100
+
+#Prior
+alpha=5
+beta=6
+theta=np.linspace(0,80,N)
+pi=fun.GammaPDF(alpha,beta,theta)
+
+#Posterior
+a=alpha+42
+b=(1+1/beta)**-1
+f_theta=fun.GammaPDF(a,b,theta)
+
+fun.Plot(theta,pi,f_theta)
+
+###################### Time To execute #################
+print("--- %s seconds ---" % (time.time() - start_time))
