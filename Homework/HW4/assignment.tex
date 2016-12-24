@@ -217,8 +217,9 @@
 %--------------------------------------------------------------------------
 %	NAME AND CLASS SECTION
 %--------------------------------------------------------------------------
-\newcommand{\hmwkTitle}{Homework\ 4 \&\ 5} % Assignment title
-\newcommand{\hmwkDueDate}{Saturday,\ November\ 19,\ 2015} % Due date
+\newcommand{\hmwkTitle}{Homework\ 4\ \&\ 5} % Assignment title
+\newcommand{\hmwkDueDate}{Thursday,\ November\ 19,\ 2015\\ \&\\
+                          Thursday,\ December\ 3,\ 2015} % Due date
 \newcommand{\hmwkClass}{NUEN 629\\ Numerical Methods in Reactor Analysis} % Course/class
 \newcommand{\hmwkClassTime}{Tu/Th 12:45am} % Class/lecture time
 \newcommand{\hmwkClassInstructor}{Dr. McClarren} % Teacher/lecturer
@@ -230,8 +231,8 @@
 
 \title{
 \vspace{2in}
-\textmd{\textbf{\hmwkClass\ \hmwkTitle}}\\
-\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\textmd{\textbf{\hmwkClass\\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on:\\ \hmwkDueDate}\\
 \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
 \vspace{3in}
 }
@@ -261,7 +262,55 @@
 %--------------------------------------------------------------------------
 
 \begin{homeworkProblem}[Homework 4]
+  Solve the following problem and submit a detailed report, including
+  a justification of why a reader should believe your results and a
+  description of your methods and iteration strategies.
 
+  \begin{enumerate}
+  \item{(150 points + 50 points extra credit) In class we discussed
+    the diamond-difference spatial discretization. Another discretization
+    is the step discretization (this has several other names
+    from other disciplines). It writes the discrete ordinates equations
+    with isotropic scattering as, for $\mu_n>0$ to}
+    \begin{equation}
+      \mu_n\frac{\psi_{i,n}-\psi_{i-1,n}}{h_x}+\Sigma_t\psi_{i,n}
+      =\frac{\Sigma_s}{2}\phi_i+\frac{Q}{2}
+    \end{equation}
+    and for $\mu_n<0$
+    \begin{equation}
+      \mu_n\frac{\psi_{i+1,n}-\psi_{i,n}}{h_x}+\Sigma_t\psi_{i,n}
+      =\frac{\Sigma_s}{2}\phi_i+\frac{Q}{2}
+    \end{equation}
+    The codes provided in class should be modified to implement
+    this discretization.
+  \end{enumerate}
+  \begin{enumerate}[label=(\alph*)]
+  \item{(50 Points) Your task (should you choose to accept it)
+    is to solve a problem with uniform source of $Q=0.01$,
+    $\Sigma_t=\Sigma_s=100$ for a slab in vacuum of width
+    10 using step and diamond difference discretizations. Use, 10,
+    50, and 100 zones ($h_x=1,0.02,0.01$) and your expert choice of
+    angular quadratures. Discuss your results and how the two methods
+    compare at each number of zones.}
+  \item{(10 points) Discuss why there is a different form of the
+        discretization for the different signs of $\mu$.}
+  \item{(40 points) Plot the error after each iteration using a 0
+    initial guess for the step discretization with source iteration and
+    GMRES.}
+  \item{(50 points) Solve Reed's problem (see finite difference diffusion
+    codes). Present convergence plots for the solution in space and angle
+    to a ``refined'' solution in space and angle.}
+  \item{(50 points extra credit) Solve a time dependant problem for
+    a slab surrounded by vacuum with $\Sigma_t=\Sigma_s=1$ and initial
+    condition given by $\phi(0)=1/h_x$. Plot the solution at $t=1\ s$,
+    using step and diamond difference. The particles have a speed of
+    1 cm/s. Which discretization is better with a small time step?
+    What do you see with a small number of ordinates compared to
+    a really large number (100s)?}
+  \end{enumerate}
+
+  
+  
 \end{homeworkProblem}
 \clearpage
 
