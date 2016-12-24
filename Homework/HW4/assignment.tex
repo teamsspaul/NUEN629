@@ -349,9 +349,12 @@
     \phi(\vec{x},v,t)\\
     q(\vec{x},\hat{\Omega},v,t)
   \end{align*}
-  This is a 7 dimensional phase space, with three spatial ($\vec{x}$),
-  two angular ($\hat{\Omega}$), one energy ($v$) and one time ($t$)
-  dependency. In the steady state ($\frac{\delta\psi}{\delta t}=0$),
+  There are 7 free variables (three spatial [$\vec{x}$],
+  two angular [$\hat{\Omega}$], one energy [$v$] and one time [$t$])
+  in this equation.
+  In the steady state
+  $\left(\frac{\delta\psi}{\delta t}=0,\ 
+  \text{i.e. no time dependence}\right)$,
   non fissioning ($\Sigma_f=0$) case the transport equation reduces to,
 
   \begin{equation*}
@@ -360,9 +363,82 @@
     \right)\psi=
     \int_0^\infty dE'\ \int_{4\pi}d\hat{\Omega}'\
     K(\hat{\Omega}'\cdot\hat{\Omega},v'\rightarrow v)\Sigma_s\psi
-    +q
+    +q.
+  \end{equation*}
+  
+  In order to reduce this to a single energy the following definitions
+  are helpful (remembering all time dependence is gone).
+  
+  \begin{equation*}
+    \psi(\vec{x},\hat{\Omega})=\int_0^\infty dE\
+    \psi(\vec{x},\hat{\Omega},v(E))
+  \end{equation*}
+  \begin{equation*}
+    \Sigma_t(\vec{x})=\frac{\int_0^\infty dE\
+      \Sigma_t(\vec{x},v(E))\psi(\vec{x},\hat{\Omega},v(E))}
+          {\psi(\vec{x},\hat{\Omega})}
+  \end{equation*}
+  \begin{equation*}
+    K(\hat{\Omega}'\cdot\hat{\Omega},v'\rightarrow v)=
+    K(\hat{\Omega}'\cdot\hat{\Omega})K(v'\rightarrow v)
+  \end{equation*}
+  \begin{equation*}
+    \Sigma_s(\vec{x})=\frac{\int_0^\infty dE\int_0^\infty dE'\
+      \Sigma_s(\vec{x},v(E))K(v'\rightarrow v)
+      \psi(\vec{x},\hat{\Omega},v(E))}
+          {\psi(\vec{x},\hat{\Omega})}
+  \end{equation*}
+  \begin{equation*}
+    q(\vec{x},\hat{\Omega})=\int_0^\infty dE\
+    q(\vec{x},\hat{\Omega},v(E))
+  \end{equation*}
+  
+  Using these definitions, integrating the transport equation over
+  all energy, and assuming cross sections and sources
+  do not vary in space or angle, our
+  transport equation reduces again to,
+  
+  \begin{equation*}
+    \left(
+    \hat{\Omega}\cdot\nabla+\Sigma_t
+    \right)\psi(\vec{x},\hat{\Omega})=
+    \int_{4\pi}d\hat{\Omega}'\
+    K(\hat{\Omega}'\cdot\hat{\Omega})\Sigma_s\psi(\vec{x},\hat{\Omega})
+    +\frac{q}{4\pi}.
+  \end{equation*}
+  
+  Where the source was divided by $4\pi$ because it was assumed to be
+  isotropic. The final simplification for our problem will be in space.
+  If we assume that our geometry is infinite in
+  $y\ \left(\frac{\delta}{\delta y}=0\right)$ and
+  $x\ \left(\frac{\delta}{\delta x}=0\right)$. This also means
+  that $\psi$ depends only on $z$ and $mu$, and if we
+  recall that
+  
+  \begin{equation*}
+    \hat{\Omega}=(\sqrt{1-\mu^2}cos(\rho),\sqrt{1-\mu^2}sin(\rho),\mu),
+  \end{equation*}
+  and
+  
+  \begin{equation*}
+    \nabla=\left(\frac{\delta}{\delta x},
+    \frac{\delta}{\delta y}, \frac{\delta}{\delta x}\right)
+  \end{equation*}
+  then our transport equation, and the equation I think we are trying
+  to solve for this homework is.
+  \begin{equation*}
+    \left(
+    \mu\frac{\delta}{\delta z}+\Sigma_t
+    \right)\psi(z,\mu)=
+    \Sigma_s\int_{4\pi}d\hat{\Omega}'\
+    K(\hat{\Omega}'\cdot\hat{\Omega})\psi(z,\mu)
+    +\frac{q}{4\pi}.
   \end{equation*}
 
+  Where $\Sigma_s$ was moved outside the integral for the following part,
+  where we employ some Legendre
+  (pronounced Legendary...just kidding) polynomial expansion
+  for the scattering term.
   
 \end{homeworkProblem}
 \clearpage
