@@ -217,7 +217,7 @@
 %--------------------------------------------------------------------------
 %	NAME AND CLASS SECTION
 %--------------------------------------------------------------------------
-\newcommand{\hmwkTitle}{Homework\ 4\ \&\ 5} % Assignment title
+\newcommand{\hmwkTitle}{Homework\ 4\ \&\ 5 \&\ Project} % Assignment title
 \newcommand{\hmwkDueDate}{Thursday,\ November\ 19,\ 2015\\ \&\\
                           Thursday,\ December\ 3,\ 2015} % Due date
 \newcommand{\hmwkClass}{NUEN 629\\ Numerical Methods in Reactor Analysis} % Course/class
@@ -258,10 +258,10 @@
 
 
 %--------------------------------------------------------------------------
-%	Homework 4
+%	Homework 4 Problem Statement
 %--------------------------------------------------------------------------
 
-\begin{homeworkProblem}[Homework 4]
+\begin{homeworkProblem}[Homework 4 Problem Statement]
   Solve the following problem and submit a detailed report, including
   a justification of why a reader should believe your results and a
   description of your methods and iteration strategies.
@@ -308,12 +308,64 @@
     What do you see with a small number of ordinates compared to
     a really large number (100s)?}
   \end{enumerate}
-
-  
   
 \end{homeworkProblem}
 \clearpage
 
+%--------------------------------------------------------------------------
+%	Homework 4 Problem Background
+%--------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Homework 4 Problem Background]
+  Due to the complicated nature of this course, I provided this background
+  for the lay person (me), so that they might have some grounding for the
+  solution and hopefully believe the results. It should be noted that
+  most of this background information is copied from various points
+  in Dr. McClarren's notes, and is in no way original. Anything
+  intelligent in the following is due to this fact and for any errors,
+  I blame myself.\\
+
+  Beginning with the weighty neutron transport equation.
+  \begin{equation*}
+    \left(
+    \frac{1}{v}\frac{\delta}{\delta t}+\hat{\Omega}\cdot\nabla+\Sigma_t
+    \right)\psi=
+    \int_0^\infty dE'\ \int_{4\pi}d\hat{\Omega}'\
+    K(\hat{\Omega}'\cdot\hat{\Omega},v'\rightarrow v)\Sigma_s\psi
+    +\frac{1}{4\pi}\chi\int_0^\infty dE'\ \bar{\nu}\Sigma_f\phi +q
+  \end{equation*}
+
+  Where $K(\hat{\Omega}'\cdot\hat{\Omega},v'\rightarrow v)$ represents
+  the probability of scattering from one angle and energy to another
+  given a scattering event occured and $\Sigma_s$ is the macroscopic
+  scattering cross section. The dependencies for the variables are shown
+  below.
+  \begin{align*}
+    \Sigma_t(\vec{x},v,t)\\
+    \psi(\vec{x},\hat{\Omega},v,t)\\
+    \Sigma_s(\vec{x},v,t)\\
+    \chi(\vec{x},v)\\
+    \Sigma_f(\vec{x},v,t)\\
+    \phi(\vec{x},v,t)\\
+    q(\vec{x},\hat{\Omega},v,t)
+  \end{align*}
+  This is a 7 dimensional phase space, with three spatial ($\vec{x}$),
+  two angular ($\hat{\Omega}$), one energy ($v$) and one time ($t$)
+  dependency. In the steady state ($\frac{\delta\psi}{\delta t}=0$),
+  non fissioning ($\Sigma_f=0$) case the transport equation reduces to,
+
+  \begin{equation*}
+    \left(
+    \hat{\Omega}\cdot\nabla+\Sigma_t
+    \right)\psi=
+    \int_0^\infty dE'\ \int_{4\pi}d\hat{\Omega}'\
+    K(\hat{\Omega}'\cdot\hat{\Omega},v'\rightarrow v)\Sigma_s\psi
+    +q
+  \end{equation*}
+
+  
+\end{homeworkProblem}
+\clearpage
 
 %--------------------------------------------------------------------------
 %	Homework 5
