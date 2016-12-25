@@ -403,7 +403,7 @@
     \hat{\Omega}\cdot\nabla+\Sigma_t
     \right)\psi(\vec{x},\hat{\Omega})=
     \int_{4\pi}d\hat{\Omega}'\
-    K(\hat{\Omega}'\cdot\hat{\Omega})\Sigma_s\psi(\vec{x},\hat{\Omega})
+    K(\hat{\Omega}'\cdot\hat{\Omega})\Sigma_s\psi(\vec{x},\hat{\Omega}')
     +\frac{q}{4\pi}.
   \end{equation*}
   
@@ -430,13 +430,18 @@
     \left(
     \mu\frac{\delta}{\delta z}+\Sigma_t
     \right)\psi(z,\mu)=
-    \Sigma_s\int_{4\pi}d\hat{\Omega}'\
-    K(\hat{\Omega}'\cdot\hat{\Omega})\psi(z,\mu)
+    \Sigma_s2\pi\int_{-1}^1d\mu'\
+    K(\mu_0)\psi(z,\mu')
     +\frac{q}{4\pi}.
   \end{equation*}
 
-  Where $\Sigma_s$ was moved outside the integral for the following part,
-  where we employ some Legendre
+  Where $\Sigma_s$ was moved outside the integral because it has
+  no angular dependence, $\mu_0$ is the cosine of the scattering angle
+  (representing the probability of scattering into $\mu$),
+  and integration over the azimuthal angle occured because $K(\mu_0)$ is
+  assumed to not depend on that angle. 
+
+  Now we employ some Legendre
   (pronounced Legendary...just kidding) polynomial expansion
   for the scattering term.
   
