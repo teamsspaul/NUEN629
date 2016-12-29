@@ -42,6 +42,7 @@
 \usepackage{fontenc}
 \usepackage{booktabs}
 \usepackage{pdfpages}
+
 % Margins
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -302,7 +303,9 @@
     to a ``refined'' solution in space and angle.}
   \item{(50 points extra credit) Solve a time dependant problem for
     a slab surrounded by vacuum with $\Sigma_t=\Sigma_s=1$ and initial
-    condition given by $\phi(0)=1/h_x$. Plot the solution at $t=1\ s$,
+    condition given by $\bm{\psi(0)=1/h_x}$ (original problem statement
+    said $\phi(0)=1/h_x$ and I'm not sure how to solve that).
+    Plot the solution at $t=1\ s$,
     using step and diamond difference. The particles have a speed of
     1 cm/s. Which discretization is better with a small time step?
     What do you see with a small number of ordinates compared to
@@ -404,11 +407,11 @@
     \right)\psi(\vec{x},\hat{\Omega})=
     \int_{4\pi}d\hat{\Omega}'\
     K(\hat{\Omega}'\cdot\hat{\Omega})\Sigma_s\psi(\vec{x},\hat{\Omega}')
-    +\frac{q}{4\pi}.
+    +q.
   \end{equation*}
   
-  Where the source was divided by $4\pi$ because it was assumed to be
-  isotropic. The final simplification for our problem will be in space.
+  Where the double differential was assumed to be separable in angle
+  and energy. The final simplification for our problem will be in space.
   If we assume that our geometry is infinite in
   $y\ \left(\frac{\delta}{\delta y}=0\right)$ and
   $x\ \left(\frac{\delta}{\delta x}=0\right)$. This also means
@@ -424,33 +427,128 @@
     \nabla=\left(\frac{\delta}{\delta x},
     \frac{\delta}{\delta y}, \frac{\delta}{\delta x}\right)
   \end{equation*}
+  also assuming that
+  \begin{equation*}
+    K(\hat{\Omega}'\cdot\hat{\Omega})=\frac{1}{4\pi}\
+    \text{Isotropic Scattering}
+  \end{equation*}
   then our transport equation, and the equation I think we are trying
   to solve for this homework is.
   \begin{equation*}
     \left(
     \mu\frac{\delta}{\delta z}+\Sigma_t
     \right)\psi(z,\mu)=
-    \Sigma_s2\pi\int_{-1}^1d\mu'\
-    K(\mu_0)\psi(z,\mu')
-    +\frac{q}{4\pi}.
+    \Sigma_s\frac{2\pi}{4\pi}\int_{-1}^1d\mu'\
+    \psi(z,\mu')
+    +q.
   \end{equation*}
-
-  Where $\Sigma_s$ was moved outside the integral because it has
-  no angular dependence, $\mu_0$ is the cosine of the scattering angle
-  (representing the probability of scattering into $\mu$),
-  and integration over the azimuthal angle occured because $K(\mu_0)$ is
-  assumed to be uniform and not depend on that angle. This means:
+  Checking units,
   \begin{equation*}
-    K(\mu_0)=\frac{\text{Total events leading to $\mu$}}
-    {\text{Total scattering events possible}}=\frac{1}{2}
+    \left(
+    \mu\frac{\delta}{\delta z}+\Sigma_t
+    \right)\left[\frac{1}{cm}\right]\psi(z,\mu)
+    \left[\frac{n\cdot cm}{str\cdot cm^3\cdot s}\right]=
+    \Sigma_s\frac{1}{2}\left[\frac{1}{cm\cdot rad}\right]
+    \int_{-1}^1d\mu'\
+    \psi(z,\mu')\left[\frac{n\cdot cm}{rad\cdot cm^3\cdot s}\right]
+    +q\left[\frac{n}{str\cdot cm^3\cdot s}\right].
   \end{equation*}
-  This assumes that scattering is isotropic, and that I understand what
-  is going on. 
 
+  $\Sigma_s$ was moved outside the integral because it has
+  no angular dependence
+  integration over the azimuthal angle occured because
+  $\psi(z,\hat{\Omega})$ is
+  assumed to be uniform and not depend on that angle.\\
   
-  Now we employ some Legendre
-  (pronounced Legendary...just kidding) polynomial expansion
-  for the scattering term.
+  Using Gauss-Legendre Quadrature for the integration term
+  \begin{equation*}
+    \phi=\int_{-1}^1d\mu'\psi(z,\mu')=\sum_{i=1}^{n}w_i\psi(z,\mu_i')
+  \end{equation*}
+  where
+  \begin{equation*}
+    w_i=\frac{2}{(1-\mu_i^2)[P_n'(\mu_i)]^2}
+  \end{equation*}
+  $P_n'$ is the differential of the legendre polynomial $n$, and $\mu_i'$
+  are the roots of $P_n$. The weights of even $n$'s of the legendre
+  polynomials
+  should sum to 2, the value of $\int_{-1}^1d\mu$, which they do.\\
+
+  \problemAnswer{
+  Putting this all together with time dependence:
+  \begin{equation*}
+    \left(\frac{\delta}{\delta t}+
+    \mu\frac{\delta}{\delta z}+\Sigma_t
+    \right)\psi_n(z)=
+    \Sigma_s\frac{1}{2}\sum_{n'=1}^{N}w_{n'}\psi_{n'}(z)
+    +q\frac{w_n}{2}
+  \end{equation*}
+  Where $n$ and $n'$ denote the direction being solved for and $N$
+  is the total number of angles being solved for, q was multiplied
+  by $\frac{w_n}{2}$ so that $\sum_n^Nq\frac{w_n}{2}=1$. Also
+  unites of $w$ are rad.}
+  
+  \textbf{Diamond difference discretization}
+  
+    $\mu_n>0$
+  \begin{equation*}
+    \frac{1}{v}\frac{\psi_{n,i}^{\ell+1,j+1}-\psi_{n,i}^{L,j}}
+         {\Delta t}+
+    \mu_n\frac{\psi_{n,i+1/2}^{\ell+1,j+1}-\psi_{n,i-1/2}^{\ell+1,j+1}}
+       {hz}+
+    \Sigma_t\psi_{n,i}^{\ell+1,j+1}=
+    \Sigma_s\frac{1}{2}\sum_{n'=1}^{N}w_i\psi_{n',i}^{\ell,j+1}
+    +q\frac{w_n}{2}.
+  \end{equation*}
+  Where $n$ is for angle, $i$ is the
+  midplane of a spacial discretization, $\ell$ is the iteration index
+  for spacial convergence, $j$ is for a time step and
+  \begin{equation*}
+    \psi_{n,i}^{\ell+1,j+1}=\frac{1}{2}(\psi_{n,i+1/2}^{\ell+1,j+1}+
+    \psi_{n,i-1/2}^{\ell+1,j+1})
+  \end{equation*}
+  Writing this in terms of a steady state (still for $\mu>0$)
+  \begin{equation*}
+    \mu_n\frac{\psi_{n,i+1/2}^{\ell+1,j+1}-\psi_{n,i-1/2}^{\ell+1,j+1}}
+       {hz}+
+       \Sigma_t^*\psi_{n,i}^{\ell+1,j+1}=
+       \Sigma_s\frac{1}{2}\sum_{n'=1}^{N}w_i\psi_{n',i}^{\ell,j+1}
+       +q^*\frac{w_n}{2}.
+  \end{equation*}
+  and for $\mu<0$
+  \begin{equation*}
+    \mu_n\frac{\psi_{n,i+1/2}^{\ell+1,j+1}-\psi_{n,i-1/2}^{\ell+1,j+1}}
+       {hz}+
+       \Sigma_t^*\psi_{n,i}^{\ell+1,j+1}=
+       \Sigma_s\frac{1}{2}\sum_{n'=1}^{N}w_i\psi_{n',i}^{\ell,j+1}
+       +q^*\frac{w_n}{2}.
+  \end{equation*}
+  where
+  \begin{equation*}
+    \Sigma_t^*=\Sigma_t+\frac{1}{v\Delta t}
+  \end{equation*}
+  \begin{equation*}
+    q^*=q+\frac{\psi_{n,i}^{L,j}}{v\Delta t}
+  \end{equation*}
+  The above equation has L for the iteration index to indicate that
+  its value was iteratively determined in the previous time step.\\~\\
+  \textbf{Step discretization}
+  
+Writing this in terms of a steady state,
+  \begin{equation*}
+    \mu_n\frac{\psi_{n,i+1/2}^{\ell+1,j+1}-\psi_{n,i-1/2}^{\ell+1,j+1}}
+       {hz}+
+       \Sigma_t^*\psi_{n,i}^{\ell+1,j+1}=
+       \Sigma_s\frac{1}{2}\sum_{n'=1}^{N}w_i\psi_{n',i}^{\ell,j+1}
+       +q^*\frac{w_n}{2}.
+  \end{equation*}
+  where
+  \begin{equation*}
+    \Sigma_t^*=\Sigma_t+\frac{1}{v\Delta t}
+  \end{equation*}
+  \begin{equation*}
+    q^*=q+\frac{\psi_{n,i}^{L,j}}{v\Delta t}
+  \end{equation*}
+
   
 \end{homeworkProblem}
 \clearpage

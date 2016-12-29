@@ -1,0 +1,109 @@
+Be-8:
+No Transmutations
+Decays to 2 alphas:
+t_1/2 = 7e-17 s
+
+***Parent Natural Isotope***
+(100%)
+Be-9:
+Transmutes to Be-10 by (n,gamma):
+2.45 MeV: sigma_a = 1.9435744999999997E-6
+14.1 MeV: sigma_a = 1.66051670416604E-6
+Transmutes to Be-8 by (n,2n):
+2.45 MeV: sigma_a = 0.0205
+14.1 MeV: sigma_a = 0.4844827628966762
+Transmutes to Li-7 by (n,t):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.02087750037599639
+Transmutes to He-6 by (n,alpha):
+2.45 MeV: sigma_a = 0.0825
+14.1 MeV: sigma_a = 0.010400000000000001
+No Decays
+
+Be-10:
+No Transmutations
+Decays to B-10:
+t_1/2 = 1.5e6 a
+
+***Parent Natural Isotope***
+(7.59%)
+Li-6:
+Transmutes to Li-7 by (n,gamma):
+2.45 MeV: sigma_a = 1.106851E-5
+14.1 MeV: sigma_a = 1.0170468324078749E-5
+Transmutes to He-6 by (n,p):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.00604
+Transmutes n + Li-6 -> H-1 + 2n + He-4:
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.0783
+Transmutes to He-4 by (n,t):
+2.45 MeV: sigma_a = 0.206155
+14.1 MeV: sigma_a = 0.025799999999999997
+No Decays
+
+***Parent Natural Isotope***
+(92.41%)
+Li-7:
+Transmutes to Li-8 by (n,gamma):
+2.45 MeV: sigma_a = 4.677236999999999E-6
+14.1 MeV: sigma_a = 4.105546409328015E-6
+Transmutes to Li-6 by (n,2n):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.0316031623575739
+Transmutes to He-6 by (n,d):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.010199468139511099
+Transmutes to H-2 by (n,2n+alpha):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.020194548097575947
+Transmutes to H-1 by (n,3n+alpha):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 6.556330167740616E-5
+No Decays
+
+Li-8:
+No Transmutations
+Decays to Be-8:
+t_1/2 = 0.840 s
+
+Li-9:
+No Transmutations
+Decays to Be-9:
+t_1/2 = 0.1783 s
+
+He-3:
+Transmutes to He-4 by (n,gamma):
+2.45 MeV: sigma_a = 9.287749999999999E-5
+14.1 MeV: sigma_a = 3.4695E-5
+Transmutes to H-3 by (n,p):
+2.45 MeV: sigma_a = 0.71494195
+14.1 MeV: sigma_a = 0.121
+Transmutes to H-2 by (n,d):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.07609
+
+He-4:
+No Transmutations
+No Decay
+
+He-6:
+No Transmutations
+Decays to Li-6:
+t_1/2 = 0.807 s
+
+H-3:
+Transmutes to H-2 by (n,2n):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.0497
+Decays to He-3:
+t_1/2 = 12.32 a
+
+H-2:
+Transmutes to H-1 as (n,2n):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.166767
+Transmutes to H-3 as (n,gamma):
+2.45 MeV: sigma_a = 8.413251E-6
+14.1 MeV: sigma_a = 9.471512E-6
+No Decay
