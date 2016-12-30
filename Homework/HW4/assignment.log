@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  28 DEC 2016 10:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  30 DEC 2016 16:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -702,28 +702,31 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 \c@homeworkProblemCounter=\count129
 
-(./assignment.aux)
+(./assignment.aux
+
+LaTeX Warning: Label `Homework4/Functions.py' multiply defined.
+
+)
 \openout1 = `assignment.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 246.
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 246.
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 246.
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 246.
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 246.
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 246.
-LaTeX Font Info:    ... okay on input line 246.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 246.
-LaTeX Font Info:    ... okay on input line 246.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 258.
+LaTeX Font Info:    ... okay on input line 258.
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 246.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+(lastpage)             ! on input line 258.
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count130
 \scratchdimen=\dimen141
@@ -753,7 +756,7 @@ e
 ))
 \c@lstlisting=\count136
 \AtBeginShipoutBox=\box36
-Package hyperref Info: Link coloring OFF on input line 246.
+Package hyperref Info: Link coloring OFF on input line 258.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -763,9 +766,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count137
 )
-LaTeX Info: Redefining \ref on input line 246.
-LaTeX Info: Redefining \pageref on input line 246.
-LaTeX Info: Redefining \nameref on input line 246.
+LaTeX Info: Redefining \ref on input line 258.
+LaTeX Info: Redefining \pageref on input line 258.
+LaTeX Info: Redefining \nameref on input line 258.
 
 (./assignment.out) (./assignment.out)
 \@outlinefile=\write3
@@ -780,7 +783,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 249.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 261.
 
 (/usr/share/texlive/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
@@ -791,90 +794,148 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 \openout4 = `assignment.toc'.
 
  [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 323--330
+Underfull \hbox (badness 10000) in paragraph at lines 335--342
 
  []
 
 [4
 
 ]
-Overfull \hbox (6.45087pt too wide) detected at line 455
+Overfull \hbox (6.45087pt too wide) detected at line 467
 [] [] \OML/cmm/m/it/10  \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 z; ^^V\OT1/cmr/m/n/10
  ) [] = ^^F[][] [] [][] \OML/cmm/m/it/10 d^^V[]  \OT1/cmr/m/n/10 (\OML/cmm/m/it
 /10 z; ^^V[]\OT1/cmr/m/n/10 ) [] + \OML/cmm/m/it/10 q [] :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 457--462
+Underfull \hbox (badness 10000) in paragraph at lines 469--474
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 470--475
+Underfull \hbox (badness 10000) in paragraph at lines 482--487
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 488--489
+Underfull \hbox (badness 10000) in paragraph at lines 500--501
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 523--527
+Underfull \hbox (badness 10000) in paragraph at lines 535--539
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 535--539
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 563--573
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 563--573
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 580--581
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 582--587
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 556--557
+Underfull \hbox (badness 10000) in paragraph at lines 596--598
 
  []
 
-[7
+
+Underfull \hbox (badness 10000) in paragraph at lines 599--600
+
+ []
+
+[7]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 626.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+(./Homework4/Functions.py
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 39.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+))
+(./Homework4/Functions.py [8
+
+]) [9]
+Underfull \hbox (badness 10000) in paragraph at lines 653--654
+
+ []
+
+[10
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 570--571
+Underfull \hbox (badness 10000) in paragraph at lines 667--668
 
  []
 
-[8
+[11
 
 ] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 637.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 637.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 734.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 734.
 (./assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 637.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 637.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 734.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 734.
 Package rerunfilecheck Info: File `assignment.out' has not changed.
-(rerunfilecheck)             Checksum: DDCEAAA1D88C7F00C700AC1B141190B8;218.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 637.
+(rerunfilecheck)             Checksum: 411F073A85D71E8567543FCD25F94C7B;281.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 734.
  ) 
 Here is how much of TeX's memory you used:
- 9619 strings out of 494953
- 136502 string characters out of 6180977
- 261891 words of memory out of 5000000
- 12714 multiletter control sequences out of 15000+600000
- 15876 words of font info for 58 fonts, out of 8000000 for 9000
+ 10179 strings out of 494953
+ 141950 string characters out of 6180977
+ 294891 words of memory out of 5000000
+ 13192 multiletter control sequences out of 15000+600000
+ 17436 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 29i,12n,43p,250b,403s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cmextra/cmmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on assignment.pdf (8 pages, 181966 bytes).
+ 30i,12n,43p,250b,2097s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/c
+mmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
+courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro
+8a.pfb>
+Output written on assignment.pdf (11 pages, 234076 bytes).
 PDF statistics:
- 145 PDF objects out of 1000 (max. 8388607)
- 118 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 257 PDF objects out of 1000 (max. 8388607)
+ 222 compressed objects within 3 object streams
+ 86 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

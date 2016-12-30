@@ -1,5 +1,6 @@
 \select@language {english}
 \contentsline {section}{Homework 4 Problem Statement}{3}{section*.2}
 \contentsline {section}{Homework 4 Problem Background}{4}{section*.3}
-\contentsline {section}{Homework 5}{7}{section*.4}
-\contentsline {section}{Project}{8}{section*.5}
+\contentsline {section}{Homework 4 Problem Solution}{8}{section*.4}
+\contentsline {section}{Homework 5}{10}{section*.5}
+\contentsline {section}{Project}{11}{section*.6}
