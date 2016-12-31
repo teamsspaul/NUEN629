@@ -49,20 +49,26 @@ for I in Is:
   # Source iteration Diamond Difference Solution
   x, phi_dd, iterations, errors = SnM.source_iteration(I,hx,q,Sig_t_discr,
                                    Sig_s_discr,N,BCs,"diamond_difference",
-                                   tolerance=1.0e-8,maxits=10000,LOUD=True)
+                                                       tolerance=1.0e-8,maxits=10000,LOUD=False)
   x_list.append(x)
   phi_SI_dd_list.append(phi_dd)
   iter_SI_dd_list.append(iterations)
   error_SI_dd_list.append(errors)
 
+
+  print(phi_dd)
+  quit()
+
   # Source iteration Step Solution
   x, phi_step, iterations, errors = SnM.source_iteration(I,hx,q,Sig_t_discr,
                                      Sig_s_discr,N,BCs,"step",
-                                     tolerance=1.0e-8,maxits=10000,LOUD=True)
+                                                         tolerance=1.0e-8,maxits=10000,LOUD=False)
   phi_SI_step_list.append(phi_step)
   iter_SI_step_list.append(iterations)
   error_SI_step_list.append(errors)
 
+
+  
   # GMRES Diamond Difference Solution
   x, phi_dd, iterations, errors = SnM.gmres_solve(I,hx,q,Sig_t_discr,
                                      Sig_s_discr,N,BCs,"diamond_difference",

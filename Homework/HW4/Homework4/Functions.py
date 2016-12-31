@@ -128,19 +128,19 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
       sigma_ts=sigma_t
   else:
       sigma_ts=sigma_t+1/(v*dt)
-  
+
   while not(converged):
     phi = np.zeros(I)
-    #sweep over each direction
+    #sweep over each direction   
     for n in range(N):
-      qs=(q*W[n])/2+phi_old*sigma_s+psiprevioustime[n,:]/(v*dt)
-      if sweep_type == 'diamond_difference':
+      qs=(q*W[n])/2+(phi_old*sigma_s)/2+psiprevioustime[n,:]/(v*dt) 
+      if sweep_type == 'dd':
         tmp_psi[n,:] = diamond_sweep1D(I,hx,qs,sigma_ts,MU[n],BCs[n])
       elif sweep_type == 'step':
         tmp_psi[n,:] = step_sweep1D(I,hx,qs,sigma_ts,MU[n],BCs[n])
       else:
         sys.exit("Sweep method specified not defined in SnMethods")
-      phi += tmp_psi[n,:]*W[n]
+      phi = phi+tmp_psi[n,:]*W[n]
     #check convergence
     change = np.linalg.norm(phi-phi_old)/np.linalg.norm(phi)
     iterations.append(iteration)
@@ -148,14 +148,15 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
     converged = (change < tolerance) or (iteration > maxits)
     if (LOUD>0) or (converged and LOUD<0):
       print("Iteration",iteration,": Relative Change =",change)
-      if iteration > 538:
-          print(phi)
     if (iteration > maxits):
       print("Warning: Source Iteration did not converge")
     #Prepare for next iteration
     iteration += 1
     phi_old = phi.copy()
-  x = np.linspace(hx/2,I*hx-hx/2,I)
+  if sweep_type == 'step':
+      x = np.linspace(hx,I*hx,I)
+  elif sweep_type == 'dd':
+      x = np.linspace(hx/2,I*hx-hx/2,I)
   return x, phi, iterations, Errors, tmp_psi
 
 

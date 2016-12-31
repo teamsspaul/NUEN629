@@ -14,13 +14,14 @@ import Functions as f
 
 #Materials
 Q = 0.01
-Sigma_t = 100.
-Sigma_s = Sigma_t
+Sigma_t = 110
+#Sigma_s = Sigma_t
+Sigma_s=100
 
 #Geometry
 L = 10.   #Width of slab
 I=10      #Number of cuts in slab
-N = 10     #Number of angle slices
+N = 2     #Number of angle slices
 BCs = f.np.zeros(N)
 
 #Width, ang lists for materials
@@ -50,9 +51,9 @@ for i in range(0,len(Time)):
     #Determine phi
     x, phi, iterations, errors, psi =f.source_iteration(I,
     hx,q,Sig_t_discr,Sig_s_discr,N,psi,v,dt,Time[i],BCs,
-    "diamond_difference",
-    tolerance=1.0e-8,maxits=1000,LOUD=True)
-
+    "step",tolerance=1.0e-8,maxits=10000,LOUD=False)
+    print(phi)
+    print(x)
 
 #print(iter_GMRES_step_list[0])
 #print(error_GMRES_step_list[0])

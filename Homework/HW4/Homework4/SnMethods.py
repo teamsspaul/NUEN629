@@ -94,6 +94,7 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,BCs,sweep_type,
   converged = False
   MU, W = np.polynomial.legendre.leggauss(N)
   iteration = 1
+  
   while not(converged):
     phi = np.zeros(I)
     #sweep over each direction
