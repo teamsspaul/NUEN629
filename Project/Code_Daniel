@@ -1,0 +1,28 @@
+Need caret package
+
+Stepwise regression code
+
+model<-train(outcome~.,
+             data=bigDF,
+	     method='glmStepAIC')
+	     summary(model)
+
+
+this model
+
+model1<-train(outcome~.,
+             data=bigDF,
+	     method='lmStepAIC',
+	     direction="both")
+
+
+#100 variables, only 5 matter
+
+bigDF <- data.frame()
+N = 200
+for (i in 1:100)
+  bigDF[1:N,i] <- runif(N)
+
+Response2 = bigDF[,1] * 20 + bigDF[,2]^1.2 * 10 + bigDF[,3]^0.9*5+ bigDF[,4]*2.5+ bigDF[,5] + rowSums(0.1 * bigDF[,6:100]^0.5) + 5 + 0.01*runif(N)
+
+

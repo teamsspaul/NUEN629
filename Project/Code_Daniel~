@@ -1,0 +1,13 @@
+Need caret package
+
+Stepwise regression code
+
+model<-train(outcome~.,
+             data=bigDF,
+	     method='glmStepAIC')
+	     summary(model)
+
+
+
+
+
