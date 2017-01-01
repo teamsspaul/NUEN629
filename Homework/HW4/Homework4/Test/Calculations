@@ -31,6 +31,9 @@ v=1    #Velocity
 
 #Method
 Methods=['step','dd']
+Colors=['red','blue'];c=0
+fig=f.plt.figure(figsize=f.FigureSize)
+ax=fig.add_subplot(111)
 for Method in Methods:
     if Method == 'step':
         I=II+1
@@ -61,27 +64,20 @@ for Method in Methods:
         hx,q,Sig_t_discr,Sig_s_discr,N,psi,v,dt,t,BCs,
         Method,tolerance=1.0e-8,maxits=10000,LOUD=False)
 
-        ax,fig=f.plot(x,phi,ax,color,Method+" : hx = "+str(hx),fig,Ylabel)
-        
-
-# fig=f.plt.figure(figsize=f.FigureSize)
-# ax=fig.add_subplot(111)
-# label="ENDF/B-VII.1: $\sigma_"+Reaction+"$ "+Element+"$^{"+Isotope+"}$"
-# Ylabel='$\sigma$(E)'
-# (fig,ax)=f.plot(E,Xsec[:,1],ax,'blue',label,fig,Ylabel)
-# label=""
-
-# Make the y-axis label and tick labels match the line color.
-# ax2.set_ylabel(Ylabel, color='red')
-for tl in ax2.get_yticklabels():
-        tl.set_color('red')
+        XLabel='z position [cm]'
+        YLabel="$\phi\left[\\frac{n\cdot cm}{cm^3\cdot s}\\right]$"
+        #YLabel=''
+        ax,fig=f.plot(x,phi,ax,
+                      Colors[c],Method+" : hx = "+str(hx),
+                      fig,XLabel,YLabel)
+        c=c+1
 
         #########################################################
         ################### Legend/Save  ########################
         #########################################################
 
 f.Legend(ax)
-f.plt.savefig('X_Sections/XwVar_'+ElementInput+'.pdf')
+f.plt.savefig('SourceIteration_'+str(I)+'.pdf')
         
 
         

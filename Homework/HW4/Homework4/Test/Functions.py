@@ -52,14 +52,14 @@ Title = ''
 TitleFontSize = 22
 TitleFontWeight = "bold"  # "bold" or "normal"
 
-Xlabel='E (eV)'   # X label
+#Xlabel='E (eV)'   # X label
 XFontSize=18          # X label font size
 XFontWeight="normal"  # "bold" or "normal"
-XScale="log"       # 'linear' or 'log'
+XScale="linear"       # 'linear' or 'log'
 
 YFontSize=18                    # Y label font size
 YFontWeight="normal"            # "bold" or "normal"
-YScale="log"                 # 'linear' or 'log'
+YScale="linear"                 # 'linear' or 'log'
 
 
 ################################################################
@@ -204,11 +204,11 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
 ################################################################
 
 
-def plot(x,y,ax,Color,label,fig,Ylabel):
+def plot(x,y,ax,Color,label,fig,Xlabel,Ylabel):
     #Plot X and Y
     ax.plot(x,y,
             linestyle="solid", #"solid","dashed","dash_dot","dotted","."
-            marker="", # "*" "H" "h" "d" "^" ">"
+            marker=".", # "*" "H" "h" "d" "^" ">"
             # good ones http://matplotlib.org/1.4.1/api/markers_api.html for more
             color=Color,
             markersize=8,
@@ -230,8 +230,8 @@ def plot(x,y,ax,Color,label,fig,Ylabel):
                   fontsize=YFontSize,
                   fontweight=YFontWeight,
                   fontdict=font)
-                                        
-
+    return(ax,fig)                                    
+    
 def Legend(ax):
     handles,labels=ax.get_legend_handles_labels()
     ax.legend(handles,labels,loc='best',
