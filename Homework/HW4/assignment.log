@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  2 JAN 2017 08:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  2 JAN 2017 11:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -869,7 +869,23 @@ Package pdftex.def Info: Homework4/SourceIteration_101.pdf used on input line 6
  [7
 
  <./Homework4/SourceIteration.pdf>]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 689.
+Underfull \hbox (badness 10000) in paragraph at lines 647--648
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 657--662
+
+ []
+
+[8pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.687 
+       <./Homework4/SourceIteration_101.pdf>]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 718.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
@@ -880,22 +896,16 @@ LaTeX Font Info:    Try loading font information for T1+pcr on input line 102.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-) [8pdfTeX warning (ext4): destination with the same identifier (name{figure.1}
-) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.103   Inputs:
-                <./Homework4/SourceIteration_101.pdf>])
-(./Homework4/Functions.py [9]) (./Homework4/Calculations [10] [11]) [12]
-Underfull \hbox (badness 10000) in paragraph at lines 719--720
+)) [9]
+(./Homework4/Functions.py) (./Homework4/Calculations [10] [11]) [12]
+Underfull \hbox (badness 10000) in paragraph at lines 748--749
 
  []
 
 [13
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 733--734
+Underfull \hbox (badness 10000) in paragraph at lines 762--763
 
  []
 
@@ -903,27 +913,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 733--734
 
 ] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 800.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 800.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 829.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 829.
 (./assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 800.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 800.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 829.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 829.
 Package rerunfilecheck Info: File `assignment.out' has not changed.
 (rerunfilecheck)             Checksum: 411F073A85D71E8567543FCD25F94C7B;281.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 800.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 829.
  ) 
 Here is how much of TeX's memory you used:
  10357 strings out of 494953
  144492 string characters out of 6180977
- 298891 words of memory out of 5000000
+ 291891 words of memory out of 5000000
  13250 multiletter control sequences out of 15000+600000
  17436 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,12n,44p,250b,2187s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,12n,43p,250b,2037s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dis
@@ -945,7 +955,7 @@ blic/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
-Output written on assignment.pdf (14 pages, 436028 bytes).
+Output written on assignment.pdf (14 pages, 438243 bytes).
 PDF statistics:
  488 PDF objects out of 1000 (max. 8388607)
  420 compressed objects within 5 object streams

@@ -9,41 +9,62 @@ start_time = time.time()
 import Functions as f
 
 ################################################################
-######################## Set Up ################################
+######################## Inputs ################################
 ################################################################
 
-#Materials
+# Constants
 Q = 0.01
-Sigma_t = 101
-#Sigma_s = Sigma_t
-Sigma_s=100
-#add adsorption to help converge
+Sigma_t = 110;Sigma_s=100
+# Add adsorption to help converge
 if Sigma_t==Sigma_s:
     Sigma_t=Sigma_t*1.0001
 
-#Geometry
-L = 10.   #Width of slab
-slices=[10,50,100,200,500] #Number of cuts in slab
-#slices=[800] #Number of cuts in slab
-N = 4     #Number of angle slices
-BCs = f.np.zeros(N)
+# Geometry
+L = 10.                       # Width of slab
+slices=[10]                   # Number of cuts in slab (looped)
+N = 2                         # Number of angle slices
+BCs = f.np.zeros(N)           # Zero incoming flux
 
 #Time
-T=0    #total Time
-dt=1 #Time steps width
-v=1    #Velocity
+T=0                           # total Time (A plot made at T)
+dt=1                          # Time steps width
+v=1                           # Velocity
 
-MAXITS=100000
-loud=False
+MAXITS=10000                  # Max iterations for source iter
+loud=False                    # Echo every Iteration?
 
 #Method
-Methods=['step','dd']
-#Methods=['step']
-fig=f.plt.figure(figsize=f.FigureSize)
-ax=fig.add_subplot(111);Check=0
-for Method in Methods:
+Methods=['Iteration:step',
+         'Iteration:dd',
+         'GMRES:step',]       # Methods to solve with? (looped)
+
+GMRES=False                   # Use GMRES with step discret?
+
+tol=1e-5
+
+################################################################
+#################### Initialize Figures ########################
+################################################################
+
+Check=0
+fig=f.plt.figure(figsize=f.FigureSize)   # Plot all Methods
+ax=fig.add_subplot(111)
+erfig=f.plt.figure(figsize=f.FigureSize) # Err Plot
+erax=erfig.add_subplot(111)              # at T=0
+
+################################################################
+##################### Calculations #############################
+################################################################
+
+for Scheme in Methods:
+
+    Method=Scheme.split(':')[1]
+    #########################################################
+    ##################### Set Up ############################
+    #########################################################
+
     for II in slices:
-        if Method == 'step':
+        if Method == 'step': #Step Dude needs one extra
             I=II+1
         elif Method == 'dd':
             I=II
@@ -53,58 +74,49 @@ for Method in Methods:
         q = f.np.ones(I)*Q
         Sig_t_discr = f.np.ones(I)*Sigma_t
         Sig_s_discr = f.np.ones(I)*Sigma_s
-        #Initialize psi
+        
+        #Initialize psi (for time steps)
         if T==0:
             psi=f.np.zeros((N,I))
             Time=[0]
         else:
             psi=f.np.ones((N,I))*(1/hx)
             Time=f.Timevector(T,dt)
-    
+
+        label_tmp=Scheme+":hx="+str(hx)+",T="
         #########################################################
-        ##################### Calculations ######################
+        #################### Determine phi ######################
         #########################################################
 
         for t in Time: #Loop over time
 
-            #Determine phi
-            x, phi, iterations, errors, psi =f.source_iteration(I,
-            hx,q,Sig_t_discr,Sig_s_discr,N,psi,v,dt,Time,BCs,
-            Method,tolerance=1.0e-8,maxits=MAXITS,LOUD=loud)
+            label=label_tmp+str(t)
+            
+            #Determine phi (new psi is determined for time steps)
+            x,phi,it,er,psi=f.solver(I,hx,q,Sig_t_discr,
+            Sig_s_discr,N,psi,v,dt,Time,BCs,Scheme,tol,MAXITS,loud)
 
-            XLabel='z position [cm]'
-            YLabel="$\phi\left[\\frac{n\cdot cm}{cm^3\cdot s}\\right]$"
-
-            ax,fig=f.plot(x,phi,ax,
-                      Method+" : hx = "+str(hx),
-                          fig,XLabel,YLabel,Check)
+            #####################################################
+            ################ Plot Information ###################
+            #####################################################
+            fig
+            ax,fig=f.plot(x,phi,ax,label,fig,Check)
+            if t==0:
+                erfig
+                erax,erfig=f.plotE(it,er,erax,label,erfig,Check)
             Check=Check+1
 
-        #########################################################
-        ################### Legend/Save  ########################
-        #########################################################
+#########################################################
+################### Legend/Save  ########################
+#########################################################
 
+fig
 f.Legend(ax)
-f.plt.savefig('SourceIteration_'+str(Sigma_t)+'.pdf')
-        
+f.plt.savefig('Plots/FluxPlot.pdf')
 
-        
-#print(iter_GMRES_step_list[0])
-#print(error_GMRES_step_list[0])
-
-################################################################
-####################### Plotting ###############################
-################################################################
-
-# Plot Source Iteration Solutions
-#plt.plot(x_list[0],phi_SI_step_list[0],label="10 zone Step Solution")
-
-# Plot Source Iteration and GMRES Step Solutions
-#plt.plot(x_list[0],phi_SI_step_list[0],label="10 zone SI Step Solution")
-
-# Plot convergence for Step Methods
-#plt.plot(iter_SI_step_list[0],error_SI_step_list[0],label="10 zone SI Step Solution")
-
+erfig
+f.Legend(erax)
+f.plt.savefig('Plots/ErrorPlot.pdf')
 
 ###################### Time To execute #################
 

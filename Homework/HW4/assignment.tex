@@ -614,7 +614,7 @@
   \begin{figure}[H]
     \begin{center}
       \includegraphics[width=1\columnwidth]
-                      {Homework4/SourceIteration.pdf}
+                      {Homework4/Plots/SourceIteration.pdf}
     \end{center}
   \end{figure}
 
@@ -632,7 +632,7 @@
   \begin{figure}[H]
     \begin{center}
       \includegraphics[width=1\columnwidth]
-                      {Homework4/SourceIteration_101.pdf}
+                      {Homework4/Plots/SourceIteration_101.pdf}
     \end{center}
     \vspace{-8mm}
     \caption{Comparison of solution with $\Sigma_t=101$}
@@ -642,8 +642,37 @@
   \textbf{Something else I would like to point out in the solution
     is that the step solution always had one more point plotted than the
     diamond difference. The reason for this is due to how each solution
-    was solved. will be shown in the case
-    where the number of zones is 10.}
+    was solved. This is easier highlighted (for me) with an example,
+    which is shown in the case
+    where the number of zones is 10.}\\
+  
+  For the Diamond difference, the average locations (remember they were averaged),
+  $\psi_{n,i}^{L,j+1}$, being solved for were,
+  \begin{equation*}
+    z=[0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5]
+  \end{equation*}
+  The points for $\psi_{n,i+1/2}^{L,j+1}$ and $\psi_{n,i-1/2}^{L,j+1}$ were at the points,
+  \begin{equation*}
+    z=[0,1,2,3,4,5,6,7,8,9,10]
+  \end{equation*}
+  When sweeping to the right, $\psi_{n}(z=0)$ was set to zero, because the incoming flux
+  is zero, and all points were solved for up to where $z=10$, and $\psi_{n,i}$ values were
+  determined with averaging. This same thing occured when sweeping to the left (except here $\psi_{n}(z=10)$ was set to zero). This would
+  yield 10 values at the points $[0.5,1.5,...,9.5]$.\\
+
+  For the step discretization scheme, the locations (non averaged), $\psi_{n,i}^{L,j+1}$, being solved for were,
+
+  \begin{equation*}
+    x=
+    \begin{cases}
+      [1,2,3,4,5,6,7,8,9,10] & \mu>0\\
+      [0,1,2,3,4,5,6,7,8,9], & \mu<0
+    \end{cases}
+  \end{equation*}
+  When combining these two lists for $\phi$, this was considered,
+  and hence the step discretization scheme had one extra point (both
+  lists have 10 points, but the location 10 is unqiue in the first list,
+  and 0 in the second).
   
   \item{(10 points) Discuss why there is a different form of the
     discretization for the different signs of $\mu$.}
@@ -738,7 +767,6 @@
 
 
 
-
   %% \begin{equation*}
   %%   u(x,0)=
   %%   \begin{cases}
@@ -746,6 +774,7 @@
   %%     0, & \text{otherwise}
   %%   \end{cases}
   %% \end{equation*}
+
 
   
   %% \begin{enumerate}[label=(\alph*)]

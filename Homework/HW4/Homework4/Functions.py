@@ -56,10 +56,12 @@ TitleFontWeight = "bold"  # "bold" or "normal"
 XFontSize=18          # X label font size
 XFontWeight="normal"  # "bold" or "normal"
 XScale="linear"       # 'linear' or 'log'
+XScaleE='linear'      # Same but for error plot
 
 YFontSize=18                    # Y label font size
 YFontWeight="normal"            # "bold" or "normal"
 YScale="linear"                 # 'linear' or 'log'
+YScaleE='linear'
 
 Check=0
 
@@ -87,6 +89,13 @@ BBOXX = 1.24
 BBOXY = 0.5       # Set legend on right side of graph
 
 NumberOfLegendColumns=1
+
+Xlabel='z position [cm]'
+Ylabel="$\phi\left[\\frac{n\cdot cm}{cm^3\cdot s}\\right]$"
+
+XlabelE='Iterations'
+#YlabelE="Error = $\\frac{||\phi^{\ell+1}-\phi^\ell||}{||\phi^{\ell+1}||}$"
+YlabelE=''
 
 ################################################################
 ######################### Functions ############################
@@ -209,6 +218,8 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
       phi = phi+tmp_psi[n,:]*W[n]
     #check convergence
     change = np.linalg.norm(phi-phi_old)/np.linalg.norm(phi)
+    iterations.append(iteration)
+    Errors.append(change)
     #iterations.append(iteration)
     #Errors.append(change)
     converged = (change < tolerance) or (iteration > maxits)
@@ -226,6 +237,105 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
       x = np.linspace(hx/2,I*hx-hx/2,I)
   return x, phi, iterations, Errors, tmp_psi
 
+def gmres_solve(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
+                v,dt,Time,BCs, sweep_type,
+                tolerance = 1.0e-8,maxits = 100, LOUD=False,
+                restart = 20 ):
+  """Solve, via GMRES, a single-group steady state problem
+  Inputs:
+    I:               number of zones
+    hx:              size of each zone
+    q:               source array
+    sigma_t:         array of total cross-sections
+    sigma_s:         array of scattering cross-sections
+    N:               number of angles
+    BCs:             Boundary conditions for each angle
+    sweep_type:      type of 1D sweep to perform solution
+    tolerance:       the relative convergence tolerance for the iterations
+    maxits:          the maximum number of iterations
+    LOUD:            boolean to print out iteration stats
+  Outputs:
+    x:               value of center of each zone
+    phi:             value of scalar flux in each zone
+  """
+  iterations = []
+  Errors = []
+
+  #compute RHS side
+  RHS = np.zeros(I)
+
+  MU, W = np.polynomial.legendre.leggauss(N)
+  tmp_psi=psiprevioustime.copy()
+  if len(Time)==1:
+      sigma_ts=sigma_t
+  else:
+      sigma_ts=sigma_t+1/(v*dt)
+      
+  for n in range(N):
+    qs=q/2+psiprevioustime[n,:]/(v*dt)
+    if sweep_type == 'dd':
+      tmp_psi[n,:] = diamond_sweep1D(I,hx,qs,sigma_ts,MU[n],BCs[n])
+    elif sweep_type == 'step':
+      tmp_psi[n,:] = step_sweep1D(I,hx,qs,sigma_ts,MU[n],BCs[n])
+    #tmp_psi = sweep1D(I,hx,q,sigma_t,MU[n],BCs[n])
+    RHS += tmp_psi[n,:]*W[n]
+  
+  #define linear operator for gmres
+  def linop(phi):
+    tmp = phi*0
+    #sweep over each direction
+    for n in range(N):
+      if sweep_type == 'diamond_difference':
+        tmp_psi = diamond_sweep1D(I,hx,(phi*sigma_s)/2,
+                                  sigma_ts,MU[n],BCs[n])
+      elif sweep_type == 'step':
+        tmp_psi = step_sweep1D(I,hx,(phi*sigma_s)/2,
+                                    sigma_ts,MU[n],BCs[n])
+      tmp += tmp_psi*W[n]
+    return phi-tmp
+  A = spla.LinearOperator((I,I), matvec = linop, dtype='d')
+
+  
+  #define a little function to call when the iteration is called
+  iteration = np.zeros(1)
+  def callback(rk, iteration=iteration):
+    iteration += 1
+    if (LOUD>0):
+      print("Iteration",iteration[0],"norm of residual",np.linalg.norm(rk))
+    iterations.append(iteration[0])
+    Errors.append(np.linalg.norm(rk))
+
+  #now call GMRES
+  phi,info = spla.gmres(A,RHS,x0=RHS,restart=restart,
+                        tol=tolerance,callback=callback)
+  print("Hello")
+  quit()
+
+  if (LOUD):
+    print("Finished in",iteration[0],"iterations.")
+  if (info >0):
+    print("Warning, convergence not achieved")
+  if sweep_type == 'step':
+      x = np.linspace(0,(I-1)*hx,I)
+  elif sweep_type == 'dd':
+      x = np.linspace(hx/2,I*hx-hx/2,I)
+  return x, phi, iterations, Errors,tmp_psi
+
+
+def solver(I,hx,q,Sig_t,Sig_s,N,psi,v,dt,Time,BCs,Scheme,tol,MAXITS,loud):
+    Method=Scheme.split(':')[1]
+    if "Iteration" in Scheme:
+        x, phi, iterations, errors, psi =source_iteration(I,
+            hx,q,Sig_t,Sig_s,N,psi,v,dt,Time,BCs,
+            Method,tolerance=tol,maxits=MAXITS,LOUD=loud)
+    elif "GMRES" in Scheme:
+        x, phi, iterations, errors, psi =gmres_solve(I,
+            hx,q,Sig_t,Sig_s,N,psi,v,dt,Time,BCs,
+            Method,tolerance=tol,maxits=MAXITS,LOUD=loud,restart=I/2)
+    else:
+        print("Improper scheme selected")
+        quit()
+    return x, phi, iterations, errors,psi
 
 ################################################################
 ################### Plotting Function ##########################
@@ -244,7 +354,7 @@ def loop_values(list1,index):
             index=index-len(list1)
     return(list1[index])
 
-def plot(x,y,ax,label,fig,Xlabel,Ylabel,Check):
+def plot(x,y,ax,label,fig,Check):
     if 'step' in label:
         Color='blue'
     elif 'dd' in label:
@@ -274,13 +384,45 @@ def plot(x,y,ax,label,fig,Xlabel,Ylabel,Check):
                   fontweight=YFontWeight,
                   fontdict=font)
     return(ax,fig)                                    
+
+
+def plotE(x,y,ax,label,fig,Check):
+    if 'step' in label:
+        Color='blue'
+    elif 'dd' in label:
+        Color='red'
+    #Plot X and Y
+    ax.plot(x,y,
+            linestyle=loop_values(LineStyles,Check),
+            marker=loop_values(MarkerType,Check),
+            color=loop_values(Colors,Check),
+            markersize=loop_values(MarkSize,Check),
+            alpha=loop_values(Alpha_Value,Check),
+            label=label)
     
+    #Log or linear scale?
+    ax.set_xscale(XScaleE)
+    ax.set_yscale(YScaleE)
+    #Set Title
+    fig.suptitle(Title,fontsize=TitleFontSize,
+                 fontweight=TitleFontWeight,fontdict=font,
+                                                          ha='center')
+    #Set X and y labels
+    ax.set_xlabel(XlabelE,
+                  fontsize=XFontSize,fontweight=XFontWeight,
+                  fontdict=font)
+    ax.set_ylabel(YlabelE,
+                  fontsize=YFontSize,
+                  fontweight=YFontWeight,
+                  fontdict=font)
+    return(ax,fig)                                    
+
 def Legend(ax):
     handles,labels=ax.get_legend_handles_labels()
     ax.legend(handles,labels,loc='best',
               fontsize=LegendFontSize,prop=font)
     return(ax)
-                        
+
 # def Legend(ax):
 #         handles,labels=ax.get_legend_handles_labels()
 #         box=ax.get_position()
