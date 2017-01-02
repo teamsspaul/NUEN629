@@ -14,47 +14,73 @@ import Functions as f
 
 #Materials
 Q = 0.01
-Sigma_t = 110
+Sigma_t = 100
 #Sigma_s = Sigma_t
 Sigma_s=100
 
 #Geometry
 L = 10.   #Width of slab
-I=10      #Number of cuts in slab
+slices=[10,50,100] #Number of cuts in slab
 N = 2     #Number of angle slices
 BCs = f.np.zeros(N)
-
-#Width, ang lists for materials
-hx = L/I
-q = f.np.ones(I)*Q
-Sig_t_discr = f.np.ones(I)*Sigma_t
-Sig_s_discr = f.np.ones(I)*Sigma_s
 
 #Time
 T=0    #total Time
 dt=1 #Time steps width
 v=1    #Velocity
-#Initialize psi
-if T==0:
-    psi=f.np.zeros((N,I))
-    Time=[0]
-else:
-    psi=f.np.ones((N,I))*(1/hx)
-    Time=f.Timevector(T,dt)
 
-################################################################
-##################### Calculations #############################
-################################################################
+#Method
+Methods=['step','dd']
+fig=f.plt.figure(figsize=f.FigureSize)
+ax=fig.add_subplot(111);Check=0
+for Method in Methods:
+    for II in slices:
+        if Method == 'step':
+            I=II+1
+        elif Method == 'dd':
+            I=II
+      
+        #Width, ang lists for materials
+        hx = L/II
+        q = f.np.ones(I)*Q
+        Sig_t_discr = f.np.ones(I)*Sigma_t
+        Sig_s_discr = f.np.ones(I)*Sigma_s
+        #Initialize psi
+        if T==0:
+            psi=f.np.zeros((N,I))
+            Time=[0]
+        else:
+            psi=f.np.ones((N,I))*(1/hx)
+            Time=f.Timevector(T,dt)
+    
+        #########################################################
+        ##################### Calculations ######################
+        #########################################################
 
-for i in range(0,len(Time)):
+        for t in Time: #Loop over time
 
-    #Determine phi
-    x, phi, iterations, errors, psi =f.source_iteration(I,
-    hx,q,Sig_t_discr,Sig_s_discr,N,psi,v,dt,Time[i],BCs,
-    "step",tolerance=1.0e-8,maxits=10000,LOUD=False)
-    print(phi)
-    print(x)
+            #Determine phi
+            x, phi, iterations, errors, psi =f.source_iteration(I,
+            hx,q,Sig_t_discr,Sig_s_discr,N,psi,v,dt,t,BCs,
+            Method,tolerance=1.0e-8,maxits=10000,LOUD=False)
 
+            XLabel='z position [cm]'
+            YLabel="$\phi\left[\\frac{n\cdot cm}{cm^3\cdot s}\\right]$"
+
+            ax,fig=f.plot(x,phi,ax,
+                      Method+" : hx = "+str(hx),
+                          fig,XLabel,YLabel,Check)
+            Check=Check+1
+
+        #########################################################
+        ################### Legend/Save  ########################
+        #########################################################
+
+f.Legend(ax)
+f.plt.savefig('SourceIteration.pdf')
+        
+
+        
 #print(iter_GMRES_step_list[0])
 #print(error_GMRES_step_list[0])
 

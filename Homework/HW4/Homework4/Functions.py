@@ -25,6 +25,69 @@ import sys
 import numpy as np
 import scipy.sparse.linalg as spla
 
+import scipy.special as sps
+import matplotlib.pyplot as plt
+plt.rcParams["font.family"] = "monospace"
+import matplotlib
+matplotlib.rc('text',usetex=True)
+matplotlib.rcParams['text.latex.preamble']=[r"\usepackage{amsmath}"]
+import random as rn
+import matplotlib.mlab as mlab
+import copy
+import os
+
+#############################################################
+######################### Variables #########################
+#############################################################
+
+# Basic information
+FigureSize = (11, 6)              # Dimensions of the figure
+TypeOfFamily='monospace'          # This sets the type of font for text
+font = {'family' : TypeOfFamily}  # This sets the type of font for text
+LegendFontSize = 12
+Lfont = {'family' : TypeOfFamily}  # This sets up legend font
+Lfont['size']=LegendFontSize
+
+Title = ''
+TitleFontSize = 22
+TitleFontWeight = "bold"  # "bold" or "normal"
+
+#Xlabel='E (eV)'   # X label
+XFontSize=18          # X label font size
+XFontWeight="normal"  # "bold" or "normal"
+XScale="linear"       # 'linear' or 'log'
+
+YFontSize=18                    # Y label font size
+YFontWeight="normal"            # "bold" or "normal"
+YScale="linear"                 # 'linear' or 'log'
+
+Check=0
+
+
+Colors=["aqua","gray","red","blue","black",
+                "green","magenta","indigo","lime","peru","steelblue",
+                "darkorange","salmon","yellow","lime","black"]
+
+# If you want to highlight a specific item
+# set its alpha value =1 and all others to 0.4
+# You can also change the MarkSize (or just use the highlight option below)
+Alpha_Value=[1  ,1  ,1  ,1  ,1  ,1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]
+MarkSize=   [8  ,8  ,8  ,8  ,8  ,8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8]
+
+Linewidth=[1  ,1  ,1  ,1  ,1  ,1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]
+
+# Can change all these to "." or "" for nothing "x" isn't that good
+MarkerType=["8","s","p","D","*","H","h","d","^",">"]
+
+# LineStyles=["solid","dashed","dash_dot","dotted","."]
+LineStyles=["solid"]
+
+SquishGraph = 0.75
+BBOXX = 1.24
+BBOXY = 0.5       # Set legend on right side of graph
+
+NumberOfLegendColumns=1
+
 ################################################################
 ######################### Functions ############################
 ################################################################
@@ -83,13 +146,15 @@ def step_sweep1D(I,hx,q,sigma_t,mu,boundary):
   ihx = 1./hx
   if (mu > 0):
     psi_left = boundary
-    for i in range(I):
+    psi[0] = 0
+    for i in range(1,I):
       psi_right = (q[i] + mu*ihx*psi_left)/(mu*ihx + sigma_t[i])
       psi[i] = 0.5*(psi_right + psi_left)
       psi_left = psi_right
   else:
     psi_right = boundary
-    for i in reversed(range(I)):
+    psi[-1] = 0
+    for i in reversed(range(0,I-1)):
       psi_left = (q[i] - mu*ihx*psi_right)/(sigma_t[i] - mu*ihx)
       psi[i] = 0.5*(psi_right + psi_left)
       psi_right = psi_left
@@ -154,10 +219,74 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
     iteration += 1
     phi_old = phi.copy()
   if sweep_type == 'step':
-      x = np.linspace(hx,I*hx,I)
+      x = np.linspace(0,(I-1)*hx,I)
   elif sweep_type == 'dd':
       x = np.linspace(hx/2,I*hx-hx/2,I)
   return x, phi, iterations, Errors, tmp_psi
 
 
+################################################################
+################### Plotting Function ##########################
+################################################################
 
+def loop_values(list1,index):
+    """                                                                                                                                              
+    This function will loop through values in list even if
+    outside range (in the positive sense not negative)
+    """
+    while True:
+        try:
+            list1[index]
+            break
+        except IndexError:
+            index=index-len(list1)
+    return(list1[index])
+
+def plot(x,y,ax,label,fig,Xlabel,Ylabel,Check):
+    if 'step' in label:
+        Color='blue'
+    elif 'dd' in label:
+        Color='red'
+    #Plot X and Y
+    ax.plot(x,y,
+            linestyle=loop_values(LineStyles,Check),
+            marker=loop_values(MarkerType,Check),
+            color=loop_values(Colors,Check),
+            markersize=loop_values(MarkSize,Check),
+            alpha=loop_values(Alpha_Value,Check),
+            label=label)
+    
+    #Log or linear scale?
+    ax.set_xscale(XScale)
+    ax.set_yscale(YScale)
+    #Set Title
+    fig.suptitle(Title,fontsize=TitleFontSize,
+                 fontweight=TitleFontWeight,fontdict=font,
+                                                          ha='center')
+    #Set X and y labels
+    ax.set_xlabel(Xlabel,
+                  fontsize=XFontSize,fontweight=XFontWeight,
+                  fontdict=font)
+    ax.set_ylabel(Ylabel,
+                  fontsize=YFontSize,
+                  fontweight=YFontWeight,
+                  fontdict=font)
+    return(ax,fig)                                    
+    
+# def Legend(ax):
+#     handles,labels=ax.get_legend_handles_labels()
+#     ax.legend(handles,labels,loc='best',
+#               fontsize=LegendFontSize,prop=font)
+#     return(ax)
+                        
+def Legend(ax):
+        handles,labels=ax.get_legend_handles_labels()
+        box=ax.get_position()
+        ax.set_position([box.x0, box.y0, box.width*SquishGraph,
+                         box.height])
+        ax.legend(handles,labels,loc='center',
+                  bbox_to_anchor=(BBOXX,BBOXY),
+                  fontsize=LegendFontSize,prop=font,
+                  ncol=NumberOfLegendColumns)
+        return(ax)
+                    
