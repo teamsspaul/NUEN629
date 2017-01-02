@@ -237,6 +237,7 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
       x = np.linspace(hx/2,I*hx-hx/2,I)
   return x, phi, iterations, Errors, tmp_psi
 
+
 def gmres_solve(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
                 v,dt,Time,BCs, sweep_type,
                 tolerance = 1.0e-8,maxits = 100, LOUD=False,
@@ -285,13 +286,13 @@ def gmres_solve(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
     tmp = phi*0
     #sweep over each direction
     for n in range(N):
-      if sweep_type == 'diamond_difference':
-        tmp_psi = diamond_sweep1D(I,hx,(phi*sigma_s)/2,
+      if sweep_type == 'dd':
+        tmp_psi[n,:] = diamond_sweep1D(I,hx,(phi*sigma_s)/2,
                                   sigma_ts,MU[n],BCs[n])
       elif sweep_type == 'step':
-        tmp_psi = step_sweep1D(I,hx,(phi*sigma_s)/2,
+        tmp_psi[n,:] = step_sweep1D(I,hx,(phi*sigma_s)/2,
                                     sigma_ts,MU[n],BCs[n])
-      tmp += tmp_psi*W[n]
+      tmp += tmp_psi[n,:]*W[n]
     return phi-tmp
   A = spla.LinearOperator((I,I), matvec = linop, dtype='d')
 
@@ -305,11 +306,8 @@ def gmres_solve(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
     iterations.append(iteration[0])
     Errors.append(np.linalg.norm(rk))
 
-  #now call GMRES
-  phi,info = spla.gmres(A,RHS,x0=RHS,restart=restart,
-                        tol=tolerance,callback=callback)
-  print("Hello")
-  quit()
+  phi,info = spla.gmres(A,RHS,x0=RHS,tol=tolerance,
+                        restart=int(restart),callback=callback)
 
   if (LOUD):
     print("Finished in",iteration[0],"iterations.")
@@ -320,7 +318,6 @@ def gmres_solve(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
   elif sweep_type == 'dd':
       x = np.linspace(hx/2,I*hx-hx/2,I)
   return x, phi, iterations, Errors,tmp_psi
-
 
 def solver(I,hx,q,Sig_t,Sig_s,N,psi,v,dt,Time,BCs,Scheme,tol,MAXITS,loud):
     Method=Scheme.split(':')[1]
@@ -333,7 +330,7 @@ def solver(I,hx,q,Sig_t,Sig_s,N,psi,v,dt,Time,BCs,Scheme,tol,MAXITS,loud):
             hx,q,Sig_t,Sig_s,N,psi,v,dt,Time,BCs,
             Method,tolerance=tol,maxits=MAXITS,LOUD=loud,restart=I/2)
     else:
-        print("Improper scheme selected")
+        print("Improper sweep selected")
         quit()
     return x, phi, iterations, errors,psi
 

@@ -101,9 +101,9 @@ for Scheme in Methods:
             #####################################################
             fig
             ax,fig=f.plot(x,phi,ax,label,fig,Check)
-            if t==0:
-                erfig
-                erax,erfig=f.plotE(it,er,erax,label,erfig,Check)
+            #if t==0:
+            #    erfig
+            #    erax,erfig=f.plotE(it,er,erax,label,erfig,Check)
             Check=Check+1
 
 #########################################################
@@ -114,9 +114,9 @@ fig
 f.Legend(ax)
 f.plt.savefig('Plots/FluxPlot.pdf')
 
-erfig
-f.Legend(erax)
-f.plt.savefig('Plots/ErrorPlot.pdf')
+#erfig
+#f.Legend(erax)
+#f.plt.savefig('Plots/ErrorPlot.pdf')
 
 ###################### Time To execute #################
 
