@@ -492,11 +492,10 @@
     \mu\frac{\delta}{\delta z}+\Sigma_t
     \right)\psi_n(z)=
     \Sigma_s\frac{1}{2}\sum_{n'=1}^{N}w_{n'}\psi_{n'}(z)
-    +q\frac{w_n}{2}
+    +q
   \end{equation*}
   Where $n$ and $n'$ denote the direction being solved for and $N$
-  is the total number of angles being solved for, q was multiplied
-  by $\frac{w_n}{2}$ so that $\sum_n^Nq\frac{w_n}{2}=q$. Also
+  is the total number of angles being solved for. Also
   unites of $w$ are rad.}
   
   \textbf{Diamond difference discretization}
@@ -508,7 +507,7 @@
        {hz}+
     \Sigma_t\psi_{n,i}^{\ell+1,j+1}=
     \Sigma_s\frac{1}{2}\sum_{n'=1}^{N}w_i\psi_{n',i}^{\ell,j+1}
-    +q\frac{w_n}{2}.
+    +q.
   \end{equation*}
   Where $n$ is for angle, $i$ is the
   midplane of a spacial discretization, $\ell$ is the iteration index
@@ -531,7 +530,7 @@
     \Sigma_t^*=\Sigma_t+\frac{1}{v\Delta t}
   \end{equation*}
   \begin{equation*}
-    q^*=q\frac{w_n}{2}+\frac{\psi_{n,i}^{L,j}}{v\Delta t}
+    q^*=q+\frac{\psi_{n,i}^{L,j}}{v\Delta t}
   \end{equation*}
   The above equation has L for the iteration index to indicate that
   its value was iteratively determined in the previous time step.\\~\\
@@ -559,23 +558,8 @@
     \Sigma_t^*=\Sigma_t+\frac{1}{v\Delta t}
   \end{equation*}
   \begin{equation*}
-    q^*=q\frac{w_n}{2}+\frac{\psi_{n,i}^{L,j}}{v\Delta t}
+    q^*=q+\frac{\psi_{n,i}^{L,j}}{v\Delta t}
   \end{equation*}
-  \textbf{
-  The different forms are needed in the step discretization because
-  in both the diamond and step approaches to the solution a value is
-  needed from a previous zone. Our vacuum boundary condition states
-  that the incoming neutrons are zero, which at the left side of the
-  boundary, determines the angular flux moving to the right, and at
-  the right side of the boundary, the angular flux moving to the left
-  (these values are 0).}\\~\\
-  \textbf{Errors}\\
-  
-  Error will be determined with the following:
-  \begin{equation*}
-    \text{Error}=\frac{||\phi^{\ell+1}-\phi^\ell||}{||\phi^{\ell+1}||}
-  \end{equation*}
-
 
   \textbf{GMRES}\\
 
@@ -606,28 +590,110 @@
 \end{homeworkProblem}
 \clearpage
 
-
-
-
-
-
-
-
-
-
 %--------------------------------------------------------------------------
-%	Homework 4 Problem Background
+%	Homework 4 Problem Solution
 %--------------------------------------------------------------------------
 
 \begin{homeworkProblem}[Homework 4 Problem Solution]
 
+  The code for this problem will be at the end of this section. The
+  answers are below.
+
+  \begin{enumerate}[label=(\alph*)]
+  \item{(50 Points) Your task
+    is to solve a problem with uniform source of $Q=0.01$,
+    $\Sigma_t=\Sigma_s=100$ for a slab in vacuum of width
+    10 using step and diamond difference discretizations. Use, 10,
+    50, and 100 zones ($h_x=1,0.02,0.01$) and your expert choice of
+    angular quadratures. Discuss your results and how the two methods
+    compare at each number of zones.}
+    
+    \textbf{The angular quadrature used was the Gauss-Legendre Quadrature
+      because of the integration range. Its form was shown in
+      the background section.}
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=1\columnwidth]
+                      {Homework4/SourceIteration.pdf}
+    \end{center}
+  \end{figure}
+
+  \textbf{Both of the iterative solutions converged with max iterations
+  of 100,000 and a slight modification on cross section
+  ($\bm{\Sigma_t=\Sigma_t\cdot1.0001}$) to help the system converge.
+  As the number of zones increased
+  for the step solution, the flux magnitude kept increasing to
+  match with the diamond difference and maintained a cosine(ish)
+  shape. As the number of zones increased with the diamond difference,
+  the shape started to converge towards the cosine, but maintained
+  the proper magnitude. This is shown below, in a plot where
+  $\Sigma_t=101$ instead of 100.}
+
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=1\columnwidth]
+                      {Homework4/SourceIteration_101.pdf}
+    \end{center}
+    \vspace{-8mm}
+    \caption{Comparison of solution with $\Sigma_t=101$}
+  \end{figure}
+
+  
+  \textbf{Something else I would like to point out in the solution
+    is that the step solution always had one more point plotted than the
+    diamond difference. The reason for this is due to how each solution
+    was solved. will be shown in the case
+    where the number of zones is 10.}
+  
+  \item{(10 points) Discuss why there is a different form of the
+    discretization for the different signs of $\mu$.}
+
+  \textbf{The different forms are needed in the step discretization because
+  in both the diamond and step approaches to the solution a value is
+  needed from a previous zone. Our vacuum boundary condition states
+  that the incoming neutrons are zero, which at the left side of the
+  boundary, determines the angular flux moving to the right, and at
+  the right side of the boundary, the angular flux moving to the left
+  (these values are 0).}
+
+  \item{(40 points) Plot the error after each iteration using a 0
+    initial guess for the step discretization with source iteration and
+    GMRES.}
+
+    \textbf{Error will be determined with the following:}
+    \begin{equation*}
+      \bm{\text{Error}=\frac{||\phi^{\ell+1}-
+          \phi^\ell||}{||\phi^{\ell+1}||}}
+    \end{equation*}
+
+  \item{(50 points) Solve Reed's problem (see finite difference diffusion
+    codes). Present convergence plots for the solution in space and angle
+    to a ``refined'' solution in space and angle.}
+  \item{(50 points extra credit) Solve a time dependant problem for
+    a slab surrounded by vacuum with $\Sigma_t=\Sigma_s=1$ and initial
+    condition given by $\bm{\psi(0)=1/h_x}$ (original problem statement
+    said $\phi(0)=1/h_x$ and I'm not sure how to solve that).
+    Plot the solution at $t=1\ s$,
+    using step and diamond difference. The particles have a speed of
+    1 cm/s. Which discretization is better with a small time step?
+    What do you see with a small number of ordinates compared to
+    a really large number (100s)?}
+  \end{enumerate}
+
+
+  
+  
   \textbf{The Sweeps}
   \script{Homework4/Functions.py}
-         {\textbf{Diamond Difference Spatial Discretization}}{32}{61}{32}
+         {\textbf{Diamond Difference Spatial Discretization}}
+         {101}{130}{101}
   \script{Homework4/Functions.py}
-         {\textbf{Step Discretization}}{63}{90}{63}
-  
-
+         {\textbf{Step Discretization}}{132}{161}{132}
+  \textbf{Main Program}
+  \script{Homework4/Calculations}
+         {Main Program}
+         {1}{104}{1}
+         
   
 \end{homeworkProblem}
 \clearpage

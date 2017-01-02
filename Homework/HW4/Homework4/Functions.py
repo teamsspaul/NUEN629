@@ -189,7 +189,7 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
   MU, W = np.polynomial.legendre.leggauss(N)
   iteration = 1
   tmp_psi=psiprevioustime.copy()
-  if Time==0:
+  if len(Time)==1:
       sigma_ts=sigma_t
   else:
       sigma_ts=sigma_t+1/(v*dt)
@@ -198,7 +198,8 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
     phi = np.zeros(I)
     #sweep over each direction   
     for n in range(N):
-      qs=(q*W[n])/2+(phi_old*sigma_s)/2+psiprevioustime[n,:]/(v*dt) 
+      #qs=(q*W[n])/2+(phi_old*sigma_s)/2+psiprevioustime[n,:]/(v*dt)
+      qs=(q)/2+(phi_old*sigma_s)/2+psiprevioustime[n,:]/(v*dt) 
       if sweep_type == 'dd':
         tmp_psi[n,:] = diamond_sweep1D(I,hx,qs,sigma_ts,MU[n],BCs[n])
       elif sweep_type == 'step':
@@ -208,13 +209,14 @@ def source_iteration(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
       phi = phi+tmp_psi[n,:]*W[n]
     #check convergence
     change = np.linalg.norm(phi-phi_old)/np.linalg.norm(phi)
-    iterations.append(iteration)
-    Errors.append(change)
+    #iterations.append(iteration)
+    #Errors.append(change)
     converged = (change < tolerance) or (iteration > maxits)
     if (LOUD>0) or (converged and LOUD<0):
       print("Iteration",iteration,": Relative Change =",change)
     if (iteration > maxits):
-      print("Warning: Source Iteration did not converge")
+      print("Warning: Source Iteration did not converge : "+\
+            sweep_type+", I : "+str(I)+", Diff : %.2e" % change)
     #Prepare for next iteration
     iteration += 1
     phi_old = phi.copy()
@@ -273,20 +275,20 @@ def plot(x,y,ax,label,fig,Xlabel,Ylabel,Check):
                   fontdict=font)
     return(ax,fig)                                    
     
-# def Legend(ax):
-#     handles,labels=ax.get_legend_handles_labels()
-#     ax.legend(handles,labels,loc='best',
-#               fontsize=LegendFontSize,prop=font)
-#     return(ax)
-                        
 def Legend(ax):
-        handles,labels=ax.get_legend_handles_labels()
-        box=ax.get_position()
-        ax.set_position([box.x0, box.y0, box.width*SquishGraph,
-                         box.height])
-        ax.legend(handles,labels,loc='center',
-                  bbox_to_anchor=(BBOXX,BBOXY),
-                  fontsize=LegendFontSize,prop=font,
-                  ncol=NumberOfLegendColumns)
-        return(ax)
+    handles,labels=ax.get_legend_handles_labels()
+    ax.legend(handles,labels,loc='best',
+              fontsize=LegendFontSize,prop=font)
+    return(ax)
+                        
+# def Legend(ax):
+#         handles,labels=ax.get_legend_handles_labels()
+#         box=ax.get_position()
+#         ax.set_position([box.x0, box.y0, box.width*SquishGraph,
+#                          box.height])
+#         ax.legend(handles,labels,loc='center',
+#                   bbox_to_anchor=(BBOXX,BBOXY),
+#                   fontsize=LegendFontSize,prop=font,
+#                   ncol=NumberOfLegendColumns)
+#         return(ax)
                     

@@ -14,14 +14,18 @@ import Functions as f
 
 #Materials
 Q = 0.01
-Sigma_t = 100
+Sigma_t = 101
 #Sigma_s = Sigma_t
 Sigma_s=100
+#add adsorption to help converge
+if Sigma_t==Sigma_s:
+    Sigma_t=Sigma_t*1.0001
 
 #Geometry
 L = 10.   #Width of slab
-slices=[10,50,100] #Number of cuts in slab
-N = 2     #Number of angle slices
+slices=[10,50,100,200,500] #Number of cuts in slab
+#slices=[800] #Number of cuts in slab
+N = 4     #Number of angle slices
 BCs = f.np.zeros(N)
 
 #Time
@@ -29,8 +33,12 @@ T=0    #total Time
 dt=1 #Time steps width
 v=1    #Velocity
 
+MAXITS=100000
+loud=False
+
 #Method
 Methods=['step','dd']
+#Methods=['step']
 fig=f.plt.figure(figsize=f.FigureSize)
 ax=fig.add_subplot(111);Check=0
 for Method in Methods:
@@ -61,8 +69,8 @@ for Method in Methods:
 
             #Determine phi
             x, phi, iterations, errors, psi =f.source_iteration(I,
-            hx,q,Sig_t_discr,Sig_s_discr,N,psi,v,dt,t,BCs,
-            Method,tolerance=1.0e-8,maxits=10000,LOUD=False)
+            hx,q,Sig_t_discr,Sig_s_discr,N,psi,v,dt,Time,BCs,
+            Method,tolerance=1.0e-8,maxits=MAXITS,LOUD=loud)
 
             XLabel='z position [cm]'
             YLabel="$\phi\left[\\frac{n\cdot cm}{cm^3\cdot s}\\right]$"
@@ -77,7 +85,7 @@ for Method in Methods:
         #########################################################
 
 f.Legend(ax)
-f.plt.savefig('SourceIteration.pdf')
+f.plt.savefig('SourceIteration_'+str(Sigma_t)+'.pdf')
         
 
         

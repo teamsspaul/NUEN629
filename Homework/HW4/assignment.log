@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  31 DEC 2016 14:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  2 JAN 2017 08:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -818,124 +818,137 @@ Underfull \hbox (badness 10000) in paragraph at lines 482--487
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 500--501
+Underfull \hbox (badness 10000) in paragraph at lines 499--500
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 535--539
+Underfull \hbox (badness 10000) in paragraph at lines 534--538
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 535--539
+Underfull \hbox (badness 10000) in paragraph at lines 534--538
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 563--573
+Underfull \hbox (badness 10000) in paragraph at lines 564--565
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 563--573
+Underfull \hbox (badness 10000) in paragraph at lines 566--571
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 580--581
+Underfull \hbox (badness 10000) in paragraph at lines 580--582
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 582--587
+Underfull \hbox (badness 10000) in paragraph at lines 583--584
 
  []
 
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 596--598
+[6] <Homework4/SourceIteration.pdf, id=83, 794.97pt x 433.62pt>
+File: Homework4/SourceIteration.pdf Graphic file (type pdf)
 
- []
+<use Homework4/SourceIteration.pdf>
+Package pdftex.def Info: Homework4/SourceIteration.pdf used on input line 617.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+
+<Homework4/SourceIteration_101.pdf, id=84, 794.97pt x 433.62pt>
+File: Homework4/SourceIteration_101.pdf Graphic file (type pdf)
+
+<use Homework4/SourceIteration_101.pdf>
+Package pdftex.def Info: Homework4/SourceIteration_101.pdf used on input line 6
+35.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+ [7
+
+ <./Homework4/SourceIteration.pdf>]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 689.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 599--600
-
- []
-
-[7]
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 626.
-
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 (./Homework4/Functions.py
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 39.
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 102.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-))
-(./Homework4/Functions.py [8
+) [8pdfTeX warning (ext4): destination with the same identifier (name{figure.1}
+) has been already used, duplicate ignored
 
-]) [9]
-Underfull \hbox (badness 10000) in paragraph at lines 653--654
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.103   Inputs:
+                <./Homework4/SourceIteration_101.pdf>])
+(./Homework4/Functions.py [9]) (./Homework4/Calculations [10] [11]) [12]
+Underfull \hbox (badness 10000) in paragraph at lines 719--720
 
  []
 
-[10
+[13
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 667--668
+Underfull \hbox (badness 10000) in paragraph at lines 733--734
 
  []
 
-[11
+[14
 
 ] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 734.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 734.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 800.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 800.
 (./assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 734.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 734.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 800.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 800.
 Package rerunfilecheck Info: File `assignment.out' has not changed.
 (rerunfilecheck)             Checksum: 411F073A85D71E8567543FCD25F94C7B;281.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 734.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 800.
  ) 
 Here is how much of TeX's memory you used:
- 10179 strings out of 494953
- 141950 string characters out of 6180977
- 293891 words of memory out of 5000000
- 13192 multiletter control sequences out of 15000+600000
+ 10357 strings out of 494953
+ 144492 string characters out of 6180977
+ 298891 words of memory out of 5000000
+ 13250 multiletter control sequences out of 15000+600000
  17436 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 30i,12n,43p,250b,2097s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,12n,44p,250b,2187s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/c
-mmib7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
-courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro
-8a.pfb>
-Output written on assignment.pdf (11 pages, 234090 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
+Output written on assignment.pdf (14 pages, 436028 bytes).
 PDF statistics:
- 257 PDF objects out of 1000 (max. 8388607)
- 222 compressed objects within 3 object streams
- 86 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 488 PDF objects out of 1000 (max. 8388607)
+ 420 compressed objects within 5 object streams
+ 201 named destinations out of 1000 (max. 500000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
