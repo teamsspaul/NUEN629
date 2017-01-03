@@ -14,15 +14,15 @@ import Functions as f
 
 # Constants
 Q = 0.01
-Sigma_t = 110;Sigma_s=100
+Sigma_t = 100;Sigma_s=100
 # Add adsorption to help converge
 if Sigma_t==Sigma_s:
     Sigma_t=Sigma_t*1.0001
 
 # Geometry
 L = 10.                       # Width of slab
-slices=[10]                   # Number of cuts in slab (looped)
-N = 2                         # Number of angle slices
+slices=[10,50,100,500]          # Number of cuts in slab (looped)
+N = 4                         # Number of angle slices
 BCs = f.np.zeros(N)           # Zero incoming flux
 
 #Time
@@ -30,17 +30,16 @@ T=0                           # total Time (A plot made at T)
 dt=1                          # Time steps width
 v=1                           # Velocity
 
-MAXITS=10000                  # Max iterations for source iter
+MAXITS=100000                 # Max iterations for source iter
 loud=False                    # Echo every Iteration?
 
 #Method
 Methods=['Iteration:step',
-         'Iteration:dd',
-         'GMRES:step',]       # Methods to solve with? (looped)
+         'GMRES:step']       # Methods to solve with? (looped)
 
-GMRES=False                   # Use GMRES with step discret?
+tol=1e-8
 
-tol=1e-5
+PlotError=True
 
 ################################################################
 #################### Initialize Figures ########################
@@ -49,8 +48,10 @@ tol=1e-5
 Check=0
 fig=f.plt.figure(figsize=f.FigureSize)   # Plot all Methods
 ax=fig.add_subplot(111)
-erfig=f.plt.figure(figsize=f.FigureSize) # Err Plot
-erax=erfig.add_subplot(111)              # at T=0
+if PlotError:
+    erfig=f.plt.figure(figsize=f.FigureSize) # Err Plot
+    erax=erfig.add_subplot(111)              # at T=0
+
 
 ################################################################
 ##################### Calculations #############################
@@ -101,9 +102,9 @@ for Scheme in Methods:
             #####################################################
             fig
             ax,fig=f.plot(x,phi,ax,label,fig,Check)
-            #if t==0:
-            #    erfig
-            #    erax,erfig=f.plotE(it,er,erax,label,erfig,Check)
+            if t==0 and PlotError:
+                erfig
+                erax,erfig=f.plotE(it,er,erax,label,erfig,Check)
             Check=Check+1
 
 #########################################################
@@ -112,11 +113,19 @@ for Scheme in Methods:
 
 fig
 f.Legend(ax)
+#f.plt.savefig('Plots/FluxPlot.pdf')
+if PlotError:
+    erfig
+    f.Legend(erax)
+    #f.plt.savefig('Plots/ErrorPlot.pdf')
+    f.plt.savefig('Plots/ErrorPlot.pdf')
+    #f.plt.clf()
+    f.plt.close()
+fig
 f.plt.savefig('Plots/FluxPlot.pdf')
+#f.plt.show()
 
-#erfig
-#f.Legend(erax)
-#f.plt.savefig('Plots/ErrorPlot.pdf')
+#Why is tmp_psi in the GMRES going negative?
 
 ###################### Time To execute #################
 

@@ -61,7 +61,7 @@ XScaleE='linear'      # Same but for error plot
 YFontSize=18                    # Y label font size
 YFontWeight="normal"            # "bold" or "normal"
 YScale="linear"                 # 'linear' or 'log'
-YScaleE='linear'
+YScaleE='log'
 
 Check=0
 
@@ -94,8 +94,7 @@ Xlabel='z position [cm]'
 Ylabel="$\phi\left[\\frac{n\cdot cm}{cm^3\cdot s}\\right]$"
 
 XlabelE='Iterations'
-#YlabelE="Error = $\\frac{||\phi^{\ell+1}-\phi^\ell||}{||\phi^{\ell+1}||}$"
-YlabelE=''
+YlabelE="Error = $\\frac{||\phi^{\ell+1}-\phi^\ell||}{||\phi^{\ell+1}||}$"
 
 ################################################################
 ######################### Functions ############################
@@ -280,7 +279,7 @@ def gmres_solve(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
       tmp_psi[n,:] = step_sweep1D(I,hx,qs,sigma_ts,MU[n],BCs[n])
     #tmp_psi = sweep1D(I,hx,q,sigma_t,MU[n],BCs[n])
     RHS += tmp_psi[n,:]*W[n]
-  
+
   #define linear operator for gmres
   def linop(phi):
     tmp = phi*0
@@ -306,9 +305,11 @@ def gmres_solve(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
     iterations.append(iteration[0])
     Errors.append(np.linalg.norm(rk))
 
+  #Do the GMRES Solve
   phi,info = spla.gmres(A,RHS,x0=RHS,tol=tolerance,
                         restart=int(restart),callback=callback)
 
+  #Print important information
   if (LOUD):
     print("Finished in",iteration[0],"iterations.")
   if (info >0):
@@ -317,6 +318,21 @@ def gmres_solve(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
       x = np.linspace(0,(I-1)*hx,I)
   elif sweep_type == 'dd':
       x = np.linspace(hx/2,I*hx-hx/2,I)
+
+  #Calculate Psi for time iterations
+  phi2 = np.zeros(I)
+  #sweep over each direction   
+  for n in range(N):
+      #qs=(q*W[n])/2+(phi_old*sigma_s)/2+psiprevioustime[n,:]/(v*dt)
+      qs=(q)/2+(phi*sigma_s)/2+psiprevioustime[n,:]/(v*dt) 
+      if sweep_type == 'dd':
+          tmp_psi[n,:] = diamond_sweep1D(I,hx,qs,sigma_ts,MU[n],BCs[n])
+      elif sweep_type == 'step':
+          tmp_psi[n,:] = step_sweep1D(I,hx,qs,sigma_ts,MU[n],BCs[n])
+      else:
+          sys.exit("Sweep method specified not defined in SnMethods")
+      phi2 = phi2+tmp_psi[n,:]*W[n]
+
   return x, phi, iterations, Errors,tmp_psi
 
 def solver(I,hx,q,Sig_t,Sig_s,N,psi,v,dt,Time,BCs,Scheme,tol,MAXITS,loud):
@@ -352,10 +368,6 @@ def loop_values(list1,index):
     return(list1[index])
 
 def plot(x,y,ax,label,fig,Check):
-    if 'step' in label:
-        Color='blue'
-    elif 'dd' in label:
-        Color='red'
     #Plot X and Y
     ax.plot(x,y,
             linestyle=loop_values(LineStyles,Check),
@@ -383,13 +395,9 @@ def plot(x,y,ax,label,fig,Check):
     return(ax,fig)                                    
 
 
-def plotE(x,y,ax,label,fig,Check):
-    if 'step' in label:
-        Color='blue'
-    elif 'dd' in label:
-        Color='red'
+def plotE(x,y,erax,label,erfig,Check):
     #Plot X and Y
-    ax.plot(x,y,
+    erax.plot(x,y,
             linestyle=loop_values(LineStyles,Check),
             marker=loop_values(MarkerType,Check),
             color=loop_values(Colors,Check),
@@ -398,21 +406,21 @@ def plotE(x,y,ax,label,fig,Check):
             label=label)
     
     #Log or linear scale?
-    ax.set_xscale(XScaleE)
-    ax.set_yscale(YScaleE)
+    erax.set_xscale(XScaleE)
+    erax.set_yscale(YScaleE)
     #Set Title
-    fig.suptitle(Title,fontsize=TitleFontSize,
+    erfig.suptitle(Title,fontsize=TitleFontSize,
                  fontweight=TitleFontWeight,fontdict=font,
                                                           ha='center')
     #Set X and y labels
-    ax.set_xlabel(XlabelE,
+    erax.set_xlabel(XlabelE,
                   fontsize=XFontSize,fontweight=XFontWeight,
                   fontdict=font)
-    ax.set_ylabel(YlabelE,
+    erax.set_ylabel(YlabelE,
                   fontsize=YFontSize,
                   fontweight=YFontWeight,
                   fontdict=font)
-    return(ax,fig)                                    
+    return(erax,erfig)                                    
 
 def Legend(ax):
     handles,labels=ax.get_legend_handles_labels()
@@ -430,4 +438,3 @@ def Legend(ax):
 #                   fontsize=LegendFontSize,prop=font,
 #                   ncol=NumberOfLegendColumns)
 #         return(ax)
-                    
