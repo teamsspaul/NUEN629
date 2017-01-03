@@ -21,12 +21,12 @@ Sigma_t = 1;Sigma_s=1
 if Sigma_t==Sigma_s:
     Sigma_t=Sigma_t*1.0001
 
-slices=[200]           # Number of cuts in slab (looped)
-NN = [4]               # Number of angle slices
+slices=[500]           # Number of cuts in slab (looped)
+NN = [4,6,50,100,200]               # Number of angle slices
 
 #Time
 T=1                           # total Time (A plot made at T)
-dtt=[0.01,0.05,0.1]            # Time steps width
+dtt=[0.05]                     # Time steps width
 v=1                           # Velocity
 
 MAXITS=1000000                # Max iterations for source iter
@@ -38,6 +38,7 @@ Methods=['GMRES:step',         # 'Iteration' or 'GMRES'
                              # 'step' or 'dd'
 
 tol=1e-8
+Ttol=1e-3
 
 PlotError=True              # Do we plot the error?
 
@@ -89,15 +90,16 @@ for Scheme in Methods:
                 else:
                     psi=f.np.ones((N,I))*(1/hx)
                     Time=f.Timevector(T,dt)
-
-                label_tmp=Scheme+":hx="+str(hx)+",N="+str(N)+",T="
+                
+                label_tmp=Scheme+":hx="+str(hx)+",N="+str(N)+",dt="+\
+                           str(dt)+",T="
                 #########################################################
                 #################### Determine phi ######################
                 #########################################################
 
                 for t in Time: #Loop over time
 
-                    label=label_tmp+str(t)
+                    label=label_tmp+str(round(t,3))
             
                     #Determine phi (new psi is determined for time steps)
                     x,phi,it,er,psi=f.solver(I,hx,q,Sig_t_discr,
@@ -106,13 +108,17 @@ for Scheme in Methods:
                     #####################################################
                     ################ Plot Information ###################
                     #####################################################
-                    fig
-                    ax,fig=f.plot(x,phi,ax,label,fig,Check,NumOfPoints)
-                    if t==0 and PlotError:
-                        erfig
-                        erax,erfig=f.plotE(it,er,erax,label,erfig,
-                                           Check,NumOfPoints)
-                    Check=Check+1
+                    PlotQuestion=abs(t-dt)<Ttol\
+                    or abs(t-0.5)<Ttol or abs(t-1)<Ttol
+                    PlotQuestion=abs(t-1)<Ttol
+                    if PlotQuestion:
+                        fig
+                        ax,fig=f.plot(x,phi,ax,label,fig,Check,NumOfPoints)
+                        if PlotError:
+                            erfig
+                            erax,erfig=f.plotE(it,er,erax,label,erfig,
+                                               Check,NumOfPoints)
+                        Check=Check+1
 
 #########################################################
 ################### Legend/Save  ########################
@@ -125,11 +131,11 @@ if PlotError:
     erfig
     f.Legend(erax)
     #f.plt.savefig('Plots/ErrorPlot.pdf')
-    f.plt.savefig('Plots/ErrorPlotTime.pdf')
+    f.plt.savefig('Plots/ErrorPlotTimeVaryN.pdf')
     #f.plt.clf()
     f.plt.close()
 fig
-f.plt.savefig('Plots/FluxPlotTime.pdf')
+f.plt.savefig('Plots/FluxPlotTimeVaryN.pdf')
 #f.plt.show()
 
 ###################### Time To execute #################

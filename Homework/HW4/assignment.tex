@@ -743,27 +743,59 @@
       \includegraphics[width=1\columnwidth]
                       {Homework4/Plots/FluxPlotTime.pdf}
     \end{center}
+    \caption{Q=0.01}
   \end{figure}
   \begin{figure}[H]
     \begin{center}
       \includegraphics[width=1\columnwidth]
                       {Homework4/Plots/ErrorPlotTime.pdf}
     \end{center}
+    \caption{Q=0.01}
   \end{figure}
+
+  Based on the above graphs, I am not sure which solution does
+  better with a smaller step size. It depends on what the answer
+  should be. I think the step solution, as the step size increases,
+  look like they have some nonphysical bends in the solution. This
+  could be due to lots of things, but maybe its because of the smaller
+  step size, which makes me think the diamond difference method is
+  better with smaller step sizes.
 
   %% \begin{figure}[H]
   %%   \begin{center}
   %%     \includegraphics[width=1\columnwidth]
-  %%                     {Homework4/Plots/FluxPlotTimeVaryN.pdf}
+  %%                     {Homework4/Plots/FluxPlotTimeQ.pdf}
   %%   \end{center}
+  %%   \caption{Q=0}
   %% \end{figure}
   %% \begin{figure}[H]
   %%   \begin{center}
   %%     \includegraphics[width=1\columnwidth]
-  %%                     {Homework4/Plots/ErrorPlotTimeVaryN.pdf}
+  %%                     {Homework4/Plots/ErrorPlotTimeQ.pdf}
   %%   \end{center}
+  %%   \caption{Q=0}
   %% \end{figure}
-    
+
+  
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=1\columnwidth]
+                      {Homework4/Plots/FluxPlotTimeVaryN.pdf}
+    \end{center}
+  \end{figure}
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=1\columnwidth]
+                      {Homework4/Plots/ErrorPlotTimeVaryN.pdf}
+    \end{center}
+  \end{figure}
+
+  As the number of ordinances increase in the problem there
+  isn't much change in the solution, which is expected because
+  with the Quadrature rule we used, the integral can usually
+  be expressed within around 6 terms. There was an increase
+  in computational time though.
+  
   \end{enumerate}
            
 \end{homeworkProblem}
