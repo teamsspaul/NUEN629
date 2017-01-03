@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  2 JAN 2017 21:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  2 JAN 2017 23:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -856,45 +856,70 @@ Underfull \hbox (badness 10000) in paragraph at lines 583--584
 File: Homework4/Plots/FluxPlot.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlot.pdf>
-Package pdftex.def Info: Homework4/Plots/FluxPlot.pdf used on input line 617.
+Package pdftex.def Info: Homework4/Plots/FluxPlot.pdf used on input line 619.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-<Homework4/Plots/SourceIteration_101.pdf, id=84, 794.97pt x 433.62pt>
-File: Homework4/Plots/SourceIteration_101.pdf Graphic file (type pdf)
+Underfull \hbox (badness 10000) in paragraph at lines 638--639
 
-<use Homework4/Plots/SourceIteration_101.pdf>
-Package pdftex.def Info: Homework4/Plots/SourceIteration_101.pdf used on input 
-line 635.
-(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
- [7
+ []
+
+[7
 
  <./Homework4/Plots/FluxPlot.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 647--648
+Underfull \hbox (badness 10000) in paragraph at lines 648--653
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 657--662
-
- []
-
-[8pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.687 
-       <./Homework4/Plots/SourceIteration_101.pdf>]
-<Homework4/Plots/ErrorPlot.pdf, id=179, 794.97pt x 433.62pt>
+<Homework4/Plots/ErrorPlot.pdf, id=136, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlot.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlot.pdf>
-Package pdftex.def Info: Homework4/Plots/ErrorPlot.pdf used on input line 701.
+Package pdftex.def Info: Homework4/Plots/ErrorPlot.pdf used on input line 692.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 730.
+ [8]
+<Homework4/Plots/FluxPlotReed.pdf, id=145, 794.97pt x 433.62pt>
+File: Homework4/Plots/FluxPlotReed.pdf Graphic file (type pdf)
 
+<use Homework4/Plots/FluxPlotReed.pdf>
+Package pdftex.def Info: Homework4/Plots/FluxPlotReed.pdf used on input line 70
+5.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+<Homework4/Plots/ErrorPlotReed.pdf, id=146, 794.97pt x 433.62pt>
+File: Homework4/Plots/ErrorPlotReed.pdf Graphic file (type pdf)
+
+<use Homework4/Plots/ErrorPlotReed.pdf>
+Package pdftex.def Info: Homework4/Plots/ErrorPlotReed.pdf used on input line 7
+11.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+
+<Homework4/Plots/FluxPlotReedVaryN.pdf, id=147, 794.97pt x 433.62pt>
+File: Homework4/Plots/FluxPlotReedVaryN.pdf Graphic file (type pdf)
+
+<use Homework4/Plots/FluxPlotReedVaryN.pdf>
+Package pdftex.def Info: Homework4/Plots/FluxPlotReedVaryN.pdf used on input li
+ne 717.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+ [9 <./Homework4/Plots/ErrorPlot.pdf> <./Homework4/Plots/FluxPlotReed.pdf
+
+pdfTeX warning: pdflatex (file ./Homework4/Plots/FluxPlotReed.pdf): PDF inclusi
+on: multiple pdfs with page group included in a single page
+>] <Homework4/Plots/ErrorPlotReedVaryN.pdf, id=224, 794.97pt x 433.62pt>
+File: Homework4/Plots/ErrorPlotReedVaryN.pdf Graphic file (type pdf)
+
+<use Homework4/Plots/ErrorPlotReedVaryN.pdf>
+Package pdftex.def Info: Homework4/Plots/ErrorPlotReedVaryN.pdf used on input l
+ine 723.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+ [10 <./Homework4/Plots/ErrorPlotReed.pdf> <./Homework4/Plots/FluxPlotReedVaryN
+.pdf
+
+pdfTeX warning: pdflatex (file ./Homework4/Plots/FluxPlotReedVaryN.pdf): PDF in
+clusion: multiple pdfs with page group included in a single page
+>]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 748.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 (./Homework4/Functions.py
@@ -902,45 +927,44 @@ LaTeX Font Info:    Try loading font information for T1+pcr on input line 101.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-) [9 <./Homework4/Plots/ErrorPlot.pdf>]) (./Homework4/Functions.py [10]) (./Hom
-ework4/Calculations
-[11] [12]) [13]
-Underfull \hbox (badness 10000) in paragraph at lines 760--761
-
- []
-
-[14
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 774--775
+) [11 <./Homework4/Plots/ErrorPlotReedVaryN.pdf>]) (./Homework4/Functions.py)
+(./Homework4/Calculations [12] [13]) [14]
+Underfull \hbox (badness 10000) in paragraph at lines 778--779
 
  []
 
 [15
 
+]
+Underfull \hbox (badness 10000) in paragraph at lines 792--793
+
+ []
+
+[16
+
 ] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 841.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 841.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 859.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 859.
 (./assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 841.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 841.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 859.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 859.
 Package rerunfilecheck Info: File `assignment.out' has not changed.
 (rerunfilecheck)             Checksum: 411F073A85D71E8567543FCD25F94C7B;281.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 841.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 859.
  ) 
 Here is how much of TeX's memory you used:
- 10366 strings out of 494953
- 144663 string characters out of 6180977
- 296891 words of memory out of 5000000
- 13255 multiletter control sequences out of 15000+600000
+ 10400 strings out of 494953
+ 145372 string characters out of 6180977
+ 294891 words of memory out of 5000000
+ 13286 multiletter control sequences out of 15000+600000
  17436 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 33i,12n,44p,250b,2151s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,12n,47p,250b,2151s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dis
@@ -965,10 +989,10 @@ m/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
-Output written on assignment.pdf (15 pages, 942169 bytes).
+Output written on assignment.pdf (16 pages, 570498 bytes).
 PDF statistics:
- 545 PDF objects out of 1000 (max. 8388607)
- 457 compressed objects within 5 object streams
+ 634 PDF objects out of 1000 (max. 8388607)
+ 530 compressed objects within 6 object streams
  203 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

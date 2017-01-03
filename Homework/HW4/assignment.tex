@@ -610,7 +610,9 @@
     
     \textbf{The angular quadrature used was the Gauss-Legendre Quadrature
       because of the integration range. Its form was shown in
-      the background section.}
+      the background section. The plot below was produced with the
+      GMRES method, but the source iteration scheme produced
+      the same results.}
   \begin{figure}[H]
     \begin{center}
       \includegraphics[width=1\columnwidth]
@@ -626,18 +628,7 @@
   match with the diamond difference and maintained a cosine(ish)
   shape. As the number of zones increased with the diamond difference,
   the shape started to converge towards the cosine, but maintained
-  the proper magnitude. This is shown below, in a plot where
-  $\Sigma_t=101$ instead of 100.}
-
-  \begin{figure}[H]
-    \begin{center}
-      \includegraphics[width=1\columnwidth]
-                      {Homework4/Plots/SourceIteration_101.pdf}
-    \end{center}
-    \vspace{-8mm}
-    \caption{Comparison of solution with $\Sigma_t=101$}
-  \end{figure}
-
+  the proper magnitude.}
   
   \textbf{Something else I would like to point out in the solution
     is that the step solution always had one more point plotted than the
@@ -701,15 +692,42 @@
                       {Homework4/Plots/ErrorPlot.pdf}
     \end{center}
   \end{figure}
-
-
-
-
-
     
   \item{(50 points) Solve Reed's problem (see finite difference diffusion
     codes). Present convergence plots for the solution in space and angle
     to a ``refined'' solution in space and angle.}
+
+    Plots are below, reduced the number of points so that figures
+    wouldn't take so long to load.
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=1\columnwidth]
+                      {Homework4/Plots/FluxPlotReed.pdf}
+    \end{center}
+  \end{figure}
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=1\columnwidth]
+                      {Homework4/Plots/ErrorPlotReed.pdf}
+    \end{center}
+  \end{figure}
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=1\columnwidth]
+                      {Homework4/Plots/FluxPlotReedVaryN.pdf}
+    \end{center}
+  \end{figure}
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=1\columnwidth]
+                      {Homework4/Plots/ErrorPlotReedVaryN.pdf}
+    \end{center}
+  \end{figure}
+
+  The solution converges with more spatial slices. Increasing the
+  number of angular slices helps upto when N=4, but beyond that
+  it doesn't do much.
+  
   \item{(50 points extra credit) Solve a time dependant problem for
     a slab surrounded by vacuum with $\Sigma_t=\Sigma_s=1$ and initial
     condition given by $\bm{\psi(0)=1/h_x}$ (original problem statement

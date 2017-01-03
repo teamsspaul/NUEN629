@@ -56,7 +56,7 @@ TitleFontWeight = "bold"  # "bold" or "normal"
 XFontSize=18          # X label font size
 XFontWeight="normal"  # "bold" or "normal"
 XScale="linear"       # 'linear' or 'log'
-XScaleE='linear'      # Same but for error plot
+XScaleE='log'      # Same but for error plot
 
 YFontSize=18                    # Y label font size
 YFontWeight="normal"            # "bold" or "normal"
@@ -99,6 +99,20 @@ YlabelE="Error = $\\frac{||\phi^{\ell+1}-\phi^\ell||}{||\phi^{\ell+1}||}$"
 ################################################################
 ######################### Functions ############################
 ################################################################
+
+def Sigma_tReed(r):
+    value = 0 + ((1.0*(r>=14) + 1.0*(r<=4)) +
+                 5.0 *((np.abs(r-11.5)<0.5) or (np.abs(r-6.5)<0.5)) +
+                 50.0 * (np.abs(r-9)<=2) )
+    return value;
+def Sigma_aReed(r):
+    value = 0 + (0.1*(r>=14) + 0.1*(r<=4) +
+                 5.0 *((np.abs(r-11.5)<0.5) or (np.abs(r-6.5)<0.5)) +
+                 50.0 * (np.abs(r-9)<=2) )
+    return value;
+def QReed(r):
+    value = 0 + 1.0*((r<16) * (r>14))+ 1.0*((r>2) * (r<4)) + 50.0*(np.abs(r-9)<=2)
+    return value;
 
 def Timevector(T,dt):
     Time=[dt]
@@ -313,7 +327,7 @@ def gmres_solve(I,hx,q,sigma_t,sigma_s,N,psiprevioustime,
   if (LOUD):
     print("Finished in",iteration[0],"iterations.")
   if (info >0):
-    print("Warning, convergence not achieved")
+    print("Warning, convergence not achieved :"+str(sweep_type)+" "+str(hx))
   if sweep_type == 'step':
       x = np.linspace(0,(I-1)*hx,I)
   elif sweep_type == 'dd':
@@ -344,7 +358,7 @@ def solver(I,hx,q,Sig_t,Sig_s,N,psi,v,dt,Time,BCs,Scheme,tol,MAXITS,loud):
     elif "GMRES" in Scheme:
         x, phi, iterations, errors, psi =gmres_solve(I,
             hx,q,Sig_t,Sig_s,N,psi,v,dt,Time,BCs,
-            Method,tolerance=tol,maxits=MAXITS,LOUD=loud,restart=I/2)
+            Method,tolerance=tol,maxits=MAXITS,LOUD=loud,restart=MAXITS)
     else:
         print("Improper sweep selected")
         quit()
@@ -353,6 +367,15 @@ def solver(I,hx,q,Sig_t,Sig_s,N,psi,v,dt,Time,BCs,Scheme,tol,MAXITS,loud):
 ################################################################
 ################### Plotting Function ##########################
 ################################################################
+
+def reduceList(List,N):
+    List2=[List[0]]
+    Div=int(len(List)/N)
+    for i in range(1,len(List)-1):
+        if i % Div == 0:
+            List2.append(List[i])
+    List2.append(List[-1])
+    return(List2)
 
 def loop_values(list1,index):
     """                                                                                                                                              
@@ -367,7 +390,10 @@ def loop_values(list1,index):
             index=index-len(list1)
     return(list1[index])
 
-def plot(x,y,ax,label,fig,Check):
+def plot(x,y,ax,label,fig,Check,NumOfPoints):
+    if len(x)>300:
+        x=reduceList(x,NumOfPoints)
+        y=reduceList(y,NumOfPoints)
     #Plot X and Y
     ax.plot(x,y,
             linestyle=loop_values(LineStyles,Check),
@@ -395,7 +421,10 @@ def plot(x,y,ax,label,fig,Check):
     return(ax,fig)                                    
 
 
-def plotE(x,y,erax,label,erfig,Check):
+def plotE(x,y,erax,label,erfig,Check,NumOfPoints):
+    if len(x)>300:
+        x=reduceList(x,NumOfPoints)
+        y=reduceList(y,NumOfPoints)
     #Plot X and Y
     erax.plot(x,y,
             linestyle=loop_values(LineStyles,Check),

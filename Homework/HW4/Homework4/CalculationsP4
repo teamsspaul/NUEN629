@@ -12,35 +12,27 @@ import Functions as f
 ######################## Inputs ################################
 ################################################################
 
-# Constants
-Q = 0.01
-Sigma_t = 100;Sigma_s=100
-# Add adsorption to help converge
-if Sigma_t==Sigma_s:
-    Sigma_t=Sigma_t*1.0001
-
 # Geometry
-L = 10.                       # Width of slab
-slices=[10,50,100,500]        # Number of cuts in slab (looped)
-N = 4                         # Number of angle slices
-BCs = f.np.zeros(N)           # Zero incoming flux
+L = 18.                       # Width of slab
+slices=[500]           # Number of cuts in slab (looped)
+NN = [2,4,8,16]               # Number of angle slices
 
 #Time
 T=0                           # total Time (A plot made at T)
 dt=1                          # Time steps width
 v=1                           # Velocity
 
-MAXITS=100000                # Max iterations for source iter
+MAXITS=1000000                # Max iterations for source iter
 loud=False                    # Echo every Iteration?
 
 #Method
-Methods=['GMRES:step',         # 'Iteration' or 'GMRES'
-         'GMRES:dd']       # Methods to solve with?
+Methods=['GMRES:step']#,         # 'Iteration' or 'GMRES'
+        # 'GMRES:step']       # Methods to solve with?
                              # 'step' or 'dd'
 
 tol=1e-8
 
-PlotError=False              # Do we plot the error?
+PlotError=True              # Do we plot the error?
 
 NumOfPoints=100              # Max Number of points for plots
 
@@ -75,41 +67,54 @@ for Scheme in Methods:
       
         #Width, ang lists for materials
         hx = L/II
-        q = f.np.ones(I)*Q
-        Sig_t_discr = f.np.ones(I)*Sigma_t
-        Sig_s_discr = f.np.ones(I)*Sigma_s
-        
-        #Initialize psi (for time steps)
-        if T==0:
-            psi=f.np.zeros((N,I))
-            Time=[0]
-        else:
-            psi=f.np.ones((N,I))*(1/hx)
-            Time=f.Timevector(T,dt)
+        q = f.np.zeros(I)
+        Sig_t_discr = f.np.zeros(I)
+        Sig_s_discr = f.np.zeros(I)
 
-        label_tmp=Scheme+":hx="+str(hx)+",N="+str(N)+",T="
-        #########################################################
-        #################### Determine phi ######################
-        #########################################################
+        if Method == 'step':
+            x = f.np.linspace(0,(I-1)*hx,I)
+        elif Method == 'dd':
+            x = f.np.linspace(hx/2,I*hx-hx/2,I)
 
-        for t in Time: #Loop over time
+        for i in range(0,len(x)):
+            q[i]=f.QReed(x[i])
+            Sig_t_discr[i]=f.Sigma_tReed(x[i])
+            Sig_s_discr[i]=Sig_t_discr[i]-f.Sigma_aReed(x[i])
 
-            label=label_tmp+str(t)
+
+        for N in NN:
+            BCs = f.np.zeros(N)           # Zero incoming flux
+            #Initialize psi (for time steps)
+            if T==0:
+                psi=f.np.zeros((N,I))
+                Time=[0]
+            else:
+                psi=f.np.ones((N,I))*(1/hx)
+                Time=f.Timevector(T,dt)
+
+            label_tmp=Scheme+":hx="+str(hx)+",N="+str(N)+",T="
+            #########################################################
+            #################### Determine phi ######################
+            #########################################################
+
+            for t in Time: #Loop over time
+
+                label=label_tmp+str(t)
             
-            #Determine phi (new psi is determined for time steps)
-            x,phi,it,er,psi=f.solver(I,hx,q,Sig_t_discr,
-            Sig_s_discr,N,psi,v,dt,Time,BCs,Scheme,tol,MAXITS,loud)
+                #Determine phi (new psi is determined for time steps)
+                x,phi,it,er,psi=f.solver(I,hx,q,Sig_t_discr,
+                Sig_s_discr,N,psi,v,dt,Time,BCs,Scheme,tol,MAXITS,loud)
 
-            #####################################################
-            ################ Plot Information ###################
-            #####################################################
-            fig
-            ax,fig=f.plot(x,phi,ax,label,fig,Check,NumOfPoints)
-            if t==0 and PlotError:
-                erfig
-                erax,erfig=f.plotE(it,er,erax,label,erfig,
-                                   Check,NumOfPoints)
-            Check=Check+1
+                #####################################################
+                ################ Plot Information ###################
+                #####################################################
+                fig
+                ax,fig=f.plot(x,phi,ax,label,fig,Check,NumOfPoints)
+                if t==0 and PlotError:
+                    erfig
+                    erax,erfig=f.plotE(it,er,erax,label,erfig,
+                                       Check,NumOfPoints)
+                Check=Check+1
 
 #########################################################
 ################### Legend/Save  ########################
@@ -122,14 +127,12 @@ if PlotError:
     erfig
     f.Legend(erax)
     #f.plt.savefig('Plots/ErrorPlot.pdf')
-    f.plt.savefig('Plots/ErrorPlotTime.pdf')
+    f.plt.savefig('Plots/ErrorPlotReedVaryN.pdf')
     #f.plt.clf()
     f.plt.close()
 fig
-f.plt.savefig('Plots/FluxPlotTime.pdf')
+f.plt.savefig('Plots/FluxPlotReedVaryN.pdf')
 #f.plt.show()
-
-#Why is tmp_psi in the GMRES going negative?
 
 ###################### Time To execute #################
 
