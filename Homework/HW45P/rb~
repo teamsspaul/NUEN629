@@ -1,0 +1,7 @@
+#!/bin/bash
+pdflatex assignment.tex
+bibtex assignment
+pdflatex assignment.tex
+pdflatex assignment.tex
+firefox assignment.pdf#page=$1 &
+
