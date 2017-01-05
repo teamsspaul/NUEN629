@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  4 JAN 2017 13:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  4 JAN 2017 20:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -493,6 +493,27 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
 LaTeX Info: Redefining \[ on input line 2739.
 LaTeX Info: Redefining \] on input line 2740.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/ms/ragged2e.sty
+Package: ragged2e 2009/05/21 v2.1 ragged2e Package (MS)
+
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everysel.sty
+Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
+)
+\CenteringLeftskip=\skip46
+\RaggedLeftLeftskip=\skip47
+\RaggedRightLeftskip=\skip48
+\CenteringRightskip=\skip49
+\RaggedLeftRightskip=\skip50
+\RaggedRightRightskip=\skip51
+\CenteringParfillskip=\skip52
+\RaggedLeftParfillskip=\skip53
+\RaggedRightParfillskip=\skip54
+\JustifyingParfillskip=\skip55
+\CenteringParindent=\skip56
+\RaggedLeftParindent=\skip57
+\RaggedRightParindent=\skip58
+\JustifyingParindent=\skip59
+)
 (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2015/11/12 v1.18 mathematical typesetting tools
 
@@ -502,12 +523,12 @@ Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Bcount=\count121
 \calc@Adimen=\dimen161
 \calc@Bdimen=\dimen162
-\calc@Askip=\skip46
-\calc@Bskip=\skip47
+\calc@Askip=\skip60
+\calc@Bskip=\skip61
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count122
-\calc@Cskip=\skip48
+\calc@Cskip=\skip62
 )
 (/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
@@ -518,7 +539,7 @@ LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \g_MT_multlinerow_int=\count123
 \l_MT_multwidth_dim=\dimen163
-\origjot=\skip49
+\origjot=\skip63
 \l_MT_shortvdotswithinadjustabove_dim=\dimen164
 \l_MT_shortvdotswithinadjustbelow_dim=\dimen165
 \l_MT_above_intertext_sep=\dimen166
@@ -526,22 +547,22 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_above_shortintertext_sep=\dimen168
 \l_MT_below_shortintertext_sep=\dimen169
 )
-LaTeX Info: Redefining \ss on input line 62.
+LaTeX Info: Redefining \ss on input line 63.
  (./BeLi.aux)
 \openout1 = `BeLi.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
-LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
+LaTeX Font Info:    ... okay on input line 91.
 
 ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
@@ -603,76 +624,77 @@ e
 ))
 Preview: Fontsize 10pt
 Preview: PDFoutput 1
+ABD: EverySelectfont initializing macros
+LaTeX Info: Redefining \selectfont on input line 91.
 
-Underfull \hbox (badness 1558) in paragraph at lines 199--199
-\OT1/cmss/m/n/10 2.45 MeV: 436
+Overfull \hbox (5.65921pt too wide) in paragraph at lines 252--252
+[][]$\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n
+\OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 Be$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--207
-[][]\OT1/cmss/m/n/10 Cross Sec-tion
+Overfull \hbox (1.88434pt too wide) in paragraph at lines 252--252
+\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 He$
+ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--207
-[][]\OT1/cmss/m/n/10 Cross sec-tion
+Overfull \hbox (2.57906pt too wide) in paragraph at lines 297--297
+[][]$\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n
+\OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 Li$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--215
-[][]\OT1/cmss/m/n/10 Cross Sec-tion
+Overfull \hbox (11.45004pt too wide) in paragraph at lines 297--297
+\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n \OT
+1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 H$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--215
-[][]\OT1/cmss/m/n/10 Cross sec-tion
+Overfull \hbox (11.45004pt too wide) in paragraph at lines 316--316
+\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n \OT
+1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 H$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--224
-[][]\OT1/cmss/m/n/10 Cross Sec-tion
+Overfull \hbox (1.62138pt too wide) in paragraph at lines 341--341
+\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n\OT1/
+cmr/bx/n/10 )[]\OML/cmm/b/it/10 H$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--224
-[][]\OT1/cmss/m/n/10 Cross sec-tion
+Underfull \hbox (badness 10000) in paragraph at lines 351--351
+
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 232--232
-[][]\OT1/cmss/m/n/10 Cross Sec-tion
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 232--232
-[][]\OT1/cmss/m/n/10 Cross sec-tion
+Overfull \hbox (77.92238pt too wide) in paragraph at lines 566--567
+[][] 
  []
 
 Preview: Tightpage -32891 -32891 32891 32891
 [1{/home/paul/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./BeLi.aux) ) 
 Here is how much of TeX's memory you used:
- 14723 strings out of 494953
- 308859 string characters out of 6180977
- 374605 words of memory out of 5000000
- 17724 multiletter control sequences out of 15000+600000
+ 14851 strings out of 494953
+ 311063 string characters out of 6180977
+ 386502 words of memory out of 5000000
+ 17846 multiletter control sequences out of 15000+600000
  11859 words of font info for 42 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 55i,16n,67p,423b,792s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,18n,67p,423b,833s stack positions out of 5000i,500n,10000p,200000b,80000s
 </u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cmextra/cmmib7.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmssbx10.pfb>
-Output written on BeLi.pdf (1 page, 75887 bytes).
+st/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmssbx10.pfb>
+Output written on BeLi.pdf (1 page, 67720 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 37 compressed objects within 1 object stream
+ 43 PDF objects out of 1000 (max. 8388607)
+ 31 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
