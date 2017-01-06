@@ -1,0 +1,44 @@
+Transmutes to N-14 by (n,2n):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.112284
+
+Transmutes to B-12 by (n,alpha):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.0692396
+
+Transmutes to C-14 by (n,n+p):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.044829600000000004
+
+Transmutes to C-13 by (n,t):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.020162799999999998
+
+Transmutes to C-15 by (n,p):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.019601199999999996
+
+
+
+Transmutes to C-14 by (n,d):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.014925599999999999
+
+
+
+
+Transmutes to B-11 by (n,n+alpha):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.0126456
+
+
+
+
+Transmutes to N-16 by (n,gamma):
+2.45 MeV: sigma_a = 8.121795E-6
+14.1 MeV: sigma_a = 8.56E-6
+
+
+
+
+

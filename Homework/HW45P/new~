@@ -1,0 +1,38 @@
+Transmutes to N-15 by (n,n+alpha):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.3818
+
+Transmutes to O-18 by (n,n+p):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.0619731
+
+
+Transmutes to F-18 by (n,2n):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.04162
+
+
+Transmutes to N-16 by (n,alpha):
+2.45 MeV: sigma_a = 2.1666667459584295E-5
+14.1 MeV: sigma_a = 0.028393
+
+
+Transmutes to O-18 by (n,d):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.022215
+
+
+
+Transmutes to O-19 by (n,p):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.0184375
+
+Transmutes to O-17 by (n,t):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.01303
+
+
+
+Transmutes to F-20 by (n,gamma):
+2.45 MeV: sigma_a = 8.649106630484988E-5
+14.1 MeV: sigma_a = 3.495035E-5

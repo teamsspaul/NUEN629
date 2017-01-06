@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  5 JAN 2017 08:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  5 JAN 2017 17:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**BeLi.tex
-(./BeLi.tex
+**FO.tex
+(./FO.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -548,8 +548,8 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \l_MT_below_shortintertext_sep=\dimen169
 )
 LaTeX Info: Redefining \ss on input line 63.
- (./BeLi.aux)
-\openout1 = `BeLi.aux'.
+ (./FO.aux)
+\openout1 = `FO.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
 LaTeX Font Info:    ... okay on input line 91.
@@ -627,82 +627,93 @@ Preview: PDFoutput 1
 ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 91.
 
-Overfull \hbox (5.65921pt too wide) in paragraph at lines 252--252
-[][]$\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n
-\OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 Be$ 
+Overfull \hbox (10.23062pt too wide) in paragraph at lines 257--257
+[][]$\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; n \OT1/cmr/bx/n/10 )[]\OML/cmm/b/it
+/10 N$ 
  []
 
 
-Overfull \hbox (1.88434pt too wide) in paragraph at lines 252--252
-\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 He$
- 
+Overfull \hbox (6.67369pt too wide) in paragraph at lines 257--257
+\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; n p\OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 O
+$ 
  []
 
 
-Overfull \hbox (2.57906pt too wide) in paragraph at lines 297--297
-[][]$\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n
-\OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 Li$ 
- []
-
-
-Overfull \hbox (11.45004pt too wide) in paragraph at lines 297--297
-\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n \OT
-1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 H$ 
- []
-
-
-Overfull \hbox (11.45004pt too wide) in paragraph at lines 316--316
-\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n \OT
-1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 H$ 
- []
-
-
-Overfull \hbox (1.62138pt too wide) in paragraph at lines 341--341
+Overfull \hbox (3.99222pt too wide) in paragraph at lines 257--257
 \OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n\OT1/
-cmr/bx/n/10 )[]\OML/cmm/b/it/10 H$ 
+cmr/bx/n/10 )[]\OML/cmm/b/it/10 F$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--351
+Overfull \hbox (0.8788pt too wide) in paragraph at lines 257--257
+\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 N$ 
 
  []
 
 
-Overfull \hbox (1.62138pt too wide) in paragraph at lines 360--360
+Underfull \hbox (badness 10000) in paragraph at lines 257--257
+
+ []
+
+
+Overfull \hbox (4.19221pt too wide) in paragraph at lines 304--304
+\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n\OT1/
+cmr/bx/n/10 )[]\OML/cmm/b/it/10 O$ 
+ []
+
+
+Overfull \hbox (8.45215pt too wide) in paragraph at lines 304--304
+\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; n \OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 C
+$ 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 304--304
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 324--324
+
+ []
+
+
+Overfull \hbox (6.15193pt too wide) in paragraph at lines 337--337
 [][]$\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; \OT1/cmr/bx/n/10 2\OML/cmm/b/it/10 n
-\OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 H$ 
+\OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 N$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 360--360
-
+Overfull \hbox (6.85493pt too wide) in paragraph at lines 337--337
+\OT1/cmr/bx/n/10 (\OML/cmm/b/it/10 n; n p\OT1/cmr/bx/n/10 )[]\OML/cmm/b/it/10 C
+$ 
  []
 
 
-Overfull \hbox (77.92325pt too wide) in paragraph at lines 575--576
-[][] 
+Underfull \hbox (badness 10000) in paragraph at lines 337--337
+
  []
 
 Preview: Tightpage -32891 -32891 32891 32891
-[1{/home/paul/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./BeLi.aux) ) 
+[1{/home/paul/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./FO.aux) ) 
 Here is how much of TeX's memory you used:
- 14857 strings out of 494953
- 311135 string characters out of 6180977
- 388502 words of memory out of 5000000
- 17852 multiletter control sequences out of 15000+600000
+ 14833 strings out of 494953
+ 310817 string characters out of 6180977
+ 385502 words of memory out of 5000000
+ 17828 multiletter control sequences out of 15000+600000
  11859 words of font info for 42 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 55i,18n,67p,423b,833s stack positions out of 5000i,500n,10000p,200000b,80000s
-</u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmssbx10.pfb>
-Output written on BeLi.pdf (1 page, 68047 bytes).
+ 55i,18n,67p,421b,833s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmssbx10.pfb>
+Output written on FO.pdf (1 page, 67387 bytes).
 PDF statistics:
  43 PDF objects out of 1000 (max. 8388607)
  31 compressed objects within 1 object stream

@@ -232,126 +232,110 @@
   \tikzstyle{GroupLabel} = [font={\sffamily\LARGE}, minimum width=2.75cm, node distance=2.0cm]
   \tikzstyle{TitleLabel} = [font={\sffamily\Huge\bfseries}]
 
-%% B10 Column
-  \node[name=B10, Element]
+%% Ne20 Column
+  \node[name=Ne20, Element]
        {\NaturalElementTextFormat
-         {$\bm{(n,\alpha)\ss{}{3}{7}Li}$}
-         {Stable - 19.9\%}
-         {$\bm{\ss{}{5}{10}}$B}
-         {2.45 MeV: 0.281 \\14.1 MeV: 0.0445}
+         {}
+         {\\~\\Stable - 90.48\%}
+         {\\$\bm{\ss{}{10}{20}}$Ne}
+         {}
          {}
        };
-  \node[name=Be9, below of=B10, Element]
+  \node[name=F19, below of=Ne20, Element]
        {\NaturalElementTextFormat
-         {$\bm{(n,2n)\ss{}{4}{8}Be}$\\
-           $\bm{(n,t)\ss{}{3}{7}Li}$\\
-         $\bm{(n,\alpha)\ss{}{2}{6}He}$}
+         {$\bm{(n,n\ \alpha)\ss{}{7}{15}N}$\\
+           $\bm{(n,n\ p)\ss{}{8}{18}O}$\\
+           $\bm{(n,2n)\ss{}{9}{18}F}$\\
+           $\bm{(n,\alpha)\ss{}{7}{16}N}$\\
+           $\bm{(n,d)\ss{}{8}{18}O}$\\
+           $\bm{(n,p)\ss{}{8}{19}O}$\\
+           $\bm{(n,t)\ss{}{8}{17}O}$\\
+           $\bm{(n,\gamma)\ss{}{9}{20}F}$\\}
          {Stable - 100\%}
-         {$\bm{\ss{}{4}{9}}$Be}
-         {2.45 MeV: 0.021, 0, 0.083\\14.1 MeV: 0.48, 0.021, 0.01}
+         {$\bm{\ss{}{9}{19}}$F}
+         {2.45 MeV: 0,0,0\\14.1 MeV: 0.4,0.06,0.04}
          {}
        };
-  \node[name=Li8, below of=Be9, Element]
+  \node[name=O18, below of=F19, Element]
        {\NaturalElementTextFormat
          {}
-         {\\$\bm{\beta^{-1}\rightarrow\ss{}{4}{8}Be}$}
-         {$\bm{\ss{}{3}{8}}$Li}
-         {}
-         {0.8399 s}
-       };
-%% Be10 Column
-  \node[name=Be10, right of=Be9, Element]
-       {\NaturalElementTextFormat
-         {}
-         {\\$\bm{\beta^{-1}\rightarrow\ss{}{5}{10}B}$}
-         {$\bm{\ss{}{4}{10}}$Be}
-         {}
-         {1.4E6 y}
-       };
-  \node[name=Li9, right of=Li8, Element]
-       {\NaturalElementTextFormat
-         {}
-         {\\$\bm{\beta^{-1}\rightarrow\ss{}{4}{9}Be}$ (49.2)
-           \\ $\bm{\beta^{-1}n\rightarrow\ss{}{4}{8}Be}$ (50.8)}
-         {$\bm{\ss{}{3}{9}}$Li}
-         {}
-         {0.178 s}
-       };
-%% Be8 Column
-  \node[name=Be8, left of=Be9, Element]
-       {\NaturalElementTextFormat
-         {}
-         {\\$\bm{\alpha\rightarrow\ss{}{2}{4}He}$}
-         {$\bm{\ss{}{4}{8}}$Be}
-         {}
-         {6E-17 s}
-       };
-  \node[name=Li7, below of=Be8, Element]
-       {\NaturalElementTextFormat
-         {$\bm{(n,2n)\ss{}{3}{6}Li}$\\
-           $\bm{(n,d)\ss{}{2}{6}He}$\\
-         $\bm{(n,2n\ \alpha)\ss{}{1}{2}H}$}
-         {Stable - 92.41\%}
-         {$\bm{\ss{}{3}{7}}$Li}
-         {2.45 MeV: 0,0,0\\14.1 MeV: 0.03,0.01,0.02}
-         {}
-       };  
-  \node[name=He6, below of=Li7, Element]
-       {\NaturalElementTextFormat
-         {}
-         {\\$\bm{\beta^{-1}\rightarrow\ss{}{3}{6}Li}$}
-         {$\bm{\ss{}{2}{6}}$He}
-         {}
-         {0.8 s}
-       };  
-%% Li6 Column
-  \node[name=Li6, left of=Li7, Element]
-       {\NaturalElementTextFormat
-         {$\bm{(n,p)\ss{}{3}{6}He}$\\
-           $\bm{(n,2n\ \alpha)\ss{}{1}{1}H}$\\
-         $\bm{(n,t)\ss{}{2}{4}He}$}
-         {Stable - 7.59\%}
-         {$\bm{\ss{}{3}{6}}$Li}
-         {2.45 MeV: 0,0,0.21\\14.1 MeV: 0.01,0.08,0.03}
-         {}
-       };
-  \node[name=He5, below of=Li6, Element]
-       {\NaturalElementTextFormat
-         {}
-         {}
-         {}
+         {\\Stable - 0.21\%}
+         {$\bm{\ss{}{8}{18}}$O}
          {}
          {}
        };
-%% He4
-  \node[name=He4, left of=He5, Element]
+%F20 Column
+  \node[name=F20, right of=F19, Element]
        {\NaturalElementTextFormat
          {}
-         {\\Stable - 99.9999\%}
-         {$\bm{\ss{}{2}{4}}$He}
+         {\\$\bm{\beta^{-1}\rightarrow\ss{}{10}{20}Ne}$}
+         {$\bm{\ss{}{9}{20}}$F}
          {}
-         {}
+         {11.1 s}
        };
-  \node[name=H3, below of=He4, Element]
+  \node[name=O19, below of=F20, Element]
        {\NaturalElementTextFormat
-         {\\$\bm{(n,2n)\ss{}{1}{2}H}$}
-         {\\$\bm{\beta^{-1}\rightarrow\ss{}{2}{3}He}$}
-         {$\bm{\ss{}{1}{3}}$H}
-         {2.45 MeV: 0\\14.1 MeV: 0.05}
-         {12.32 y}
+         {}
+         {\\$\bm{\beta^{-1}\rightarrow\ss{}{9}{19}F}$}
+         {$\bm{\ss{}{8}{19}}$O}
+         {}
+         {26.9 s}
        };
-%% He3
-  \node[name=He3, left of=He4, Element]
+%F18 Column
+  \node[name=F18, left of=F19, Element]
        {\NaturalElementTextFormat
-         {$\bm{(n,p)\ss{}{2}{3}He}$\\
-           $\bm{(n,d)\ss{}{1}{2}H}$\\}
-         {Stable - 0.0001\%}
-         {$\bm{\ss{}{2}{3}}$He}
-         {2.45 MeV: 0.71,0\\14.1 MeV: 0.12,0.08}
+         {}
+         {\\$\bm{EC\rightarrow\ss{}{8}{18}O}$}
+         {$\bm{\ss{}{9}{18}}$F}
+         {}
+         {110 min}
+       };
+  \node[name=O17, below of=F18, Element]
+       {\NaturalElementTextFormat
+         {$\bm{(n,\alpha)\ss{}{6}{14}C}$\\
+           $\bm{(n,2n)\ss{}{8}{16}O}$\\
+           $\bm{(n,n\ \alpha)\ss{}{6}{13}C}$\\
+           $\bm{(n,p)\ss{}{7}{17}N}$\\
+           $\bm{(n,d)\ss{}{7}{16}N}$\\
+           $\bm{(n,\gamma)\ss{}{8}{18}O}$\\}
+         {Stable - 0.038\%}
+         {$\bm{\ss{}{8}{17}}$O}
+         {2.45 MeV: 0.12,0,0\\14.1 MeV: 0.3,0.1,0.04}
          {}
        };
-
-       
+  \node[name=N16, below of=O17, Element]
+       {\NaturalElementTextFormat
+         {}
+         {\\$\bm{EC\rightarrow\ss{}{8}{16}O}$}
+         {$\bm{\ss{}{7}{16}}$N}
+         {}
+         {7.13 s}
+       };
+%O16 Column
+  \node[name=O16, left of=O17, Element]
+       {\NaturalElementTextFormat
+         {$\bm{(n,\alpha)\ss{}{6}{13}C}$\\
+           $\bm{(n,p)\ss{}{7}{16}N}$\\
+           $\bm{(n,d)\ss{}{7}{15}N}$\\
+           $\bm{(n,\gamma)\ss{}{8}{17}O}$\\}
+         {Stable - 99.757\%}
+         {$\bm{\ss{}{8}{16}}$O}
+         {2.45 MeV: 0,0,0\\14.1 MeV: 0.14,0.04,0.02}
+         {}
+       };
+  \node[name=N15, below of=O16, Element]
+       {\NaturalElementTextFormat
+         {$\bm{(n,2n)\ss{}{7}{14}N}$\\
+           $\bm{(n,\alpha)\ss{}{5}{12}B}$\\
+           $\bm{(n,n\ p)\ss{}{6}{14}C}$\\
+           $\bm{(n,t)\ss{}{6}{13}C}$\\
+           $\bm{(n,p)\ss{}{6}{15}C}$\\
+           $\bm{(n,d)\ss{}{6}{14}C}$\\}
+         {Stable - 0.364\%}
+         {$\bm{\ss{}{7}{15}}$N}
+         {2.45 MeV: 0,0,0\\14.1 MeV: 0.11,0.07,0.04}
+         {}
+       };
           
 %% %% Group 3 - IIIB
 %%   \node[name=Sc, right of=Ca, Metal] {\NaturalElementTextFormat{21}{44.956}{Sc}{Scandium}};
