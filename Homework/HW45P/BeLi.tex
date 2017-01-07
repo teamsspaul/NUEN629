@@ -245,7 +245,9 @@
        {\NaturalElementTextFormat
          {$\bm{(n,2n)\ss{}{4}{8}Be}$\\
            $\bm{(n,t)\ss{}{3}{7}Li}$\\
-         $\bm{(n,\alpha)\ss{}{2}{6}He}$}
+           $\bm{(n,\alpha)\ss{}{2}{6}He}$\\
+           $\bm{(n,\gamma)\ss{}{4}{10}Be}$\\
+           $\bm{(n,p)\ss{}{3}{9}Li}$}
          {Stable - 100\%}
          {$\bm{\ss{}{4}{9}}$Be}
          {2.45 MeV: 0.021, 0, 0.083\\14.1 MeV: 0.48, 0.021, 0.01}
@@ -271,7 +273,7 @@
   \node[name=Li9, right of=Li8, Element]
        {\NaturalElementTextFormat
          {}
-         {\\$\bm{\beta^{-1}\rightarrow\ss{}{4}{9}Be}$ (49.2)
+         {\\$\bm{\beta^{-1}\rightarrow\ss{}{4}{9}Be}$ (49.2)\strut
            \\ $\bm{\beta^{-1}n\rightarrow\ss{}{4}{8}Be}$ (50.8)}
          {$\bm{\ss{}{3}{9}}$Li}
          {}
@@ -289,11 +291,13 @@
   \node[name=Li7, below of=Be8, Element]
        {\NaturalElementTextFormat
          {$\bm{(n,2n)\ss{}{3}{6}Li}$\\
+           $\bm{(n,2n\ \alpha)\ss{}{1}{2}H}$\\
            $\bm{(n,d)\ss{}{2}{6}He}$\\
-         $\bm{(n,2n\ \alpha)\ss{}{1}{2}H}$}
+           $\bm{(n,3n\ \alpha)\ss{}{1}{1}H}$\\
+           $\bm{(n,\gamma)\ss{}{3}{8}Li}$}
          {Stable - 92.41\%}
          {$\bm{\ss{}{3}{7}}$Li}
-         {2.45 MeV: 0,0,0\\14.1 MeV: 0.03,0.01,0.02}
+         {2.45 MeV: 0,0,0\\14.1 MeV: 0.03,0.02,0.01}
          {}
        };  
   \node[name=He6, below of=Li7, Element]
@@ -307,12 +311,13 @@
 %% Li6 Column
   \node[name=Li6, left of=Li7, Element]
        {\NaturalElementTextFormat
-         {$\bm{(n,p)\ss{}{3}{6}He}$\\
+         {$\bm{(n,t)\ss{}{2}{4}He}$\\
            $\bm{(n,2n\ \alpha)\ss{}{1}{1}H}$\\
-         $\bm{(n,t)\ss{}{2}{4}He}$}
+           $\bm{(n,p)\ss{}{3}{6}He}$\\
+           $\bm{(n,\gamma)\ss{}{3}{7}Li}$\\}
          {Stable - 7.59\%}
          {$\bm{\ss{}{3}{6}}$Li}
-         {2.45 MeV: 0,0,0.21\\14.1 MeV: 0.01,0.08,0.03}
+         {2.45 MeV: 0.21,0,0\\14.1 MeV: 0.03,0.08,0.01}
          {}
        };
   \node[name=He5, below of=Li6, Element]
@@ -344,10 +349,11 @@
   \node[name=He3, left of=He4, Element]
        {\NaturalElementTextFormat
          {$\bm{(n,p)\ss{}{2}{3}He}$\\
-           $\bm{(n,d)\ss{}{1}{2}H}$\\}
+           $\bm{(n,d)\ss{}{1}{2}H}$\\
+           $\bm{(n,\gamma)\ss{}{2}{4}He}$}
          {Stable - 0.0001\%}
          {$\bm{\ss{}{2}{3}}$He}
-         {2.45 MeV: 0.71,0\\14.1 MeV: 0.12,0.08}
+         {2.45 MeV: 0.71,0,9E-5\\14.1 MeV: 0.12,0.08,3E-5}
          {}
        };
   \node[name=H2, below of=He3, Element]

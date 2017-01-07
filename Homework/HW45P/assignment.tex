@@ -921,7 +921,7 @@
     \vec{n}(t)=e^{\bm{A}t}\vec{n}_0\approx-2\Re\sum_{k=1}^{N/2}c_k
     (z_k\bm{I}-\bm{A}t)^{-1}\vec{n}_0
   \end{align*}
-  with
+  The $\Re$ symbol means taking the real part of the solution. Further,
   \begin{equation*}
     c_k=\frac{i}{N}e^{z_k}w_k
   \end{equation*}
@@ -941,6 +941,13 @@
     \theta_k=\pm\frac{\pi}{N}\left(1+2k\right)\ \ \text{k from 0 to N-1}
   \end{equation*}
   Where $N$ doesn't have to go much higher than 10 to have low errors.
+  Also both plus and minus terms were written here, but the first equation
+  in this solution method only uses the positive terms. This is because
+  using the negative $\beta$'s yields the same real part as the positive
+  $\beta$'s, with opposite complex parts (the complex cancels).
+  Thats why the $\sum$ only goes to $N/2$ and the solution is multiplied
+  by $2$.
+  
 \end{homeworkProblem}
 
 \clearpage

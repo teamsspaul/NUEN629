@@ -28,38 +28,41 @@ t_1/2 = 1.5e6 a
 ***Parent Natural Isotope***
 (7.59%)
 Li-6:
-Transmutes to Li-7 by (n,gamma):
-2.45 MeV: sigma_a = 1.106851E-5
-14.1 MeV: sigma_a = 1.0170468324078749E-5
-Transmutes to He-6 by (n,p):
-2.45 MeV: sigma_a = 0.0
-14.1 MeV: sigma_a = 0.00604
-Transmutes n + Li-6 -> H-1 + 2n + He-4:
-2.45 MeV: sigma_a = 0.0
-14.1 MeV: sigma_a = 0.0783
 Transmutes to He-4 by (n,t):
 2.45 MeV: sigma_a = 0.206155
 14.1 MeV: sigma_a = 0.025799999999999997
+Transmutes n + Li-6 -> H-1 + 2n + He-4:
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.0783
+Transmutes to He-6 by (n,p):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.00604
+Transmutes to Li-7 by (n,gamma):
+2.45 MeV: sigma_a = 1.106851E-5
+14.1 MeV: sigma_a = 1.0170468324078749E-5
+
+
+
 No Decays
 
 ***Parent Natural Isotope***
 (92.41%)
 Li-7:
-Transmutes to Li-8 by (n,gamma):
-2.45 MeV: sigma_a = 4.677236999999999E-6
-14.1 MeV: sigma_a = 4.105546409328015E-6
 Transmutes to Li-6 by (n,2n):
 2.45 MeV: sigma_a = 0.0
 14.1 MeV: sigma_a = 0.0316031623575739
-Transmutes to He-6 by (n,d):
-2.45 MeV: sigma_a = 0.0
-14.1 MeV: sigma_a = 0.010199468139511099
 Transmutes to H-2 by (n,2n+alpha):
 2.45 MeV: sigma_a = 0.0
 14.1 MeV: sigma_a = 0.020194548097575947
+Transmutes to He-6 by (n,d):
+2.45 MeV: sigma_a = 0.0
+14.1 MeV: sigma_a = 0.010199468139511099
 Transmutes to H-1 by (n,3n+alpha):
 2.45 MeV: sigma_a = 0.0
 14.1 MeV: sigma_a = 6.556330167740616E-5
+Transmutes to Li-8 by (n,gamma):
+2.45 MeV: sigma_a = 4.677236999999999E-6
+14.1 MeV: sigma_a = 4.105546409328015E-6
 No Decays
 
 Li-8:
