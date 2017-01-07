@@ -7,6 +7,7 @@
 import sys
 import numpy as np
 import scipy.sparse.linalg as spla
+import scipy.sparse as sparse
 
 import scipy.special as sps
 import matplotlib.pyplot as plt
@@ -484,4 +485,66 @@ def MatExp(A,n0,t,maxits,tolerance=1e-12,LOUD=False):
 
   return sum
 
-def BackEuler():
+def BackEuler(A,no,dt):
+
+    #Change to matrix compatable
+    return((1-A*dt)**-1*no)
+
+def RationalPrep(N,Phi):
+    """Calculate constants for a rational approximation
+    Inputs:
+    N:               Number of Quadrature points
+    Phi:             'Parabola',
+                     'Cotangent', or
+                     'Hyperbola' (shape of Phi)
+
+    Outputs:
+    ck:              First set of constants for approximation
+    zk:             Second set of constants for approximation
+    """
+    theta=np.pi*np.arange(1,N,2)/N
+    if Phi=='Parabola':
+        zk=N*(0.1309-0.1194*theta**2+0.2500j*theta)
+        w=N*(-2*0.1194*theta+0.2500j)
+    elif Phi=='Cotangent':
+        cot=1/np.tan(0.6407*theta)
+        ncsc=-0.6407/(np.sin(0.6407*theta)**2)
+        zk=N*(0.5017*theta*cot-0.6122+0.2645j*theta)
+        w=N*(0.2645j+0.5017*cot+0.5017*theta*ncsc)
+    elif Phi=='Hyperbola':
+        zk=2.246*N*(1-np.sin(1.1721-0.3443j*theta))
+        w=2.246*N*(0.3443j*np.cos(1.1721-0.3443j*theta))
+    else:
+        print("Did not pick proper rational approximation dude")
+        print("Quiting now")
+        quit()
+             
+    ck=1.0j/N*np.exp(zk)*w
+    return(ck,zk)
+
+def RationalApprox(A,n0,t,N,ck,zk,tol=1e-5,maxits=100):
+    """
+    Calculate the rational approximation solution for n(t)
+    Inputs:
+    A:          Matrix with system to be solved
+    n0:         initial conditions of the system 
+    t:          time at which solution is determined
+    N:          Number of quadrature points (should be less than 20)
+    ck:         constants for quadrature solution
+    zk:         constants for quadrature solution
+    tol:        Tolerence for convergence for GMRES
+    maxits:     Maximium iterations for GMRES
+    Outputs:
+    nt:         Solution at time t
+    """
+    nt=np.zeros(len(n0))
+    for k in range(int(N/2)):
+        if len(n0)>1:
+            phi,code=spla.gmres(zk[k]*sparse.identity(len(n0))-A*t,n0,
+                                tol=tol,maxiter=maxits)
+            if (code):
+                print(code)
+        else:
+            phi=(zk[k]-A*t)**(-1)*n0
+        nt=nt-2*np.real(ck[k]*phi)
+    return(nt)

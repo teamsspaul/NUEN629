@@ -11,9 +11,27 @@ import Functions as f
 
 A=1;t=-1;maxits=20;n0=f.np.array([1])
 
+#Matrix Exp
 nt=f.MatExp(A,n0,t,maxits)
-print(nt)
-print(f.np.exp(-1))
+print("Matrix Exp",nt)
+#Backward Euler
+Nt=100;dt=t/Nt
+for i in range(Nt):
+    n0=f.BackEuler(A,n0,dt)
+print("Backward Euler",n0)
+
+
+#Rational Approximation
+N=10;Method="Cotangent"  #Parabola, Cotangent, Hyperbola
+ck,zk=f.RationalPrep(N,Method)
+n0=f.np.array([1])
+nt=f.RationalApprox(A,n0,t,N,ck,zk)
+print("Rational Approx",nt,Method)
+
+
+
+#Real solution
+print("Real",f.np.exp(t))
 
 
 
