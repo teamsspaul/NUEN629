@@ -9,8 +9,11 @@ start_time = time.time()
 import Functions as f
 
 
+A=1;t=-1;maxits=20;n0=f.np.array([1])
 
-
+nt=f.MatExp(A,n0,t,maxits)
+print(nt)
+print(f.np.exp(-1))
 
 
 

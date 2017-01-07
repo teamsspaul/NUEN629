@@ -456,29 +456,32 @@ def Legend(ax):
 #################### Functions Making ##########################
 ################################################################
 
-def MatExp(A,no,t,maxits)
+def MatExp(A,n0,t,maxits,tolerance=1e-12,LOUD=False):
 
   converged = False
-  iteration=1
+  m=0
+  sum_old=n0.copy()*0
   
   while not(converged):
+
+    #Upgrade so A is a matrix multiply (keep t)
+    sum=sum_old+(1/np.math.factorial(m))*(A**m)*(t**m)*n0
+
+    #Avoid dividing by zero
+    if sum==0: m+=1;sum_old=sum.copy();continue
     
-    change = np.linalg.norm(phi-phi_old)/np.linalg.norm(phi)
-    iterations.append(iteration)
-    Errors.append(change)
-    #iterations.append(iteration)
-    #Errors.append(change)
-    converged = (change < tolerance) or (iteration > maxits)
+    change = np.linalg.norm(sum-sum_old)/np.linalg.norm(sum)    
+    converged = (change < tolerance) or (m > maxits)
+    
     if (LOUD>0) or (converged and LOUD<0):
-      print("Iteration",iteration,": Relative Change =",change)
-    if (iteration > maxits):
+      print("Iteration",m,": Relative Change =",change)
+    if (m > maxits):
       print("Warning: Source Iteration did not converge : "+\
-            sweep_type+", I : "+str(I)+", Diff : %.2e" % change)
+            ", m : "+str(m)+", Diff : %.2e" % change)
     #Prepare for next iteration
-    iteration += 1
-    phi_old = phi.copy()
-  if sweep_type == 'step':
-      x = np.linspace(0,(I-1)*hx,I)
-  elif sweep_type == 'dd':
-      x = np.linspace(hx/2,I*hx-hx/2,I)
-  return x, phi, iterations, Errors, tmp_psi
+    m += 1
+    sum_old = sum.copy()
+
+  return sum
+
+def BackEuler():
