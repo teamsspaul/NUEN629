@@ -496,25 +496,26 @@ def DeterminePolesNResidues(n):
     K = 75;                             # no of Cheb coeffs
     K = 10;
     nf = 1024;                          # no of pts for FFT
-    nf = 100;
+    nf = 20;
     
     #Roots correct?
     roots=np.arange(0,nf,1)/nf
     #w = np.exp(2i*pi*(0:nf-1)/nf);     # roots of unity
 
-
-    
     w=np.exp(2j*np.pi*roots)
     t = np.real(w);                     # Cheb pts (twice over)
     scl = 9;                            # scale factor for stability
     #F = np.exp(scl*(t-1)./(t+1+1e-16)); # exp(x) transpl. to [-1,1]
     F = np.exp(scl*(t-1)/(t+1+1e-16)); # exp(x) transpl. to [-1,1]
     c = np.real(np.fft.fft(F))/nf;      # Cheb coeffs of F
-    print(c)
-    quit()
     index=reversed(np.arange(1,K+2,1))
+    partofc=[]
+    for i in index:
+        partofc.append(c[i-1])
     #f = np.polyval(c(K+1:-1:1),w);      # analytic part f of F
-    f = np.polyval(reversed(c[1:K+2]),w);      # analytic part f of F
+    f = np.polyval(partofc,w);      # analytic part f of F
+
+    
     print(f)
     quit()
     #[U,S,V] = svd(hankel(c(2:K+1)));    # SVD of Hankel matrix
