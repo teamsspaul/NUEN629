@@ -22,7 +22,7 @@ print("Backward Euler",n0)
 
 
 #Rational Approximation
-N=10;Method="Cotangent"  #Parabola, Cotangent, Hyperbola
+N=10;Method="Best"  #Parabola, Cotangent, Hyperbola, Best
 ck,zk=f.RationalPrep(N,Method)
 n0=f.np.array([1])
 nt=f.RationalApprox(A,n0,t,N,ck,zk)
