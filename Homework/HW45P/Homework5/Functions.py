@@ -6,9 +6,9 @@
 
 import sys
 import numpy as np
-import scipy.sparse.linalg as spla
 import scipy.sparse as sparse
-
+import scipy.sparse.linalg as spla
+import scipy.linalg as scil
 import scipy.special as sps
 import matplotlib.pyplot as plt
 plt.rcParams["font.family"] = "monospace"
@@ -491,7 +491,11 @@ def BackEuler(A,no,dt):
     return((1-A*dt)**-1*no)
 
 def DeterminePolesNResidues(n):
-
+    """
+    This program takes the algorithm from the reference
+    and converts to a python script
+    """
+    
     #function [zk,ck] = cf(n);
     K = 75;                             # no of Cheb coeffs
     K = 10;
@@ -515,8 +519,10 @@ def DeterminePolesNResidues(n):
     #f = np.polyval(c(K+1:-1:1),w);      # analytic part f of F
     f = np.polyval(partofc,w);      # analytic part f of F
 
-    
-    print(f)
+    hankie=scil.hankel(c[1:K+1])
+    U,S,V=np.linalg.svd(hankie)
+    mhank=hankie.shape[0];nhank=hankie.shape[1];
+    print()
     quit()
     #[U,S,V] = svd(hankel(c(2:K+1)));    # SVD of Hankel matrix
     #s = S(n+1,n+1);                     # singular value
