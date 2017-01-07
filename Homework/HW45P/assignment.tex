@@ -859,6 +859,95 @@
 \clearpage
 
 %--------------------------------------------------------------------------
+%	Homework 5 Background
+%--------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Homework 5 Background]
+  Please note, that most of this background is copied directly from
+  Dr. McClarren's notes, but are reproduced here.\\~\\
+
+  The production of an isotope is dictated by production and loss
+  \begin{equation*}
+    \frac{dn_i}{dt}=-\lambda_i^{eff}n_i+
+    \sum_{j=1}^{N}b_{j\rightarrow i}^{eff}\lambda_j^{eff}n_j
+  \end{equation*}
+  Where,
+  \begin{equation*}
+    \lambda_i^{eff}=\lambda_i+\phi\sum_{j=1}^N\sigma_{i\rightarrow j}
+  \end{equation*}
+  and
+  \begin{equation*}
+    b_{j\rightarrow i}^{eff}=\frac{b_{j\rightarrow i}\lambda_j+
+      \sigma_{j\rightarrow i}\phi}{\lambda_{j}^{eff}}
+  \end{equation*}
+  For a system of isotopes, this can be reduced to:
+  \begin{equation*}
+    \frac{d\vec{n}}{dt}=\bm{A}\vec{n}(t)
+  \end{equation*}
+  Where $\bm{A}$ is a matrix whose diagonal elements are
+  $[-\lambda_1^{eff},-\lambda_2^{eff},...,-\lambda_N^{eff}]$,
+  all off diagonal elements are
+  $b_{j\rightarrow i}^{eff}\lambda_j^{eff}$ (i for the diagonal, and j is
+  for the off diagonal position) and $\vec{n}(t)=[n_1,n_2,...,n_N]$.\\
+
+  The solution to this system is obvious (it wasn't to me at first - but
+  that's because I'm a newb)
+  
+  \begin{equation*}
+    \vec{n}=e^{\bm{A}t}\vec{n}_0
+  \end{equation*}
+
+  Determing $e^{\bm{A}t}\vec{n}_0$ will be done 3 different ways,\\
+
+  \textbf{Matrix Exponential}\\
+  
+  Analytic Solution, unstable with large N.
+  \begin{equation*}
+    \vec{n}(t)=e^{\bm{A}t}\vec{n}_0\approx\left[
+    \sum_{m=0}^\infty\frac{1}{m!}\bm{A}^mt^m\right]\vec{n}_0
+  \end{equation*}
+  \\
+  \textbf{Backward Euler}\\
+  
+  Unstable for large $\Delta t$, but can take time steps.
+  \begin{align*}
+    \frac{d\vec{n}}{dt}\approx
+    \frac{\vec{n}(\Delta t)-\vec{n}_0}{\Delta t}\approx
+    &\bm{A}\vec{n}(\Delta t)\\
+    \vec{n}(\Delta t)\approx&(\bm{I}-\bm{A}\Delta t)^{-1}\vec{n}_0
+  \end{align*}
+  \textbf{Rational Approximation}
+  \begin{align*}
+    \vec{n}(t)=e^{\bm{A}t}\vec{n}_0\approx-2\Re\sum_{k=1}^{N/2}c_k
+    (z_k\bm{I}-\bm{A}t)^{-1}\vec{n}_0
+  \end{align*}
+  with
+  \begin{equation*}
+    c_k=\frac{i}{N}e^{z_k}w_k
+  \end{equation*}
+  where $z_k$ and $w_k$ are both scalers defined as
+  \begin{align*}
+    z_k=&\phi(\theta_k)\\
+    w_k=&\phi'(\theta_k)
+  \end{align*}
+  with
+  \begin{align*}
+    \phi(\theta)=&N[0.1309-0.1194\theta^2+0.2500i\theta]\\
+    &\text{or}\\
+    \phi(\theta)=&N[0.5071\theta cot(0.6407\theta)-0.6122+0.2645i\theta]
+  \end{align*}
+  and
+  \begin{equation*}
+    \theta_k=\pm\frac{\pi}{N}\left(1+2k\right)\ \ \text{k from 0 to N-1}
+  \end{equation*}
+  Where $N$ doesn't have to go much higher than 10 to have low errors.
+\end{homeworkProblem}
+
+\clearpage
+
+
+
+%--------------------------------------------------------------------------
 %	Homework 5 Solution
 %--------------------------------------------------------------------------
 
