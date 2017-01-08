@@ -501,7 +501,7 @@ def DeterminePolesNResidues(n):
     K = 10;
     nf = 1024;                          # no of pts for FFT
     nf = 20;
-    
+    n=4
     #Roots correct?
     roots=np.arange(0,nf,1)/nf
     #w = np.exp(2i*pi*(0:nf-1)/nf);     # roots of unity
@@ -521,14 +521,27 @@ def DeterminePolesNResidues(n):
 
     hankie=scil.hankel(c[1:K+1])
     U,S,V=np.linalg.svd(hankie)
-    mhank=hankie.shape[0];nhank=hankie.shape[1];
-    print()
-    quit()
     #[U,S,V] = svd(hankel(c(2:K+1)));    # SVD of Hankel matrix
+
+    s=S[n]
     #s = S(n+1,n+1);                     # singular value
+    
     #u = U(K:-1:1,n+1)’; v = V(:,n+1)’;  # singular vector
+    u=[]
+    index=reversed(np.arange(0,K,1))
+    for i in index:
+        u.append(U[i,n])
+    v=V[:,n]
+    
     #zz = zeros(1,nf-K);                 # zeros for padding
+    zz=np.zeros((1,nf-K))
+    
     #b = fft([u zz])./fft([v zz]);       # finite Blaschke product
+    b=np.fft.fft([u,zz])/np.fft.fft([v,zz])
+    print(b)
+    quit()
+
+    
     #rt = f-s*w.^K.*b;                   # extended function r-tilde
     #rtc = real(fft(rt))/nf;             # its Laurent coeffs
     #zr = roots(v); qk = zr(abs(zr)>1);  # poles

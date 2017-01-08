@@ -3,7 +3,7 @@ K = 75;
 K = 10;
 % no of Cheb coeffs
 nf = 1024;
-nv = 20;
+nf = 20;
 % no of pts for FFT
 w = exp(2i*pi*(0:nf-1)/nf);
 % roots of unity
