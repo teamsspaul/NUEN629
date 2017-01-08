@@ -532,7 +532,8 @@ def DeterminePolesNResidues(n):
     hankie=scil.hankel(c[1:K+1])
     U,S,V=np.linalg.svd(hankie)
     #[U,S,V] = svd(hankel(c(2:K+1)));    # SVD of Hankel matrix
-    V=np.matrix([[-0.786133,-0.541927,-0.257169,0.137889,-0.056223],[-0.529731,0.366252,0.536248,-0.462584,0.289308],[-0.291366,0.589808,0.012354,0.427047,-0.620250][-0.123742,0.433169,-0.521591,0.294150,0.662172],[-0.034260,0.191485,-0.611631,-0.705769,-0.299928]])
+    print(V)
+    V=np.matrix([[-0.786133,-0.541927,-0.257169,0.137889,-0.056223],[-0.529731,0.366252,0.536248,-0.462584,0.289308],[-0.291366,0.589808,0.012354,0.427047,-0.620250],[-0.123742,0.433169,-0.521591,0.294150,0.662172],[-0.034260,0.191485,-0.611631,-0.705769,-0.299928]])
     print(V) #- V is different
     quit()
     s=S[n]
@@ -543,20 +544,18 @@ def DeterminePolesNResidues(n):
     index=reversed(np.arange(0,K,1))
     for i in index:
         u.append(U[i,n])
-    v=V[:,n].copy()
-    
+    v=np.array(V[:,n].copy())
+
     #zz = zeros(1,nf-K);                 # zeros for padding
     zz=np.zeros([1,nf-K])
     #b = fft([u zz])./fft([v zz]);       # finite Blaschke product
     b=np.fft.fft(Append(u,zz))/np.fft.fft(Append(v,zz))
-    #print(b)
-
     #rt = f-s*w.^K.*b;                   # extended function r-tilde
     rt=f-s*(w**K)*b;
     #rtc = real(fft(rt))/nf;             # its Laurent coeffs
-    rts=np.real(np.fft.fft(rt))/nf;
+    rtc=np.real(np.fft.fft(rt))/nf;
     #zr = roots(v); qk = zr(abs(zr)>1);  # poles
-    zr=np.roots(v);qk=np.array(absG(zr));
+    zr=np.roots(v[:,0]);qk=np.array(absG(zr));
     #qc = poly(qk);                      # coeffs of denominator
     qc=np.poly(qk);
     #pt = rt.*polyval(qc,w);             # numerator
@@ -589,8 +588,6 @@ def DeterminePolesNResidues(n):
     zk=scl*((qk-1)**2)/((qk+1)**2)
     #ck = 4*ck.*zk./(qk.^2-1);           # residues in z-plane
     ck=4*ck*zk/(qk**2-1)
-    #print(zk)
-    quit()
     return(ck,zk)
 
 def RationalPrep(N,Phi):
