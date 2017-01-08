@@ -495,7 +495,11 @@ def DeterminePolesNResidues(n):
     This program takes the algorithm from the reference
     and converts to a python script
     """
-    
+    def Append(List1,List2):
+        for item in List2:
+            for item2 in item:
+                List1=np.append(List1,item2)
+        return(List1)
     #function [zk,ck] = cf(n);
     K = 75;                             # no of Cheb coeffs
     K = 10;
@@ -531,13 +535,12 @@ def DeterminePolesNResidues(n):
     index=reversed(np.arange(0,K,1))
     for i in index:
         u.append(U[i,n])
-    v=V[:,n]
+    v=V[:,n].copy()
     
     #zz = zeros(1,nf-K);                 # zeros for padding
-    zz=np.zeros((1,nf-K))
-    
+    zz=np.zeros([1,nf-K])
     #b = fft([u zz])./fft([v zz]);       # finite Blaschke product
-    b=np.fft.fft([u,zz])/np.fft.fft([v,zz])
+    b=np.fft.fft(Append(u,zz))/np.fft.fft(Append(v,zz))
     print(b)
     quit()
 
