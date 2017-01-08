@@ -508,7 +508,7 @@ def DeterminePolesNResidues(n):
         return(List2)
     #function [zk,ck] = cf(n);
     K = 75;                             # no of Cheb coeffs
-    K = 10;
+    K = 5;
     nf = 1024;                          # no of pts for FFT
     nf = 20;
     n=4
@@ -532,7 +532,9 @@ def DeterminePolesNResidues(n):
     hankie=scil.hankel(c[1:K+1])
     U,S,V=np.linalg.svd(hankie)
     #[U,S,V] = svd(hankel(c(2:K+1)));    # SVD of Hankel matrix
-    print(V)
+    V=np.matrix([[-0.786133,-0.541927,-0.257169,0.137889,-0.056223],[-0.529731,0.366252,0.536248,-0.462584,0.289308],[-0.291366,0.589808,0.012354,0.427047,-0.620250][-0.123742,0.433169,-0.521591,0.294150,0.662172],[-0.034260,0.191485,-0.611631,-0.705769,-0.299928]])
+    print(V) #- V is different
+    quit()
     s=S[n]
     #s = S(n+1,n+1);                     # singular value
     
@@ -547,7 +549,7 @@ def DeterminePolesNResidues(n):
     zz=np.zeros([1,nf-K])
     #b = fft([u zz])./fft([v zz]);       # finite Blaschke product
     b=np.fft.fft(Append(u,zz))/np.fft.fft(Append(v,zz))
-    print(b)
+    #print(b)
 
     #rt = f-s*w.^K.*b;                   # extended function r-tilde
     rt=f-s*(w**K)*b;
@@ -568,15 +570,27 @@ def DeterminePolesNResidues(n):
         ptc2.append(ptc[i])
     ptc=ptc2.copy()
     ck=0*qk
-    
     #N+1?
-    #for k in range(1:n+1):              # calculate residues
+    #for k =1:n              # calculate residues
     #    q = qk(k); q2 = poly(qk(qk~=q));
     #    ck(k) = polyval(ptc,q)/polyval(q2,q);
-    #for k in range(1:n+1):
-    #    q=qk(k);q2=np.poly(qk
+    for k in range(0,n):
+        if len(qk)==k:
+            print("we are short a qk")
+            continue
+        q=qk[k];
+        q2=[];
+        for item in qk:
+            if not q==item:
+                q2.append(item)
+        q2=np.poly(q2);
+        ck[k]=np.polyval(ptc,q)/np.polyval(q2,q)
     #zk = scl*(qk-1).^2./(qk+1).^2;      # poles in z-plane
+    zk=scl*((qk-1)**2)/((qk+1)**2)
     #ck = 4*ck.*zk./(qk.^2-1);           # residues in z-plane
+    ck=4*ck*zk/(qk**2-1)
+    #print(zk)
+    quit()
     return(ck,zk)
 
 def RationalPrep(N,Phi):

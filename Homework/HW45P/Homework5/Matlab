@@ -1,6 +1,6 @@
 function [zk,ck] = cf(n);
 K = 75;
-K = 10;
+K = 5;
 % no of Cheb coeffs
 nf = 1024;
 nf = 20;
