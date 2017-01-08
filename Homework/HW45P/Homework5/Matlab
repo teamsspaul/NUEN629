@@ -19,9 +19,10 @@ f = polyval(c(K+1:-1:1),w);
 % analytic part f of F
 [U,S,V] = svd(hankel(c(2:K+1)));
 % SVD of Hankel matrix
+n=4;
 s = S(n+1,n+1);
 % singular value
-u = U(K:-1:1,n+1)’; v = V(:,n+1)’;   % singular vector
+u = U(K:-1:1,n+1)'; v = V(:,n+1)';   % singular vector
 zz = zeros(1,nf-K);
 % zeros for padding
 b = fft([u zz])./fft([v zz]);

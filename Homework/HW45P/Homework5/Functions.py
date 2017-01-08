@@ -500,6 +500,12 @@ def DeterminePolesNResidues(n):
             for item2 in item:
                 List1=np.append(List1,item2)
         return(List1)
+    def absG(List):
+        List2=[]
+        for item in List:
+            if abs(item)>1:
+                List2.append(item)
+        return(List2)
     #function [zk,ck] = cf(n);
     K = 75;                             # no of Cheb coeffs
     K = 10;
@@ -526,7 +532,7 @@ def DeterminePolesNResidues(n):
     hankie=scil.hankel(c[1:K+1])
     U,S,V=np.linalg.svd(hankie)
     #[U,S,V] = svd(hankel(c(2:K+1)));    # SVD of Hankel matrix
-
+    print(V)
     s=S[n]
     #s = S(n+1,n+1);                     # singular value
     
@@ -542,21 +548,33 @@ def DeterminePolesNResidues(n):
     #b = fft([u zz])./fft([v zz]);       # finite Blaschke product
     b=np.fft.fft(Append(u,zz))/np.fft.fft(Append(v,zz))
     print(b)
-    quit()
 
-    
     #rt = f-s*w.^K.*b;                   # extended function r-tilde
+    rt=f-s*(w**K)*b;
     #rtc = real(fft(rt))/nf;             # its Laurent coeffs
+    rts=np.real(np.fft.fft(rt))/nf;
     #zr = roots(v); qk = zr(abs(zr)>1);  # poles
+    zr=np.roots(v);qk=np.array(absG(zr));
     #qc = poly(qk);                      # coeffs of denominator
+    qc=np.poly(qk);
     #pt = rt.*polyval(qc,w);             # numerator
+    pt=rt*np.polyval(qc,w);
     #ptc = real(fft(pt)/nf);             # coeffs of numerator
+    ptc=np.real(np.fft.fft(pt)/nf);
     #ptc = ptc(n+1:-1:1); ck = 0*qk;
-
+    index=reversed(np.arange(0,n+1,1))
+    ptc2=[]
+    for i in index:  #Can I just reversed ptc?
+        ptc2.append(ptc[i])
+    ptc=ptc2.copy()
+    ck=0*qk
+    
     #N+1?
     #for k in range(1:n+1):              # calculate residues
     #    q = qk(k); q2 = poly(qk(qk~=q));
     #    ck(k) = polyval(ptc,q)/polyval(q2,q);
+    #for k in range(1:n+1):
+    #    q=qk(k);q2=np.poly(qk
     #zk = scl*(qk-1).^2./(qk+1).^2;      # poles in z-plane
     #ck = 4*ck.*zk./(qk.^2-1);           # residues in z-plane
     return(ck,zk)
