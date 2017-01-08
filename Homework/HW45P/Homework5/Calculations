@@ -24,6 +24,13 @@ for i in range(Nt):
 #Rational Approximation
 N=10;Method="Best"  #Parabola, Cotangent, Hyperbola, Best
 ck,zk=f.RationalPrep(N,Method)
+
+#For the best method, might have to only take half the
+#ck and zk dudes
+if Method=='Best'):
+    
+
+
 n0=f.np.array([1])
 nt=f.RationalApprox(A,n0,t,N,ck,zk)
 print("Rational Approx",nt,Method)

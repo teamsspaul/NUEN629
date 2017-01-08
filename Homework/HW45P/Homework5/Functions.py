@@ -508,10 +508,7 @@ def DeterminePolesNResidues(n):
         return(List2)
     #function [zk,ck] = cf(n);
     K = 75;                             # no of Cheb coeffs
-    K = 5;
     nf = 1024;                          # no of pts for FFT
-    nf = 20;
-    n=4
     #Roots correct?
     roots=np.arange(0,nf,1)/nf
     #w = np.exp(2i*pi*(0:nf-1)/nf);     # roots of unity
@@ -529,23 +526,19 @@ def DeterminePolesNResidues(n):
     #f = np.polyval(c(K+1:-1:1),w);      # analytic part f of F
     f = np.polyval(partofc,w);      # analytic part f of F
 
-    hankie=scil.hankel(c[1:K+1])
-    U,S,V=np.linalg.svd(hankie)
     #[U,S,V] = svd(hankel(c(2:K+1)));    # SVD of Hankel matrix
-    print(V)
-    V=np.matrix([[-0.786133,-0.541927,-0.257169,0.137889,-0.056223],[-0.529731,0.366252,0.536248,-0.462584,0.289308],[-0.291366,0.589808,0.012354,0.427047,-0.620250],[-0.123742,0.433169,-0.521591,0.294150,0.662172],[-0.034260,0.191485,-0.611631,-0.705769,-0.299928]])
-    print(V) #- V is different
-    quit()
-    s=S[n]
+    hankie=scil.hankel(c[1:K+1])
+    U,S,V=np.linalg.svd(hankie,full_matrices=False)
+
     #s = S(n+1,n+1);                     # singular value
-    
+    s=S[n]
     #u = U(K:-1:1,n+1)’; v = V(:,n+1)’;  # singular vector
     u=[]
     index=reversed(np.arange(0,K,1))
     for i in index:
         u.append(U[i,n])
-    v=np.array(V[:,n].copy())
-
+    #v=np.array(V[:,n].copy())
+    v=np.array(V[n,:].copy())
     #zz = zeros(1,nf-K);                 # zeros for padding
     zz=np.zeros([1,nf-K])
     #b = fft([u zz])./fft([v zz]);       # finite Blaschke product
@@ -555,7 +548,7 @@ def DeterminePolesNResidues(n):
     #rtc = real(fft(rt))/nf;             # its Laurent coeffs
     rtc=np.real(np.fft.fft(rt))/nf;
     #zr = roots(v); qk = zr(abs(zr)>1);  # poles
-    zr=np.roots(v[:,0]);qk=np.array(absG(zr));
+    zr=np.roots(v);qk=np.array(absG(zr));
     #qc = poly(qk);                      # coeffs of denominator
     qc=np.poly(qk);
     #pt = rt.*polyval(qc,w);             # numerator
