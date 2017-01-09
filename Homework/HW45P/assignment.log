@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.8.30)  7 JAN 2017 06:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.12.2)  8 JAN 2017 17:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **assignment.tex
 (./assignment.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -34,7 +34,7 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \f@ncyO@olf=\skip50
 \f@ncyO@orf=\skip51
 )
-(/home/paul/texmf/tex/latex/lastpage/lastpage.sty
+(/home/teamsspaul/texmf/tex/latex/lastpage/lastpage.sty
 Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/extramarks.sty
@@ -226,24 +226,24 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip52
 )
-(/home/paul/texmf/tex/latex/amsmath/amsmath.sty
+(/home/teamsspaul/texmf/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/06/28 v2.15d AMS math features
 \@mathmargin=\skip53
 
 For additional information on amsmath, use the `?' option.
-(/home/paul/texmf/tex/latex/amsmath/amstext.sty
+(/home/teamsspaul/texmf/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
 
-(/home/paul/texmf/tex/latex/amsmath/amsgen.sty
+(/home/teamsspaul/texmf/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks17
 \ex@=\dimen113
 ))
-(/home/paul/texmf/tex/latex/amsmath/amsbsy.sty
+(/home/teamsspaul/texmf/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen114
 )
-(/home/paul/texmf/tex/latex/amsmath/amsopn.sty
+(/home/teamsspaul/texmf/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count106
@@ -304,7 +304,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks23
 \@floatcapt=\box31
 )
-(/home/paul/texmf/tex/latex/enumitem/enumitem.sty
+(/home/teamsspaul/texmf/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip56
 \enit@outerparindent=\dimen122
@@ -323,8 +323,6 @@ File: babel.def 2016/02/24 3.9q Babel common definitions
 \babel@savecnt=\count120
 \U@D=\dimen123
 )
-\l@british = a dialect from \language\l@english 
-\l@UKenglish = a dialect from \language\l@english 
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
@@ -786,7 +784,7 @@ LaTeX Font Info:    Try loading font information for U+rsfs on input line 262.
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ) [1
 
-{/home/paul/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./assignment.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./assignment.toc)
 \tf@toc=\write4
 \openout4 = `assignment.toc'.
 
@@ -1027,31 +1025,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 908--911
 [33
 
 ] [34]
-Underfull \hbox (badness 10000) in paragraph at lines 963--965
+Underfull \hbox (badness 10000) in paragraph at lines 968--970
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 963--965
+Underfull \hbox (badness 10000) in paragraph at lines 968--970
 
  []
 
 <BeLi.pdf, id=1503, 423.92677pt x 353.5077pt>
 File: BeLi.pdf Graphic file (type pdf)
  <use BeLi.pdf>
-Package pdftex.def Info: BeLi.pdf used on input line 971.
+Package pdftex.def Info: BeLi.pdf used on input line 976.
 (pdftex.def)             Requested size: 469.75499pt x 391.74011pt.
 
 <FO.pdf, id=1504, 283.08562pt x 283.08562pt>
 File: FO.pdf Graphic file (type pdf)
  <use FO.pdf>
-Package pdftex.def Info: FO.pdf used on input line 977.
+Package pdftex.def Info: FO.pdf used on input line 982.
 (pdftex.def)             Requested size: 469.75499pt x 469.7881pt.
  [35
 
  <./BeLi.pdf>]
 [36 <./FO.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 1005--1006
+Underfull \hbox (badness 10000) in paragraph at lines 1009--1010
 
  []
 
@@ -1059,23 +1057,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 1005--1006
 
 ] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1072.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1072.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1076.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1076.
 (./assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1072.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1072.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1076.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1076.
 
 Package rerunfilecheck Info: File `assignment.out' has not changed.
 (rerunfilecheck)             Checksum: 6183612D5E894400C354BF5EDD085C7D;462.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1072.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1076.
  ) 
 Here is how much of TeX's memory you used:
- 11295 strings out of 494953
- 158308 string characters out of 6180977
- 313891 words of memory out of 5000000
- 13432 multiletter control sequences out of 15000+600000
+ 11293 strings out of 493029
+ 158390 string characters out of 6136234
+ 318731 words of memory out of 5000000
+ 13681 multiletter control sequences out of 15000+600000
  17436 words of font info for 63 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 1141 hyphenation exceptions out of 8191
  35i,12n,43p,250b,2141s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
@@ -1105,7 +1103,7 @@ exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/urw/courier/ucrro8a.pfb>
-Output written on assignment.pdf (37 pages, 731173 bytes).
+Output written on assignment.pdf (37 pages, 731329 bytes).
 PDF statistics:
  1854 PDF objects out of 2073 (max. 8388607)
  1657 compressed objects within 17 object streams

@@ -8,202 +8,96 @@ import time
 start_time = time.time()
 import Functions as f
 
+################################################################
+##################### Initialize System ########################
+################################################################
 
-A=1;t=-1;maxits=20;n0=f.np.array([1])
+NumOfPoints=100          # Max Number of points for plots
 
-#Matrix Exp
-nt=f.MatExp(A,n0,t,maxits)
-#print("Matrix Exp",nt)
-#Backward Euler
-Nt=100;dt=t/Nt
+#########################################################
+############# Initialize Matrix #########################
+#########################################################
+
+high_flux_fraction=0.5
+phi=1.0e14
+A,n0=f.MakeAb(high_flux_fraction,phi)
+
+if not A.shape[0] == A.shape[1] or not A.shape[0] == len(n0):
+    print("A is not a square matrix")
+    quit()
+
+#########################################################
+############# Initialize Time ###########################
+#########################################################
+
+t=730.5;  #Two years in days
+Nt=2000;   #Number of Time Steps
+dt=t/Nt;
+Time=f.np.linspace(0,t,Nt+1) #Time steps
+
+################################################################
+##################### Solve System #############################
+################ And Time How long it takes ####################
+################### For Each Method ############################
+################# And Plot at Each Time Step ###################
+################################################################
+
+#Matrix Exp - Unstable
+#Current_Time=time.time() 
+#maxits=20
+# nt_Mat=f.MatExp(A,n0,t,maxits)
+# Mat_Time=time.time()-Current_Time
+#nt_Mat=n0.copy();TIMEOLD=0
+#for TIME in Time[1:len(Time)]: #Unstable
+    #nt_Mat=f.MatExp(A,n0,TIME,maxits) No Converge
+    #Step through
+    #nt_Mat=f.MatExp(A,nt_Mat,TIME-TIMEOLD,maxits)
+    #TIMEOLD=TIME.copy()
+#nt_Mat=f.RationalApprox(A,n0,t,maxits) #one Step
+#Mat_Time=time.time()-Current_Time
+
+#########################################################
+################ Backward Euler #########################
+#########################################################
+
+Current_Time=time.time()
+nt_Back=n0.copy();
 for i in range(Nt):
-    n0=f.BackEuler(A,n0,dt)
-#print("Backward Euler",n0)
-
-
-#Rational Approximation
-N=10;Method="Best"  #Parabola, Cotangent, Hyperbola, Best
-ck,zk=f.RationalPrep(N,Method)
-
-#For the best method, might have to only take half the
-#ck and zk dudes
-if Method=='Best'):
-    
-
-
-n0=f.np.array([1])
-nt=f.RationalApprox(A,n0,t,N,ck,zk)
-print("Rational Approx",nt,Method)
-
-
-
-#Real solution
-print("Real",f.np.exp(t))
-
-
-
-
-
-
-
-quit()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-################################################################
-######################## Inputs ################################
-################################################################
-
-# Constants
-Q = 0.01
-Sigma_t = 100;Sigma_s=100
-# Add adsorption to help converge
-if Sigma_t==Sigma_s:
-    Sigma_t=Sigma_t*1.0001
-
-# Geometry
-L = 10.                       # Width of slab
-slices=[10,50,100,500]        # Number of cuts in slab (looped)
-N = 4                         # Number of angle slices
-BCs = f.np.zeros(N)           # Zero incoming flux
-
-#Time
-T=0                           # total Time (A plot made at T)
-dt=1                          # Time steps width
-v=1                           # Velocity
-
-MAXITS=100000                # Max iterations for source iter
-loud=False                    # Echo every Iteration?
-
-#Method
-Methods=['GMRES:step',         # 'Iteration' or 'GMRES'
-         'GMRES:dd']       # Methods to solve with?
-                             # 'step' or 'dd'
-
-tol=1e-8
-
-PlotError=False              # Do we plot the error?
-
-NumOfPoints=100              # Max Number of points for plots
-
-################################################################
-#################### Initialize Figures ########################
-################################################################
-
-Check=0
-fig=f.plt.figure(figsize=f.FigureSize)   # Plot all Methods
-ax=fig.add_subplot(111)
-if PlotError:
-    erfig=f.plt.figure(figsize=f.FigureSize) # Err Plot
-    erax=erfig.add_subplot(111)              # at T=0
-
-
-################################################################
-##################### Calculations #############################
-################################################################
-
-for Scheme in Methods:
-
-    Method=Scheme.split(':')[1]
-    #########################################################
-    ##################### Set Up ############################
-    #########################################################
-
-    for II in slices:
-        if Method == 'step': #Step Dude needs one extra
-            I=II+1
-        elif Method == 'dd':
-            I=II
-      
-        #Width, ang lists for materials
-        hx = L/II
-        q = f.np.ones(I)*Q
-        Sig_t_discr = f.np.ones(I)*Sigma_t
-        Sig_s_discr = f.np.ones(I)*Sigma_s
-        
-        #Initialize psi (for time steps)
-        if T==0:
-            psi=f.np.zeros((N,I))
-            Time=[0]
-        else:
-            psi=f.np.ones((N,I))*(1/hx)
-            Time=f.Timevector(T,dt)
-
-        label_tmp=Scheme+":hx="+str(hx)+",N="+str(N)+",T="
-        #########################################################
-        #################### Determine phi ######################
-        #########################################################
-
-        for t in Time: #Loop over time
-
-            label=label_tmp+str(t)
-            
-            #Determine phi (new psi is determined for time steps)
-            x,phi,it,er,psi=f.solver(I,hx,q,Sig_t_discr,
-            Sig_s_discr,N,psi,v,dt,Time,BCs,Scheme,tol,MAXITS,loud)
-
-            #####################################################
-            ################ Plot Information ###################
-            #####################################################
-            fig
-            ax,fig=f.plot(x,phi,ax,label,fig,Check,NumOfPoints)
-            if t==0 and PlotError:
-                erfig
-                erax,erfig=f.plotE(it,er,erax,label,erfig,
-                                   Check,NumOfPoints)
-            Check=Check+1
+    nt_Back=f.BackEuler(A,nt_Back,dt)
+    #axBack,figBack=f.plot(x,phi,
+    #axBacl,label,figBack,Check,NumOfPoints)
+Back_Time=time.time()-Current_Time
 
 #########################################################
-################### Legend/Save  ########################
+################ Rational Approx ########################
 #########################################################
 
-fig
-f.Legend(ax)
-#f.plt.savefig('Plots/FluxPlot.pdf')
-if PlotError:
-    erfig
-    f.Legend(erax)
-    #f.plt.savefig('Plots/ErrorPlot.pdf')
-    f.plt.savefig('Plots/ErrorPlotTime.pdf')
-    #f.plt.clf()
-    f.plt.close()
-fig
-f.plt.savefig('Plots/FluxPlotTime.pdf')
-#f.plt.show()
+Current_Time=time.time()
+N=10;
+Method="Best"  #Parabola, Cotangent, Hyperbola, Best
+ck,zk=f.RationalPrep(N,Method);nt_Rational=n0.copy();TIMEOLD=0
+for TIME in Time[1:len(Time)]:
+    nt_Rational=f.RationalApprox(A,n0,TIME,N,ck,zk)
+    #Step through
+    #nt_Rational=f.RationalApprox(A,nt_Rational,TIME-TIMEOLD,N,ck,zk)
+    #TIMEOLD=TIME.copy()
+#nt_Rational=f.RationalApprox(A,n0,t,N,ck,zk) #one Step
+Rational_Time=time.time()-Current_Time
 
-#Why is tmp_psi in the GMRES going negative?
+################################################################
+################### Print Solution #############################
+################################################################
+
+Index=f.nuclides['H3']
+print(Index)
+MassConversion=(f.atom_mass[Index]/f.Na)   #/1000 #for kg
+string="Isotope : "+f.nuclide_names[Index]+" Mass (g) = "
+#Mass=nt_Mat[Index]*MassConversion
+#print("Matrix Exp      : "+string,Mass," Time = ",Mat_Time)
+Mass=nt_Back[Index]*MassConversion
+print("Backward Euler  : "+string,Mass, " Time = ",Back_Time)
+Mass=nt_Rational[Index]*MassConversion
+print("Rational Approx : ",string,Mass," Time = ",Rational_Time)
 
 ###################### Time To execute #################
 

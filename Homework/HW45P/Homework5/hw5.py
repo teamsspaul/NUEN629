@@ -27,10 +27,12 @@ atom_mass = np.array([1.007825032, 2.014101778, 3.0160492779, 3.016029320,
              18., 18.998403162, 20., 19.992440176])
 
 """Interaction functions
-   @ In, nuclides:  dictionary with isotope keywords and corresponding indices
+   @ In, nuclides:  dictionary with isotope keywords and 
+                    corresponding indices
    @ In, parent:    parent nuclides undergoing a decay or interaction
-   @Out, value:     new value in interaction matrix, either a half life [secs]
-                    or 2.45 MeV and 14.1 MeV cross sections [barns]
+   @Out, value:     new value in interaction matrix, either a half life
+                    [secs] or 2.45 MeV and 14.1 MeV cross sections 
+                    [barns]
 """
 
 decay_consts = np.array([0., 0., log(2)/3.887896E8, 0., 0., log(2)/0.807, 0.,
