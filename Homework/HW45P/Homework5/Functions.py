@@ -44,7 +44,7 @@ XScale="linear"       # 'linear' or 'log'
 
 YFontSize=18                    # Y label font size
 YFontWeight="normal"            # "bold" or "normal"
-YScale="linear"                 # 'linear' or 'log'
+YScale="log"                 # 'linear' or 'log'
 
 Check=0
 
@@ -104,6 +104,18 @@ nuclide_names = ('H1', 'H2', 'H3', 'He3', 'He4', 'He6', 'Li6',
                  'N17', 'O16', 'O17', 'O18', 'O19', 'F18',
                  'F19', 'F20', 'Ne20')
 
+decay_consts = np.array([0., 0., np.log(2)/3.887896E8, #H1 H2 H3
+                         0., 0., np.log(2)/0.807, #He3 He4 He6
+                         0.,0., np.log(2)/0.840,  #Li6 #Li7 #Li8
+                         np.log(2)/6E-17,0.,    #Be8 #Be9
+                         np.log(2)/4.73364E13,np.log(2)/13.8, # Be10,11
+                         0., 0., np.log(2)/0.0202, #B10 B11 B12
+                         0., 0.,np.log(2)/1.803517E11, #C12 C13 C14
+                         np.log(2)/2.45,np.log(2)/598.2, #C15 N13
+                         0., 0., np.log(2)/7.13, # N14 N15 N16
+                         np.log(2)/4.174, 0., 0., 0., #N17 O16 O17 O18
+                         np.log(2)/26.9, np.log(2)/6586.2, #O19 F18
+                         0., np.log(2)/11.1, 0.]) #F19 F20 Ne20
 Na=6.0221409E23
 
 ################################################################
@@ -322,18 +334,7 @@ def MakeAb(hi_flux_frac = 0.5,phi = 1.0e14):
                      life [secs] or 2.45 MeV and 14.1 MeV cross 
                      sections [barns]
     """
-
-    decay_consts = np.array([0., 0., np.log(2)/3.887896E8,
-                             0., 0., np.log(2)/0.807, 0.,
-                             0., np.log(2)/0.840, np.log(2)/7.0E-17,
-                             0., np.log(2)/4.73364E13, np.log(2)/13.8,
-                             0., 0., np.log(2)/0.0202, 0., 0.,
-                             np.log(2)/1.803517E11, np.log(2)/2.45,
-                             np.log(2)/598.2, 0., 0., np.log(2)/7.13,
-                             np.log(2)/4.174, 0., 0., 0.,
-                             np.log(2)/26.9, np.log(2)/6586.2,
-                             0., np.log(2)/11.1, 0.])
-    
+   
     def betanegdecay(nuclides, parent):
         if   parent == 'F20':  return nuclides['Ne20'], 11.1 # s
         elif parent == 'O19':  return nuclides['F19'],  26.9 # s
@@ -370,7 +371,7 @@ def MakeAb(hi_flux_frac = 0.5,phi = 1.0e14):
         elif parent == 'N15':
             return nuclides['N16'],  8.121795E-6,    8.56E-6
         elif parent == 'Be9':
-            return nuclides['Be10'], 1.943574E-6,    1.660517E-6
+            return nuclides['Be10'],1.943574E-6,    1.660517E-6
         elif parent == 'Li6':
             return nuclides['Li7'],  1.106851E-5,    1.017047E-5
         elif parent == 'Li7':
@@ -712,16 +713,17 @@ def InList(item2,List):
     quit()
 
 def plot(df,Plotting,Name,NumOfPoints):
+    #Plot In grams
     fig=plt.figure(figsize=FigureSize)  
     ax=fig.add_subplot(111)
 
     List=list(df.columns.values)
-    x=df[List[0]].values[1:-1]
+    x=df[List[0]].values[2:-1]
 
     Check=0
     for Item in Plotting:
       InList(Item,List) #Check if we have the isotope
-      y=((df[Item].values[1:-1])/Na)*df[Item].values[0]
+      y=((df[Item].values[2:-1])/Na)*df[Item].values[0]
       if len(x)>NumOfPoints:
         x=reduceList(x,NumOfPoints)
         y=reduceList(y,NumOfPoints)
@@ -751,21 +753,76 @@ def plot(df,Plotting,Name,NumOfPoints):
                   fontdict=font)
 
     Legend(ax)
-    plt.savefig("Plots/"+Name+'.pdf')
-
+    plt.savefig("Plots/"+Name+'_grams.pdf')
     
-def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
+    #Plot in Bq #################################
+
     fig=plt.figure(figsize=FigureSize)  
     ax=fig.add_subplot(111)
 
     List=list(df.columns.values)
-    x=df[List[0]].values[1:-1]
+    x=df[List[0]].values[2:-1]
 
+    Check=0;Sum=np.zeros(len(x))
+    for Item in Plotting:
+      InList(Item,List) #Check if we have the isotope
+      y=((df[Item].values[2:-1]))*df[Item].values[1]
+      Sum=Sum+y
+      if len(x)>NumOfPoints:
+        xP=reduceList(x,NumOfPoints)
+        y=reduceList(y,NumOfPoints)
+      ax.plot(xP,y,
+              linestyle=loop_values(LineStyles,Check),
+              marker=loop_values(MarkerType,Check),
+              color=loop_values(Colors,Check),
+              markersize=loop_values(MarkSize,Check),
+              alpha=loop_values(Alpha_Value,Check),
+              label=Item)
+      Check=Check+1
+    if len(x)>NumOfPoints:
+      Sum=reduceList(Sum,NumOfPoints)
+    ax.plot(xP,Sum,
+            linestyle=loop_values(LineStyles,Check),
+            marker=loop_values(MarkerType,Check),
+            color=loop_values(Colors,Check),
+            markersize=loop_values(MarkSize,Check),
+            alpha=loop_values(Alpha_Value,Check),
+            label="Sum")
+    
+    #Log or linear scale?
+    ax.set_xscale(XScale)
+    if sum(Sum)==0:
+      ax.set_yscale('linear')
+    else:
+      ax.set_yscale(YScale)
+    #Set Title
+    fig.suptitle(Title,fontsize=TitleFontSize,
+                 fontweight=TitleFontWeight,fontdict=font,ha='center')
+    #Set X and y labels
+    ax.set_xlabel(Xlabel,
+                  fontsize=XFontSize,fontweight=XFontWeight,
+                  fontdict=font)
+    ax.set_ylabel("Bq",
+                  fontsize=YFontSize,
+                  fontweight=YFontWeight,
+                  fontdict=font)
+
+    Legend(ax)
+    plt.savefig("Plots/"+Name+'_Bq.pdf') 
+    
+def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
+    #Plot in grams
+    fig=plt.figure(figsize=FigureSize)  
+    ax=fig.add_subplot(111)
+
+    List=list(df.columns.values)
+    x=df[List[0]].values[2:-1]
+    
     Check=0
     for Item in Plotting:
       InList(Item,List) #Check if we have the isotope
-      y=((df[Item].values[1:-1])/Na)*df[Item].values[0]
-      y2=((df2[Item].values[1:-1])/Na)*df2[Item].values[0]
+      y=((df[Item].values[2:-1])/Na)*df[Item].values[0]
+      y2=((df2[Item].values[2:-1])/Na)*df2[Item].values[0]
       if len(x)>NumOfPoints:
         x=reduceList(x,NumOfPoints)
         y=reduceList(y,NumOfPoints)
@@ -804,7 +861,83 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
                   fontdict=font)
 
     Legend(ax)
-    plt.savefig("Plots/"+Name+'.pdf')
+    plt.savefig("Plots/"+Name+'_Grams.pdf')
+
+
+    #Plot in Bq
+    fig=plt.figure(figsize=FigureSize)  
+    ax=fig.add_subplot(111)
+
+    List=list(df.columns.values)
+    x=df[List[0]].values[2:-1]
+    
+    Check=0;Sum=np.zeros(len(x));Sum2=np.zeros(len(x))
+    for Item in Plotting:
+      InList(Item,List) #Check if we have the isotope
+      y=((df[Item].values[2:-1]))*df[Item].values[1]
+      y2=((df2[Item].values[2:-1]))*df2[Item].values[1]
+      Sum=Sum+y
+      Sum2=Sum2+y2
+      if len(x)>NumOfPoints:
+        xP=reduceList(x,NumOfPoints)
+        y=reduceList(y,NumOfPoints)
+        y2=reduceList(y2,NumOfPoints)
+      ax.plot(xP,y,
+              linestyle=loop_values(LineStyles,Check),
+              marker=loop_values(MarkerType,Check),
+              color=loop_values(Colors,Check),
+              markersize=loop_values(MarkSize,Check),
+              alpha=loop_values(Alpha_Value,Check),
+              label=Item+" "+Method1)
+      Check=Check+1
+      ax.plot(xP,y2,
+              linestyle=loop_values(LineStyles,Check),
+              marker=loop_values(MarkerType,Check),
+              color=loop_values(Colors,Check),
+              markersize=loop_values(MarkSize,Check),
+              alpha=loop_values(Alpha_Value,Check),
+              label=Item+" "+Method2)
+      Check=Check+1
+    if len(x)>NumOfPoints:
+      Sum=reduceList(Sum,NumOfPoints)
+      Sum2=reduceList(Sum2,NumOfPoints)
+    ax.plot(xP,Sum,
+              linestyle=loop_values(LineStyles,Check),
+              marker=loop_values(MarkerType,Check),
+              color=loop_values(Colors,Check),
+              markersize=loop_values(MarkSize,Check),
+              alpha=loop_values(Alpha_Value,Check),
+              label="Sum "+Method1)
+    Check=Check+1
+    ax.plot(xP,Sum2,
+            linestyle=loop_values(LineStyles,Check),
+            marker=loop_values(MarkerType,Check),
+            color=loop_values(Colors,Check),
+            markersize=loop_values(MarkSize,Check),
+            alpha=loop_values(Alpha_Value,Check),
+            label="Sum "+Method2)
+
+    #Log or linear scale?
+    ax.set_xscale(XScale)
+    if sum(Sum)==0:
+      ax.set_yscale('linear')
+    else:
+      ax.set_yscale(YScale)
+      
+    #Set Title
+    fig.suptitle(Title,fontsize=TitleFontSize,
+                 fontweight=TitleFontWeight,fontdict=font,ha='center')
+    #Set X and y labels
+    ax.set_xlabel(Xlabel,
+                  fontsize=XFontSize,fontweight=XFontWeight,
+                  fontdict=font)
+    ax.set_ylabel("Bq",
+                  fontsize=YFontSize,
+                  fontweight=YFontWeight,
+                  fontdict=font)
+
+    Legend(ax)
+    plt.savefig("Plots/"+Name+'_Bq.pdf')
 
 def ListToStr(List):
   Str=''
@@ -819,6 +952,7 @@ def PrepFile(Name,n0):
   File=open(Name,'w')
   File.write("Mass then Time (d),"+','.join(nuclide_names)+'\n')
   File.write("Masses,"+ListToStr(atom_mass)) #New line already included
+  File.write("DecayConts,"+ListToStr(decay_consts))
   File.write("0,"+ListToStr(n0))
   return(File)
 

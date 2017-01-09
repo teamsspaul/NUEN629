@@ -36,9 +36,14 @@ if not A.shape[0] == A.shape[1] or not A.shape[0] == len(n0):
 #########################################################
 
 t=730.5;  #Two years in days
-Nt=10;   #Number of Time Steps
+Nt=1000;   #Number of Time Steps
 dt=t/Nt;
 Time=f.np.linspace(dt,t,Nt) #Time steps
+
+tDecay=730.5; #Two years of Decay
+NtDecay=1000; #Number of Decay Time Steps
+dtDecay=tDecay/NtDecay
+TimeDecay=f.np.linspace(t+dtDecay,t+tDecay,NtDecay)
 
 ################################################################
 ##################### Solve System #############################
@@ -68,9 +73,17 @@ Time=f.np.linspace(dt,t,Nt) #Time steps
 Current_Time=time.time()
 File=f.PrepFile('BackEuler.csv',n0) #Prep File
 nt_Back=n0.copy();
+#Irradiation Time
 for TIME in Time:
     nt_Back=f.BackEuler(A,nt_Back,dt)
     File.write(str(TIME)+","+f.ListToStr(nt_Back))
+#Decay Time
+phi=0
+A,n0=f.MakeAb(high_flux_fraction,phi)
+for TIME in TimeDecay:
+    nt_Back=f.BackEuler(A,nt_Back,dtDecay)
+    File.write(str(TIME)+","+f.ListToStr(nt_Back))
+
 File.close()
 Back_Time=time.time()-Current_Time
 
@@ -78,6 +91,12 @@ Back_Time=time.time()-Current_Time
 ################ Rational Approx ########################
 #########################################################
 
+#Reset A and n0
+high_flux_fraction=0.5
+phi=1.0e14
+A,n0=f.MakeAb(high_flux_fraction,phi)
+
+#Irradiation Time
 Current_Time=time.time()
 N=10;
 Method="Best"  #Parabola, Cotangent, Hyperbola, Best
@@ -90,11 +109,22 @@ for TIME in Time:
     #nt_Rational=f.RationalApprox(A,nt_Rational,TIME-TIMEOLD,N,ck,zk)
     #TIMEOLD=TIME.copy()
 #nt_Rational=f.RationalApprox(A,n0,t,N,ck,zk) #one Step
+
+#Non Irradiation Time
+phi=0
+A,n0=f.MakeAb(high_flux_fraction,phi)
+n0=nt_Rational
+for TIME in TimeDecay:
+    nt_Rational=f.RationalApprox(A,n0,TIME-t,N,ck,zk)
+    File.write(str(TIME)+","+f.ListToStr(nt_Rational))
+
 File.close()
 Rational_Time=time.time()-Current_Time
 
 #########################################################
 ################# Plot Solution #########################
+################# In Grams ##############################
+################# and activity ##########################
 #########################################################
 
 dfBack = f.pd.read_csv('BackEuler.csv',index_col=False)
