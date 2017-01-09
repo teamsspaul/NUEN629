@@ -945,13 +945,29 @@
   \begin{equation*}
     \theta_k=\pm\frac{\pi}{N}\left(1+2k\right)\ \ \text{k from 0 to N-1}
   \end{equation*}
-  Where $N$ doesn't have to go much higher than 10 to have low errors.
-  Also both plus and minus terms were written here, but the first equation
-  in this solution method only uses the positive terms. This is because
-  using the negative $\beta$'s yields the same real part as the positive
+  Where $N$ doesn't have to go much higher than 10 to have low errors
+  (for the best Rational Approximation).
+  Also both plus and minus terms were written here,
+  but the first equation
+  in this solution method only uses the positive terms.
+  This is because
+  using the negative $\beta$'s yields the same real part as the
+  positive
   $\beta$'s, with opposite complex parts (the complex cancels).
-  Thats why the $\sum$ only goes to $N/2$ and the solution is multiplied
-  by $2$.
+  Thats why the $\sum$ only goes to $N/2$ and the solution is
+  multiplied
+  by $2$.\\
+
+  The solution utilized the assumption that half the neutron flux
+  was 14 MeV and the other half was 2.45 MeV. The $A$ matrix was built
+  in terms of days and atoms per kg of initial fuel.
+  \begin{equation*}
+    1\ \text{Kg FLiBe}\cdot\frac{6.022E23}{98.9\ \text{g}}=
+    6.09E24\ \text{atoms of FLiBe}
+  \end{equation*}
+  This number was the starting condition for \tss{9}Be.
+  Twice this number (with natural abundancy considerations) for
+  \tss{6}Li and \tss{7}Li, and 4 times this number for \tss{19}F.
   
 \end{homeworkProblem}
 
@@ -988,11 +1004,59 @@
   \item{(50 points) Over a two-year cycle compute the inventory
     of nuclides in the system using two methods discussed in class.
     What is the maximum concentration of tritium?}
+
+    The matrix exponential method did not converge. The Backwards
+    Euler and the Rational approximation solutions did converge.
+    Their answers are basically the same (all plots will have
+    both solutions, but their answers are on top of one another).
+    It should be noted that
+    I changed the solver from in the notes from a GMRES solver to a
+    normal matrix inverter for the rational approach
+    to speed up the algorithm and give better
+    results.
+
+    Plots were split up into two groups, with initial nuclides,
+    and product nuclides which would have appreciable activity
+    after a couple of days. Below plots are shown in grams.
+
+    The rational approximation used the ``Best'' method with
+    10 quadrature points, 
+    
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Homework5/Plots/BackEuler_Best_G1_Grams.pdf}
+      \end{center}
+    \end{figure}
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Homework5/Plots/BackEuler_Best_G2_Grams.pdf}
+      \end{center}
+    \end{figure}
+
+    
   \item{(25 points) After discharging the FLiBe blanket, how long
     will it take until the material is less radioactive than
-\href{http://www.orau.org/PTP/collection/consumer%20products/brazilnuts.htm}{Brazil Nuts}
-    ? (444 Bq/kg)
-    }
+    \href{http://www.orau.org/PTP/collection/consumer%20products/brazilnuts.htm}{Brazil Nuts}? (444 Bq/kg)}
+
+      The same solutions as above are depicted below, but in terms
+      of activity. 
+
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Homework5/Plots/BackEuler_Best_G1_Bq.pdf}
+      \end{center}
+    \end{figure}
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Homework5/Plots/BackEuler_Best_G2_Bq.pdf}
+      \end{center}
+    \end{figure}
+
+
   \end{enumerate}
 \end{homeworkProblem}
 
