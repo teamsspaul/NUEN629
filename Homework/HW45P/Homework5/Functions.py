@@ -19,6 +19,7 @@ import random as rn
 import matplotlib.mlab as mlab
 import copy
 import os
+import pandas as pd
 
 #############################################################
 ######################### Variables #########################
@@ -654,7 +655,7 @@ def MakeAb(hi_flux_frac = 0.5,phi = 1.0e14):
     b[nuclides['Be9']] = AtomsofFLiBe*1
     b[nuclides['Li6']] = AtomsofFLiBe*2*0.0759
     b[nuclides['Li7']] = AtomsofFLiBe*2*0.9241
-    
+
     return(A,b)
 
 ################################################################
@@ -739,3 +740,26 @@ def plot(x,y,label,Check,NumOfPoints):
     #f.Legend(ax)
     #f.plt.savefig('Plots/FluxPlotTime.pdf')
 
+def ListToStr(List):
+  Str=''
+  for i in range(0,len(List)):
+    if not i==len(List)-1:
+      Str=Str+str(List[i])+","
+    else:
+      Str=Str+str(List[i])+"\n"
+  return(Str)
+    
+def PrepFile(Name,n0):
+  File=open(Name,'w')
+  File.write("Mass then Time (d),"+','.join(nuclide_names)+'\n')
+  File.write("Masses,"+ListToStr(atom_mass)) #New line already included
+  File.write("0,"+ListToStr(n0))
+  return(File)
+
+def Print(Method,nuclide,Results,Time):
+  Index=nuclides[nuclide]
+  MassConversion=atom_mass[Index]/Na
+  string="Isotope "+nuclide_names[Index]+", Mass (g) = "
+  Mass=Results[Index]*MassConversion
+  Mass="%.4e" % Mass
+  print(Method+" :",string,Mass,"Time=%.2f" % Time)

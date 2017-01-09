@@ -31,9 +31,9 @@ if not A.shape[0] == A.shape[1] or not A.shape[0] == len(n0):
 #########################################################
 
 t=730.5;  #Two years in days
-Nt=2000;   #Number of Time Steps
+Nt=10;   #Number of Time Steps
 dt=t/Nt;
-Time=f.np.linspace(0,t,Nt+1) #Time steps
+Time=f.np.linspace(dt,t,Nt) #Time steps
 
 ################################################################
 ##################### Solve System #############################
@@ -61,11 +61,12 @@ Time=f.np.linspace(0,t,Nt+1) #Time steps
 #########################################################
 
 Current_Time=time.time()
+File=f.PrepFile('BackEuler.csv',n0) #Prep File
 nt_Back=n0.copy();
-for i in range(Nt):
+for TIME in Time:
     nt_Back=f.BackEuler(A,nt_Back,dt)
-    #axBack,figBack=f.plot(x,phi,
-    #axBacl,label,figBack,Check,NumOfPoints)
+    File.write(str(TIME)+","+f.ListToStr(nt_Back))
+File.close()
 Back_Time=time.time()-Current_Time
 
 #########################################################
@@ -75,29 +76,39 @@ Back_Time=time.time()-Current_Time
 Current_Time=time.time()
 N=10;
 Method="Best"  #Parabola, Cotangent, Hyperbola, Best
+File=f.PrepFile(Method+".csv",n0)
 ck,zk=f.RationalPrep(N,Method);nt_Rational=n0.copy();TIMEOLD=0
-for TIME in Time[1:len(Time)]:
+for TIME in Time:
     nt_Rational=f.RationalApprox(A,n0,TIME,N,ck,zk)
+    File.write(str(TIME)+","+f.ListToStr(nt_Rational))
     #Step through
     #nt_Rational=f.RationalApprox(A,nt_Rational,TIME-TIMEOLD,N,ck,zk)
     #TIMEOLD=TIME.copy()
 #nt_Rational=f.RationalApprox(A,n0,t,N,ck,zk) #one Step
+File.close()
 Rational_Time=time.time()-Current_Time
+
+#########################################################
+################# Plot Solution #########################
+#########################################################
+
+df = f.pd.read_csv('BackEuler.csv',index_col=False)
+List=list(df.columns.values)
+for item in List:
+    if ToPlot(item,Plotting):
+
+print(List)
+
+
+
 
 ################################################################
 ################### Print Solution #############################
 ################################################################
 
-Index=f.nuclides['H3']
-print(Index)
-MassConversion=(f.atom_mass[Index]/f.Na)   #/1000 #for kg
-string="Isotope : "+f.nuclide_names[Index]+" Mass (g) = "
-#Mass=nt_Mat[Index]*MassConversion
-#print("Matrix Exp      : "+string,Mass," Time = ",Mat_Time)
-Mass=nt_Back[Index]*MassConversion
-print("Backward Euler  : "+string,Mass, " Time = ",Back_Time)
-Mass=nt_Rational[Index]*MassConversion
-print("Rational Approx : ",string,Mass," Time = ",Rational_Time)
+#f.Print("Matrix Exp","H3",nt_Mat,Mat_Time)
+f.Print("Backward Euler","H3",nt_Back,Back_Time)
+f.Print("Rational Approx ","H3",nt_Rational,Rational_Time)
 
 ###################### Time To execute #################
 
