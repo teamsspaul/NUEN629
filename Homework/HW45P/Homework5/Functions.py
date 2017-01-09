@@ -73,11 +73,9 @@ BBOXY = 0.5       # Set legend on right side of graph
 
 NumberOfLegendColumns=1
 
-Xlabel='z position [cm]'
-Ylabel="$\phi\left[\\frac{n\cdot cm}{cm^3\cdot s}\\right]$"
+Xlabel='Time [days]'
+Ylabel="Mass (g)"
 
-XlabelE='Iterations'
-YlabelE="Error = $\\frac{||\phi^{\ell+1}-\phi^\ell||}{||\phi^{\ell+1}||}$"
 
 nuclides = {  'H1':0,    'H2':1,    'H3':2,  'He3':3,  'He4':4,
               'He6':5,   'Li6':6,   'Li7':7,  'Li8':8,  'Be8':9,
@@ -703,31 +701,46 @@ def Legend(ax):
 #                   ncol=NumberOfLegendColumns)
 #         return(ax)
 
+def InList(item2,List):
+  TF=False
+  for item1 in List:
+    if item1 == item2:
+      TF=True
+  if not TF:
+    print("Invalid selection for plotting")
+    print("Shuting down")
+    quit()
 
-def plot(x,y,label,Check,NumOfPoints):
-
+def plot(df,Plotting,Name,NumOfPoints):
     fig=plt.figure(figsize=FigureSize)  
-    ax=add_subplot(111)
+    ax=fig.add_subplot(111)
 
-    if len(x)>300:
+    List=list(df.columns.values)
+    x=df[List[0]].values[1:-1]
+
+    Check=0
+    for Item in Plotting:
+      InList(Item,List) #Check if we have the isotope
+      y=((df[Item].values[1:-1])/Na)*df[Item].values[0]
+      if len(x)>NumOfPoints:
         x=reduceList(x,NumOfPoints)
         y=reduceList(y,NumOfPoints)
-    #Plot X and Y
-    ax.plot(x,y,
-             linestyle=loop_values(LineStyles,Check),
-            marker=loop_values(MarkerType,Check),
-            color=loop_values(Colors,Check),
-            markersize=loop_values(MarkSize,Check),
-            alpha=loop_values(Alpha_Value,Check),
-            label=label)
-    
+      ax.plot(x,y,
+              linestyle=loop_values(LineStyles,Check),
+              marker=loop_values(MarkerType,Check),
+              color=loop_values(Colors,Check),
+              markersize=loop_values(MarkSize,Check),
+              alpha=loop_values(Alpha_Value,Check),
+              label=Item)
+      Check=Check+1
+
+
     #Log or linear scale?
     ax.set_xscale(XScale)
     ax.set_yscale(YScale)
     #Set Title
     fig.suptitle(Title,fontsize=TitleFontSize,
-                 fontweight=TitleFontWeight,fontdict=font,
-                                                          ha='center')
+                 fontweight=TitleFontWeight,fontdict=font,ha='center')
     #Set X and y labels
     ax.set_xlabel(Xlabel,
                   fontsize=XFontSize,fontweight=XFontWeight,
@@ -737,8 +750,61 @@ def plot(x,y,label,Check,NumOfPoints):
                   fontweight=YFontWeight,
                   fontdict=font)
 
-    #f.Legend(ax)
-    #f.plt.savefig('Plots/FluxPlotTime.pdf')
+    Legend(ax)
+    plt.savefig("Plots/"+Name+'.pdf')
+
+    
+def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
+    fig=plt.figure(figsize=FigureSize)  
+    ax=fig.add_subplot(111)
+
+    List=list(df.columns.values)
+    x=df[List[0]].values[1:-1]
+
+    Check=0
+    for Item in Plotting:
+      InList(Item,List) #Check if we have the isotope
+      y=((df[Item].values[1:-1])/Na)*df[Item].values[0]
+      y2=((df2[Item].values[1:-1])/Na)*df2[Item].values[0]
+      if len(x)>NumOfPoints:
+        x=reduceList(x,NumOfPoints)
+        y=reduceList(y,NumOfPoints)
+        y2=reduceList(y2,NumOfPoints)
+      ax.plot(x,y,
+              linestyle=loop_values(LineStyles,Check),
+              marker=loop_values(MarkerType,Check),
+              color=loop_values(Colors,Check),
+              markersize=loop_values(MarkSize,Check),
+              alpha=loop_values(Alpha_Value,Check),
+              label=Item+" "+Method1)
+      Check=Check+1
+      ax.plot(x,y2,
+              linestyle=loop_values(LineStyles,Check),
+              marker=loop_values(MarkerType,Check),
+              color=loop_values(Colors,Check),
+              markersize=loop_values(MarkSize,Check),
+              alpha=loop_values(Alpha_Value,Check),
+              label=Item+" "+Method2)
+      Check=Check+1
+
+
+    #Log or linear scale?
+    ax.set_xscale(XScale)
+    ax.set_yscale(YScale)
+    #Set Title
+    fig.suptitle(Title,fontsize=TitleFontSize,
+                 fontweight=TitleFontWeight,fontdict=font,ha='center')
+    #Set X and y labels
+    ax.set_xlabel(Xlabel,
+                  fontsize=XFontSize,fontweight=XFontWeight,
+                  fontdict=font)
+    ax.set_ylabel(Ylabel,
+                  fontsize=YFontSize,
+                  fontweight=YFontWeight,
+                  fontdict=font)
+
+    Legend(ax)
+    plt.savefig("Plots/"+Name+'.pdf')
 
 def ListToStr(List):
   Str=''
@@ -763,3 +829,4 @@ def Print(Method,nuclide,Results,Time):
   Mass=Results[Index]*MassConversion
   Mass="%.4e" % Mass
   print(Method+" :",string,Mass,"Time=%.2f" % Time)
+
