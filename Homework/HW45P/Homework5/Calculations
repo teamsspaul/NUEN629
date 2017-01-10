@@ -12,11 +12,11 @@ import Functions as f
 ##################### Initialize System ########################
 ################################################################
 
-NumOfPoints=100          # Max Number of points for plots
+NumOfPoints=500          # Max Number of points for plots
 PlottingG1=["Li6","Li7","F19","Be9"]  #List elements you want to Plot 
 CompareG1=["Li6","Li7","F19","Be9"]
 PlottingG2=["H3","Be10","F18"]  #List elements you want to Plot 
-CompareG2=["H3","Be10","F18"]
+CompareG2=["H3","Be10"]
 #List elements you want to compare between methods
 
 #########################################################
@@ -40,8 +40,8 @@ Nt=1000;   #Number of Time Steps
 dt=t/Nt;
 Time=f.np.linspace(dt,t,Nt) #Time steps
 
-tDecay=730.5; #Two years of Decay
-NtDecay=1000; #Number of Decay Time Steps
+tDecay=0; #No time of decay
+NtDecay=1; #Number of Decay Time Steps
 dtDecay=tDecay/NtDecay
 TimeDecay=f.np.linspace(t+dtDecay,t+tDecay,NtDecay)
 
@@ -130,22 +130,23 @@ Rational_Time=time.time()-Current_Time
 dfBack = f.pd.read_csv('BackEuler.csv',index_col=False)
 dfRational = f.pd.read_csv(Method+".csv",index_col=False)
 
-#Plot group 1 dudes Back Euler method
-f.plot(dfBack,PlottingG1,'BackEulerG1',NumOfPoints)
-f.plot(dfRational,PlottingG1,Method+'G1',NumOfPoints)
+# #Plot group 1 dudes Back Euler method
+# f.plot(dfBack,PlottingG1,'BackEulerG1',NumOfPoints)
+# f.plot(dfRational,PlottingG1,Method+'G1',NumOfPoints)
 
-#Plot group 2 dudes Rational method
-f.plot(dfBack,PlottingG2,'BackEulerG2',NumOfPoints)
-f.plot(dfRational,PlottingG2,Method+'G2',NumOfPoints)
+# #Plot group 2 dudes Rational method
+# f.plot(dfBack,PlottingG2,'BackEulerG2',NumOfPoints)
+# f.plot(dfRational,PlottingG2,Method+'G2',NumOfPoints)
 
-#Plot group 1 dudes, compare both methods
-Name='BackEuler_'+Method+"_G1"
-f.plots2(dfBack,dfRational,CompareG1,Name,
-         NumOfPoints,'BackEuler',Method)
+# #Plot group 1 dudes, compare both methods
+# Name='BackEuler_'+Method+"_G1"
+# f.plots2(dfBack,dfRational,CompareG1,Name,
+#          NumOfPoints,'BackEuler',Method)
+
 #Plot group 2 dudes, compare both methods
-Name='BackEuler_'+Method+"_G2"
-f.plots2(dfBack,dfRational,CompareG2,Name,
-         NumOfPoints,'BackEuler',Method)
+# Name='BackEuler_'+Method+"_G2_NoFe"
+# f.plots2(dfBack,dfRational,CompareG2,Name,
+#          NumOfPoints,'BackEuler',Method)
 
 ################################################################
 ################### Print Solution #############################
@@ -154,6 +155,18 @@ f.plots2(dfBack,dfRational,CompareG2,Name,
 #f.Print("Matrix Exp","H3",nt_Mat,Mat_Time)
 f.Print("Backward Euler","H3",nt_Back,Back_Time)
 f.Print("Rational Approx ","H3",nt_Rational,Rational_Time)
+
+f.Print("Backward Euler","Be10",nt_Back,Back_Time)
+f.Print("Rational Approx ","Be10",nt_Rational,Rational_Time)
+
+## Time in years to be below 444 bq
+f.Years("Backward Euler","H3",nt_Back)
+f.Years("Rational Approx ","H3",nt_Rational)
+
+f.Years("Backward Euler","Be10",nt_Back)
+f.Years("Rational Approx ","Be10",nt_Rational)
+
+
 
 ###################### Time To execute #################
 

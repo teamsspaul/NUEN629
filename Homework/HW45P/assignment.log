@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.12.2)  9 JAN 2017 17:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.12.2)  10 JAN 2017 13:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -847,7 +847,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 584--585
 
  []
 
-[6] <Homework4/Plots/FluxPlot.pdf, id=98, 794.97pt x 433.62pt>
+[6] <Homework4/Plots/FluxPlot.pdf, id=103, 794.97pt x 433.62pt>
 File: Homework4/Plots/FluxPlot.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlot.pdf>
@@ -865,14 +865,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 649--654
 
  []
 
-<Homework4/Plots/ErrorPlot.pdf, id=151, 794.97pt x 433.62pt>
+<Homework4/Plots/ErrorPlot.pdf, id=156, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlot.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlot.pdf>
 Package pdftex.def Info: Homework4/Plots/ErrorPlot.pdf used on input line 693.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
  [8]
-<Homework4/Plots/FluxPlotReed.pdf, id=160, 794.97pt x 433.62pt>
+<Homework4/Plots/FluxPlotReed.pdf, id=165, 794.97pt x 433.62pt>
 File: Homework4/Plots/FluxPlotReed.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlotReed.pdf>
@@ -880,7 +880,7 @@ Package pdftex.def Info: Homework4/Plots/FluxPlotReed.pdf used on input line 70
 6.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-<Homework4/Plots/ErrorPlotReed.pdf, id=161, 794.97pt x 433.62pt>
+<Homework4/Plots/ErrorPlotReed.pdf, id=166, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlotReed.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlotReed.pdf>
@@ -888,7 +888,7 @@ Package pdftex.def Info: Homework4/Plots/ErrorPlotReed.pdf used on input line 7
 12.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-<Homework4/Plots/FluxPlotReedVaryN.pdf, id=162, 794.97pt x 433.62pt>
+<Homework4/Plots/FluxPlotReedVaryN.pdf, id=167, 794.97pt x 433.62pt>
 File: Homework4/Plots/FluxPlotReedVaryN.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlotReedVaryN.pdf>
@@ -899,7 +899,7 @@ ne 718.
 
 pdfTeX warning: pdflatex (file ./Homework4/Plots/FluxPlotReed.pdf): PDF inclusi
 on: multiple pdfs with page group included in a single page
->] <Homework4/Plots/ErrorPlotReedVaryN.pdf, id=239, 794.97pt x 433.62pt>
+>] <Homework4/Plots/ErrorPlotReedVaryN.pdf, id=244, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlotReedVaryN.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlotReedVaryN.pdf>
@@ -911,7 +911,7 @@ ine 724.
 
 pdfTeX warning: pdflatex (file ./Homework4/Plots/FluxPlotReedVaryN.pdf): PDF in
 clusion: multiple pdfs with page group included in a single page
->] <Homework4/Plots/FluxPlotTime.pdf, id=304, 794.97pt x 433.62pt>
+>] <Homework4/Plots/FluxPlotTime.pdf, id=309, 794.97pt x 433.62pt>
 File: Homework4/Plots/FluxPlotTime.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlotTime.pdf>
@@ -919,7 +919,7 @@ Package pdftex.def Info: Homework4/Plots/FluxPlotTime.pdf used on input line 74
 5.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-<Homework4/Plots/ErrorPlotTime.pdf, id=305, 794.97pt x 433.62pt>
+<Homework4/Plots/ErrorPlotTime.pdf, id=310, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlotTime.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlotTime.pdf>
@@ -944,7 +944,7 @@ f
 
 pdfTeX warning: pdflatex (file ./Homework4/Plots/ErrorPlotTime.pdf): PDF inclus
 ion: multiple pdfs with page group included in a single page
->] <Homework4/Plots/FluxPlotTimeVaryN.pdf, id=419, 794.97pt x 433.62pt>
+>] <Homework4/Plots/FluxPlotTimeVaryN.pdf, id=424, 794.97pt x 433.62pt>
 File: Homework4/Plots/FluxPlotTimeVaryN.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlotTimeVaryN.pdf>
@@ -952,7 +952,7 @@ Package pdftex.def Info: Homework4/Plots/FluxPlotTimeVaryN.pdf used on input li
 ne 784.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-<Homework4/Plots/ErrorPlotTimeVaryN.pdf, id=420, 794.97pt x 433.62pt>
+<Homework4/Plots/ErrorPlotTimeVaryN.pdf, id=425, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlotTimeVaryN.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlotTimeVaryN.pdf>
@@ -1039,13 +1039,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 984--986
 
  []
 
-<BeLi.pdf, id=1503, 423.92677pt x 353.5077pt>
+<BeLi.pdf, id=1508, 423.92677pt x 353.5077pt>
 File: BeLi.pdf Graphic file (type pdf)
  <use BeLi.pdf>
 Package pdftex.def Info: BeLi.pdf used on input line 992.
 (pdftex.def)             Requested size: 469.75499pt x 391.74011pt.
 
-<FO.pdf, id=1504, 283.08562pt x 283.08562pt>
+<FO.pdf, id=1509, 283.08562pt x 283.08562pt>
 File: FO.pdf Graphic file (type pdf)
  <use FO.pdf>
 Package pdftex.def Info: FO.pdf used on input line 998.
@@ -1053,71 +1053,84 @@ Package pdftex.def Info: FO.pdf used on input line 998.
  [35
 
  <./BeLi.pdf>]
-<Homework5/Plots/BackEuler_Best_G1_Grams.pdf, id=1553, 794.97pt x 433.62pt>
+<Homework5/Plots/BackEuler_Best_G1_Grams.pdf, id=1558, 794.97pt x 433.62pt>
 File: Homework5/Plots/BackEuler_Best_G1_Grams.pdf Graphic file (type pdf)
 
 <use Homework5/Plots/BackEuler_Best_G1_Grams.pdf>
 Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G1_Grams.pdf used on in
 put line 1028.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
-
-<Homework5/Plots/BackEuler_Best_G2_Grams.pdf, id=1554, 794.97pt x 433.62pt>
+ [36 <./FO.pdf>]
+<Homework5/Plots/BackEuler_Best_G2_Grams.pdf, id=1590, 794.97pt x 433.62pt>
 File: Homework5/Plots/BackEuler_Best_G2_Grams.pdf Graphic file (type pdf)
 
 <use Homework5/Plots/BackEuler_Best_G2_Grams.pdf>
 Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G2_Grams.pdf used on in
-put line 1034.
-(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
- [36 <./FO.pdf>]
-<Homework5/Plots/BackEuler_Best_G1_Bq.pdf, id=1587, 794.97pt x 433.62pt>
-File: Homework5/Plots/BackEuler_Best_G1_Bq.pdf Graphic file (type pdf)
-
-<use Homework5/Plots/BackEuler_Best_G1_Bq.pdf>
-Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G1_Bq.pdf used on input
- line 1049.
-(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
-
-<Homework5/Plots/BackEuler_Best_G2_Bq.pdf, id=1588, 794.97pt x 433.62pt>
-File: Homework5/Plots/BackEuler_Best_G2_Bq.pdf Graphic file (type pdf)
-
-<use Homework5/Plots/BackEuler_Best_G2_Bq.pdf>
-Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G2_Bq.pdf used on input
- line 1055.
+put line 1039.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
  [37 <./Homework5/Plots/BackEuler_Best_G1_Grams.pdf> <./Homework5/Plots/BackEul
 er_Best_G2_Grams.pdf
 
 pdfTeX warning: pdflatex (file ./Homework5/Plots/BackEuler_Best_G2_Grams.pdf): 
 PDF inclusion: multiple pdfs with page group included in a single page
->] [38 <./Homework5/Plots/BackEuler_Best_G1_Bq.pdf> <./Homework5/Plots/BackEule
-r_Best_G2_Bq.pdf
-
-pdfTeX warning: pdflatex (file ./Homework5/Plots/BackEuler_Best_G2_Bq.pdf): PDF
- inclusion: multiple pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 1073--1074
+<Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf, id=1651, 794.97pt x 433.62pt>
+File: Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf Graphic file (type pdf)
+
+<use Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf>
+Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf used on 
+input line 1061.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+
+<Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf, id=1652, 794.97pt x 433.62pt>
+File: Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf Graphic file (type pdf)
+
+<use Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf>
+Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf used on
+ input line 1071.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+ [38 <./Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf> <./Homework5/Plots/BackE
+uler_Best_G2_He_Grams.pdf
+
+pdfTeX warning: pdflatex (file ./Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf
+): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf, id=1708, 794.97pt x 433.62pt>
+File: Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf Graphic file (type pdf)
+
+<use Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf>
+Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf used on 
+input line 1089.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+ [39 <./Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf>] (./Homework5/Calculatio
+ns [40
+
+] [41] [42])
+(./Homework5/Functions.py [43] [44] [45] [46] [47] [48] [49] [50] [51] [52]
+[53] [54] [55] [56] [57] [58] [59] [60]) [61]
+Underfull \hbox (badness 10000) in paragraph at lines 1142--1143
 
  []
 
-[39
+[62
 
 ] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1140.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1140.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1209.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1209.
 (./assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1140.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1140.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1209.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1209.
 
 Package rerunfilecheck Info: File `assignment.out' has not changed.
-(rerunfilecheck)             Checksum: 6183612D5E894400C354BF5EDD085C7D;462.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1140.
+(rerunfilecheck)             Checksum: 9ACB2AB3C167F886F31EBE63CF029CED;514.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1209.
  ) 
 Here is how much of TeX's memory you used:
- 11316 strings out of 493029
- 159262 string characters out of 6136234
- 318731 words of memory out of 5000000
- 13697 multiletter control sequences out of 15000+600000
+ 12687 strings out of 493029
+ 178945 string characters out of 6136234
+ 328731 words of memory out of 5000000
+ 13888 multiletter control sequences out of 15000+600000
  17436 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  35i,12n,43p,250b,2141s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1149,10 +1162,10 @@ exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/urw/courier/ucrro8a.pfb>
-Output written on assignment.pdf (39 pages, 777652 bytes).
+Output written on assignment.pdf (62 pages, 896332 bytes).
 PDF statistics:
- 1965 PDF objects out of 2073 (max. 8388607)
- 1714 compressed objects within 18 object streams
- 944 named destinations out of 1000 (max. 500000)
- 145 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3522 PDF objects out of 3580 (max. 8388607)
+ 3231 compressed objects within 33 object streams
+ 2118 named destinations out of 2487 (max. 500000)
+ 158 words of extra memory for PDF output out of 10000 (max. 10000000)
 

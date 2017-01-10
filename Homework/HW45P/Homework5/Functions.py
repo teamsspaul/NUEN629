@@ -44,7 +44,7 @@ XScale="linear"       # 'linear' or 'log'
 
 YFontSize=18                    # Y label font size
 YFontWeight="normal"            # "bold" or "normal"
-YScale="linear"                 # 'linear' or 'log'
+YScale="log"                 # 'linear' or 'log'
 
 Check=0
 
@@ -74,7 +74,7 @@ BBOXY = 0.5       # Set legend on right side of graph
 NumberOfLegendColumns=1
 
 Xlabel='Time [days]'
-Ylabel="Mass (g)"
+Ylabel="Mass $\\left[\\frac{g}{kg \\text{ FLiBe}}\\right]$"
 
 
 nuclides = {  'H1':0,    'H2':1,    'H3':2,  'He3':3,  'He4':4,
@@ -202,7 +202,7 @@ def DeterminePolesNResidues(n):
 
     #s = S(n+1,n+1);                     # singular value
     s=S[n]
-    #u = U(K:-1:1,n+1)’; v = V(:,n+1)’;  # singular vector
+    #u = U(K:-1:1,n+1); v = V(:,n+1);  # singular vector
     u=[]
     index=reversed(np.arange(0,K,1))
     for i in index:
@@ -802,7 +802,8 @@ def plot(df,Plotting,Name,NumOfPoints):
     ax.set_xlabel(Xlabel,
                   fontsize=XFontSize,fontweight=XFontWeight,
                   fontdict=font)
-    ax.set_ylabel("Bq",
+    YlabelBq="Activity $\\left[\\frac{Bq}{kg \\text{ FLiBe}}\\right]$"
+    ax.set_ylabel(YlabelBq,
                   fontsize=YFontSize,
                   fontweight=YFontWeight,
                   fontdict=font)
@@ -831,7 +832,7 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
               linestyle=loop_values(LineStyles,Check),
               marker=loop_values(MarkerType,Check),
               color=loop_values(Colors,Check),
-              markersize=loop_values(MarkSize,Check),
+              markersize=loop_values(MarkSize,Check)*1.5,
               alpha=loop_values(Alpha_Value,Check),
               label=Item+" "+Method1)
       Check=Check+1
@@ -886,7 +887,7 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
               linestyle=loop_values(LineStyles,Check),
               marker=loop_values(MarkerType,Check),
               color=loop_values(Colors,Check),
-              markersize=loop_values(MarkSize,Check),
+              markersize=loop_values(MarkSize,Check)*1.5,
               alpha=loop_values(Alpha_Value,Check),
               label=Item+" "+Method1)
       Check=Check+1
@@ -905,7 +906,7 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
               linestyle=loop_values(LineStyles,Check),
               marker=loop_values(MarkerType,Check),
               color=loop_values(Colors,Check),
-              markersize=loop_values(MarkSize,Check),
+              markersize=loop_values(MarkSize,Check)*1.5,
               alpha=loop_values(Alpha_Value,Check),
               label="Sum "+Method1)
     Check=Check+1
@@ -931,7 +932,8 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
     ax.set_xlabel(Xlabel,
                   fontsize=XFontSize,fontweight=XFontWeight,
                   fontdict=font)
-    ax.set_ylabel("Bq",
+    YlabelBq="Activity $\\left[\\frac{Bq}{kg \\text{ FLiBe}}\\right]$"
+    ax.set_ylabel(YlabelBq,
                   fontsize=YFontSize,
                   fontweight=YFontWeight,
                   fontdict=font)
@@ -964,3 +966,10 @@ def Print(Method,nuclide,Results,Time):
   Mass="%.4e" % Mass
   print(Method+" :",string,Mass,"Time=%.2f" % Time)
 
+def Years(Method,nuclide,Results):
+  Index=nuclides[nuclide]
+  LambdaY=decay_consts[Index]*60*60*24*365.25
+  Lambdas=decay_consts[Index]
+  string="Isotope "+nuclide_names[Index]+", Years to 444 Bq = "
+  Years=(-1/LambdaY)*np.log(444/(Results[Index]*Lambdas))
+  print(Method+" :",string,"%.3e" % Years)

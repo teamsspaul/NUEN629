@@ -802,9 +802,9 @@
 \end{homeworkProblem}
 \clearpage
 
-%--------------------------------------------------------------------------
+%---------------------------------------------------------------------
 %	Homework 4 Code
-%--------------------------------------------------------------------------
+%---------------------------------------------------------------------
 
 \begin{homeworkProblem}[Homework 4 Code]
     
@@ -821,9 +821,9 @@
 
 \clearpage
 
-%--------------------------------------------------------------------------
+%--------------------------------------------------------------------
 %	Homework 5 Problem Statement
-%--------------------------------------------------------------------------
+%--------------------------------------------------------------------
 
 \begin{homeworkProblem}[Homework 5 Problem Statement]
   Solve the following problem and submit a detailed report,
@@ -858,9 +858,9 @@
 
 \clearpage
 
-%--------------------------------------------------------------------------
+%--------------------------------------------------------------------
 %	Homework 5 Background
-%--------------------------------------------------------------------------
+%---------------------------------------------------------------------
 
 \begin{homeworkProblem}[Homework 5 Background]
   Please note, that most of this background is copied directly from
@@ -1028,10 +1028,47 @@
                         {Homework5/Plots/BackEuler_Best_G1_Grams.pdf}
       \end{center}
     \end{figure}
+
+    This figure shows that there wasn't sizeable amount of depletion
+    in the coolant. Which is expected because the cross sections
+    are less than a barn.
+    
     \begin{figure}[H]
       \begin{center}
         \includegraphics[width=1\columnwidth]
                         {Homework5/Plots/BackEuler_Best_G2_Grams.pdf}
+      \end{center}
+    \end{figure}
+
+
+    The above figure shows that the high activity elements
+    with large half lives (all other radioactive elements
+    have half lives less than a minute and would decay
+    away and less than 7 minutes) are not produces in a sizeable
+    quantity except for \tss{3}H, which has a 12 year half life. The
+    sharp decrease in \tss{18}F is because the plot has about a
+    day of decay included to show that activity is primarily from
+    \tss{3}H (Beta emitter) and \tss{10}Be (alpha emitter).
+
+    Below it is shown that the hydrogen is fairly enriched in
+    \tss{3}H $\approx$ 40\%. If the hydrogen were removed,
+    the dose due to the coolant would decrease dramatically
+    but would still have a small amount of activity due to \tss{10}Be.
+    
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf}
+      \end{center}
+    \end{figure}
+
+    Below we look at the enrichment of \tss{3}He. Which is mostly
+    \tss{4}He.
+
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf}
       \end{center}
     \end{figure}
 
@@ -1040,27 +1077,59 @@
     will it take until the material is less radioactive than
     \href{http://www.orau.org/PTP/collection/consumer%20products/brazilnuts.htm}{Brazil Nuts}? (444 Bq/kg)}
 
-      The same solutions as above are depicted below, but in terms
-      of activity. 
-
+      In order to use the code to do decay, the $A$ matrix was
+      remade with $\phi=0$.
+      Looking into this problem without \tss{18}F.
+      Also the reason why this plot looks linear is because
+      the y axis has a log scale.
+      
     \begin{figure}[H]
       \begin{center}
         \includegraphics[width=1\columnwidth]
-                        {Homework5/Plots/BackEuler_Best_G1_Bq.pdf}
-      \end{center}
-    \end{figure}
-    \begin{figure}[H]
-      \begin{center}
-        \includegraphics[width=1\columnwidth]
-                        {Homework5/Plots/BackEuler_Best_G2_Bq.pdf}
+                        {Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf}
       \end{center}
     \end{figure}
 
+    It will take a long time for the \tss{10}Be to decay to a point
+    where its less radioactive than nuts.
 
+    I decided to do this analytically with
+    \begin{equation*}
+      t=\frac{-1}{\lambda_Y}ln\left(\frac{444}{N_0\lambda_s}\right)
+    \end{equation*}
+
+    For the \tss{3}H to decay to 444 Bq, it will take about 400 years,
+    and the \tss{10}Be it will take 1.8E6 years, which is a long time,
+    and slightly over one half life for the \tss{10}Be.
+    
   \end{enumerate}
 \end{homeworkProblem}
 
 \clearpage
+
+
+
+%---------------------------------------------------------------------
+%	Homework 5 Code
+%---------------------------------------------------------------------
+
+\begin{homeworkProblem}[Homework 5 Code]
+
+  In order to build the $A$ matrix I utilized code from
+  James Tompkins that he let me see a while back. I wanted to
+  give him credit because building the A matrix is probably one
+  of the harder parts of this homework.
+  
+  \pythonscript{Homework5/Calculations}
+               {\textbf{Main Code}}
+  \pythonscript{Homework5/Functions.py}
+               {\textbf{Functions holder}}
+  
+\end{homeworkProblem}
+
+\clearpage
+
+
 
 
 %---------------------------------------------------------------------
