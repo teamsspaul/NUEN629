@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.12.2)  10 JAN 2017 13:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.12)  13 JAN 2017 08:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **assignment.tex
 (./assignment.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -34,7 +34,7 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \f@ncyO@olf=\skip50
 \f@ncyO@orf=\skip51
 )
-(/home/teamsspaul/texmf/tex/latex/lastpage/lastpage.sty
+(/home/paul/texmf/tex/latex/lastpage/lastpage.sty
 Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/extramarks.sty
@@ -226,24 +226,24 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip52
 )
-(/home/teamsspaul/texmf/tex/latex/amsmath/amsmath.sty
+(/home/paul/texmf/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/06/28 v2.15d AMS math features
 \@mathmargin=\skip53
 
 For additional information on amsmath, use the `?' option.
-(/home/teamsspaul/texmf/tex/latex/amsmath/amstext.sty
+(/home/paul/texmf/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
 
-(/home/teamsspaul/texmf/tex/latex/amsmath/amsgen.sty
+(/home/paul/texmf/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks17
 \ex@=\dimen113
 ))
-(/home/teamsspaul/texmf/tex/latex/amsmath/amsbsy.sty
+(/home/paul/texmf/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen114
 )
-(/home/teamsspaul/texmf/tex/latex/amsmath/amsopn.sty
+(/home/paul/texmf/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count106
@@ -304,7 +304,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks23
 \@floatcapt=\box31
 )
-(/home/teamsspaul/texmf/tex/latex/enumitem/enumitem.sty
+(/home/paul/texmf/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip56
 \enit@outerparindent=\dimen122
@@ -323,6 +323,8 @@ File: babel.def 2016/02/24 3.9q Babel common definitions
 \babel@savecnt=\count120
 \U@D=\dimen123
 )
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
@@ -694,6 +696,10 @@ File: pppdftex.def 2015/09/18 v0.5d Pdfpages driver for pdfTeX (AM)
 \AM@toc@title=\toks27
 \c@AM@survey=\count128
 \AM@templatesizebox=\box34
+)
+(/home/paul/texmf/tex/latex/type1cm/type1cm.sty
+Package: type1cm 2002/09/05 v0.04 BlueSky/Y&Y Type1 CM font definitions (DPC, p
+atched RF)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -1108,7 +1114,27 @@ ns [40
 ] [41] [42])
 (./Homework5/Functions.py [43] [44] [45] [46] [47] [48] [49] [50] [51] [52]
 [53] [54] [55] [56] [57] [58] [59] [60]) [61]
-Underfull \hbox (badness 10000) in paragraph at lines 1142--1143
+Underfull \hbox (badness 10000) in paragraph at lines 1140--1144
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1140--1144
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1163--1169
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1170--1171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1170--1171
 
  []
 
@@ -1116,23 +1142,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 1142--1143
 
 ] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1209.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1209.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1258.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1258.
 (./assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1209.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1209.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1258.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1258.
 
 Package rerunfilecheck Info: File `assignment.out' has not changed.
 (rerunfilecheck)             Checksum: 9ACB2AB3C167F886F31EBE63CF029CED;514.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1209.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1258.
  ) 
 Here is how much of TeX's memory you used:
- 12687 strings out of 493029
- 178945 string characters out of 6136234
- 328731 words of memory out of 5000000
- 13888 multiletter control sequences out of 15000+600000
- 17436 words of font info for 63 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
+ 12776 strings out of 494953
+ 180635 string characters out of 6180977
+ 324122 words of memory out of 5000000
+ 13728 multiletter control sequences out of 15000+600000
+ 17417 words of font info for 63 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
  35i,12n,43p,250b,2141s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
@@ -1162,7 +1188,7 @@ exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/urw/courier/ucrro8a.pfb>
-Output written on assignment.pdf (62 pages, 896332 bytes).
+Output written on assignment.pdf (62 pages, 898931 bytes).
 PDF statistics:
  3522 PDF objects out of 3580 (max. 8388607)
  3231 compressed objects within 33 object streams
