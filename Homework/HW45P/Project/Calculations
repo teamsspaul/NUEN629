@@ -25,6 +25,18 @@ CompareG2=["H3","Be10"]
 
 high_flux_fraction=0.5
 phi=1.0e14
+
+Nuclides,Nuclide_Names=f.Isotopes()
+#Grab atomic weight information
+df=f.pd.read_csv('Data/AtomicWeights.csv')
+Atom_Mass=f.GatherMasses(df,Nuclides)
+
+
+print(Nuclide_Names[0:5])
+print(Atom_Mass[0:5])
+
+quit()
+
 A,n0=f.MakeAb(high_flux_fraction,phi)
 
 if not A.shape[0] == A.shape[1] or not A.shape[0] == len(n0):

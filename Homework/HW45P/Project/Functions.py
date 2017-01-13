@@ -85,6 +85,8 @@ nuclides = {  'H1':0,    'H2':1,    'H3':2,  'He3':3,  'He4':4,
               'O16':25,  'O17':26,  'O18':27, 'O19':28, 'F18':29,
               'F19':30, 'F20':31, 'Ne20':32}
 
+
+
 atom_mass = np.array([1.007825032,2.014101778,3.0160492779,  #2
                       3.016029320,4.002603254,6.151228874,   #5
                       6.015122887,7.0160034366,8.022486246,  #8
@@ -117,6 +119,143 @@ decay_consts = np.array([0., 0., np.log(2)/3.887896E8, #H1 H2 H3
                          np.log(2)/26.9, np.log(2)/6586.2, #O19 F18
                          0., np.log(2)/11.1, 0.]) #F19 F20 Ne20
 Na=6.0221409E23
+
+
+################################################################
+################### Function for Vars ##########################
+################################################################
+
+def Returnfloat(string):
+    """
+    string has format   238.023249814(23) 
+            or format   [15.99903-15.99977]
+            or format   235.04+/-0.0000019
+
+    Returns just the number, no uncertainties
+    """
+    if "(" in string:
+        Number=str(string.split('(')[0])
+        LastErrorNumber=str(string.split("(")[1].replace(")",""))
+        NumberOfZeros=len(Number.split(".")[1])-len(LastErrorNumber)
+        Error="0."
+        for i in range(0,NumberOfZeros):
+            Error=Error+"0"
+        Error=Error+LastErrorNumber
+    elif "[" in string:
+        FirstNum=float(string.split('-')[0].replace("[",''))
+        SecondNum=float(string.split('-')[1].replace(']',''))
+        Number=str((FirstNum+SecondNum)/2)
+        Error=str(float(Number)-FirstNum)
+    elif "+/-" in string:
+        Number=string.split("+/-")[0]
+        Error=string.split("+/-")[1]
+        
+    return(float(Number))
+
+def Isotopes():
+  """
+  This function will create a dictionary 'Nuclides'
+  with nuclides found in tape9.inp, excluding activation isotopes
+  """
+  Nuclides={}
+  Nuclide_Names=()
+
+  with open('tape9.inp') as f:
+    TAPE9Content=f.readlines()
+
+  count=0
+  for line in TAPE9Content:
+    hold=line.split()
+
+    #No activation products or the -1 between libraries
+    if not '1' in hold[0] and not '601' in hold[0] and "-" not in hold[0]:
+
+      #No repeats                 #No decimals              #No text
+      if hold[1] not in Nuclides and "." not in hold[1] and hold[1].isdigit():
+        #Filter out lower mass isotopes
+        if len(hold[1])==6:
+          Nuclides[hold[1]]=count
+          Nuclide_Names=Nuclide_Names+(hold[1],)
+          count=count+1
+        
+  return(Nuclides,Nuclide_Names)
+
+
+def FindAtomicMass(df,proton,Isotope):
+    """
+    This function will take in a dataset 'df' look through the
+    'df.Protons' column and find the column that matches with 
+    'proton'. If the row that contains 'proton' also contains
+    'Isotope' in the 'df.Isotope' column, then the value stored
+    in 'df.Relative_Atomic_Mass' is reported for that row.
+    Because the proton numbering scheme can have a format
+    '10' for hydrogen and '10' for neon (following MCNP ZAID 
+    naming conventions) if we don't find a value with the whole
+    string of 'proton' then the program looks through the first
+    element of string and tries to match that 'proton[0]'
+    If no matches are found, and error is thrown out.
+
+    df = dataset with columns 'Protons' 'Isotopes' and 
+    'Relative_Atomic_Mass'. Dataset created with pandas
+
+    proton = string with proton number (follow MCNP zaid format)
+
+    Isotope = string with isotope number (just put the atomic mass
+    do not follow MCNP format - different for few cases)
+    """
+    #print(df)
+    for i in range(0,len(df.Protons)):
+        dfPro=str(df.Protons[i])
+        if proton==dfPro:
+            dfIso=str(df.Isotope[i])
+            if Isotope==dfIso:
+                Mass=df.Relative_Atomic_Mass[i]
+                break
+    try:
+        Mass
+    except NameError:
+        for i in range(0,len(df.Protons)):
+            dfPro=str(df.Protons[i])
+            if proton[0]==dfPro:
+                dfIso=str(df.Isotope[i])
+                if Isotope==dfIso:
+                    Mass=df.Relative_Atomic_Mass[i]
+                    break
+    try:
+        Mass
+    except NameError:
+        print("Could not find atomic mass for proton = "\
+              +proton+" and for Isotope = "+Isotope)
+        Mass='10000.09(23)'
+    Mass=Returnfloat(Mass)
+    return(Mass)
+
+def GatherMasses(df,Nuclides):
+  """
+  Make numpy array of masses which correspond to isotopes in Nuclides
+  Nuclides is a dictionary. Where each key is a zaid number
+  """
+  
+  Atom_Mass=np.zeros(len(Nuclides))
+  for key,value in Nuclides.items():
+    if not len(key)==6:
+      print("Did not filter out the lower mass isotopes, quitting")
+      quit()
+    proton=key[0:2]
+    if key[2]=="0":
+        Isotope=key[3:5]
+    elif key[4]=="0" and float(proton)*3<100:
+        Isotope=key[2:3]
+    elif key[2]!="0":
+        Isotope=key[2:5]
+
+    Mass=FindAtomicMass(df,proton,Isotope)
+    if Mass>9000:
+        print("Mass is over 9,000!!!")
+        print(key)
+        quit()
+    Atom_Mass[value]=Mass
+  return(Atom_Mass)
 
 ################################################################
 ###################### Functions ###############################
