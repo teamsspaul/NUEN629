@@ -44,7 +44,7 @@ XScale="linear"       # 'linear' or 'log'
 
 YFontSize=18                    # Y label font size
 YFontWeight="normal"            # "bold" or "normal"
-YScale="log"                 # 'linear' or 'log'
+YScale="linear"                 # 'linear' or 'log'
 
 Check=0
 

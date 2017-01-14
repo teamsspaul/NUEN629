@@ -12,10 +12,10 @@ import Functions as f
 ##################### Initialize System ########################
 ################################################################
 
-NumOfPoints=500          # Max Number of points for plots
+NumOfPoints=200          # Max Number of points for plots
 PlottingG1=["Li6","Li7","F19","Be9"]  #List elements you want to Plot 
 CompareG1=["Li6","Li7","F19","Be9"]
-PlottingG2=["H3","Be10","F18"]  #List elements you want to Plot 
+PlottingG2=["H3","Be10"]  #List elements you want to Plot 
 CompareG2=["H3","Be10"]
 #List elements you want to compare between methods
 
@@ -40,8 +40,8 @@ Nt=1000;   #Number of Time Steps
 dt=t/Nt;
 Time=f.np.linspace(dt,t,Nt) #Time steps
 
-tDecay=0; #No time of decay
-NtDecay=1; #Number of Decay Time Steps
+tDecay=100000; #No time of decay
+NtDecay=10000; #Number of Decay Time Steps
 dtDecay=tDecay/NtDecay
 TimeDecay=f.np.linspace(t+dtDecay,t+tDecay,NtDecay)
 
@@ -135,8 +135,8 @@ dfRational = f.pd.read_csv(Method+".csv",index_col=False)
 # f.plot(dfRational,PlottingG1,Method+'G1',NumOfPoints)
 
 # #Plot group 2 dudes Rational method
-# f.plot(dfBack,PlottingG2,'BackEulerG2',NumOfPoints)
-# f.plot(dfRational,PlottingG2,Method+'G2',NumOfPoints)
+#f.plot(dfBack,PlottingG2,'BackEulerG2',NumOfPoints)
+f.plot(dfRational,PlottingG2,Method+'G2_Check',NumOfPoints)
 
 # #Plot group 1 dudes, compare both methods
 # Name='BackEuler_'+Method+"_G1"
@@ -144,7 +144,7 @@ dfRational = f.pd.read_csv(Method+".csv",index_col=False)
 #          NumOfPoints,'BackEuler',Method)
 
 #Plot group 2 dudes, compare both methods
-# Name='BackEuler_'+Method+"_G2_NoFe"
+# Name='BackEuler_'+Method+"_G2_NoF"
 # f.plots2(dfBack,dfRational,CompareG2,Name,
 #          NumOfPoints,'BackEuler',Method)
 
