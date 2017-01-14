@@ -295,7 +295,7 @@ def GatherMasses(df,Nuclides):
     if key[2]=="0":
         Isotope=key[3:5]
     elif key[4]=="0" and float(proton)*3<100:
-        Isotope=key[2:3]
+        Isotope=key[2:4]
     elif key[2]!="0":
         Isotope=key[2:5]
 
@@ -1356,6 +1356,120 @@ def n_t(nuclides, parent):
     else:
         return [-1,-1], 0.0, 0.0
 
+
+
+
+class DecayClass:
+    def __init__(self):
+        self.lambdas = -1  # Half life in seconds
+        self.FBX    =  0. # 'The fraction of negatron beta decay transitions that results in
+                          # in the daughter nuclide being in a relatively long-lived state'
+                          # I think this should read the fraction of all decay events which are...
+        self.IDFBX  = ''  # ZAID for daughter for FBX
+        self.FPEC   =  0. # Fraction of all decay events which are positron or EC
+        self.IDFPEC = ''  # ZAID for daughter for FPEC
+        self.FPECX  =  0. # Fraction of all EC or positron decays which result in excited state
+        self.IDFPECX= ''  # ZAID for daughter for FPECX
+        self.FA     =  0. # Fraction of all decay events which are alpha
+        self.IDFA   = ''  # ZAID for daughter for alpha
+        self.FIT    =  0. # 'fraction of all the decay events of an excited nuclear state
+                          # which result in the production of the ground state of the same nuclide'
+        self.IDFIT  = ''  # ZAID for daughter of FIT
+        self.FSF    =  0. # Fraction that decay events that are spontaneous fission
+        # No daughter listed, will loop through all elements for yields
+        self.FN     =  0. # Fraction of all decay events that are beta + neutron decays
+        self.IDFN   = ''  # ZAID for daughter for FN
+        #Note: Negatron beta decay = 1 - FBX - FPEC - FA - FIT - FSF - FN
+        self.FB     =  0. # Fraction of all decay events which are beta
+    
+
+def FindPotentialMatch(List,protons,A,Fraction,Excited):
+    if(Fraction<0 or Fraction>1):
+        print("Fraction of decays is too low or high : ",Fraction)
+        print("Inquire further")
+        quit()
+    if Fraction>0:
+        for item in List:
+            if protons in item[0:2] and A in item[:-1] and item[-1]==Excited:
+                Toreturn=item
+    else:
+        Toreturn=''
+    try: #To make sure its defined
+        Toreturn
+    except NameError:
+        print("Could not find daughter in list of isotopes when expecting one")
+        print("Looking for Protons : ",protons," Totat Nucleons : ",A," Fraction",Fraction)
+        print("Close items are")
+        for item in List:
+            if protons in item[:-1] and A in item[:-1]:
+                print(item)
+        if (Fraction<4e-4):
+            print("Small fraction, will let slide")
+            Toreturn=''
+        else:
+            quit()
+    
+    return(Toreturn)
+
+def DecayInfo(Nuclides,Nuclide_Names,parent,Decay_Conts,proton,neutrons,A):
+    """
+    This function will store and return decay information from
+    the tape9.inp file
+    """
+
+    Info=DecayClass()
+    Info.lambdas=Decay_Conts[Nuclides[parent]]
+    
+    with open('tape9.inp') as f:
+        TAPE9Content=f.readlines()
+
+    Found=False
+    for line in TAPE9Content:
+        hold=line.split()
+
+        #Looking at second line in each library (put this if statement above below)
+        if Found:
+            #Spontaneous fission
+            Info.FSF=float(hold[1])
+            #Beta plus neutron
+            Info.FN=float(hold[2])
+            Info.IDFN=FindPotentialMatch(Nuclide_Names,str(int(proton)+1),str(int(A)-1),Info.FN,'0')
+            break
+        
+        #Looking for fission product and actinide decay information
+        #The libraries we are looking through for this information are '2' and '3'
+        if ('2' == hold[0] or '3' == hold[0]) and hold[1]==parent:
+            Found=True
+
+            #Beta minus to excited
+            Info.FBX=float(hold[4])
+            Info.IDFBX=FindPotentialMatch(Nuclide_Names,str(int(proton)+1),A,Info.FBX,'1')
+            #positron or EC
+            Info.FPEC=float(hold[5])  #Total positron or EC
+            Info.FPECX=float(hold[6]) #percent of above to excited
+            if Info.FPECX < 1:
+                Info.IDFPEC=FindPotentialMatch(Nuclide_Names,str(int(proton)-1),A,Info.FPEC,'0')
+            Info.IDFPECX=FindPotentialMatch(Nuclide_Names,str(int(proton)-1),A,Info.FPECX,'1')
+            Info.FA=float(hold[7])    #Fraction of events that are alpha
+            Info.IDFA=FindPotentialMatch(Nuclide_Names,str(int(proton)-2),str(int(A)-4),Info.FA,'0')
+            #Excited state to ground state
+            Info.FIT=float(hold[8])
+            Info.IDFIT=FindPotentialMatch(Nuclide_Names,proton,A,Info.FIT,'0')
+
+    Info.FB=1-Info.FBX-Info.FPEC-Info.FA-Info.FIT-Info.FSF-Info.FN
+
+    if(Info.FB<0 or Info.FB>1):
+        print("Fraction of beta decays is too low or high : ",Info.FB)
+        if abs(Info.FB)<1e-8:
+            print("But I'll let it slide and set to zero")
+            Info.FB=0
+        else:
+            print("I can't let this slide, not small enough")
+            quit()
+    
+    return(Info)
+
+    
 def MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts):
 
     # Create Activation and Decay Matrix and initial
@@ -1368,33 +1482,46 @@ def MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts):
 
     for isotope in Nuclides:
         row = Nuclides[isotope]
+        proton=isotope[0:2]
+        if isotope[2]=="0":
+            Anum=isotope[3:5]
+        elif isotope[4]=="0" and float(proton)*3<100:
+            Anum=isotope[2:4]
+        elif isotope[2]!="0":
+            Anum=isotope[2:5]
+        else:
+            print("Missed logic in finding A number")
+            quit()
+        if int(Anum)<int(proton):
+            print("Something is wrong, more protons than neutrons")
+            print("Proton: ",proton,"A: ",Anum,"ZAID :",isotope)
+            quit()
+        neutrons=str(int(Anum)-int(proton))
+
         print(row,isotope)
-        quit()
-        row_betanegdecay =  BetaNegDecay(nuclides, isotope)
-        row_betaposdecay =  betaposdecay(nuclides, isotope)
-        row_2alphadecay =   twoalphadecay(nuclides, isotope)
-        row_n_gamma =       n_gamma(nuclides, isotope)
-        row_n_2n =          n_2n(nuclides, isotope)
-        row_n_alpha =       n_alpha(nuclides, isotope)
-        row_n_2alpha =      n_2alpha(nuclides, isotope)
-        row_n_nalpha =      n_nalpha(nuclides, isotope)
-        row_n_2nalpha =     n_2nalpha(nuclides, isotope)
-        row_n_3nalpha =     n_3nalpha(nuclides, isotope)
-        row_n_p =           n_p(nuclides, isotope)
-        row_n_np =          n_np(nuclides, isotope)
-        row_n_d =           n_d(nuclides, isotope)
-        row_n_t =           n_t(nuclides, isotope)
-        row_lo_act_sum = row_n_gamma[1] + row_n_2n[1] +\
-                         row_n_alpha[1] + row_n_2alpha[1] +\
-                         row_n_nalpha[1] + row_n_2nalpha[1] + \
-                         row_n_3nalpha[1] + row_n_p[1] +\
-                         row_n_np[1] + row_n_d[1] +\
-                         row_n_t[1]
-        row_hi_act_sum = row_n_gamma[2] + row_n_2n[2] +\
-                         row_n_alpha[2] + row_n_2alpha[2] +\
-                         row_n_nalpha[2] + row_n_2nalpha[2] + \
-                         row_n_3nalpha[2] + row_n_p[2] +\
-                         row_n_np[2] + row_n_d[2] +row_n_t[2]
+        row_decay =  DecayInfo(Nuclides,Nuclide_Names,isotope,Decay_Conts,proton,neutrons,Anum)
+        # row_n_gamma =       n_gamma(nuclides, isotope)
+        # row_n_2n =          n_2n(nuclides, isotope)
+        # row_n_alpha =       n_alpha(nuclides, isotope)
+        # row_n_2alpha =      n_2alpha(nuclides, isotope)
+        # row_n_nalpha =      n_nalpha(nuclides, isotope)
+        # row_n_2nalpha =     n_2nalpha(nuclides, isotope)
+        # row_n_3nalpha =     n_3nalpha(nuclides, isotope)
+        # row_n_p =           n_p(nuclides, isotope)
+        # row_n_np =          n_np(nuclides, isotope)
+        # row_n_d =           n_d(nuclides, isotope)
+        # row_n_t =           n_t(nuclides, isotope)
+        # row_lo_act_sum = row_n_gamma[1] + row_n_2n[1] +\
+        #                  row_n_alpha[1] + row_n_2alpha[1] +\
+        #                  row_n_nalpha[1] + row_n_2nalpha[1] + \
+        #                  row_n_3nalpha[1] + row_n_p[1] +\
+        #                  row_n_np[1] + row_n_d[1] +\
+        #                  row_n_t[1]
+        # row_hi_act_sum = row_n_gamma[2] + row_n_2n[2] +\
+        #                  row_n_alpha[2] + row_n_2alpha[2] +\
+        #                  row_n_nalpha[2] + row_n_2nalpha[2] + \
+        #                  row_n_3nalpha[2] + row_n_p[2] +\
+        #                  row_n_np[2] + row_n_d[2] +row_n_t[2]
         # try:
         #     if row_n_alpha[0] >= 0:
         #         print(row_n_alpha)
@@ -1405,69 +1532,69 @@ def MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts):
         #     print(row_n_alpha[0][0])
         #     quit()
         
-        if row_betanegdecay[0] >= 0:
-            # [days^-1]
-            row_lambda = np.log(2)*60*60*24/row_betanegdecay[1] 
-        elif row_betaposdecay[0] >= 0:
-            # [days^-1]
-            row_lambda = np.log(2)*60*60*24/row_betaposdecay[1] 
-        elif row_2alphadecay[0] >= 0:
-            # [days^-1]
-            row_lambda = np.log(2)*60*60*24/row_2alphadecay[1] 
-        else:
-            row_lambda = 0.0
+        # if row_betanegdecay[0] >= 0:
+        #     # [days^-1]
+        #     row_lambda = np.log(2)*60*60*24/row_betanegdecay[1] 
+        # elif row_betaposdecay[0] >= 0:
+        #     # [days^-1]
+        #     row_lambda = np.log(2)*60*60*24/row_betaposdecay[1] 
+        # elif row_2alphadecay[0] >= 0:
+        #     # [days^-1]
+        #     row_lambda = np.log(2)*60*60*24/row_2alphadecay[1] 
+        # else:
+        #     row_lambda = 0.0
     
-        # Diagonal Assignment
-        A[row,row] = -row_lambda - phi_lo*row_lo_act_sum -\
-                     phi_hi*row_hi_act_sum
-        # Off Diagonal Assignment
-        if row_betanegdecay[0] >= 0:
-            A[row_betanegdecay[0],row] = np.log(2)*60*60*24/\
-                                         row_betanegdecay[1]
-        if row_betaposdecay[0] >= 0:
-            A[row_betaposdecay[0],row] = np.log(2)*60*60*24/\
-                                         row_betaposdecay[1]
-        if row_2alphadecay[0] >= 0:
-            A[row_2alphadecay[0],row] = np.log(2)*60*60*24/\
-                                        row_2alphadecay[1]
-        if row_n_gamma[0] >= 0:
-            A[row_n_gamma[0],row] = phi_lo*row_n_gamma[1] +\
-                                    phi_hi*row_n_gamma[2]
-        if row_n_2n[0] >= 0:
-            A[row_n_2n[0],row] = phi_lo*row_n_2n[1] +\
-                                 phi_hi*row_n_2n[2]
-        if row_n_alpha[0][0] >= 0:
-            for i in row_n_alpha[0]:
-                A[i,row] = phi_lo*row_n_alpha[1] +\
-                           phi_hi*row_n_alpha[2]
-        if row_n_2alpha[0][0] >= 0:
-            for i in row_n_2alpha[0]:
-                A[i,row] = phi_lo*row_n_2alpha[1] +\
-                           phi_hi*row_n_2alpha[2]
-        if row_n_nalpha[0][0] >= 0:
-            for i in row_n_nalpha[0]:
-                A[i,row] = phi_lo*row_n_nalpha[1] +\
-                           phi_hi*row_n_nalpha[2]
-        if row_n_2nalpha[0][0] >= 0:
-            for i in row_n_2nalpha[0]:
-                A[i,row] = phi_lo*row_n_2nalpha[1] +\
-                           phi_hi*row_n_2nalpha[2]
-        if row_n_3nalpha[0][0] >= 0:
-            for i in row_n_3nalpha[0]:
-                A[i,row] = phi_lo*row_n_3nalpha[1] +\
-                           phi_hi*row_n_3nalpha[2]
-        if row_n_p[0][0] >= 0:
-            for i in row_n_p[0]:
-                A[i,row] = phi_lo*row_n_p[1] + phi_hi*row_n_p[2]
-        if row_n_np[0][0] >= 0:
-            for i in row_n_np[0]:
-                A[i,row] = phi_lo*row_n_np[1] + phi_hi*row_n_np[2]
-        if row_n_d[0][0] >= 0:
-            for i in row_n_d[0]:
-                A[i,row] = phi_lo*row_n_d[1] + phi_hi*row_n_d[2]
-        if row_n_t[0][0] >= 0:
-            for i in row_n_t[0]:
-                A[i,row] = phi_lo*row_n_t[1] + phi_hi*row_n_t[2]
+        # # Diagonal Assignment
+        # A[row,row] = -row_lambda - phi_lo*row_lo_act_sum -\
+        #              phi_hi*row_hi_act_sum
+        # # Off Diagonal Assignment
+        # if row_betanegdecay[0] >= 0:
+        #     A[row_betanegdecay[0],row] = np.log(2)*60*60*24/\
+        #                                  row_betanegdecay[1]
+        # if row_betaposdecay[0] >= 0:
+        #     A[row_betaposdecay[0],row] = np.log(2)*60*60*24/\
+        #                                  row_betaposdecay[1]
+        # if row_2alphadecay[0] >= 0:
+        #     A[row_2alphadecay[0],row] = np.log(2)*60*60*24/\
+        #                                 row_2alphadecay[1]
+        # if row_n_gamma[0] >= 0:
+        #     A[row_n_gamma[0],row] = phi_lo*row_n_gamma[1] +\
+        #                             phi_hi*row_n_gamma[2]
+        # if row_n_2n[0] >= 0:
+        #     A[row_n_2n[0],row] = phi_lo*row_n_2n[1] +\
+        #                          phi_hi*row_n_2n[2]
+        # if row_n_alpha[0][0] >= 0:
+        #     for i in row_n_alpha[0]:
+        #         A[i,row] = phi_lo*row_n_alpha[1] +\
+        #                    phi_hi*row_n_alpha[2]
+        # if row_n_2alpha[0][0] >= 0:
+        #     for i in row_n_2alpha[0]:
+        #         A[i,row] = phi_lo*row_n_2alpha[1] +\
+        #                    phi_hi*row_n_2alpha[2]
+        # if row_n_nalpha[0][0] >= 0:
+        #     for i in row_n_nalpha[0]:
+        #         A[i,row] = phi_lo*row_n_nalpha[1] +\
+        #                    phi_hi*row_n_nalpha[2]
+        # if row_n_2nalpha[0][0] >= 0:
+        #     for i in row_n_2nalpha[0]:
+        #         A[i,row] = phi_lo*row_n_2nalpha[1] +\
+        #                    phi_hi*row_n_2nalpha[2]
+        # if row_n_3nalpha[0][0] >= 0:
+        #     for i in row_n_3nalpha[0]:
+        #         A[i,row] = phi_lo*row_n_3nalpha[1] +\
+        #                    phi_hi*row_n_3nalpha[2]
+        # if row_n_p[0][0] >= 0:
+        #     for i in row_n_p[0]:
+        #         A[i,row] = phi_lo*row_n_p[1] + phi_hi*row_n_p[2]
+        # if row_n_np[0][0] >= 0:
+        #     for i in row_n_np[0]:
+        #         A[i,row] = phi_lo*row_n_np[1] + phi_hi*row_n_np[2]
+        # if row_n_d[0][0] >= 0:
+        #     for i in row_n_d[0]:
+        #         A[i,row] = phi_lo*row_n_d[1] + phi_hi*row_n_d[2]
+        # if row_n_t[0][0] >= 0:
+        #     for i in row_n_t[0]:
+        #         A[i,row] = phi_lo*row_n_t[1] + phi_hi*row_n_t[2]
 
     
     b = np.zeros(len(nuclides))
