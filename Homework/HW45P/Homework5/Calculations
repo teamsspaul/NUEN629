@@ -131,7 +131,7 @@ dfBack = f.pd.read_csv('BackEuler.csv',index_col=False)
 dfRational = f.pd.read_csv(Method+".csv",index_col=False)
 
 # #Plot group 1 dudes Back Euler method
-# f.plot(dfBack,PlottingG1,'BackEulerG1',NumOfPoints)
+#f.plot(dfBack,PlottingG1,'BackEulerG1',NumOfPoints)
 # f.plot(dfRational,PlottingG1,Method+'G1',NumOfPoints)
 
 # #Plot group 2 dudes Rational method

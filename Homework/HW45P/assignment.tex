@@ -43,7 +43,6 @@
 \usepackage{booktabs}
 \usepackage{pdfpages}
 
-
 % Margins
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -1137,9 +1136,58 @@
 %---------------------------------------------------------------------
 \begin{homeworkProblem}[Project]
 
-  \problemAnswer{
-    
-  }
+  For the project I wanted to solve a depletion problem using the
+  algorithms developed in the previous homework. The bateman equations
+  will be written in a different form to align more with how the
+  system was built in homework 5, and for the project.\\~\\
+  
+  
+  The production of an isotope is dictated by production and loss
+  \begin{equation*}
+    \frac{dn_i}{dt}=-\lambda_i^{eff}n_i+
+    \sum_{j=1}^{N}b_{j\rightarrow i}^{eff}n_j
+  \end{equation*}
+  Where,
+  \begin{equation*}
+    \lambda_i^{eff}=\lambda_i+\phi\sum_{j=1}^N\sigma_{i\rightarrow j}
+  \end{equation*}
+  and
+  \begin{equation*}
+    b_{j\rightarrow i}^{eff}=b_{j\rightarrow i}\lambda_j+
+      \sigma_{j\rightarrow i}\phi+\gamma_{j\rightarrow i}\sigma_{j,f}\phi
+  \end{equation*}
+  For a system of isotopes, this can be reduced to:
+  \begin{equation*}
+    \frac{d\vec{n}}{dt}=\bm{A}\vec{n}(t)
+  \end{equation*}
+  Where $\bm{A}$ is a matrix whose diagonal elements are
+  $[-\lambda_1^{eff},-\lambda_2^{eff},...,-\lambda_N^{eff}]$,
+  all off diagonal elements are
+  $b_{j\rightarrow i}^{eff}$ (i for the row, and j is
+  for the column) and $\vec{n}(t)=[n_1,n_2,...,n_N]$.\\
+
+  The solution to this system is so obvious, I won't even write it down.\\~\\
+  
+  %% \begin{equation*}
+  %%   \vec{n}=e^{\bm{A}t}\vec{n}_0
+  %% \end{equation*}
+
+  For the current problem 1 metric ton of PWR fuel will be irradiated for a 100 days
+  at a constant flux of 10\tss{14} n/cm\tss{2}$\cdot$s and some of the fission product
+  masses will be determined as a function of time. If we ignore the oxygen, the initial
+  amount of atoms for each of the heavy isotopes is
+  \begin{equation*}
+    N_{^{234}U}=270\ \text{g }\frac{6.022E23\ \text{atoms}}{234.0409523
+      \ \text{g}}=6.94741E23\ \frac{\text{atoms of \tss{234}U}}{\text{tHM}}
+  \end{equation*}
+    \begin{equation*}
+      N_{^{235}U}=30000\ \text{g }\frac{6.022E23\ \text{atoms}}{235.0439301\ \text{g}}=
+      7.6864E25\ \frac{\text{atoms of \tss{235}U}}{\text{tHM}}
+  \end{equation*}
+    \begin{equation*}
+      N_{^{238}U}=969730\ \text{g }\frac{6.022E23\ \text{atoms}}{238.0507884\ \text{g}}=
+      2.4532E27\ \frac{\text{atoms of \tss{238}U}}{\text{tHM}}
+  \end{equation*}
   
 \end{homeworkProblem}
 
