@@ -44,12 +44,12 @@ if not f.os.path.isfile('Decay_Consts.npy'):
     f.np.save('Decay_Consts',Decay_Conts)
 else:
     Decay_Conts=f.np.load('Decay_Consts.npy')
+  
+A,n0=f.MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts)
 
-
-
-print(Nuclide_Names[0:5])
-print(Atom_Mass[0:5])
-print(Decay_Conts[0:5])
+#print(Nuclide_Names[0:5])
+#print(Atom_Mass[0:5])
+#print(Decay_Conts[0:5])
 quit()
 
 A,n0=f.MakeAb(high_flux_fraction,phi)
