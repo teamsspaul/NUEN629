@@ -20,6 +20,7 @@ import matplotlib.mlab as mlab
 import copy
 import os
 import pandas as pd
+import os.path
 
 #############################################################
 ######################### Variables #########################
@@ -179,6 +180,35 @@ def Isotopes():
           count=count+1
         
   return(Nuclides,Nuclide_Names)
+
+def GatherDecay(Nuclide_Names):
+  """
+  This function will create an array 'Decay_Consts'
+  that has all the half-life information for our system.
+  """
+
+  with open('tape9.inp') as f:
+    TAPE9Content=f.readlines()
+
+  for i in range(0,len(Nuclide_Names)):
+      Nuclide=Nuclide_Names[i]
+      for line in TAPE9Content:
+          hold=line.split()
+
+          #Look for half life information, and decay type information
+          #No activation products or the -1 between libraries
+          if hold[0]==2 or hold[0]==3:
+              
+      #No repeats                 #No decimals              #No text
+      if hold[1] not in Nuclides and "." not in hold[1] and hold[1].isdigit():
+        #Filter out lower mass isotopes
+        if len(hold[1])==6:
+          Nuclides[hold[1]]=count
+          Nuclide_Names=Nuclide_Names+(hold[1],)
+          count=count+1
+        
+  return(Decay_Consts)
+
 
 
 def FindAtomicMass(df,proton,Isotope):

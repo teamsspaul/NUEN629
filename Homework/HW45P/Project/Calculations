@@ -27,9 +27,27 @@ high_flux_fraction=0.5
 phi=1.0e14
 
 Nuclides,Nuclide_Names=f.Isotopes()
-#Grab atomic weight information
-df=f.pd.read_csv('Data/AtomicWeights.csv')
-Atom_Mass=f.GatherMasses(df,Nuclides)
+
+#This variable takes a while to make, so if its already made
+#Just load it
+if not f.os.path.isfile('Masses.npy'):
+    #Grab atomic weight information
+    df=f.pd.read_csv('Data/AtomicWeights.csv')
+    Atom_Mass=f.GatherMasses(df,Nuclides)
+    f.np.save('Masses',Atom_Mass)
+else:
+    Atom_Mass=f.np.load('Masses.npy')
+
+if not f.os.path.isfile('Decay_Consts.npy'):
+    Decay_Conts=f.GatherDecay(Nuclide_Names)
+    f.np.save('Decay_Consts',Decay_Conts)
+else:
+    Decay_Conts=f.np.load('Decay_Consts.npy')
+
+f.os.system('rm Decay_Consts.npy')
+
+
+
 
 
 print(Nuclide_Names[0:5])
