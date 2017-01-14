@@ -38,21 +38,18 @@ if not f.os.path.isfile('Masses.npy'):
 else:
     Atom_Mass=f.np.load('Masses.npy')
 
+#Load up all the decay constants
 if not f.os.path.isfile('Decay_Consts.npy'):
     Decay_Conts=f.GatherDecay(Nuclide_Names)
     f.np.save('Decay_Consts',Decay_Conts)
 else:
     Decay_Conts=f.np.load('Decay_Consts.npy')
 
-f.os.system('rm Decay_Consts.npy')
-
-
-
 
 
 print(Nuclide_Names[0:5])
 print(Atom_Mass[0:5])
-
+print(Decay_Conts[0:5])
 quit()
 
 A,n0=f.MakeAb(high_flux_fraction,phi)

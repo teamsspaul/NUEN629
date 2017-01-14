@@ -187,6 +187,9 @@ def GatherDecay(Nuclide_Names):
   that has all the half-life information for our system.
   """
 
+  Decay_Consts = np.zeros(len(Nuclide_Names))
+
+  
   with open('tape9.inp') as f:
     TAPE9Content=f.readlines()
 
@@ -194,18 +197,35 @@ def GatherDecay(Nuclide_Names):
       Nuclide=Nuclide_Names[i]
       for line in TAPE9Content:
           hold=line.split()
-
+          
           #Look for half life information, and decay type information
           #No activation products or the -1 between libraries
-          if hold[0]==2 or hold[0]==3:
-              
-      #No repeats                 #No decimals              #No text
-      if hold[1] not in Nuclides and "." not in hold[1] and hold[1].isdigit():
-        #Filter out lower mass isotopes
-        if len(hold[1])==6:
-          Nuclides[hold[1]]=count
-          Nuclide_Names=Nuclide_Names+(hold[1],)
-          count=count+1
+          if hold[0]=='2' or hold[0]=='3': 
+              if hold[1] == Nuclide:
+                  Thalf=float(hold[3])
+                  if hold[2]=='1':  #seconds
+                      const=np.log(2)/Thalf
+                  elif hold[2]=='2':  #minutes
+                      const=np.log(2)/(Thalf*60)
+                  elif hold[2]=='3': #hours
+                      const=np.log(2)/(Thalf*60*60)
+                  elif hold[2]=='4': #days
+                      const=np.log(2)/(Thalf*60*60*24)
+                  elif hold[2]=='5': #years
+                      const=np.log(2)/(Thalf*60*60*24*365.25)
+                  elif hold[2]=='6': #Stable
+                      const=-1
+                  elif hold[2]=='7':
+                      const=np.log(2)/(Thalf*60*60*24*365.25*10**3)
+                  elif hold[2]=='8':
+                      const=np.log(2)/(Thalf*60*60*24*365.25*10**6)
+                  elif hold[2]=='9':
+                      const=np.log(2)/(Thalf*60*60*24*365.25*10**9)
+                  else:
+                      print("could not find a proper halflife")
+                      print(line)
+                      quit()
+                  Decay_Consts[i]=const
         
   return(Decay_Consts)
 
