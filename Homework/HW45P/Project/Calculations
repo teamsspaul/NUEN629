@@ -26,7 +26,8 @@ CompareG2=["H3","Be10"]
 high_flux_fraction=0.5
 phi=1.0e14
 
-Nuclides,Nuclide_Names=f.Isotopes()
+ToAdd=[]
+Nuclides,Nuclide_Names=f.Isotopes(ToAdd)
 
 #This variable takes a while to make, so if its already made
 #Just load it
@@ -44,7 +45,7 @@ if not f.os.path.isfile('Decay_Consts.npy'):
     f.np.save('Decay_Consts',Decay_Conts)
 else:
     Decay_Conts=f.np.load('Decay_Consts.npy')
-  
+
 A,n0=f.MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts)
 
 #print(Nuclide_Names[0:5])

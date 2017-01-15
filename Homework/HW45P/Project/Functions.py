@@ -153,7 +153,7 @@ def Returnfloat(string):
         
     return(float(Number))
 
-def Isotopes():
+def Isotopes(ToAdd):
   """
   This function will create a dictionary 'Nuclides'
   with nuclides found in tape9.inp, excluding activation isotopes
@@ -178,7 +178,12 @@ def Isotopes():
           Nuclides[hold[1]]=count
           Nuclide_Names=Nuclide_Names+(hold[1],)
           count=count+1
-        
+
+  for isotope in ToAdd:
+      Nuclides[isotope]=count
+      Nuclide_Names=Nuclide_Names+(isotope,)
+      count=count+1
+      
   return(Nuclides,Nuclide_Names)
 
 def GatherDecay(Nuclide_Names):
@@ -1361,7 +1366,6 @@ def n_t(nuclides, parent):
 
 class DecayClass:
     def __init__(self):
-        self.lambdas = -1  # Half life in seconds
         self.FBX    =  0. # 'The fraction of negatron beta decay transitions that results in
                           # in the daughter nuclide being in a relatively long-lived state'
                           # I think this should read the fraction of all decay events which are...
@@ -1381,7 +1385,8 @@ class DecayClass:
         self.IDFN   = ''  # ZAID for daughter for FN
         #Note: Negatron beta decay = 1 - FBX - FPEC - FA - FIT - FSF - FN
         self.FB     =  0. # Fraction of all decay events which are beta
-    
+        self.IDFB   = ''
+
 
 def FindPotentialMatch(List,protons,A,Fraction,Excited):
     if(Fraction<0 or Fraction>1):
@@ -1398,27 +1403,27 @@ def FindPotentialMatch(List,protons,A,Fraction,Excited):
         Toreturn
     except NameError:
         print("Could not find daughter in list of isotopes when expecting one")
-        print("Looking for Protons : ",protons," Totat Nucleons : ",A," Fraction",Fraction)
-        print("Close items are")
-        for item in List:
-            if protons in item[:-1] and A in item[:-1]:
-                print(item)
-        if (Fraction<4e-4):
-            print("Small fraction, will let slide")
+        print("Looking for Protons : ",protons," Total Nucleons : ",A," Fraction",Fraction)
+        #print("Close items are")
+        #for item in List:
+        #    if protons in item[:-1] and A in item[:-1]:
+        #        print(item)
+        if (Fraction<2):
+            print("Assuming it doesn't matter, will let slide")
             Toreturn=''
         else:
             quit()
     
     return(Toreturn)
 
-def DecayInfo(Nuclides,Nuclide_Names,parent,Decay_Conts,proton,neutrons,A):
+
+def DecayInfo(Nuclide_Names,parent,Lambda,proton,A):
     """
     This function will store and return decay information from
     the tape9.inp file
     """
 
     Info=DecayClass()
-    Info.lambdas=Decay_Conts[Nuclides[parent]]
     
     with open('tape9.inp') as f:
         TAPE9Content=f.readlines()
@@ -1455,21 +1460,134 @@ def DecayInfo(Nuclides,Nuclide_Names,parent,Decay_Conts,proton,neutrons,A):
             #Excited state to ground state
             Info.FIT=float(hold[8])
             Info.IDFIT=FindPotentialMatch(Nuclide_Names,proton,A,Info.FIT,'0')
-
+            
+    #Calculate the beta
     Info.FB=1-Info.FBX-Info.FPEC-Info.FA-Info.FIT-Info.FSF-Info.FN
 
     if(Info.FB<0 or Info.FB>1):
-        print("Fraction of beta decays is too low or high : ",Info.FB)
-        if abs(Info.FB)<1e-8:
-            print("But I'll let it slide and set to zero")
+        #print("Fraction of beta decays is too low or high : ",Info.FB)
+        if abs(Info.FB)<7e-4 or abs(Info.FB-1)<7e-4:
+            #print("But I'll let it slide and set to zero")
             Info.FB=0
         else:
             print("I can't let this slide, not small enough")
+            print("Beta excited",Info.FBX)
+            print("EC",Info.FPEC)
+            print("Alpha decay ground",Info.FA)
+            print("Excited to ground",Info.FIT)
+            print("Spontaneous fission",Info.FSF)
+            print("Beta Plus neutron",Info.FN)
             quit()
+
+    if Lambda>0:
+        Info.IDFB=FindPotentialMatch(Nuclide_Names,str(int(proton)+1),A,Info.FB,'0')
     
     return(Info)
 
+
+def FindPotentialMatchX(List,protons,A,XSection,Excited,Lambda):
+    if(XSection<0):
+        print("Fraction of decays is too low",XSection)
+        print("Inquire further")
+        quit()
+    if XSection>0:
+        for item in List:
+            if protons in item[0:2] and A in item[:-1] and item[-1]==Excited:
+                Toreturn=item
+    else:
+        Toreturn=''
+    try: #To make sure its defined
+        Toreturn
+    except NameError:
+        print("Could not find daughter in list of isotopes when expecting one")
+        print("Looking for Protons : ",protons," Total Nucleons : ",A," XSection ",XSection)
+        print("Lambda = ",Lambda)
+        #print("Close items are")
+        #for item in List:
+        #    if protons in item[:-1] and A in item[:-1]:
+        #        print(item)
+        if (XSection<100000 or Lambda>0.1):
+            print("Assuming it doesn't matter, will let slide")
+            Toreturn=''
+            XSection=0
+        else:
+            quit()
     
+    return(Toreturn,XSection)
+
+class XSectionClass:
+    def __init__(self):
+        self.SNG   = 0     # the effective, one grounp (n,y) x-section leadin to ground state
+        self.IDSNG = ''    # ZAID ID for the above
+        self.SN2N    =  0. # the effective, one grounp (n,2n) x-section leading to ground state
+        self.IDSN2N = ''   # ZAID ID for the above
+        self.SN3N  =   0   # effective to ground
+        self.IDSN3N  = ''  # ZAID for daughter for above
+        self.SNA   =  0.   # effective to ground n,alpha
+        self.IDSNA = ''    # ZAID for daughter for above
+        self.SNF  =  0.    
+        self.SNP     =  0. # 
+        self.IDSNP   = ''  # ZAID for daughter for above
+        self.SNGX    =  0. # 
+        self.IDSNGX  = ''  # ZAID for daughter of above
+        self.SN2NX     =  0. # 
+        self.IDSN2NX   = ''  # ZAID for daughter for above
+
+
+def XSectionInfo(Nuclide_Names,parent,L,proton,A):
+    """
+    This function will store and return decay information from
+    the tape9.inp file
+    """
+
+    Info=XSectionClass()
+    
+    with open('tape9.inp') as f:
+        TAPE9Content=f.readlines()
+
+    Found=False
+    for line in TAPE9Content:
+        hold=line.split()
+        
+        #Looking for fission product and actinide cross section information
+        #The libraries we are looking through for this information are '602' and '603'
+        #set a cross section to zero if daughter is not found (second return of FindPotentialMatchX)
+        if ('602' == hold[0] or '603' == hold[0]) and hold[1]==parent:
+
+            #(n,gamma)
+            Info.SNG=float(hold[2])
+            Info.IDSNG,Info.SNG=FindPotentialMatchX(Nuclide_Names,proton,str(int(A)+1),Info.SNG,'0',L)
+            #n,2n
+            Info.SN2N=float(hold[3])
+            Info.IDSN2N,Info.SN2N=FindPotentialMatchX(Nuclide_Names,
+                                                      proton,str(int(A)-1),Info.SN2N,'0',L)
+            if '602' == hold[0]: #Actinides
+                #n,3n
+                Info.SN3N=float(hold[4])
+                Info.IDSN3N,Info.SN3N=FindPotentialMatchX(Nuclide_Names,
+                                                          proton,str(int(A)-2),Info.SN3N,'0',L)
+                #n,f
+                Info.SNF=float(hold[5])
+            if '603' == hold[0]: #Fission products
+                #n,alpha
+                Info.SNA=float(hold[4])
+                Info.IDSNA,Info.SNA=FindPotentialMatchX(Nuclide_Names,str(int(proton)-2),str(int(A)-3),
+                                               Info.SNA,'0',L)
+                #n,p
+                Info.SNP=float(hold[5])
+                Info.IDSNP,Info.SNP=FindPotentialMatchX(Nuclide_Names,
+                                                        str(int(proton)-1),A,Info.SNP,'0',L)
+            #(n,gamma)excited
+            Info.SNGX=float(hold[6])
+            Info.IDSNGX,Info.SNGX=FindPotentialMatchX(Nuclide_Names,proton,
+                                                      str(int(A)+1),Info.SNGX,'1',L)
+            #(n,2n)excited
+            Info.SN2NX=float(hold[7])
+            Info.IDSN2NX,Info.SN2NX=FindPotentialMatchX(Nuclide_Names,proton,
+                                                        str(int(A)-1),Info.SN2NX,'1',L)
+            
+    return(Info)
+
 def MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts):
 
     # Create Activation and Decay Matrix and initial
@@ -1496,57 +1614,35 @@ def MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts):
             print("Something is wrong, more protons than neutrons")
             print("Proton: ",proton,"A: ",Anum,"ZAID :",isotope)
             quit()
-        neutrons=str(int(Anum)-int(proton))
 
-        print(row,isotope)
-        row_decay =  DecayInfo(Nuclides,Nuclide_Names,isotope,Decay_Conts,proton,neutrons,Anum)
-        # row_n_gamma =       n_gamma(nuclides, isotope)
-        # row_n_2n =          n_2n(nuclides, isotope)
-        # row_n_alpha =       n_alpha(nuclides, isotope)
-        # row_n_2alpha =      n_2alpha(nuclides, isotope)
-        # row_n_nalpha =      n_nalpha(nuclides, isotope)
-        # row_n_2nalpha =     n_2nalpha(nuclides, isotope)
-        # row_n_3nalpha =     n_3nalpha(nuclides, isotope)
-        # row_n_p =           n_p(nuclides, isotope)
-        # row_n_np =          n_np(nuclides, isotope)
-        # row_n_d =           n_d(nuclides, isotope)
-        # row_n_t =           n_t(nuclides, isotope)
-        # row_lo_act_sum = row_n_gamma[1] + row_n_2n[1] +\
-        #                  row_n_alpha[1] + row_n_2alpha[1] +\
-        #                  row_n_nalpha[1] + row_n_2nalpha[1] + \
-        #                  row_n_3nalpha[1] + row_n_p[1] +\
-        #                  row_n_np[1] + row_n_d[1] +\
-        #                  row_n_t[1]
-        # row_hi_act_sum = row_n_gamma[2] + row_n_2n[2] +\
-        #                  row_n_alpha[2] + row_n_2alpha[2] +\
-        #                  row_n_nalpha[2] + row_n_2nalpha[2] + \
-        #                  row_n_3nalpha[2] + row_n_p[2] +\
-        #                  row_n_np[2] + row_n_d[2] +row_n_t[2]
-        # try:
-        #     if row_n_alpha[0] >= 0:
-        #         print(row_n_alpha)
-        #         donotuse=100
-        #     continue
-        # except TypeError:
-        #     print(row_n_alpha)
-        #     print(row_n_alpha[0][0])
-        #     quit()
+        #print(row,isotope,Decay_Conts[row])
+        Lambda=Decay_Conts[row]
+        #Store all decay and x section information for row (I think I mean column)
+        row_decay =  DecayInfo(Nuclide_Names,isotope,Lambda,proton,Anum)        
+        row_XSection=XSectionInfo(Nuclide_Names,isotope,Lambda,proton,Anum)
+
+        #Convert LAmbda to years^-1 (If radioactive)
+        if Lambda>0:
+            Lambday=Lambda*60*60*24*365.25
+        else:
+            Lambday=0
+
+        XList=["SN2N","SN2NX","SN3N","SNA","SNG","SNGX","SNP","SNF"]
+
+        #USeful to see things
+        #for a in dir(row_XSection):
+        #    if not a.startswith('__'):
+        #        print(a)
+        #        print(getattr(row_XSection,a))
+        #quit()
+
+        #Sum up all the sigma abs
+        sigma_sum=0
+        for xsec in XList:
+            sigma_sum=sigma_sum+getattr(row_XSection,xsec)
         
-        # if row_betanegdecay[0] >= 0:
-        #     # [days^-1]
-        #     row_lambda = np.log(2)*60*60*24/row_betanegdecay[1] 
-        # elif row_betaposdecay[0] >= 0:
-        #     # [days^-1]
-        #     row_lambda = np.log(2)*60*60*24/row_betaposdecay[1] 
-        # elif row_2alphadecay[0] >= 0:
-        #     # [days^-1]
-        #     row_lambda = np.log(2)*60*60*24/row_2alphadecay[1] 
-        # else:
-        #     row_lambda = 0.0
-    
-        # # Diagonal Assignment
-        # A[row,row] = -row_lambda - phi_lo*row_lo_act_sum -\
-        #              phi_hi*row_hi_act_sum
+        # Diagonal Assignment
+        A[row,row] = -Lambday - phi*sigma_sum
         # # Off Diagonal Assignment
         # if row_betanegdecay[0] >= 0:
         #     A[row_betanegdecay[0],row] = np.log(2)*60*60*24/\
