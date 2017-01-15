@@ -771,7 +771,7 @@ def ListToStr(List):
       Str=Str+str(List[i])+"\n"
   return(Str)
     
-def PrepFile(Name,n0):
+def PrepFile(Name,n0,nuclide_names,atom_mass,decay_consts):
   File=open(Name,'w')
   File.write("Mass then Time (d),"+','.join(nuclide_names)+'\n')
   File.write("Masses,"+ListToStr(atom_mass)) #New line already included
@@ -779,7 +779,7 @@ def PrepFile(Name,n0):
   File.write("0,"+ListToStr(n0))
   return(File)
 
-def Print(Method,nuclide,Results,Time):
+def Print(Method,nuclide,Results,Time,nuclides,atom_mass,nuclide_names):
   Index=nuclides[nuclide]
   MassConversion=atom_mass[Index]/Na
   string="Isotope "+nuclide_names[Index]+", Mass (g) = "
@@ -787,13 +787,6 @@ def Print(Method,nuclide,Results,Time):
   Mass="%.4e" % Mass
   print(Method+" :",string,Mass,"Time=%.2f" % Time)
 
-def Years(Method,nuclide,Results):
-  Index=nuclides[nuclide]
-  LambdaY=decay_consts[Index]*60*60*24*365.25
-  Lambdas=decay_consts[Index]
-  string="Isotope "+nuclide_names[Index]+", Years to 444 Bq = "
-  Years=(-1/LambdaY)*np.log(444/(Results[Index]*Lambdas))
-  print(Method+" :",string,"%.3e" % Years)
 
 #####################################################################
 ################## For Building A and b #############################
@@ -1184,10 +1177,10 @@ def MakeAb(phi,Nuclides,Nuclide_Names,Decay_Conts):
                 if len(Product)>1:
                     actualrow=Nuclides[Product]
                     A[actualrow,row]=A[actualrow,row]+Lambday*getattr(row_decay,decay)
-        #Now for xfission
+
+        #Now for xfission (these next two if statements take the longest)
         #if row_XSection.SNF>0:
         #    A=AddFission(A,Nuclides,isotope,row_XSection.SNF,phi,row,LOUD=False)
-
         #Now for spontaneous fission
         #if row_decay.FSF>0:
         #    A=AddFission(A,Nuclides,isotope,row_decay.FSF,Lambday,row,LOUD=False)
