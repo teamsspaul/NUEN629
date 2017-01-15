@@ -801,6 +801,75 @@ def Print(Method,nuclide,Results,Time,nuclides,atom_mass,nuclide_names):
 
 
 #####################################################################
+################## for calculatin phi #############################
+#####################################################################
+
+def FindFissionXSection(Fissile_Isotopes):
+
+    FissionXSections=np.zeros(len(Fissile_Isotopes))
+
+    with open('tape9.inp') as f:  #Save all X-section data to variable
+        TAPE9Content=f.readlines()
+        
+    for i in range(0,len(Fissile_Isotopes)): #Loop through fissile isos
+        parent=Fissile_Isotopes[i]
+        
+        for line in TAPE9Content: #Loop through x-section data
+            hold=line.split()
+
+            if '602' == hold[0] and hold[1]==parent:  #Find x-section
+                FissionXSections[i]=hold[5]
+                break
+    return(FissionXSections)
+
+def CalMevPerFiss(Fissile_Isotopes):
+    """
+    Given a list of fissile isotopes
+    return a list of MeV/fission numbers
+    calculated from an equation
+    """
+    MeVperFission=np.zeros(len(Fissile_Isotopes))
+    for i in range(0,len(Fissile_Isotopes)):
+        isotope=Fissile_Isotopes[i]
+        proton=isotope[0:2]
+        if isotope[2]=="0":
+            Anum=isotope[3:5]
+        elif isotope[4]=="0" and float(proton)*3<100:
+            Anum=isotope[2:4]
+        elif isotope[2]!="0":
+            Anum=isotope[2:5]
+        else:
+            print("Missed logic in finding A number")
+            quit()
+        if int(Anum)<int(proton):
+            print("Something is wrong, more protons than neutrons")
+            print("Proton: ",proton,"A: ",Anum,"ZAID :",isotope)
+            quit()
+        MeVperFission[i]=1.29927*(10**-3)*(float(proton)**2)*(float(Anum)**0.5)+33.12
+    return(MeVperFission)
+
+
+def Calculatephi(FissionXSections,MeVperFission,n0,Power,Fissile_Isotopes,Nuclides):
+    Sum=0
+    for i in range(0,len(FissionXSections)):
+        sigma=FissionXSections[i]*10**-24
+        E=MeVperFission[i]
+        N=n0[Nuclides[Fissile_Isotopes[i]]]
+        Sum=Sum+sigma*E*N
+    phi=(6.2414959617521E18*Power)/Sum
+    return(phi)
+
+def Makeb(Nuclides):
+
+    b = np.zeros(len(Nuclides))
+    b[Nuclides['922340']] = 6.94741E23
+    b[Nuclides['922350']] = 7.6864E25
+    b[Nuclides['922380']] = 2.4532E27
+    return(b)
+
+    
+
+#####################################################################
 ################## For Building A and b #############################
 #####################################################################
 

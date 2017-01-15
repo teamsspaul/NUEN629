@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+#Means for improving speed. Make dir and save all variables
+#made for making a, so that no parsing is needed,
+#Just multiplying by phi
 
 ################################################################
 ##################### Import packages ##########################
@@ -25,10 +28,20 @@ CompareG2=["631540"]
 ############# Initialize Matrix #########################
 #########################################################
 
-phi=1.0e13
+phi=1.0e13;Power = 37.5 # MW (bc 1 ton HM power den is W/g)
 
+Fissile_Isotopes=["922350","922380","942390","942410"]
+FissionXSections=f.FindFissionXSection(Fissile_Isotopes)
+MeVperFission=f.CalMevPerFiss(Fissile_Isotopes)
 ToAdd=[]
 Nuclides,Nuclide_Names=f.Isotopes(ToAdd)
+n0=f.Makeb(Nuclides)
+phiC=f.Calculatephi(FissionXSections,MeVperFission,n0,Power,Fissile_Isotopes,Nuclides)
+print(FissionXSections)
+print(MeVperFission)
+print(phiC)
+
+quit()
 
 #This variable takes a while to make, so if its already made
 #Just load it
@@ -196,8 +209,8 @@ f.plots2(dfBack,dfRational,CompareG2,Name,
 ################################################################
 
 #f.Print("Matrix Exp","H3",nt_Mat,Mat_Time)
-f.Print("Backward Euler","922350",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
-f.Print("Rational Approx ","922350",nt_Rational,Rational_Time,Nuclides,Atom_Mass,Nuclide_Names)
+f.Print("Backward Euler","551370",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
+f.Print("Rational Approx ","551370",nt_Rational,Rational_Time,Nuclides,Atom_Mass,Nuclide_Names)
 
 
 ###################### Time To execute #################
