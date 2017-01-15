@@ -21,14 +21,14 @@ PlottingG1=["922350"]  #List elements you want to Plot
 CompareG1=["942390"]
 PlottingG2=["922350"]  #List elements you want to Plot 
 #CompareG2=["551370","631540","601480"]
-CompareG2=["631540"]
+CompareG2=["551370"]
 #List elements you want to compare between methods
 
 #########################################################
 ############# Initialize Matrix #########################
 #########################################################
 
-phi=1.0e13;Power = 37.5 # MW (bc 1 ton HM power den is W/g)
+phi=1.0e14;Power = 37.5 # MW (bc 1 ton HM power den is W/g)
 
 Fissile_Isotopes=["922350","922380","942390","942410"]
 FissionXSections=f.FindFissionXSection(Fissile_Isotopes)
@@ -36,56 +36,51 @@ MeVperFission=f.CalMevPerFiss(Fissile_Isotopes)
 ToAdd=[]
 Nuclides,Nuclide_Names=f.Isotopes(ToAdd)
 n0=f.Makeb(Nuclides)
-phiC=f.Calculatephi(FissionXSections,MeVperFission,n0,Power,Fissile_Isotopes,Nuclides)
-print(FissionXSections)
-print(MeVperFission)
-print(phiC)
-
-quit()
+phi=f.Calculatephi(FissionXSections,MeVperFission,n0,Power,Fissile_Isotopes,Nuclides)
 
 #This variable takes a while to make, so if its already made
 #Just load it
-#f.os.system("rm Masses.npy")  #To start over and remake
-if not f.os.path.isfile('Masses.npy'):
+#f.os.system("rm Saved_Variables/Masses.npy")  #To start over and remake
+if not f.os.path.isfile('Saved_Variables/Masses.npy'):
     #Grab atomic weight information
     df=f.pd.read_csv('Data/AtomicWeights.csv')
     Atom_Mass=f.GatherMasses(df,Nuclides)
-    f.np.save('Masses',Atom_Mass)
+    f.np.save('Saved_Variables/Masses',Atom_Mass)
 else:
-    Atom_Mass=f.np.load('Masses.npy')
+    Atom_Mass=f.np.load('Saved_Variables/Masses.npy')
 
 #Load up all the decay constants
-#f.os.system("rm Decay_Consts.npy") #To start over and remake
-if not f.os.path.isfile('Decay_Consts.npy'):
+#f.os.system("rm Saved_Variables/Decay_Consts.npy") #To start over and remake
+if not f.os.path.isfile('Saved_Variables/Decay_Consts.npy'):
     Decay_Conts=f.GatherDecay(Nuclide_Names)
-    f.np.save('Decay_Consts',Decay_Conts)
+    f.np.save('Saved_Variables/Decay_Consts',Decay_Conts)
 else:
-    Decay_Conts=f.np.load('Decay_Consts.npy')
+    Decay_Conts=f.np.load('Saved_Variables/Decay_Consts.npy')
 
 #load up A and b with phi
-f.os.system("rm Amatrix.npy") #To start over
-f.os.system("rm n0vector.npy") #to start over
-if not f.os.path.isfile('Amatrix.npy'):
+#f.os.system("rm Saved_Variables/Amatrix.npy") #To start over
+#f.os.system("rm Saved_Variables/n0vector.npy") #to start over
+if not f.os.path.isfile('Saved_Variables/Amatrix.npy'):
     #A is in terms of years
     A,n0=f.MakeAb(phi,Nuclides,Nuclide_Names,Decay_Conts)
-    f.np.save('Amatrix',A)
-    f.np.save('n0vector',n0)
+    f.np.save('Saved_Variables/Amatrix',A)
+    f.np.save('Saved_Variables/n0vector',n0)
 else:
-    A=f.np.load('Amatrix.npy')
-    n0=f.np.load('n0vector.npy')
+    A=f.np.load('Saved_Variables/Amatrix.npy')
+    n0=f.np.load('Saved_Variables/n0vector.npy')
 
 phi=0
 #load up A and b without phi (decay)
-#f.os.system("rm Amatrixdecay.npy") #To start over
-#f.os.system("rm n0vectordecay.npy") #to start over
-if not f.os.path.isfile('Amatrixdecay.npy'):
+#f.os.system("rm Saved_Variables/Amatrixdecay.npy") #To start over
+#f.os.system("rm Saved_Variables/n0vectordecay.npy") #to start over
+if not f.os.path.isfile('Saved_Variables/Amatrixdecay.npy'):
     #A is in terms of years
     Adecay,n0=f.MakeAb(phi,Nuclides,Nuclide_Names,Decay_Conts)
-    f.np.save('Amatrixdecay',A)
-    f.np.save('n0vectordecay',n0)
+    f.np.save('Saved_Variables/Amatrixdecay',A)
+    f.np.save('Saved_Variables/n0vectordecay',n0)
 else:
-    Adecay=f.np.load('Amatrixdecay.npy')
-    n0decay=f.np.load('n0vectordecay.npy')
+    Adecay=f.np.load('Saved_Variables/Amatrixdecay.npy')
+    n0decay=f.np.load('Saved_Variables/n0vectordecay.npy')
 
 if not A.shape[0] == A.shape[1] or not A.shape[0] == len(n0):
     print("A is not a square matrix")
@@ -96,7 +91,7 @@ print("A is complete")
 ############# Initialize Time ###########################
 #########################################################
 
-t=20;  #years
+t=1.09514;  #years
 Nt=100;   #Number of Time Steps
 dt=t/Nt;
 Time=f.np.linspace(dt,t,Nt) #Time steps
@@ -132,7 +127,7 @@ TimeDecay=f.np.linspace(t+dtDecay,t+tDecay,NtDecay)
 #########################################################
 
 Current_Time=time.time()
-File=f.PrepFile('BackEuler.csv',n0,Nuclide_Names,Atom_Mass,Decay_Conts) #Prep File
+File=f.PrepFile('Data/BackEuler.csv',n0,Nuclide_Names,Atom_Mass,Decay_Conts) #Prep File
 nt_Back=n0.copy();
 #Irradiation Time
 for TIME in Time:
@@ -155,7 +150,7 @@ Back_Time=time.time()-Current_Time
 Current_Time=time.time()
 N=10;
 Method="Best"  #Parabola, Cotangent, Hyperbola, Best
-File=f.PrepFile(Method+".csv",n0,Nuclide_Names,Atom_Mass,Decay_Conts)
+File=f.PrepFile("Data/"+Method+".csv",n0,Nuclide_Names,Atom_Mass,Decay_Conts)
 ck,zk=f.RationalPrep(N,Method);nt_Rational=n0.copy();TIMEOLD=0
 #for TIME in Time:
 #    nt_Rational=f.RationalApprox(A,n0,TIME,N,ck,zk)
@@ -183,8 +178,8 @@ Rational_Time=time.time()-Current_Time
 #########################################################
 
 
-dfBack = f.pd.read_csv('BackEuler.csv',index_col=False)
-dfRational = f.pd.read_csv(Method+".csv",index_col=False)
+dfBack = f.pd.read_csv('Data/BackEuler.csv',index_col=False)
+dfRational = f.pd.read_csv("Data/"+Method+".csv",index_col=False)
 
 # #Plot group 1 dudes Back Euler method
 # f.plot(dfBack,PlottingG1,'BackEulerG1',NumOfPoints)
@@ -195,22 +190,22 @@ dfRational = f.pd.read_csv(Method+".csv",index_col=False)
 # f.plot(dfRational,PlottingG2,Method+'G2',NumOfPoints)
 
 #Plot group 1 dudes, compare both methods
-Name='BackEuler_'+Method+"_G1"
-f.plots2(dfBack,dfRational,CompareG1,Name,
-         NumOfPoints,'BackEuler',Method)
+#Name='BackEuler_'+Method+"_G1"
+#f.plots2(dfBack,dfRational,CompareG1,Name,
+#         NumOfPoints,'BackEuler',Method)
 
 #Plot group 2 dudes, compare both methods
-Name='BackEuler_'+Method+"_G2"
-f.plots2(dfBack,dfRational,CompareG2,Name,
-         NumOfPoints,'BackEuler',Method)
+#Name='BackEuler_'+Method+"_G2"
+#f.plots2(dfBack,dfRational,CompareG2,Name,
+#         NumOfPoints,'BackEuler',Method)
 
 ################################################################
 ################### Print Solution #############################
 ################################################################
 
 #f.Print("Matrix Exp","H3",nt_Mat,Mat_Time)
-f.Print("Backward Euler","551370",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
-f.Print("Rational Approx ","551370",nt_Rational,Rational_Time,Nuclides,Atom_Mass,Nuclide_Names)
+f.Print("Backward Euler","400950",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
+f.Print("Rational Approx ","400950",nt_Rational,Rational_Time,Nuclides,Atom_Mass,Nuclide_Names)
 
 
 ###################### Time To execute #################

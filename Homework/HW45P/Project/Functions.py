@@ -122,7 +122,7 @@ def Isotopes(ToAdd):
   Nuclides={}
   Nuclide_Names=()
 
-  with open('tape9.inp') as f:
+  with open('Data/tape9.inp') as f:
     TAPE9Content=f.readlines()
 
   count=0
@@ -156,7 +156,7 @@ def GatherDecay(Nuclide_Names):
   Decay_Consts = np.zeros(len(Nuclide_Names))
 
   
-  with open('tape9.inp') as f:
+  with open('Data/tape9.inp') as f:
     TAPE9Content=f.readlines()
 
   for i in range(0,len(Nuclide_Names)):
@@ -808,7 +808,7 @@ def FindFissionXSection(Fissile_Isotopes):
 
     FissionXSections=np.zeros(len(Fissile_Isotopes))
 
-    with open('tape9.inp') as f:  #Save all X-section data to variable
+    with open('Data/tape9.inp') as f:  #Save all X-section data to variable
         TAPE9Content=f.readlines()
         
     for i in range(0,len(Fissile_Isotopes)): #Loop through fissile isos
@@ -936,7 +936,7 @@ def DecayInfo(Nuclide_Names,parent,Lambda,proton,A):
 
     Info=DecayClass()
     
-    with open('tape9.inp') as f:
+    with open('Data/tape9.inp') as f:
         TAPE9Content=f.readlines()
 
     Found=False
@@ -1062,7 +1062,7 @@ def XSectionInfo(Nuclide_Names,parent,L,proton,A):
 
     Info=XSectionClass()
     
-    with open('tape9.inp') as f:
+    with open('Data/tape9.inp') as f:
         TAPE9Content=f.readlines()
 
     Found=False
@@ -1109,7 +1109,7 @@ def XSectionInfo(Nuclide_Names,parent,L,proton,A):
     return(Info)
 
 def YieldInfo(yieldiso,holdIndex,LOUD=False):
-    with open('tape9.inp') as f:
+    with open('Data/tape9.inp') as f:
         TAPE9Content=f.readlines()
 
     Found=False;Yield=False
