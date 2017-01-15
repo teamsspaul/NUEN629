@@ -45,7 +45,7 @@ XScale="linear"       # 'linear' or 'log'
 
 YFontSize=18                    # Y label font size
 YFontWeight="normal"            # "bold" or "normal"
-YScale="log"                 # 'linear' or 'log'
+YScale="linear"                 # 'linear' or 'log'
 
 Check=0
 
@@ -74,8 +74,9 @@ BBOXY = 0.5       # Set legend on right side of graph
 
 NumberOfLegendColumns=1
 
-Xlabel='Time [days]'
-Ylabel="Mass $\\left[\\frac{g}{kg \\text{ FLiBe}}\\right]$"
+#Xlabel='Time [days]'
+Xlabel='Time [years]'
+Ylabel="Mass $\\left[\\frac{g}{\\text{tHM}}\\right]$"
 
 
 Na=6.0221409E23
@@ -539,12 +540,12 @@ def plot(df,Plotting,Name,NumOfPoints):
     ax=fig.add_subplot(111)
 
     List=list(df.columns.values)
-    x=df[List[0]].values[2:-1]
+    x=df[List[0]].values[2:]
 
     Check=0
     for Item in Plotting:
       InList(Item,List) #Check if we have the isotope
-      y=((df[Item].values[2:-1])/Na)*df[Item].values[0]
+      y=((df[Item].values[2:])/Na)*df[Item].values[0]
       if len(x)>NumOfPoints:
         x=reduceList(x,NumOfPoints)
         y=reduceList(y,NumOfPoints)
@@ -582,12 +583,12 @@ def plot(df,Plotting,Name,NumOfPoints):
     ax=fig.add_subplot(111)
 
     List=list(df.columns.values)
-    x=df[List[0]].values[2:-1]
+    x=df[List[0]].values[2:]
 
     Check=0;Sum=np.zeros(len(x))
     for Item in Plotting:
       InList(Item,List) #Check if we have the isotope
-      y=((df[Item].values[2:-1]))*df[Item].values[1]
+      y=((df[Item].values[2:]))*df[Item].values[1]
       Sum=Sum+y
       if len(x)>NumOfPoints:
         xP=reduceList(x,NumOfPoints)
@@ -623,7 +624,7 @@ def plot(df,Plotting,Name,NumOfPoints):
     ax.set_xlabel(Xlabel,
                   fontsize=XFontSize,fontweight=XFontWeight,
                   fontdict=font)
-    YlabelBq="Activity $\\left[\\frac{Bq}{kg \\text{ FLiBe}}\\right]$"
+    YlabelBq="Activity $\\left[\\frac{Bq}{\\text{tHM}}\\right]$"
     ax.set_ylabel(YlabelBq,
                   fontsize=YFontSize,
                   fontweight=YFontWeight,
@@ -638,16 +639,19 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
     ax=fig.add_subplot(111)
 
     List=list(df.columns.values)
-    x=df[List[0]].values[2:-1]
+    x=df[List[0]].values[2:]
+    x2=df2[List[0]].values[2:]
     
     Check=0
     for Item in Plotting:
       InList(Item,List) #Check if we have the isotope
-      y=((df[Item].values[2:-1])/Na)*df[Item].values[0]
-      y2=((df2[Item].values[2:-1])/Na)*df2[Item].values[0]
+      y=((df[Item].values[2:])/Na)*df[Item].values[0]
+      y2=((df2[Item].values[2:])/Na)*df2[Item].values[0]
       if len(x)>NumOfPoints:
         x=reduceList(x,NumOfPoints)
         y=reduceList(y,NumOfPoints)
+      if len(x2)>NumOfPoints:
+        x2=reduceList(x2,NumOfPoints)
         y2=reduceList(y2,NumOfPoints)
       ax.plot(x,y,
               linestyle=loop_values(LineStyles,Check),
@@ -657,7 +661,7 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
               alpha=loop_values(Alpha_Value,Check),
               label=Item+" "+Method1)
       Check=Check+1
-      ax.plot(x,y2,
+      ax.plot(x2,y2,
               linestyle=loop_values(LineStyles,Check),
               marker=loop_values(MarkerType,Check),
               color=loop_values(Colors,Check),
@@ -691,19 +695,26 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
     ax=fig.add_subplot(111)
 
     List=list(df.columns.values)
-    x=df[List[0]].values[2:-1]
+    x=df[List[0]].values[2:]
+    x2=df2[List[0]].values[2:]
     
-    Check=0;Sum=np.zeros(len(x));Sum2=np.zeros(len(x))
+    Check=0;Sum=np.zeros(len(x));Sum2=np.zeros(len(x2))
     for Item in Plotting:
       InList(Item,List) #Check if we have the isotope
-      y=((df[Item].values[2:-1]))*df[Item].values[1]
-      y2=((df2[Item].values[2:-1]))*df2[Item].values[1]
+      y=((df[Item].values[2:]))*df[Item].values[1]
+      y2=((df2[Item].values[2:]))*df2[Item].values[1]
       Sum=Sum+y
       Sum2=Sum2+y2
       if len(x)>NumOfPoints:
         xP=reduceList(x,NumOfPoints)
         y=reduceList(y,NumOfPoints)
+      else:
+        xP=x.copy()
+      if len(x2)>NumOfPoints:
+        xP2=redcueList(x2,NumOfPoints)
         y2=reduceList(y2,NumOfPoints)
+      else:
+        xP2=x2.copy()
       ax.plot(xP,y,
               linestyle=loop_values(LineStyles,Check),
               marker=loop_values(MarkerType,Check),
@@ -712,7 +723,7 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
               alpha=loop_values(Alpha_Value,Check),
               label=Item+" "+Method1)
       Check=Check+1
-      ax.plot(xP,y2,
+      ax.plot(xP2,y2,
               linestyle=loop_values(LineStyles,Check),
               marker=loop_values(MarkerType,Check),
               color=loop_values(Colors,Check),
@@ -722,6 +733,7 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
       Check=Check+1
     if len(x)>NumOfPoints:
       Sum=reduceList(Sum,NumOfPoints)
+    if len(x2)>NumOfPoints:
       Sum2=reduceList(Sum2,NumOfPoints)
     ax.plot(xP,Sum,
               linestyle=loop_values(LineStyles,Check),
@@ -731,7 +743,7 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
               alpha=loop_values(Alpha_Value,Check),
               label="Sum "+Method1)
     Check=Check+1
-    ax.plot(xP,Sum2,
+    ax.plot(xP2,Sum2,
             linestyle=loop_values(LineStyles,Check),
             marker=loop_values(MarkerType,Check),
             color=loop_values(Colors,Check),
@@ -753,7 +765,7 @@ def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
     ax.set_xlabel(Xlabel,
                   fontsize=XFontSize,fontweight=XFontWeight,
                   fontdict=font)
-    YlabelBq="Activity $\\left[\\frac{Bq}{kg \\text{ FLiBe}}\\right]$"
+    YlabelBq="Activity $\\left[\\frac{Bq}{\\text{tHM}}\\right]$"
     ax.set_ylabel(YlabelBq,
                   fontsize=YFontSize,
                   fontweight=YFontWeight,
@@ -1058,37 +1070,49 @@ def AddFission(A,Nuclides,isotope,c1,c2,row,LOUD=False):
     if isotope=="922320": #Th232
         #print("Th232")
         holdIndex=1
+        element="Th232"
     elif isotope=="922330": #U233
         #print("U233")
         holdIndex=2
+        element="U233"
     elif isotope=="922350": #U235
         #print("U235")
         holdIndex=3
+        element="U235"
     elif isotope=="922380": #U238
         #print("U238")
         holdIndex=4
+        element="U238"
     elif isotope=="942390": #Pu239
         #print("Pu239")
         holdIndex=5
+        element="Pu239"
     elif isotope=="942410": #Pu241
         #print("Pu241")
         holdIndex=6
+        element="Pu241"
     elif isotope=="962450": #Cm245
         #print("Cm245")
         holdIndex=7
+        element="Cm245"
     elif isotope=="982490": #Cf249
         #print("Cf249")
         holdIndex=8
+        element="Cf249"
     else:
         if LOUD:
             print("Did not find yields for ",isotope," because not provided")
         holdIndex=100
 
     if holdIndex<40:
+        YieldSum=0 #Check what the yields sum up to
         for yieldiso in Nuclides:
             actualrow=Nuclides[yieldiso]
             Yield=YieldInfo(yieldiso,holdIndex,LOUD=False)
-            A[actualrow,row]=A[actualrow,row]+c1*c2*Yield
+            A[actualrow,row]=A[actualrow,row]+c1*c2*Yield/100
+            YieldSum=YieldSum+Yield
+        if LOUD:
+            print("Yield Sum for ",element," = ",YieldSum) 
     return(A)
 
 def MakeAb(phi,Nuclides,Nuclide_Names,Decay_Conts):
@@ -1097,8 +1121,8 @@ def MakeAb(phi,Nuclides,Nuclide_Names,Decay_Conts):
     # nuclide quantity vector
     A = np.zeros((len(Nuclides),len(Nuclides)))
 
-    #10^14 1/cm^2/s in 1/cm^2 /year
-    phi = phi * 60 * 60 * 24 * 365.25 
+    #10^14 1/cm^2/s in 1/cm^2 /year #Bars included
+    phi = phi * 60 * 60 * 24 * 365.25 *(10**(-24))
 
 
     for isotope in Nuclides:
@@ -1179,11 +1203,11 @@ def MakeAb(phi,Nuclides,Nuclide_Names,Decay_Conts):
                     A[actualrow,row]=A[actualrow,row]+Lambday*getattr(row_decay,decay)
 
         #Now for xfission (these next two if statements take the longest)
-        #if row_XSection.SNF>0:
-        #    A=AddFission(A,Nuclides,isotope,row_XSection.SNF,phi,row,LOUD=False)
+        if row_XSection.SNF>0:
+            A=AddFission(A,Nuclides,isotope,row_XSection.SNF,phi,row,LOUD=False)
         #Now for spontaneous fission
-        #if row_decay.FSF>0:
-        #    A=AddFission(A,Nuclides,isotope,row_decay.FSF,Lambday,row,LOUD=False)
+        if row_decay.FSF>0:
+            A=AddFission(A,Nuclides,isotope,row_decay.FSF,Lambday,row,LOUD=False)
    
     b = np.zeros(len(Nuclides))
     b[Nuclides['922340']] = 6.94741E23
