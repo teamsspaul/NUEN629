@@ -78,52 +78,12 @@ Xlabel='Time [days]'
 Ylabel="Mass $\\left[\\frac{g}{kg \\text{ FLiBe}}\\right]$"
 
 
-nuclides = {  'H1':0,    'H2':1,    'H3':2,  'He3':3,  'He4':4,
-              'He6':5,   'Li6':6,   'Li7':7,  'Li8':8,  'Be8':9,
-              'Be9':10, 'Be10':11, 'Be11':12, 'B10':13, 'B11':14,
-              'B12':15,  'C12':16,  'C13':17, 'C14':18, 'C15':19,
-              'N13':20,  'N14':21,  'N15':22, 'N16':23, 'N17':24,
-              'O16':25,  'O17':26,  'O18':27, 'O19':28, 'F18':29,
-              'F19':30, 'F20':31, 'Ne20':32}
-
-
-
-atom_mass = np.array([1.007825032,2.014101778,3.0160492779,  #2
-                      3.016029320,4.002603254,6.151228874,   #5
-                      6.015122887,7.0160034366,8.022486246,  #8
-                      8.005305102,9.012183065,10.013534695,  #11
-                      11.02166108,10.01293695,11.00930536,   #14
-                      12.0269221, 12, 13.003354835,          #17
-                      14.003241988, 15.01059926,13.00573861, #20
-                      14.003074004, 15.000108898, 16.0061019,#23
-                      17.008449, 15.994914619, 16.999131756, #26
-                      17.999159612, 19.0035780,17.99915961286,#29
-                      18.998403162, 19.999981252, 19.992440176])
-
-nuclide_names = ('H1', 'H2', 'H3', 'He3', 'He4', 'He6', 'Li6',
-                 'Li7', 'Li8', 'Be8', 'Be9', 'Be10',
-                 'Be11', 'B10', 'B11', 'B12', 'C12', 'C13',
-                 'C14', 'C15', 'N13', 'N14', 'N15', 'N16',
-                 'N17', 'O16', 'O17', 'O18', 'O19', 'F18',
-                 'F19', 'F20', 'Ne20')
-
-decay_consts = np.array([0., 0., np.log(2)/3.887896E8, #H1 H2 H3
-                         0., 0., np.log(2)/0.807, #He3 He4 He6
-                         0.,0., np.log(2)/0.840,  #Li6 #Li7 #Li8
-                         np.log(2)/6E-17,0.,    #Be8 #Be9
-                         np.log(2)/4.73364E13,np.log(2)/13.8, # Be10,11
-                         0., 0., np.log(2)/0.0202, #B10 B11 B12
-                         0., 0.,np.log(2)/1.803517E11, #C12 C13 C14
-                         np.log(2)/2.45,np.log(2)/598.2, #C15 N13
-                         0., 0., np.log(2)/7.13, # N14 N15 N16
-                         np.log(2)/4.174, 0., 0., 0., #N17 O16 O17 O18
-                         np.log(2)/26.9, np.log(2)/6586.2, #O19 F18
-                         0., np.log(2)/11.1, 0.]) #F19 F20 Ne20
 Na=6.0221409E23
 
 
 ################################################################
-################### Function for Vars ##########################
+################### Functions for building #####################
+################### Lists                  #####################
 ################################################################
 
 def Returnfloat(string):
@@ -313,7 +273,7 @@ def GatherMasses(df,Nuclides):
   return(Atom_Mass)
 
 ################################################################
-###################### Functions ###############################
+####### Functions for solving the system Ax=b (kind of) ########
 ################################################################
 
 def MatExp(A,n0,t,maxits,tolerance=1e-12,LOUD=False):
@@ -518,341 +478,8 @@ def RationalApprox(A,n0,t,N,ck,zk,tol=1e-12,maxits=2000):
         nt=nt-2*np.real(ck[k]*phi)
     return(nt)
 
-def MakeAb(hi_flux_frac = 0.5,phi = 1.0e14):
-    
-    """Interaction functions
-    @ In, nuclides:  dictionary with isotope keywords and 
-                     corresponding indices
-    @ In, parent:    parent nuclides undergoing a decay or interaction
-    @Out, value:     new value in interaction matrix, either a half 
-                     life [secs] or 2.45 MeV and 14.1 MeV cross 
-                     sections [barns]
-    """
-   
-    def betanegdecay(nuclides, parent):
-        if   parent == 'F20':  return nuclides['Ne20'], 11.1 # s
-        elif parent == 'O19':  return nuclides['F19'],  26.9 # s
-        elif parent == 'N16':  return nuclides['O16'],  7.13 # s
-        elif parent == 'N17':  return nuclides['O17'],  4.174 # s
-        elif parent == 'C14':  return nuclides['N14'],  1.803517E11 # s
-        elif parent == 'C15':  return nuclides['N15'],  2.45 # s
-        elif parent == 'B12':  return nuclides['C12'],  0.0202 # s
-        elif parent == 'Be10': return nuclides['B10'],  4.73364E13 # s
-        elif parent == 'Be11': return nuclides['B11'],  13.8 # s
-        elif parent == 'Li8':  return nuclides['Be8'],  0.840 # s
-        elif parent == 'He6':  return nuclides['Li6'],  0.807 # s
-        elif parent == 'H3':   return nuclides['He3'],  3.887896E8 # s
-        else: return -1, 0.0
-
-    def betaposdecay(nuclides, parent):
-        if   parent == 'F18':  return nuclides['O18'],  6586.2 # s
-        elif parent == 'N13':  return nuclides['C13'],  598.2 # s
-        else: return -1, 0.0
-
-    def twoalphadecay(nuclides, parent):
-        if   parent == 'Be8':  return nuclides['He4'],  7.0E-17 # s
-        else: return -1, 0.0
-
-    def n_gamma(nuclides, parent):
-        if   parent == 'F19':
-            return nuclides['F20'],  8.649107E-5,    3.495035E-5
-        elif parent == 'O16':
-            return nuclides['O17'],  1.0E-4,         1.0E-4
-        elif parent == 'O17':
-            return nuclides['O18'],  2.2675E-4,      2.087114E-4
-        elif parent == 'N14':
-            return nuclides['N15'],  2.397479E-5,    1.679535E-5
-        elif parent == 'N15':
-            return nuclides['N16'],  8.121795E-6,    8.56E-6
-        elif parent == 'Be9':
-            return nuclides['Be10'],1.943574E-6,    1.660517E-6
-        elif parent == 'Li6':
-            return nuclides['Li7'],  1.106851E-5,    1.017047E-5
-        elif parent == 'Li7':
-            return nuclides['Li8'],  4.677237E-6,    4.105546E-6
-        elif parent == 'He3':
-            return nuclides['He4'],  9.28775E-5,     3.4695E-5
-        elif parent == 'H2':
-            return nuclides['H3'],   8.413251E-6,    9.471512E-6
-        else:
-            return -1, 0.0, 0.0
-
-
-    def n_2n(nuclides, parent):
-        if   parent == 'F19':
-            return nuclides['F18'],  0.0,            0.04162
-        elif parent == 'O17':
-            return nuclides['O16'],  0.0,            0.066113
-        elif parent == 'N14':
-            return nuclides['N13'],  0.0,            0.006496
-        elif parent == 'N15':
-            return nuclides['N14'],  0.0,            0.112284
-        elif parent == 'B11':
-            return nuclides['B10'],  0.0,            0.018805
-        elif parent == 'Be9':
-            return nuclides['Be8'],  0.0205,         0.484483
-        elif parent == 'Li7':
-            return nuclides['Li6'],  0.0,            0.031603
-        elif parent == 'H3':
-            return nuclides['H2'],   0.0,            0.0497
-        elif parent == 'H2':
-            return nuclides['H1'],   0.0,            0.166767
-        else:
-            return -1, 0.0, 0.0
-
-    def n_alpha(nuclides, parent):
-        if   parent == 'F19':
-            return [nuclides['N16'],nuclides['He4']],2.1667E-5,0.028393
-        elif parent == 'O16':
-            return [nuclides['C13'], nuclides['He4']], 0.0, 0.144515
-        elif parent == 'O17':
-            return [nuclides['C14'], nuclides['He4']],0.117316,0.260809
-        elif parent == 'N14':
-            return [nuclides['B11'], nuclides['He4']],0.104365,0.080516
-        elif parent == 'N15':
-            return [nuclides['B12'], nuclides['He4']], 0.0,0.069240
-        elif parent == 'B10':
-            return [nuclides['Li7'], nuclides['He4']],0.281082,0.044480
-        elif parent == 'B11':
-            return [nuclides['Li8'], nuclides['He4']], 0.0,0.031853
-        else:
-            return [-1,-1], 0.0, 0.0
-
-    def n_2alpha(nuclides, parent):
-        if   parent == 'N14':
-            return [nuclides['Li7'], nuclides['He4']],  0.0,0.031771
-        elif parent == 'B10':
-            return [nuclides['H3'],  nuclides['He4']],0.038439,0.095487
-        else:
-            return [-1,-1], 0.0, 0.0
-
-    def n_nalpha(nuclides, parent):
-        if   parent == 'F19':
-            return [nuclides['N15'], nuclides['He4']], 0.0,0.3818
-        elif parent == 'O17':
-            return [nuclides['C13'], nuclides['He4']], 0.0,0.043420
-        elif parent == 'N15':
-            return [nuclides['B11'], nuclides['He4']], 0.0,0.012646
-        elif parent == 'B11':
-            return [nuclides['Li7'], nuclides['He4']], 0.0,0.286932
-        elif parent == 'Be9':
-            return [nuclides['He6'], nuclides['He4']], 0.0825,0.0104
-        else:
-            return [-1,-1], 0.0, 0.0
-
-    def n_2nalpha(nuclides, parent):
-        if   parent == 'Li6':
-            return [nuclides['H1'], nuclides['He4']],  0.0,0.0783
-        elif parent == 'Li7':
-            return [nuclides['H2'], nuclides['He4']],  0.0,0.020195
-        else:
-            return [-1,-1], 0.0, 0.0
-
-    def n_3nalpha(nuclides, parent):
-        if   parent == 'Li7':
-            return [nuclides['H1'], nuclides['He4']],  0.0,6.556330E-5
-        else:
-            return [-1,-1], 0.0, 0.0
-
-    def n_p(nuclides, parent):
-        if   parent == 'F19':
-            return [nuclides['O19'],  nuclides['H1']], 0.0,0.018438
-        elif parent == 'O16':
-            return [nuclides['N16'],  nuclides['H1']], 0.0,0.042723
-        elif parent == 'O17':
-            return [nuclides['N17'],  nuclides['H1']], 0.0, 0.041838
-        elif parent == 'N14':
-            return [nuclides['C14'], nuclides['H1']],0.014102,0.043891
-        elif parent == 'N15':
-            return [nuclides['C15'],  nuclides['H1']], 0.0,0.019601
-        elif parent == 'B10':
-            return [nuclides['Be10'], nuclides['H1']],0.018860,0.034093
-        elif parent == 'B11':
-            return [nuclides['Be11'], nuclides['H1']], 0.0,0.005564
-        elif parent == 'Li6':
-            return [nuclides['He6'],  nuclides['H1']], 0.0,0.00604
-        elif parent == 'He3':
-            return [nuclides['H3'],nuclides['H1']],0.714941, 0.121
-        else:
-            return [-1,-1], 0.0, 0.0
-
-    def n_np(nuclides, parent):
-        if   parent == 'F19':
-            return [nuclides['O18'],nuclides['H1']], 0.0, 0.061973
-        elif parent == 'N15':
-            return [nuclides['C14'],  nuclides['H1']], 0.0, 0.044827
-        elif parent == 'B11':
-            return [nuclides['Be10'], nuclides['H1']], 0.0, 0.001016
-        else:
-            return [-1,-1], 0.0, 0.0
-
-    def n_d(nuclides, parent):
-        if   parent == 'F19':
-            return [nuclides['O18'], nuclides['H2']],  0.0, 0.022215
-        elif parent == 'O16':
-            return [nuclides['N15'], nuclides['H2']],  0.0,0.017623
-        elif parent == 'O17':
-            return [nuclides['N16'], nuclides['H2']],  0.0,0.020579
-        elif parent == 'N14':
-            return [nuclides['C13'], nuclides['H2']],  0.0, 0.042027
-        elif parent == 'N15':
-            return [nuclides['C14'], nuclides['H2']],  0.0,0.014926
-        elif parent == 'B10':
-            return [nuclides['Be9'], nuclides['H2']],  0.0, 0.031270
-        elif parent == 'Li7':
-            return [nuclides['He6'], nuclides['H2']],  0.0, 0.010199
-        elif parent == 'He3':
-            return [nuclides['H2'],  nuclides['H2']],  0.0,0.07609
-        else:
-            return [-1,-1], 0.0, 0.0
-
-    def n_t(nuclides, parent):
-        if   parent == 'F19':
-            return [nuclides['O17'], nuclides['H3']],  0.0,0.01303
-        elif parent == 'N14':
-            return [nuclides['C12'], nuclides['H3']],  0.0,0.028573
-        elif parent == 'N15':
-            return [nuclides['C13'], nuclides['H3']],  0.0,0.020163
-        elif parent == 'B11':
-            return [nuclides['Be9'], nuclides['H3']],  0.0,0.015172
-        elif parent == 'Be9':
-            return [nuclides['Li7'], nuclides['H3']],  0.0,0.020878
-        elif parent == 'Li6':
-            return [nuclides['He4'], nuclides['H3']],  0.206155,0.0258
-        else:
-            return [-1,-1], 0.0, 0.0
-
-    
-    # Create Activation and Decay Matrix and initial
-    # nuclide quantity vector
-    A = np.zeros((len(nuclides),len(nuclides)))
-
-    lo_flux_frac = (1.0-hi_flux_frac)
-
-    phi = phi * 60 * 60 * 24 #10^14 1/cm^2/s in 1/cm^2 /day
-    phi_hi = hi_flux_frac*phi*1.0e-24
-    phi_lo = lo_flux_frac*phi*1.0e-24
-
-
-    for isotope in nuclides:
-        row = nuclides[isotope]
-        row_betanegdecay =  betanegdecay(nuclides, isotope)
-        row_betaposdecay =  betaposdecay(nuclides, isotope)
-        row_2alphadecay =   twoalphadecay(nuclides, isotope)
-        row_n_gamma =       n_gamma(nuclides, isotope)
-        row_n_2n =          n_2n(nuclides, isotope)
-        row_n_alpha =       n_alpha(nuclides, isotope)
-        row_n_2alpha =      n_2alpha(nuclides, isotope)
-        row_n_nalpha =      n_nalpha(nuclides, isotope)
-        row_n_2nalpha =     n_2nalpha(nuclides, isotope)
-        row_n_3nalpha =     n_3nalpha(nuclides, isotope)
-        row_n_p =           n_p(nuclides, isotope)
-        row_n_np =          n_np(nuclides, isotope)
-        row_n_d =           n_d(nuclides, isotope)
-        row_n_t =           n_t(nuclides, isotope)
-        row_lo_act_sum = row_n_gamma[1] + row_n_2n[1] +\
-                         row_n_alpha[1] + row_n_2alpha[1] +\
-                         row_n_nalpha[1] + row_n_2nalpha[1] + \
-                         row_n_3nalpha[1] + row_n_p[1] +\
-                         row_n_np[1] + row_n_d[1] +\
-                         row_n_t[1]
-        row_hi_act_sum = row_n_gamma[2] + row_n_2n[2] +\
-                         row_n_alpha[2] + row_n_2alpha[2] +\
-                         row_n_nalpha[2] + row_n_2nalpha[2] + \
-                         row_n_3nalpha[2] + row_n_p[2] +\
-                         row_n_np[2] + row_n_d[2] +row_n_t[2]
-        # try:
-        #     if row_n_alpha[0] >= 0:
-        #         print(row_n_alpha)
-        #         donotuse=100
-        #     continue
-        # except TypeError:
-        #     print(row_n_alpha)
-        #     print(row_n_alpha[0][0])
-        #     quit()
-        
-        if row_betanegdecay[0] >= 0:
-            # [days^-1]
-            row_lambda = np.log(2)*60*60*24/row_betanegdecay[1] 
-        elif row_betaposdecay[0] >= 0:
-            # [days^-1]
-            row_lambda = np.log(2)*60*60*24/row_betaposdecay[1] 
-        elif row_2alphadecay[0] >= 0:
-            # [days^-1]
-            row_lambda = np.log(2)*60*60*24/row_2alphadecay[1] 
-        else:
-            row_lambda = 0.0
-    
-        # Diagonal Assignment
-        A[row,row] = -row_lambda - phi_lo*row_lo_act_sum -\
-                     phi_hi*row_hi_act_sum
-        # Off Diagonal Assignment
-        if row_betanegdecay[0] >= 0:
-            A[row_betanegdecay[0],row] = np.log(2)*60*60*24/\
-                                         row_betanegdecay[1]
-        if row_betaposdecay[0] >= 0:
-            A[row_betaposdecay[0],row] = np.log(2)*60*60*24/\
-                                         row_betaposdecay[1]
-        if row_2alphadecay[0] >= 0:
-            A[row_2alphadecay[0],row] = np.log(2)*60*60*24/\
-                                        row_2alphadecay[1]
-        if row_n_gamma[0] >= 0:
-            A[row_n_gamma[0],row] = phi_lo*row_n_gamma[1] +\
-                                    phi_hi*row_n_gamma[2]
-        if row_n_2n[0] >= 0:
-            A[row_n_2n[0],row] = phi_lo*row_n_2n[1] +\
-                                 phi_hi*row_n_2n[2]
-        if row_n_alpha[0][0] >= 0:
-            for i in row_n_alpha[0]:
-                A[i,row] = phi_lo*row_n_alpha[1] +\
-                           phi_hi*row_n_alpha[2]
-        if row_n_2alpha[0][0] >= 0:
-            for i in row_n_2alpha[0]:
-                A[i,row] = phi_lo*row_n_2alpha[1] +\
-                           phi_hi*row_n_2alpha[2]
-        if row_n_nalpha[0][0] >= 0:
-            for i in row_n_nalpha[0]:
-                A[i,row] = phi_lo*row_n_nalpha[1] +\
-                           phi_hi*row_n_nalpha[2]
-        if row_n_2nalpha[0][0] >= 0:
-            for i in row_n_2nalpha[0]:
-                A[i,row] = phi_lo*row_n_2nalpha[1] +\
-                           phi_hi*row_n_2nalpha[2]
-        if row_n_3nalpha[0][0] >= 0:
-            for i in row_n_3nalpha[0]:
-                A[i,row] = phi_lo*row_n_3nalpha[1] +\
-                           phi_hi*row_n_3nalpha[2]
-        if row_n_p[0][0] >= 0:
-            for i in row_n_p[0]:
-                A[i,row] = phi_lo*row_n_p[1] + phi_hi*row_n_p[2]
-        if row_n_np[0][0] >= 0:
-            for i in row_n_np[0]:
-                A[i,row] = phi_lo*row_n_np[1] + phi_hi*row_n_np[2]
-        if row_n_d[0][0] >= 0:
-            for i in row_n_d[0]:
-                A[i,row] = phi_lo*row_n_d[1] + phi_hi*row_n_d[2]
-        if row_n_t[0][0] >= 0:
-            for i in row_n_t[0]:
-                A[i,row] = phi_lo*row_n_t[1] + phi_hi*row_n_t[2]
-
-    
-    b = np.zeros(len(nuclides))
-
-    # N_0 expressed as kg nuclide per kg FLiBe
-    #b[nuclides['F19']] = 0.7685
-    #b[nuclides['Be9']] = 0.0911
-    #b[nuclides['Li6']] = 0.01065636
-    #b[nuclides['Li7']] = 0.12974364
-    AtomsofFLiBe=6.0899894727155e24
-    b[nuclides['F19']] = AtomsofFLiBe*4
-    b[nuclides['Be9']] = AtomsofFLiBe*1
-    b[nuclides['Li6']] = AtomsofFLiBe*2*0.0759
-    b[nuclides['Li7']] = AtomsofFLiBe*2*0.9241
-
-    return(A,b)
-
 ################################################################
-################### Plotting Function ##########################
+################### Plotting Functions #########################
 ################################################################
 
 def reduceList(List,N):
@@ -1169,200 +796,8 @@ def Years(Method,nuclide,Results):
   print(Method+" :",string,"%.3e" % Years)
 
 #####################################################################
-#################### Under Construction #############################
+################## For Building A and b #############################
 #####################################################################
-
-def BetaNegDecay(nuclides, parent):
-    if   parent == 'F20':  return nuclides['Ne20'], 11.1 # s
-    elif parent == 'O19':  return nuclides['F19'],  26.9 # s
-    elif parent == 'N16':  return nuclides['O16'],  7.13 # s
-    elif parent == 'N17':  return nuclides['O17'],  4.174 # s
-    elif parent == 'C14':  return nuclides['N14'],  1.803517E11 # s
-    elif parent == 'C15':  return nuclides['N15'],  2.45 # s
-    elif parent == 'B12':  return nuclides['C12'],  0.0202 # s
-    elif parent == 'Be10': return nuclides['B10'],  4.73364E13 # s
-    elif parent == 'Be11': return nuclides['B11'],  13.8 # s
-    elif parent == 'Li8':  return nuclides['Be8'],  0.840 # s
-    elif parent == 'He6':  return nuclides['Li6'],  0.807 # s
-    elif parent == 'H3':   return nuclides['He3'],  3.887896E8 # s
-    else: return -1, 0.0
-
-def BetaPosDecay(nuclides, parent):
-    if   parent == 'F18':  return nuclides['O18'],  6586.2 # s
-    elif parent == 'N13':  return nuclides['C13'],  598.2 # s
-    else: return -1, 0.0
-
-def n_gamma(nuclides, parent):
-    if   parent == 'F19':
-        return nuclides['F20'],  8.649107E-5,    3.495035E-5
-    elif parent == 'O16':
-        return nuclides['O17'],  1.0E-4,         1.0E-4
-    elif parent == 'O17':
-        return nuclides['O18'],  2.2675E-4,      2.087114E-4
-    elif parent == 'N14':
-        return nuclides['N15'],  2.397479E-5,    1.679535E-5
-    elif parent == 'N15':
-        return nuclides['N16'],  8.121795E-6,    8.56E-6
-    elif parent == 'Be9':
-        return nuclides['Be10'],1.943574E-6,    1.660517E-6
-    elif parent == 'Li6':
-        return nuclides['Li7'],  1.106851E-5,    1.017047E-5
-    elif parent == 'Li7':
-        return nuclides['Li8'],  4.677237E-6,    4.105546E-6
-    elif parent == 'He3':
-        return nuclides['He4'],  9.28775E-5,     3.4695E-5
-    elif parent == 'H2':
-        return nuclides['H3'],   8.413251E-6,    9.471512E-6
-    else:
-        return -1, 0.0, 0.0
-
-
-def n_2n(nuclides, parent):
-    if   parent == 'F19':
-        return nuclides['F18'],  0.0,            0.04162
-    elif parent == 'O17':
-        return nuclides['O16'],  0.0,            0.066113
-    elif parent == 'N14':
-        return nuclides['N13'],  0.0,            0.006496
-    elif parent == 'N15':
-        return nuclides['N14'],  0.0,            0.112284
-    elif parent == 'B11':
-        return nuclides['B10'],  0.0,            0.018805
-    elif parent == 'Be9':
-        return nuclides['Be8'],  0.0205,         0.484483
-    elif parent == 'Li7':
-        return nuclides['Li6'],  0.0,            0.031603
-    elif parent == 'H3':
-        return nuclides['H2'],   0.0,            0.0497
-    elif parent == 'H2':
-        return nuclides['H1'],   0.0,            0.166767
-    else:
-        return -1, 0.0, 0.0
-
-def n_alpha(nuclides, parent):
-    if   parent == 'F19':
-        return [nuclides['N16'],nuclides['He4']],2.1667E-5,0.028393
-    elif parent == 'O16':
-        return [nuclides['C13'], nuclides['He4']], 0.0, 0.144515
-    elif parent == 'O17':
-        return [nuclides['C14'], nuclides['He4']],0.117316,0.260809
-    elif parent == 'N14':
-        return [nuclides['B11'], nuclides['He4']],0.104365,0.080516
-    elif parent == 'N15':
-            return [nuclides['B12'], nuclides['He4']], 0.0,0.069240
-    elif parent == 'B10':
-        return [nuclides['Li7'], nuclides['He4']],0.281082,0.044480
-    elif parent == 'B11':
-        return [nuclides['Li8'], nuclides['He4']], 0.0,0.031853
-    else:
-        return [-1,-1], 0.0, 0.0
-
-def n_2alpha(nuclides, parent):
-    if   parent == 'N14':
-        return [nuclides['Li7'], nuclides['He4']],  0.0,0.031771
-    elif parent == 'B10':
-        return [nuclides['H3'],  nuclides['He4']],0.038439,0.095487
-    else:
-        return [-1,-1], 0.0, 0.0
-
-def n_nalpha(nuclides, parent):
-    if   parent == 'F19':
-        return [nuclides['N15'], nuclides['He4']], 0.0,0.3818
-    elif parent == 'O17':
-        return [nuclides['C13'], nuclides['He4']], 0.0,0.043420
-    elif parent == 'N15':
-        return [nuclides['B11'], nuclides['He4']], 0.0,0.012646
-    elif parent == 'B11':
-        return [nuclides['Li7'], nuclides['He4']], 0.0,0.286932
-    elif parent == 'Be9':
-        return [nuclides['He6'], nuclides['He4']], 0.0825,0.0104
-    else:
-        return [-1,-1], 0.0, 0.0
-
-def n_2nalpha(nuclides, parent):
-    if   parent == 'Li6':
-        return [nuclides['H1'], nuclides['He4']],  0.0,0.0783
-    elif parent == 'Li7':
-        return [nuclides['H2'], nuclides['He4']],  0.0,0.020195
-    else:
-        return [-1,-1], 0.0, 0.0
-
-def n_3nalpha(nuclides, parent):
-    if   parent == 'Li7':
-        return [nuclides['H1'], nuclides['He4']],  0.0,6.556330E-5
-    else:
-        return [-1,-1], 0.0, 0.0
-
-def n_p(nuclides, parent):
-    if   parent == 'F19':
-        return [nuclides['O19'],  nuclides['H1']], 0.0,0.018438
-    elif parent == 'O16':
-        return [nuclides['N16'],  nuclides['H1']], 0.0,0.042723
-    elif parent == 'O17':
-        return [nuclides['N17'],  nuclides['H1']], 0.0, 0.041838
-    elif parent == 'N14':
-        return [nuclides['C14'], nuclides['H1']],0.014102,0.043891
-    elif parent == 'N15':
-        return [nuclides['C15'],  nuclides['H1']], 0.0,0.019601
-    elif parent == 'B10':
-        return [nuclides['Be10'], nuclides['H1']],0.018860,0.034093
-    elif parent == 'B11':
-        return [nuclides['Be11'], nuclides['H1']], 0.0,0.005564
-    elif parent == 'Li6':
-        return [nuclides['He6'],  nuclides['H1']], 0.0,0.00604
-    elif parent == 'He3':
-        return [nuclides['H3'],nuclides['H1']],0.714941, 0.121
-    else:
-        return [-1,-1], 0.0, 0.0
-
-def n_np(nuclides, parent):
-    if   parent == 'F19':
-        return [nuclides['O18'],nuclides['H1']], 0.0, 0.061973
-    elif parent == 'N15':
-        return [nuclides['C14'],  nuclides['H1']], 0.0, 0.044827
-    elif parent == 'B11':
-        return [nuclides['Be10'], nuclides['H1']], 0.0, 0.001016
-    else:
-        return [-1,-1], 0.0, 0.0
-    
-def n_d(nuclides, parent):
-    if   parent == 'F19':
-        return [nuclides['O18'], nuclides['H2']],  0.0, 0.022215
-    elif parent == 'O16':
-        return [nuclides['N15'], nuclides['H2']],  0.0,0.017623
-    elif parent == 'O17':
-        return [nuclides['N16'], nuclides['H2']],  0.0,0.020579
-    elif parent == 'N14':
-        return [nuclides['C13'], nuclides['H2']],  0.0, 0.042027
-    elif parent == 'N15':
-        return [nuclides['C14'], nuclides['H2']],  0.0,0.014926
-    elif parent == 'B10':
-        return [nuclides['Be9'], nuclides['H2']],  0.0, 0.031270
-    elif parent == 'Li7':
-        return [nuclides['He6'], nuclides['H2']],  0.0, 0.010199
-    elif parent == 'He3':
-        return [nuclides['H2'],  nuclides['H2']],  0.0,0.07609
-    else:
-        return [-1,-1], 0.0, 0.0
-    
-def n_t(nuclides, parent):
-    if   parent == 'F19':
-        return [nuclides['O17'], nuclides['H3']],  0.0,0.01303
-    elif parent == 'N14':
-        return [nuclides['C12'], nuclides['H3']],  0.0,0.028573
-    elif parent == 'N15':
-        return [nuclides['C13'], nuclides['H3']],  0.0,0.020163
-    elif parent == 'B11':
-        return [nuclides['Be9'], nuclides['H3']],  0.0,0.015172
-    elif parent == 'Be9':
-        return [nuclides['Li7'], nuclides['H3']],  0.0,0.020878
-    elif parent == 'Li6':
-        return [nuclides['He4'], nuclides['H3']],  0.206155,0.0258
-    else:
-        return [-1,-1], 0.0, 0.0
-
-
-
 
 class DecayClass:
     def __init__(self):
@@ -1388,7 +823,7 @@ class DecayClass:
         self.IDFB   = ''
 
 
-def FindPotentialMatch(List,protons,A,Fraction,Excited):
+def FindPotentialMatch(List,protons,A,Fraction,Excited,LOUD=False):
     if(Fraction<0 or Fraction>1):
         print("Fraction of decays is too low or high : ",Fraction)
         print("Inquire further")
@@ -1402,14 +837,16 @@ def FindPotentialMatch(List,protons,A,Fraction,Excited):
     try: #To make sure its defined
         Toreturn
     except NameError:
-        print("Could not find daughter in list of isotopes when expecting one")
-        print("Looking for Protons : ",protons," Total Nucleons : ",A," Fraction",Fraction)
-        #print("Close items are")
-        #for item in List:
-        #    if protons in item[:-1] and A in item[:-1]:
-        #        print(item)
+        if LOUD:
+            print("Could not find daughter in list of isotopes when expecting one")
+            print("Looking for Protons : ",protons," Total Nucleons : ",A," Fraction",Fraction)
+            #print("Close items are")
+            #for item in List:
+            #    if protons in item[:-1] and A in item[:-1]:
+            #        print(item)
         if (Fraction<2):
-            print("Assuming it doesn't matter, will let slide")
+            if LOUD:
+                print("Assuming it doesn't matter, will let slide")
             Toreturn=''
         else:
             quit()
@@ -1481,11 +918,18 @@ def DecayInfo(Nuclide_Names,parent,Lambda,proton,A):
 
     if Lambda>0:
         Info.IDFB=FindPotentialMatch(Nuclide_Names,str(int(proton)+1),A,Info.FB,'0')
+
+    #Make sure all decay fractions add to one (for some reason the EC to excited is
+    # probability given a EC
+    FPEC=(1-Info.FPECX)*Info.FPEC
+    FPECX=Info.FPECX*Info.FPEC
+    Info.FPEC=FPEC
+    Info.FPECX=FPECX
     
     return(Info)
 
 
-def FindPotentialMatchX(List,protons,A,XSection,Excited,Lambda):
+def FindPotentialMatchX(List,protons,A,XSection,Excited,Lambda,LOUD=False):
     if(XSection<0):
         print("Fraction of decays is too low",XSection)
         print("Inquire further")
@@ -1499,15 +943,17 @@ def FindPotentialMatchX(List,protons,A,XSection,Excited,Lambda):
     try: #To make sure its defined
         Toreturn
     except NameError:
-        print("Could not find daughter in list of isotopes when expecting one")
-        print("Looking for Protons : ",protons," Total Nucleons : ",A," XSection ",XSection)
-        print("Lambda = ",Lambda)
-        #print("Close items are")
-        #for item in List:
-        #    if protons in item[:-1] and A in item[:-1]:
-        #        print(item)
+        if LOUD:
+            print("Could not find daughter in list of isotopes when expecting one")
+            print("Looking for Protons : ",protons," Total Nucleons : ",A," XSection ",XSection)
+            print("Lambda = ",Lambda)
+            #print("Close items are")
+            #for item in List:
+            #    if protons in item[:-1] and A in item[:-1]:
+            #        print(item)
         if (XSection<100000 or Lambda>0.1):
-            print("Assuming it doesn't matter, will let slide")
+            if LOUD:
+                print("Assuming it doesn't matter, will let slide")
             Toreturn=''
             XSection=0
         else:
@@ -1588,7 +1034,71 @@ def XSectionInfo(Nuclide_Names,parent,L,proton,A):
             
     return(Info)
 
-def MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts):
+def YieldInfo(yieldiso,holdIndex,LOUD=False):
+    with open('tape9.inp') as f:
+        TAPE9Content=f.readlines()
+
+    Found=False;Yield=False
+    for line in TAPE9Content:
+        hold=line.split()
+        
+        if Found:
+            if Yield:
+                returnyield=float(hold[holdIndex])
+            else:
+                returnyield=0
+            break
+        if '603' == hold[0] and hold[1]==yieldiso:
+            Found=True
+            if float(hold[8])>0:
+                Yield=True
+            else:
+                Yield=False
+                
+    if not Found:
+        if LOUD:
+            print("Did not find a yield for ",yieldiso)
+        returnyield=0
+    return(returnyield)
+
+def AddFission(A,Nuclides,isotope,c1,c2,row,LOUD=False):
+    if isotope=="922320": #Th232
+        #print("Th232")
+        holdIndex=1
+    elif isotope=="922330": #U233
+        #print("U233")
+        holdIndex=2
+    elif isotope=="922350": #U235
+        #print("U235")
+        holdIndex=3
+    elif isotope=="922380": #U238
+        #print("U238")
+        holdIndex=4
+    elif isotope=="942390": #Pu239
+        #print("Pu239")
+        holdIndex=5
+    elif isotope=="942410": #Pu241
+        #print("Pu241")
+        holdIndex=6
+    elif isotope=="962450": #Cm245
+        #print("Cm245")
+        holdIndex=7
+    elif isotope=="982490": #Cf249
+        #print("Cf249")
+        holdIndex=8
+    else:
+        if LOUD:
+            print("Did not find yields for ",isotope," because not provided")
+        holdIndex=100
+
+    if holdIndex<40:
+        for yieldiso in Nuclides:
+            actualrow=Nuclides[yieldiso]
+            Yield=YieldInfo(yieldiso,holdIndex,LOUD=False)
+            A[actualrow,row]=A[actualrow,row]+c1*c2*Yield
+    return(A)
+
+def MakeAb(phi,Nuclides,Nuclide_Names,Decay_Conts):
 
     # Create Activation and Decay Matrix and initial
     # nuclide quantity vector
@@ -1628,14 +1138,20 @@ def MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts):
             Lambday=0
 
         XList=["SN2N","SN2NX","SN3N","SNA","SNG","SNGX","SNP","SNF"]
-
+        DList=["FA","FB","FBX","FIT","FN","FPEC","FPECX","FSF"]
+        
         #USeful to see things
         #for a in dir(row_XSection):
         #    if not a.startswith('__'):
         #        print(a)
         #        print(getattr(row_XSection,a))
         #quit()
-
+        #for a in dir(row_decay):
+        #    if not a.startswith('__'):
+        #        print(a)
+        #        print(getattr(row_decay,a))
+        #quit()
+        
         #Sum up all the sigma abs
         sigma_sum=0
         for xsec in XList:
@@ -1643,68 +1159,43 @@ def MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts):
         
         # Diagonal Assignment
         A[row,row] = -Lambday - phi*sigma_sum
-        # # Off Diagonal Assignment
-        # if row_betanegdecay[0] >= 0:
-        #     A[row_betanegdecay[0],row] = np.log(2)*60*60*24/\
-        #                                  row_betanegdecay[1]
-        # if row_betaposdecay[0] >= 0:
-        #     A[row_betaposdecay[0],row] = np.log(2)*60*60*24/\
-        #                                  row_betaposdecay[1]
-        # if row_2alphadecay[0] >= 0:
-        #     A[row_2alphadecay[0],row] = np.log(2)*60*60*24/\
-        #                                 row_2alphadecay[1]
-        # if row_n_gamma[0] >= 0:
-        #     A[row_n_gamma[0],row] = phi_lo*row_n_gamma[1] +\
-        #                             phi_hi*row_n_gamma[2]
-        # if row_n_2n[0] >= 0:
-        #     A[row_n_2n[0],row] = phi_lo*row_n_2n[1] +\
-        #                          phi_hi*row_n_2n[2]
-        # if row_n_alpha[0][0] >= 0:
-        #     for i in row_n_alpha[0]:
-        #         A[i,row] = phi_lo*row_n_alpha[1] +\
-        #                    phi_hi*row_n_alpha[2]
-        # if row_n_2alpha[0][0] >= 0:
-        #     for i in row_n_2alpha[0]:
-        #         A[i,row] = phi_lo*row_n_2alpha[1] +\
-        #                    phi_hi*row_n_2alpha[2]
-        # if row_n_nalpha[0][0] >= 0:
-        #     for i in row_n_nalpha[0]:
-        #         A[i,row] = phi_lo*row_n_nalpha[1] +\
-        #                    phi_hi*row_n_nalpha[2]
-        # if row_n_2nalpha[0][0] >= 0:
-        #     for i in row_n_2nalpha[0]:
-        #         A[i,row] = phi_lo*row_n_2nalpha[1] +\
-        #                    phi_hi*row_n_2nalpha[2]
-        # if row_n_3nalpha[0][0] >= 0:
-        #     for i in row_n_3nalpha[0]:
-        #         A[i,row] = phi_lo*row_n_3nalpha[1] +\
-        #                    phi_hi*row_n_3nalpha[2]
-        # if row_n_p[0][0] >= 0:
-        #     for i in row_n_p[0]:
-        #         A[i,row] = phi_lo*row_n_p[1] + phi_hi*row_n_p[2]
-        # if row_n_np[0][0] >= 0:
-        #     for i in row_n_np[0]:
-        #         A[i,row] = phi_lo*row_n_np[1] + phi_hi*row_n_np[2]
-        # if row_n_d[0][0] >= 0:
-        #     for i in row_n_d[0]:
-        #         A[i,row] = phi_lo*row_n_d[1] + phi_hi*row_n_d[2]
-        # if row_n_t[0][0] >= 0:
-        #     for i in row_n_t[0]:
-        #         A[i,row] = phi_lo*row_n_t[1] + phi_hi*row_n_t[2]
 
-    
-    b = np.zeros(len(nuclides))
+        ##does a single isotope produce another isotope through more than one path
+        ##like EC and NP
+        #for xsec in XList:
+        #    for decay in DList:
+        #        if not decay[-1]=='F' and not "F" in xsec and len(getattr(row_decay,"ID"+decay))>1:
+        #            if getattr(row_XSection,"ID"+xsec) == getattr(row_decay,"ID"+decay):
+        #                print("Isotope ",getattr(row_XSection,"ID"+xsec),"Produced from ",
+        #                      isotope," with RNS ",decay,xsec)
+        #                print("Both will be used")
 
-    # N_0 expressed as kg nuclide per kg FLiBe
-    #b[nuclides['F19']] = 0.7685
-    #b[nuclides['Be9']] = 0.0911
-    #b[nuclides['Li6']] = 0.01065636
-    #b[nuclides['Li7']] = 0.12974364
-    AtomsofFLiBe=6.0899894727155e24
-    b[nuclides['F19']] = AtomsofFLiBe*4
-    b[nuclides['Be9']] = AtomsofFLiBe*1
-    b[nuclides['Li6']] = AtomsofFLiBe*2*0.0759
-    b[nuclides['Li7']] = AtomsofFLiBe*2*0.9241
+        #Off diagonal assignment adding x-sec productions except from fission
+        for xsec in XList:
+            if not "F" in xsec: #Don't do fission yet
+                Product=getattr(row_XSection,"ID"+xsec)
+                if len(Product)>1:
+                    actualrow=Nuclides[Product]
+                    A[actualrow,row]=A[actualrow,row]+phi*getattr(row_XSection,xsec)
+        #Off diagonal assignment adding all decay except from spontaneous fission
+        for decay in DList:
+            if not decay[-1]=='F':
+                Product=getattr(row_decay,"ID"+decay)
+                if len(Product)>1:
+                    actualrow=Nuclides[Product]
+                    A[actualrow,row]=A[actualrow,row]+Lambday*getattr(row_decay,decay)
+        #Now for xfission
+        #if row_XSection.SNF>0:
+        #    A=AddFission(A,Nuclides,isotope,row_XSection.SNF,phi,row,LOUD=False)
+
+        #Now for spontaneous fission
+        #if row_decay.FSF>0:
+        #    A=AddFission(A,Nuclides,isotope,row_decay.FSF,Lambday,row,LOUD=False)
+   
+    b = np.zeros(len(Nuclides))
+    b[Nuclides['922340']] = 6.94741E23
+    b[Nuclides['922350']] = 7.6864E25
+    b[Nuclides['922380']] = 2.4532E27
 
     return(A,b)
 

@@ -12,18 +12,17 @@ import Functions as f
 ##################### Initialize System ########################
 ################################################################
 
-NumOfPoints=500          # Max Number of points for plots
-PlottingG1=["Li6","Li7","F19","Be9"]  #List elements you want to Plot 
-CompareG1=["Li6","Li7","F19","Be9"]
-PlottingG2=["H3","Be10","F18"]  #List elements you want to Plot 
-CompareG2=["H3","Be10"]
+NumOfPoints=2          # Max Number of points for plots
+PlottingG1=["922350"]  #List elements you want to Plot 
+CompareG1=["922350"]
+PlottingG2=["922350"]  #List elements you want to Plot 
+CompareG2=["922350"]
 #List elements you want to compare between methods
 
 #########################################################
 ############# Initialize Matrix #########################
 #########################################################
 
-high_flux_fraction=0.5
 phi=1.0e14
 
 ToAdd=[]
@@ -31,6 +30,7 @@ Nuclides,Nuclide_Names=f.Isotopes(ToAdd)
 
 #This variable takes a while to make, so if its already made
 #Just load it
+#f.os.system("rm Masses.npy")  #To start over and remake
 if not f.os.path.isfile('Masses.npy'):
     #Grab atomic weight information
     df=f.pd.read_csv('Data/AtomicWeights.csv')
@@ -40,31 +40,28 @@ else:
     Atom_Mass=f.np.load('Masses.npy')
 
 #Load up all the decay constants
+#f.os.system("rm Decay_Consts.npy") #To start over and remake
 if not f.os.path.isfile('Decay_Consts.npy'):
     Decay_Conts=f.GatherDecay(Nuclide_Names)
     f.np.save('Decay_Consts',Decay_Conts)
 else:
     Decay_Conts=f.np.load('Decay_Consts.npy')
 
-A,n0=f.MakeAb2(phi,Nuclides,Nuclide_Names,Decay_Conts)
+#A is in terms of years
+A,n0=f.MakeAb(phi,Nuclides,Nuclide_Names,Decay_Conts)
 
-#print(Nuclide_Names[0:5])
-#print(Atom_Mass[0:5])
-#print(Decay_Conts[0:5])
-quit()
-
-A,n0=f.MakeAb(high_flux_fraction,phi)
 
 if not A.shape[0] == A.shape[1] or not A.shape[0] == len(n0):
     print("A is not a square matrix")
     quit()
 
+quit()
 #########################################################
 ############# Initialize Time ###########################
 #########################################################
 
-t=730.5;  #Two years in days
-Nt=1000;   #Number of Time Steps
+t=20;  #years
+Nt=5;   #Number of Time Steps
 dt=t/Nt;
 Time=f.np.linspace(dt,t,Nt) #Time steps
 
@@ -181,20 +178,12 @@ dfRational = f.pd.read_csv(Method+".csv",index_col=False)
 ################################################################
 
 #f.Print("Matrix Exp","H3",nt_Mat,Mat_Time)
-f.Print("Backward Euler","H3",nt_Back,Back_Time)
-f.Print("Rational Approx ","H3",nt_Rational,Rational_Time)
-
-f.Print("Backward Euler","Be10",nt_Back,Back_Time)
-f.Print("Rational Approx ","Be10",nt_Rational,Rational_Time)
+f.Print("Backward Euler","922350",nt_Back,Back_Time)
+f.Print("Rational Approx ","922350",nt_Rational,Rational_Time)
 
 ## Time in years to be below 444 bq
-f.Years("Backward Euler","H3",nt_Back)
-f.Years("Rational Approx ","H3",nt_Rational)
-
-f.Years("Backward Euler","Be10",nt_Back)
-f.Years("Rational Approx ","Be10",nt_Rational)
-
-
+f.Years("Backward Euler","922350",nt_Back)
+f.Years("Rational Approx ","922350",nt_Rational)
 
 ###################### Time To execute #################
 
