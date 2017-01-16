@@ -1238,6 +1238,7 @@
         $^{134}Ba$ & 3.70  & 3.60 \\
         $^{133}Cs$ & 549 & 538 \\
         $^{106}Ru$ & 74.3 & 73.2 \\
+        $^{148}Nd$ & 169.1 & 166.5 \\
         $^{105}Pd$ & 136 & 134 \\
         $^{99}Tc$ & 374 & 371 \\
         $^{95}Zr$ & 83.1 & 79.9 \\
@@ -1252,15 +1253,65 @@
 
 
   Below are some graphs of the production and loss of nuclides to show nuclide
-  production trends.
+  production trends. Plots are only shown with the back-Euler solution (the rational
+  approximation was faster to get results for a single time, but to show trends,
+  back Euler calculates the answer at each time step) to save space on the plots.
+  The two methods for calculation agreed on the results with 10 quadrature points
+  for the Best method (more for others).
   
     \begin{figure}[H]
       \begin{center}
         \includegraphics[width=1\columnwidth]
-                        {Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf}
+                        {Project/Plots/BackEulerG1U_grams.pdf}
       \end{center}
     \end{figure}
-  
+
+    The \tss{238}U didn't deplete an appreciable amount in the irradiation.
+    The \tss{235}U depleted an appreciable amount.
+    
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Project/Plots/BackEulerG1Pu_grams.pdf}
+      \end{center}
+    \end{figure}
+
+    The plutonium isotopes were produced at a rate about what I would expect.
+    It seems that \tss{239}Pu is being produced at a rate that is a little higher
+    than what I would expect.
+    
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Project/Plots/BackEulerG2B100_grams.pdf}
+      \end{center}
+    \end{figure}
+
+    Above are some slowly growing isotopes.
+    
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Project/Plots/BackEulerG2A100_grams.pdf}
+      \end{center}
+    \end{figure}
+
+    Above are moderately growing isotopes. These plots are ploted against
+    time, not burnup, but to first order the scaling is about the same.
+    \tss{137}Cs and \tss{148}Nd should be linear as a function of
+    burnup, the others, not so much, but maybe they will turn over.
+    
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Project/Plots/BackEulerG2A1000_grams.pdf}
+      \end{center}
+    \end{figure}
+
+    Above is another, larger yield isotope, \tss{136}Xe, which is
+    absorbed from \tss{135}Xe.
+    
+    
 \end{homeworkProblem}
 
 \clearpage

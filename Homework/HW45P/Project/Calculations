@@ -16,12 +16,18 @@ import Functions as f
 ################################################################
 
 NumOfPoints=30          # Max Number of points for plots
-PlottingG1=["922350"]  #List elements you want to Plot 
+PlottingG1=["922350","922380","942390","942410"]  #List elements you want to Plot
+PlottingG1=["942390","942400","942410","942420"]  #List elements you want to Plot
+PlottingG1=["922350"]  #List elements you want to Plot
 #CompareG1=["922350","922380","942390"]
-CompareG1=["942390"]
-PlottingG2=["922350"]  #List elements you want to Plot 
+CompareG1=["922350","922380","942390","942410"]
+PlottingG2=["551370","561370","541360","561340","551330","441060","461050","430990","400950"]
+PlottingG2=["561370","561340","441060","400950"]
+PlottingG2=["551370","551330","461050","430990","601480"]
+PlottingG2=["541360"]
+#List elements you want to Plot 
 #CompareG2=["551370","631540","601480"]
-CompareG2=["551370"]
+CompareG2=["551370","561370","541360","561340","551330","441060","461050","430990","400950"]
 #List elements you want to compare between methods
 
 #########################################################
@@ -181,12 +187,12 @@ Rational_Time=time.time()-Current_Time
 dfBack = f.pd.read_csv('Data/BackEuler.csv',index_col=False)
 dfRational = f.pd.read_csv("Data/"+Method+".csv",index_col=False)
 
-# #Plot group 1 dudes Back Euler method
-# f.plot(dfBack,PlottingG1,'BackEulerG1',NumOfPoints)
-# f.plot(dfRational,PlottingG1,Method+'G1',NumOfPoints)
+# #Plot group 1 dudes Back Euler method and rational
+f.plot(dfBack,PlottingG1,'BackEulerG1U',NumOfPoints)
+#f.plot(dfRational,PlottingG1,Method+'G1',NumOfPoints)
 
-# #Plot group 2 dudes Rational method
-# f.plot(dfBack,PlottingG2,'BackEulerG2',NumOfPoints)
+# #Plot group 2 dudes Rational method and back
+#f.plot(dfBack,PlottingG2,'BackEulerG2A1000',NumOfPoints)
 # f.plot(dfRational,PlottingG2,Method+'G2',NumOfPoints)
 
 #Plot group 1 dudes, compare both methods
@@ -204,8 +210,8 @@ dfRational = f.pd.read_csv("Data/"+Method+".csv",index_col=False)
 ################################################################
 
 #f.Print("Matrix Exp","H3",nt_Mat,Mat_Time)
-f.Print("Backward Euler","541360",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
-f.Print("Rational Approx ","541360",nt_Rational,Rational_Time,Nuclides,Atom_Mass,Nuclide_Names)
+#f.Print("Backward Euler","601480",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
+#f.Print("Rational Approx ","541360",nt_Rational,Rational_Time,Nuclides,Atom_Mass,Nuclide_Names)
 
 
 ###################### Time To execute #################

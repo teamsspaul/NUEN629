@@ -593,6 +593,8 @@ def plot(df,Plotting,Name,NumOfPoints):
       if len(x)>NumOfPoints:
         xP=reduceList(x,NumOfPoints)
         y=reduceList(y,NumOfPoints)
+      else:
+        xP=x.copy()
       ax.plot(xP,y,
               linestyle=loop_values(LineStyles,Check),
               marker=loop_values(MarkerType,Check),

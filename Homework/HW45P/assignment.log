@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.12)  15 JAN 2017 18:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.12)  15 JAN 2017 19:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1146,10 +1146,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 1215--1222
 
  []
 
-File: Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf Graphic file (type pdf)
-<use Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf>
-Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf used on 
-input line 1260.
+<Project/Plots/BackEulerG1U_grams.pdf, id=3032, 794.97pt x 433.62pt>
+File: Project/Plots/BackEulerG1U_grams.pdf Graphic file (type pdf)
+
+<use Project/Plots/BackEulerG1U_grams.pdf>
+Package pdftex.def Info: Project/Plots/BackEulerG1U_grams.pdf used on input lin
+e 1265.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
  [63
 
@@ -1158,283 +1160,337 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1263 
-       ] [64] (./Project/Calculations
-Overfull \hbox (14.24971pt too wide) in paragraph at lines 39--41
-[][][][][][][][][][][][][][][][][][][][][] 
- []
+l.1268 
+       ] <Project/Plots/BackEulerG1Pu_grams.pdf, id=3040, 794.97pt x 433.62pt>
+File: Project/Plots/BackEulerG1Pu_grams.pdf Graphic file (type pdf)
 
-[65
+<use Project/Plots/BackEulerG1Pu_grams.pdf>
+Package pdftex.def Info: Project/Plots/BackEulerG1Pu_grams.pdf used on input li
+ne 1275.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-] [66]
-Overfull \hbox (25.04982pt too wide) in paragraph at lines 130--131
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][] 
- []
+<Project/Plots/BackEulerG2B100_grams.pdf, id=3041, 794.97pt x 433.62pt>
+File: Project/Plots/BackEulerG2B100_grams.pdf Graphic file (type pdf)
 
-[67]
-Overfull \hbox (14.24971pt too wide) in paragraph at lines 207--208
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][] 
- []
+<use Project/Plots/BackEulerG2B100_grams.pdf>
+Package pdftex.def Info: Project/Plots/BackEulerG2B100_grams.pdf used on input 
+line 1286.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+ [64 <./Project/Plots/BackEulerG1U_grams.pdf> <./Project/Plots/BackEulerG1Pu_gr
+ams.pdf
 
+pdfTeX warning: pdflatex (file ./Project/Plots/BackEulerG1Pu_grams.pdf): PDF in
+clusion: multiple pdfs with page group included in a single page
+>] <Project/Plots/BackEulerG2A100_grams.pdf, id=3081, 794.97pt x 433.62pt>
+File: Project/Plots/BackEulerG2A100_grams.pdf Graphic file (type pdf)
 
-Overfull \hbox (68.25026pt too wide) in paragraph at lines 208--211
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][] 
- []
+<use Project/Plots/BackEulerG2A100_grams.pdf>
+Package pdftex.def Info: Project/Plots/BackEulerG2A100_grams.pdf used on input 
+line 1295.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-[68]) (./Project/Functions.py [69] [70] [71] [72] [73] [74] [75] [76] [77]
-[78] [79] [80] [81] [82] [83] [84]
-Overfull \hbox (14.24971pt too wide) in paragraph at lines 848--849
-[][][][][][][][][][][][][][][][][][][][] 
- []
+<Project/Plots/BackEulerG2A1000_grams.pdf, id=3082, 794.97pt x 433.62pt>
+File: Project/Plots/BackEulerG2A1000_grams.pdf Graphic file (type pdf)
 
+<use Project/Plots/BackEulerG2A1000_grams.pdf>
+Package pdftex.def Info: Project/Plots/BackEulerG2A1000_grams.pdf used on input
+ line 1307.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+ [65 <./Project/Plots/BackEulerG2B100_grams.pdf> <./Project/Plots/BackEulerG2A1
+00_grams.pdf
 
-Overfull \hbox (8.84966pt too wide) in paragraph at lines 852--853
-[][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (52.0501pt too wide) in paragraph at lines 878--879
+pdfTeX warning: pdflatex (file ./Project/Plots/BackEulerG2A100_grams.pdf): PDF 
+inclusion: multiple pdfs with page group included in a single page
+>] [66 <./Project/Plots/BackEulerG2A1000_grams.pdf>] (./Project/Calculations
+Overfull \hbox (57.45015pt too wide) in paragraph at lines 24--25
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][] 
+[][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.65004pt too wide) in paragraph at lines 879--880
+Overfull \hbox (52.0501pt too wide) in paragraph at lines 30--31
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (14.24971pt too wide) in paragraph at lines 45--47
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[67
+
+] [68]
+Overfull \hbox (25.04982pt too wide) in paragraph at lines 136--137
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][] 
+ []
+
+[69] [70]
+Overfull \hbox (19.64977pt too wide) in paragraph at lines 213--214
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (73.65031pt too wide) in paragraph at lines 214--217
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) (./Project/Functions.py [71] [72] [73] [74] [75] [76] [77] [78] [79] [80]
+[81] [82] [83] [84] [85] [86]
+Overfull \hbox (14.24971pt too wide) in paragraph at lines 850--851
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (8.84966pt too wide) in paragraph at lines 854--855
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (52.0501pt too wide) in paragraph at lines 880--881
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][] 
+ []
+
+
+Overfull \hbox (46.65004pt too wide) in paragraph at lines 881--882
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (84.45042pt too wide) in paragraph at lines 880--881
+Overfull \hbox (84.45042pt too wide) in paragraph at lines 882--883
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][] 
+[][][][][][][][][] 
  []
 
 
-Overfull \hbox (68.25026pt too wide) in paragraph at lines 884--885
+Overfull \hbox (68.25026pt too wide) in paragraph at lines 886--887
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 [][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (35.84993pt too wide) in paragraph at lines 888--889
+Overfull \hbox (35.84993pt too wide) in paragraph at lines 890--891
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][] 
+ []
+
+[87]
+Overfull \hbox (89.85048pt too wide) in paragraph at lines 891--892
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 [][][][][][][][][] 
  []
 
 
-Overfull \hbox (89.85048pt too wide) in paragraph at lines 889--890
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][] 
- []
-
-
-Overfull \hbox (3.4496pt too wide) in paragraph at lines 891--892
+Overfull \hbox (3.4496pt too wide) in paragraph at lines 893--894
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (25.04982pt too wide) in paragraph at lines 893--894
+Overfull \hbox (25.04982pt too wide) in paragraph at lines 895--896
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][] 
- []
-
-[85]
-Overfull \hbox (3.4496pt too wide) in paragraph at lines 915--916
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[] 
+[][][][][][][][] 
  []
 
 
-Overfull \hbox (68.25026pt too wide) in paragraph at lines 916--917
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][] 
- []
-
-
-Overfull \hbox (3.4496pt too wide) in paragraph at lines 946--947
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][] 
- []
-
-[86]
-Overfull \hbox (95.25053pt too wide) in paragraph at lines 952--953
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][] 
- []
-
-
-Overfull \hbox (41.24998pt too wide) in paragraph at lines 962--963
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (73.65031pt too wide) in paragraph at lines 967--968
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (62.8502pt too wide) in paragraph at lines 968--969
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (95.25053pt too wide) in paragraph at lines 970--971
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][] 
- []
-
-
-Overfull \hbox (8.84966pt too wide) in paragraph at lines 994--996
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (3.4496pt too wide) in paragraph at lines 996--997
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[87]
-Overfull \hbox (3.4496pt too wide) in paragraph at lines 1021--1022
+Overfull \hbox (3.4496pt too wide) in paragraph at lines 917--918
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (73.65031pt too wide) in paragraph at lines 1022--1023
+Overfull \hbox (68.25026pt too wide) in paragraph at lines 918--919
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][] 
+ []
+
+[88]
+Overfull \hbox (3.4496pt too wide) in paragraph at lines 948--949
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][] 
+ []
+
+
+Overfull \hbox (95.25053pt too wide) in paragraph at lines 954--955
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][] 
+ []
+
+
+Overfull \hbox (41.24998pt too wide) in paragraph at lines 964--965
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (73.65031pt too wide) in paragraph at lines 969--970
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (62.8502pt too wide) in paragraph at lines 970--971
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+] 
+ []
+
+
+Overfull \hbox (95.25053pt too wide) in paragraph at lines 972--973
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][] 
+ []
+
+
+Overfull \hbox (8.84966pt too wide) in paragraph at lines 996--998
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[89]
+Overfull \hbox (3.4496pt too wide) in paragraph at lines 998--999
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (3.4496pt too wide) in paragraph at lines 1023--1024
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (73.65031pt too wide) in paragraph at lines 1024--1025
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 [][][][][][][][][][] 
  []
 
 
-Overfull \hbox (57.45015pt too wide) in paragraph at lines 1040--1041
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (68.25026pt too wide) in paragraph at lines 1042--1043
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[88]
-Overfull \hbox (19.64977pt too wide) in paragraph at lines 1073--1074
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][] 
- []
-
-
-Overfull \hbox (95.25053pt too wide) in paragraph at lines 1074--1075
+Overfull \hbox (57.45015pt too wide) in paragraph at lines 1042--1043
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (106.05064pt too wide) in paragraph at lines 1079--1080
+Overfull \hbox (68.25026pt too wide) in paragraph at lines 1044--1045
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[90]
+Overfull \hbox (19.64977pt too wide) in paragraph at lines 1075--1076
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][] 
+ []
+
+
+Overfull \hbox (95.25053pt too wide) in paragraph at lines 1076--1077
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (106.05064pt too wide) in paragraph at lines 1081--1082
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][] 
  []
 
 
-Overfull \hbox (46.65004pt too wide) in paragraph at lines 1083--1084
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+Overfull \hbox (46.65004pt too wide) in paragraph at lines 1085--1086
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (68.25026pt too wide) in paragraph at lines 1088--1089
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+Overfull \hbox (68.25026pt too wide) in paragraph at lines 1090--1091
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (111.4507pt too wide) in paragraph at lines 1094--1095
+Overfull \hbox (111.4507pt too wide) in paragraph at lines 1096--1097
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (52.0501pt too wide) in paragraph at lines 1099--1100
+Overfull \hbox (52.0501pt too wide) in paragraph at lines 1101--1102
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[91]
+Overfull \hbox (8.84966pt too wide) in paragraph at lines 1105--1106
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (8.84966pt too wide) in paragraph at lines 1103--1104
+Overfull \hbox (25.04982pt too wide) in paragraph at lines 1109--1111
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-
-Overfull \hbox (25.04982pt too wide) in paragraph at lines 1107--1109
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[89] [90] [91]
-Overfull \hbox (95.25053pt too wide) in paragraph at lines 1253--1254
+[92] [93]
+Overfull \hbox (95.25053pt too wide) in paragraph at lines 1255--1256
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (35.84993pt too wide) in paragraph at lines 1254--1255
+Overfull \hbox (35.84993pt too wide) in paragraph at lines 1256--1257
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (46.65004pt too wide) in paragraph at lines 1255--1256
+Overfull \hbox (46.65004pt too wide) in paragraph at lines 1257--1258
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-
-Overfull \hbox (8.84966pt too wide) in paragraph at lines 1265--1266
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[92]
-Overfull \hbox (19.64977pt too wide) in paragraph at lines 1272--1274
+[94]
+Overfull \hbox (8.84966pt too wide) in paragraph at lines 1267--1268
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-) [93] 
+
+Overfull \hbox (19.64977pt too wide) in paragraph at lines 1274--1276
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [95] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1344.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1344.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1395.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1395.
 (./assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1344.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1344.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1395.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1395.
 
 Package rerunfilecheck Info: File `assignment.out' has not changed.
 (rerunfilecheck)             Checksum: 72B7D211A7AB295E24280DC2606EBC4C;617.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1344.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1395.
  ) 
 Here is how much of TeX's memory you used:
- 14360 strings out of 494953
- 203385 string characters out of 6180977
+ 14396 strings out of 494953
+ 204515 string characters out of 6180977
  323891 words of memory out of 5000000
- 13770 multiletter control sequences out of 15000+600000
+ 13790 multiletter control sequences out of 15000+600000
  17436 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 37i,12n,43p,250b,2141s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 35i,12n,43p,250b,2141s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/share/texlive/texm
@@ -1463,10 +1519,10 @@ exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/urw/courier/ucrro8a.pfb>
-Output written on assignment.pdf (93 pages, 1021037 bytes).
+Output written on assignment.pdf (95 pages, 1051158 bytes).
 PDF statistics:
- 5521 PDF objects out of 6186 (max. 8388607)
- 5180 compressed objects within 52 object streams
- 3653 named destinations out of 4296 (max. 500000)
- 174 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5636 PDF objects out of 6186 (max. 8388607)
+ 5266 compressed objects within 53 object streams
+ 3663 named destinations out of 4296 (max. 500000)
+ 199 words of extra memory for PDF output out of 10000 (max. 10000000)
 
