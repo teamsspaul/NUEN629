@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.12)  14 JAN 2017 01:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.12)  15 JAN 2017 18:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -849,7 +849,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 583--584
 
  []
 
-[6] <Homework4/Plots/FluxPlot.pdf, id=103, 794.97pt x 433.62pt>
+[6] <Homework4/Plots/FluxPlot.pdf, id=113, 794.97pt x 433.62pt>
 File: Homework4/Plots/FluxPlot.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlot.pdf>
@@ -867,14 +867,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 648--653
 
  []
 
-<Homework4/Plots/ErrorPlot.pdf, id=156, 794.97pt x 433.62pt>
+<Homework4/Plots/ErrorPlot.pdf, id=166, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlot.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlot.pdf>
 Package pdftex.def Info: Homework4/Plots/ErrorPlot.pdf used on input line 692.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
  [8]
-<Homework4/Plots/FluxPlotReed.pdf, id=165, 794.97pt x 433.62pt>
+<Homework4/Plots/FluxPlotReed.pdf, id=176, 794.97pt x 433.62pt>
 File: Homework4/Plots/FluxPlotReed.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlotReed.pdf>
@@ -882,7 +882,7 @@ Package pdftex.def Info: Homework4/Plots/FluxPlotReed.pdf used on input line 70
 5.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-<Homework4/Plots/ErrorPlotReed.pdf, id=166, 794.97pt x 433.62pt>
+<Homework4/Plots/ErrorPlotReed.pdf, id=177, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlotReed.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlotReed.pdf>
@@ -890,7 +890,7 @@ Package pdftex.def Info: Homework4/Plots/ErrorPlotReed.pdf used on input line 7
 11.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-<Homework4/Plots/FluxPlotReedVaryN.pdf, id=167, 794.97pt x 433.62pt>
+<Homework4/Plots/FluxPlotReedVaryN.pdf, id=178, 794.97pt x 433.62pt>
 File: Homework4/Plots/FluxPlotReedVaryN.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlotReedVaryN.pdf>
@@ -901,7 +901,7 @@ ne 717.
 
 pdfTeX warning: pdflatex (file ./Homework4/Plots/FluxPlotReed.pdf): PDF inclusi
 on: multiple pdfs with page group included in a single page
->] <Homework4/Plots/ErrorPlotReedVaryN.pdf, id=244, 794.97pt x 433.62pt>
+>] <Homework4/Plots/ErrorPlotReedVaryN.pdf, id=254, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlotReedVaryN.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlotReedVaryN.pdf>
@@ -913,7 +913,7 @@ ine 723.
 
 pdfTeX warning: pdflatex (file ./Homework4/Plots/FluxPlotReedVaryN.pdf): PDF in
 clusion: multiple pdfs with page group included in a single page
->] <Homework4/Plots/FluxPlotTime.pdf, id=309, 794.97pt x 433.62pt>
+>] <Homework4/Plots/FluxPlotTime.pdf, id=319, 794.97pt x 433.62pt>
 File: Homework4/Plots/FluxPlotTime.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlotTime.pdf>
@@ -921,7 +921,7 @@ Package pdftex.def Info: Homework4/Plots/FluxPlotTime.pdf used on input line 74
 4.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-<Homework4/Plots/ErrorPlotTime.pdf, id=310, 794.97pt x 433.62pt>
+<Homework4/Plots/ErrorPlotTime.pdf, id=320, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlotTime.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlotTime.pdf>
@@ -946,7 +946,7 @@ f
 
 pdfTeX warning: pdflatex (file ./Homework4/Plots/ErrorPlotTime.pdf): PDF inclus
 ion: multiple pdfs with page group included in a single page
->] <Homework4/Plots/FluxPlotTimeVaryN.pdf, id=424, 794.97pt x 433.62pt>
+>] <Homework4/Plots/FluxPlotTimeVaryN.pdf, id=434, 794.97pt x 433.62pt>
 File: Homework4/Plots/FluxPlotTimeVaryN.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/FluxPlotTimeVaryN.pdf>
@@ -954,7 +954,7 @@ Package pdftex.def Info: Homework4/Plots/FluxPlotTimeVaryN.pdf used on input li
 ne 783.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-<Homework4/Plots/ErrorPlotTimeVaryN.pdf, id=425, 794.97pt x 433.62pt>
+<Homework4/Plots/ErrorPlotTimeVaryN.pdf, id=435, 794.97pt x 433.62pt>
 File: Homework4/Plots/ErrorPlotTimeVaryN.pdf Graphic file (type pdf)
 
 <use Homework4/Plots/ErrorPlotTimeVaryN.pdf>
@@ -1041,13 +1041,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 983--985
 
  []
 
-<BeLi.pdf, id=1508, 423.92677pt x 353.5077pt>
+<BeLi.pdf, id=1518, 423.92677pt x 353.5077pt>
 File: BeLi.pdf Graphic file (type pdf)
  <use BeLi.pdf>
 Package pdftex.def Info: BeLi.pdf used on input line 991.
 (pdftex.def)             Requested size: 469.75499pt x 391.74011pt.
 
-<FO.pdf, id=1509, 283.08562pt x 283.08562pt>
+<FO.pdf, id=1519, 283.08562pt x 283.08562pt>
 File: FO.pdf Graphic file (type pdf)
  <use FO.pdf>
 Package pdftex.def Info: FO.pdf used on input line 997.
@@ -1055,7 +1055,7 @@ Package pdftex.def Info: FO.pdf used on input line 997.
  [35
 
  <./BeLi.pdf>]
-<Homework5/Plots/BackEuler_Best_G1_Grams.pdf, id=1558, 794.97pt x 433.62pt>
+<Homework5/Plots/BackEuler_Best_G1_Grams.pdf, id=1568, 794.97pt x 433.62pt>
 File: Homework5/Plots/BackEuler_Best_G1_Grams.pdf Graphic file (type pdf)
 
 <use Homework5/Plots/BackEuler_Best_G1_Grams.pdf>
@@ -1063,7 +1063,7 @@ Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G1_Grams.pdf used on in
 put line 1027.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
  [36 <./FO.pdf>]
-<Homework5/Plots/BackEuler_Best_G2_Grams.pdf, id=1590, 794.97pt x 433.62pt>
+<Homework5/Plots/BackEuler_Best_G2_Grams.pdf, id=1600, 794.97pt x 433.62pt>
 File: Homework5/Plots/BackEuler_Best_G2_Grams.pdf Graphic file (type pdf)
 
 <use Homework5/Plots/BackEuler_Best_G2_Grams.pdf>
@@ -1076,7 +1076,7 @@ er_Best_G2_Grams.pdf
 pdfTeX warning: pdflatex (file ./Homework5/Plots/BackEuler_Best_G2_Grams.pdf): 
 PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf, id=1651, 794.97pt x 433.62pt>
+<Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf, id=1661, 794.97pt x 433.62pt>
 File: Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf Graphic file (type pdf)
 
 <use Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf>
@@ -1084,7 +1084,7 @@ Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G2_H_Grams.pdf used on
 input line 1060.
 (pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
 
-<Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf, id=1652, 794.97pt x 433.62pt>
+<Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf, id=1662, 794.97pt x 433.62pt>
 File: Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf Graphic file (type pdf)
 
 <use Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf>
@@ -1097,7 +1097,7 @@ uler_Best_G2_He_Grams.pdf
 pdfTeX warning: pdflatex (file ./Homework5/Plots/BackEuler_Best_G2_He_Grams.pdf
 ): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf, id=1708, 794.97pt x 433.62pt>
+<Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf, id=1718, 794.97pt x 433.62pt>
 File: Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf Graphic file (type pdf)
 
 <use Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf>
@@ -1110,52 +1110,331 @@ ns [40
 ] [41] [42])
 (./Homework5/Functions.py [43] [44] [45] [46] [47] [48] [49] [50] [51] [52]
 [53] [54] [55] [56] [57] [58] [59] [60]) [61]
-Underfull \hbox (badness 10000) in paragraph at lines 1139--1143
+Underfull \hbox (badness 10000) in paragraph at lines 1140--1144
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1139--1143
+Underfull \hbox (badness 10000) in paragraph at lines 1140--1144
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1162--1168
+Underfull \hbox (badness 10000) in paragraph at lines 1159--1166
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1169--1170
+Underfull \hbox (badness 10000) in paragraph at lines 1170--1176
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1169--1170
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1178
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1178
 
  []
 
 [62
 
-] 
+]
+Underfull \hbox (badness 10000) in paragraph at lines 1215--1222
+
+ []
+
+File: Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf Graphic file (type pdf)
+<use Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf>
+Package pdftex.def Info: Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf used on 
+input line 1260.
+(pdftex.def)             Requested size: 469.75499pt x 256.23718pt.
+ [63
+
+pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
+ been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1263 
+       ] [64] (./Project/Calculations
+Overfull \hbox (14.24971pt too wide) in paragraph at lines 39--41
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[65
+
+] [66]
+Overfull \hbox (25.04982pt too wide) in paragraph at lines 130--131
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][] 
+ []
+
+[67]
+Overfull \hbox (14.24971pt too wide) in paragraph at lines 207--208
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][] 
+ []
+
+
+Overfull \hbox (68.25026pt too wide) in paragraph at lines 208--211
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][] 
+ []
+
+[68]) (./Project/Functions.py [69] [70] [71] [72] [73] [74] [75] [76] [77]
+[78] [79] [80] [81] [82] [83] [84]
+Overfull \hbox (14.24971pt too wide) in paragraph at lines 848--849
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (8.84966pt too wide) in paragraph at lines 852--853
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (52.0501pt too wide) in paragraph at lines 878--879
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][] 
+ []
+
+
+Overfull \hbox (46.65004pt too wide) in paragraph at lines 879--880
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (84.45042pt too wide) in paragraph at lines 880--881
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (68.25026pt too wide) in paragraph at lines 884--885
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.84993pt too wide) in paragraph at lines 888--889
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][] 
+ []
+
+
+Overfull \hbox (89.85048pt too wide) in paragraph at lines 889--890
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][] 
+ []
+
+
+Overfull \hbox (3.4496pt too wide) in paragraph at lines 891--892
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (25.04982pt too wide) in paragraph at lines 893--894
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][] 
+ []
+
+[85]
+Overfull \hbox (3.4496pt too wide) in paragraph at lines 915--916
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[] 
+ []
+
+
+Overfull \hbox (68.25026pt too wide) in paragraph at lines 916--917
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][] 
+ []
+
+
+Overfull \hbox (3.4496pt too wide) in paragraph at lines 946--947
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][] 
+ []
+
+[86]
+Overfull \hbox (95.25053pt too wide) in paragraph at lines 952--953
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][] 
+ []
+
+
+Overfull \hbox (41.24998pt too wide) in paragraph at lines 962--963
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (73.65031pt too wide) in paragraph at lines 967--968
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (62.8502pt too wide) in paragraph at lines 968--969
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (95.25053pt too wide) in paragraph at lines 970--971
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][] 
+ []
+
+
+Overfull \hbox (8.84966pt too wide) in paragraph at lines 994--996
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (3.4496pt too wide) in paragraph at lines 996--997
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[87]
+Overfull \hbox (3.4496pt too wide) in paragraph at lines 1021--1022
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (73.65031pt too wide) in paragraph at lines 1022--1023
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (57.45015pt too wide) in paragraph at lines 1040--1041
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (68.25026pt too wide) in paragraph at lines 1042--1043
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[88]
+Overfull \hbox (19.64977pt too wide) in paragraph at lines 1073--1074
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][] 
+ []
+
+
+Overfull \hbox (95.25053pt too wide) in paragraph at lines 1074--1075
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (106.05064pt too wide) in paragraph at lines 1079--1080
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][] 
+ []
+
+
+Overfull \hbox (46.65004pt too wide) in paragraph at lines 1083--1084
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (68.25026pt too wide) in paragraph at lines 1088--1089
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (111.4507pt too wide) in paragraph at lines 1094--1095
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (52.0501pt too wide) in paragraph at lines 1099--1100
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (8.84966pt too wide) in paragraph at lines 1103--1104
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (25.04982pt too wide) in paragraph at lines 1107--1109
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[89] [90] [91]
+Overfull \hbox (95.25053pt too wide) in paragraph at lines 1253--1254
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (35.84993pt too wide) in paragraph at lines 1254--1255
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.65004pt too wide) in paragraph at lines 1255--1256
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (8.84966pt too wide) in paragraph at lines 1265--1266
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[92]
+Overfull \hbox (19.64977pt too wide) in paragraph at lines 1272--1274
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+) [93] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1257.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1257.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1344.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1344.
 (./assignment.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1257.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1257.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1344.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1344.
 
 Package rerunfilecheck Info: File `assignment.out' has not changed.
-(rerunfilecheck)             Checksum: 9ACB2AB3C167F886F31EBE63CF029CED;514.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1257.
+(rerunfilecheck)             Checksum: 72B7D211A7AB295E24280DC2606EBC4C;617.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1344.
  ) 
 Here is how much of TeX's memory you used:
- 12689 strings out of 494953
- 178863 string characters out of 6180977
+ 14360 strings out of 494953
+ 203385 string characters out of 6180977
  323891 words of memory out of 5000000
- 13639 multiletter control sequences out of 15000+600000
+ 13770 multiletter control sequences out of 15000+600000
  17436 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 35i,12n,43p,250b,2141s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,12n,43p,250b,2141s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/share/texlive/texm
@@ -1184,10 +1463,10 @@ exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/urw/courier/ucrro8a.pfb>
-Output written on assignment.pdf (62 pages, 899084 bytes).
+Output written on assignment.pdf (93 pages, 1021037 bytes).
 PDF statistics:
- 3522 PDF objects out of 3580 (max. 8388607)
- 3231 compressed objects within 33 object streams
- 2118 named destinations out of 2487 (max. 500000)
- 158 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5521 PDF objects out of 6186 (max. 8388607)
+ 5180 compressed objects within 52 object streams
+ 3653 named destinations out of 4296 (max. 500000)
+ 174 words of extra memory for PDF output out of 10000 (max. 10000000)
 

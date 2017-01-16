@@ -1117,7 +1117,8 @@
   In order to build the $A$ matrix I utilized code from
   James Tompkins that he let me see a while back. I wanted to
   give him credit because building the A matrix is probably one
-  of the harder parts of this homework.
+  of the harder parts of this homework. I had my own experience
+  in building a much larger A matrix for the next problem.
   
   \pythonscript{Homework5/Calculations}
                {\textbf{Main Code}}
@@ -1147,7 +1148,7 @@
     \frac{dn_i}{dt}=-\lambda_i^{eff}n_i+
     \sum_{j=1}^{N}b_{j\rightarrow i}^{eff}n_j
   \end{equation*}
-  Where,
+  Where $N$ is the number of nuclides and,
   \begin{equation*}
     \lambda_i^{eff}=\lambda_i+\phi\sum_{j=1}^N\sigma_{i\rightarrow j}
   \end{equation*}
@@ -1156,7 +1157,14 @@
     b_{j\rightarrow i}^{eff}=b_{j\rightarrow i}\lambda_j+
       \sigma_{j\rightarrow i}\phi+\gamma_{j\rightarrow i}\sigma_{j,f}\phi
   \end{equation*}
-  For a system of isotopes, this can be reduced to:
+  where
+  $\gamma_{j\rightarrow i}\ \text{is the fission yield for isotope i from fission of isotope j}$.
+  $b_{j\rightarrow i}$ is the fraction of radioactive disintegration by nuclide $j$, which
+  leads to nuclide $i$. In the case of spontaneous fission $b_{j\rightarrow i}$ is the product
+  of spontenous fission fraction for nuclide $j$ and the yield for fission from nuclide $j$
+  producing nuclide $i$.\\ 
+
+  For a system of isotopes, the system can be reduced to:
   \begin{equation*}
     \frac{d\vec{n}}{dt}=\bm{A}\vec{n}(t)
   \end{equation*}
@@ -1166,16 +1174,15 @@
   $b_{j\rightarrow i}^{eff}$ (i for the row, and j is
   for the column) and $\vec{n}(t)=[n_1,n_2,...,n_N]$.\\
 
-  The solution to this system is so obvious, I won't even write it down.
-  Also spontaneous fission isn't represented here, but I included it in the
-  code.\\~\\
+  The solution to this system is so obvious, I won't even write it down.\\~\\
   
   %% \begin{equation*}
   %%   \vec{n}=e^{\bm{A}t}\vec{n}_0
   %% \end{equation*}
 
-  For the current problem 1 metric ton of PWR fuel will be irradiated for a 100 days
-  at a constant flux of 10\tss{14} n/cm\tss{2}$\cdot$s and some of the fission product
+  For the current problem 1 metric ton of PWR fuel will be irradiated for 400 days
+  at a constant flux of 2.9896 $\cdot$10\tss{14} n/cm\tss{2}$\cdot$s (37.5 W/g initially)
+  and some of the fission product
   masses will be determined as a function of time. If we ignore the oxygen, the initial
   amount of atoms for each of the heavy isotopes is
   \begin{equation*}
@@ -1190,11 +1197,89 @@
       N_{^{238}U}=969730\ \text{g }\frac{6.022E23\ \text{atoms}}{238.0507884\ \text{g}}=
       2.4532E27\ \frac{\text{atoms of \tss{238}U}}{\text{tHM}}
   \end{equation*}
+
+    The results will be compared with ORIGEN2 results for a similar problem that will
+    irradiate the same fuel with a constant power of 37.5 W/g (compare with my results
+    from UQ).
+
+\end{homeworkProblem}
+
+\clearpage
+
+
+%---------------------------------------------------------------------
+%	Project Results
+%---------------------------------------------------------------------
+\begin{homeworkProblem}[Project Results]
+
+  The results for the code are shown below. The hardest part of this problem
+  was building the A matrix. In order to determine if the system was solved
+  correctly the information fed into ORIGEN2 from its TAPE9.inp file was
+  used so that results from the two codes could be compared. I wanted to be
+  able to recreate what ORIGEN2 does with my own code so I could complete
+  the project for UQ in the future after I graduate. The only part I
+  am not sure about on how to do is how to sample the cross section spectrum.\\
+
+  Comparison of results from the two codes are shown in the table below, and
+  it can be seen that they are fairly close. The main difference is from
+  the constant power (ORIGEN2) constant flux (MINE) different assumption.
+
+
+  \begin{table}[H]
+    \begin{center}
+      \caption{Comparison between ORIGEN2 and my code results in grams}
+      \begin{tabular}{l l l}
+        \toprule
+        Nuclide & ORIGEN2 & My Code\\
+        \hline
+        $^{137}Cs$ & 553 & 544\\
+        $^{137}Ba$ & 7.10 & 7.13\\
+        $^{136}Xe$ & 1.04E3 & 1.02E3\\
+        $^{134}Ba$ & 3.70  & 3.60 \\
+        $^{133}Cs$ & 549 & 538 \\
+        $^{106}Ru$ & 74.3 & 73.2 \\
+        $^{105}Pd$ & 136 & 134 \\
+        $^{99}Tc$ & 374 & 371 \\
+        $^{95}Zr$ & 83.1 & 79.9 \\
+        $^{235}U$ & 1.629E4 & 1.65E4 \\
+        $^{238}U$ & 9.597E5 & 9.6E5 \\
+        $^{239}Pu$ & 3.994E3 & 3.85E3 \\
+        $^{241}Pu$ & 5.279E2 & 5.838E2 \\
+        \bottomrule
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+
+  Below are some graphs of the production and loss of nuclides to show nuclide
+  production trends.
+  
+    \begin{figure}[H]
+      \begin{center}
+        \includegraphics[width=1\columnwidth]
+                        {Homework5/Plots/BackEuler_Best_G2_NoFe_Bq.pdf}
+      \end{center}
+    \end{figure}
   
 \end{homeworkProblem}
 
 \clearpage
 
+
+
+%---------------------------------------------------------------------
+%	Project Code
+%---------------------------------------------------------------------
+\begin{homeworkProblem}[Project Code]
+
+  \pythonscript{Project/Calculations}
+               {\textbf{Main Code}}
+  \pythonscript{Project/Functions.py}
+               {\textbf{Functions holder}}
+  
+\end{homeworkProblem}
+
+\clearpage
 
 
   %% \begin{equation*}

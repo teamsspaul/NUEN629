@@ -204,8 +204,8 @@ dfRational = f.pd.read_csv("Data/"+Method+".csv",index_col=False)
 ################################################################
 
 #f.Print("Matrix Exp","H3",nt_Mat,Mat_Time)
-f.Print("Backward Euler","400950",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
-f.Print("Rational Approx ","400950",nt_Rational,Rational_Time,Nuclides,Atom_Mass,Nuclide_Names)
+f.Print("Backward Euler","541360",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
+f.Print("Rational Approx ","541360",nt_Rational,Rational_Time,Nuclides,Atom_Mass,Nuclide_Names)
 
 
 ###################### Time To execute #################
