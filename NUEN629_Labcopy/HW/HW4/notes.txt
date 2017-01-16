@@ -1,0 +1,9 @@
+Also, there was a bug in my diamond difference code.  It was actually doing a bad version of step.  The sweep1D code should be 
+
+for mu >0
+
+psi_right = (q[i]*0.5 + (mu*ihx-0.5*sigma_t[i])*psi_left)/(0.5*sigma_t[i] + mu*ihx)            
+
+for mu < 0
+
+psi_left = (q[i]*0.5+ (-mu*ihx-0.5*sigma_t[i])*psi_right)/(0.5*sigma_t[i] - mu*ihx)           

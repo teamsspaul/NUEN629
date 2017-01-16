@@ -1,0 +1,7 @@
+    findingstuff=find(P_Store(2:end)==0,2)
+    findingstuff(2)
+    disp([distance,P_Store(2),P_Store(3:findingstuff(2))]);
+	
+	
+	
+	[ymin,ymax,xmin,xmax]
