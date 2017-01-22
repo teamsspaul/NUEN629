@@ -19,6 +19,7 @@ NumOfPoints=30          # Max Number of points for plots
 PlottingG1=["922350","922380","942390","942410"]  #List elements you want to Plot
 PlottingG1=["942390","942400","942410","942420"]  #List elements you want to Plot
 PlottingG1=["922350"]  #List elements you want to Plot
+PlottingG1=["942380","952410","962430","962420"]
 #CompareG1=["922350","922380","942390"]
 CompareG1=["922350","922380","942390","942410"]
 PlottingG2=["551370","561370","541360","561340","551330","441060","461050","430990","400950"]
@@ -98,6 +99,7 @@ print("A is complete")
 #########################################################
 
 t=1.09514;  #years
+t=0.29;
 Nt=100;   #Number of Time Steps
 dt=t/Nt;
 Time=f.np.linspace(dt,t,Nt) #Time steps
@@ -139,6 +141,8 @@ nt_Back=n0.copy();
 for TIME in Time:
     nt_Back=f.BackEuler(A,nt_Back,dt)
     File.write(str(TIME)+","+f.ListToStr(nt_Back))
+    #print(nt_Back[Nuclides["942380"]]/nt_Back[Nuclides["952410"]])
+
 #Decay Time
 #for TIME in TimeDecay:
 #    nt_Back=f.BackEuler(Adecay,nt_Back,dtDecay)
@@ -184,11 +188,11 @@ Rational_Time=time.time()-Current_Time
 #########################################################
 
 
-dfBack = f.pd.read_csv('Data/BackEuler.csv',index_col=False)
-dfRational = f.pd.read_csv("Data/"+Method+".csv",index_col=False)
+#dfBack = f.pd.read_csv('Data/BackEuler.csv',index_col=False)
+#dfRational = f.pd.read_csv("Data/"+Method+".csv",index_col=False)
 
 # #Plot group 1 dudes Back Euler method and rational
-f.plot(dfBack,PlottingG1,'BackEulerG1U',NumOfPoints)
+#f.plot(dfBack,PlottingG1,'BackEulerG1Minor',NumOfPoints)
 #f.plot(dfRational,PlottingG1,Method+'G1',NumOfPoints)
 
 # #Plot group 2 dudes Rational method and back
@@ -210,7 +214,9 @@ f.plot(dfBack,PlottingG1,'BackEulerG1U',NumOfPoints)
 ################################################################
 
 #f.Print("Matrix Exp","H3",nt_Mat,Mat_Time)
-#f.Print("Backward Euler","601480",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
+#f.Print("Backward Euler","551370",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
+f.Print("Backward Euler","942390",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
+f.Print("Backward Euler","942400",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
 #f.Print("Rational Approx ","541360",nt_Rational,Rational_Time,Nuclides,Atom_Mass,Nuclide_Names)
 
 
