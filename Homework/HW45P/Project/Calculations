@@ -215,8 +215,8 @@ Rational_Time=time.time()-Current_Time
 
 #f.Print("Matrix Exp","H3",nt_Mat,Mat_Time)
 #f.Print("Backward Euler","551370",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
-f.Print("Backward Euler","942390",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
-f.Print("Backward Euler","942400",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
+f.Print("Backward Euler","551370",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
+f.Print("Backward Euler","551330",nt_Back,Back_Time,Nuclides,Atom_Mass,Nuclide_Names)
 #f.Print("Rational Approx ","541360",nt_Rational,Rational_Time,Nuclides,Atom_Mass,Nuclide_Names)
 
 
