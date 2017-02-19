@@ -78,6 +78,8 @@ NumberOfLegendColumns=1
 Xlabel='Time [years]'
 Ylabel="Mass $\\left[\\frac{g}{\\text{tHM}}\\right]$"
 
+XlabelBurn='Burnup $\\left[\\frac{\\text{MWd}}{\\text{tHM}}\\right]$'
+YlabelBurn='$^{239}$Pu Mass Percentage'
 
 Na=6.0221409E23
 
@@ -512,6 +514,11 @@ def Legend(ax):
     ax.legend(handles,labels,loc='best',
               fontsize=LegendFontSize,prop=font)
     return(ax)
+def Legend2(ax):
+    handles,labels=ax.get_legend_handles_labels()
+    ax.legend(handles,labels,loc='upper left',
+              fontsize=LegendFontSize,prop=font)
+    return(ax)
 
 # def Legend(ax):
 #         handles,labels=ax.get_legend_handles_labels()
@@ -634,6 +641,168 @@ def plot(df,Plotting,Name,NumOfPoints):
 
     Legend(ax)
     plt.savefig("Plots/"+Name+'_Bq.pdf') 
+
+def PUNAME(Item):
+    if Item=="942390":
+        NAME="$^{239}$Pu"
+    elif Item=="942380":
+        NAME="$^{238}$Pu"
+    elif Item=="942400":
+        NAME="$^{240}$Pu"
+    elif Item=="942410":
+        NAME="$^{241}$Pu"
+    elif Item=="942420":
+        NAME="$^{242}$Pu"
+    else:
+        print("No Name :(")
+        quit()
+
+    return(NAME)
+
+def plotburnPuComp(df,Plotting,Name,NumOfPoints):
+    #Plot In grams
+    fig=plt.figure(figsize=FigureSize)  
+    ax=fig.add_subplot(111)
+    ax2=ax.twinx()
+    List=list(df.columns.values)
+    x=df[List[0]].values[2:]
+
+    #print(Plotting)
+    #quit()
+
+          
+    Cs137=((df['551370'].values[2:])/Na)*df['551370'].values[0]
+    Burnup=Cs137*25.4627010527
+
+    
+    Check=0;Sum=np.zeros(len(x));Pu239=np.zeros(len(x));
+    for Item in Plotting:
+      NAME=PUNAME(Item)
+      InList(Item,List) #Check if we have the isotope
+      y=((df[Item].values[2:])/Na)*df[Item].values[0]
+      Sum=Sum+y
+      if Item=="942390":
+          Pu239=Pu239+y
+      if len(x)>NumOfPoints:
+          Burnup=reduceList(Burnup,NumOfPoints)
+          x=reduceList(x,NumOfPoints)
+          y=reduceList(y,NumOfPoints)
+      ax.plot(Burnup,y,
+              linestyle=loop_values(LineStyles,Check),
+              marker=loop_values(MarkerType,Check),
+              color=loop_values(Colors,Check),
+              markersize=loop_values(MarkSize,Check),
+              alpha=loop_values(Alpha_Value,Check),
+              label=NAME)
+      Check=Check+1
+
+    #Log or linear scale?
+    ax.set_xscale(XScale)
+    ax.set_yscale(YScale)
+    #Set Title
+    fig.suptitle(Title,fontsize=TitleFontSize,
+                 fontweight=TitleFontWeight,fontdict=font,ha='center')
+    #Set X and y labels
+    ax.set_xlabel(Xlabel,
+                  fontsize=XFontSize,fontweight=XFontWeight,
+                  fontdict=font)
+    ax.set_ylabel(Ylabel,
+                  fontsize=YFontSize,
+                  fontweight=YFontWeight,
+                  fontdict=font)
+
+    Legend(ax)
+
+
+    Pu239Percent=Pu239/Sum
+    if len(Burnup)>NumOfPoints:
+        Burnup=reduceList(Burnup,NumOfPoints)
+        Pu239Percent=reduceList(Pu239Percent,NumOfPoints)
+    ax2.plot(Burnup,Pu239Percent,
+              linestyle=loop_values(LineStyles,Check),
+              marker=loop_values(MarkerType,Check),
+              color=loop_values(Colors,Check),
+              markersize=loop_values(MarkSize,Check),
+              alpha=loop_values(Alpha_Value,Check),
+              label='$^{239}$Pu Mass Percent')
+    Check=Check+1
+
+
+    #Log or linear scale?
+    #ax.set_xscale(XScale)
+    ax2.set_yscale(YScale)
+    #Set Title
+    #fig.suptitle(Title,fontsize=TitleFontSize,
+    #             fontweight=TitleFontWeight,fontdict=font,ha='center')
+    #Set X and y labels
+    #ax.set_xlabel(XlabelBurn,
+    #              fontsize=XFontSize,fontweight=XFontWeight,
+    #              fontdict=font)
+    ax2.set_ylabel(YlabelBurn,
+                  fontsize=YFontSize,
+                  fontweight=YFontWeight,
+                  fontdict=font)
+
+    Legend2(ax2)
+    plt.savefig("Plots/"+Name+'_grams.pdf')
+    
+    # #Plot in Bq #################################
+
+    # fig=plt.figure(figsize=FigureSize)  
+    # ax=fig.add_subplot(111)
+
+    # List=list(df.columns.values)
+    # x=df[List[0]].values[2:]
+
+    # for Item in Plotting:
+    #   InList(Item,List) #Check if we have the isotope
+    #   y=((df[Item].values[2:]))*df[Item].values[1]
+    #   Sum=Sum+y
+    #   if len(x)>NumOfPoints:
+    #     xP=reduceList(x,NumOfPoints)
+    #     y=reduceList(y,NumOfPoints)
+    #   else:
+    #     xP=x.copy()
+    #   ax.plot(xP,y,
+    #           linestyle=loop_values(LineStyles,Check),
+    #           marker=loop_values(MarkerType,Check),
+    #           color=loop_values(Colors,Check),
+    #           markersize=loop_values(MarkSize,Check),
+    #           alpha=loop_values(Alpha_Value,Check),
+    #           label=Item)
+    #   Check=Check+1
+    # if len(x)>NumOfPoints:
+    #   Sum=reduceList(Sum,NumOfPoints)
+    # ax.plot(xP,Sum,
+    #         linestyle=loop_values(LineStyles,Check),
+    #         marker=loop_values(MarkerType,Check),
+    #         color=loop_values(Colors,Check),
+    #         markersize=loop_values(MarkSize,Check),
+    #         alpha=loop_values(Alpha_Value,Check),
+    #         label="Sum")
+    
+    # #Log or linear scale?
+    # ax.set_xscale(XScale)
+    # if sum(Sum)==0:
+    #   ax.set_yscale('linear')
+    # else:
+    #   ax.set_yscale(YScale)
+    # #Set Title
+    # fig.suptitle(Title,fontsize=TitleFontSize,
+    #              fontweight=TitleFontWeight,fontdict=font,ha='center')
+    # #Set X and y labels
+    # ax.set_xlabel(Xlabel,
+    #               fontsize=XFontSize,fontweight=XFontWeight,
+    #               fontdict=font)
+    # YlabelBq="Activity $\\left[\\frac{Bq}{\\text{tHM}}\\right]$"
+    # ax.set_ylabel(YlabelBq,
+    #               fontsize=YFontSize,
+    #               fontweight=YFontWeight,
+    #               fontdict=font)
+
+    # Legend(ax)
+    # plt.savefig("Plots/"+Name+'_Bq.pdf') 
+
     
 def plots2(df,df2,Plotting,Name,NumOfPoints,Method1,Method2):
     #Plot in grams
