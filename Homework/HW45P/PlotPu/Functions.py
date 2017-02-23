@@ -703,9 +703,9 @@ def plotburnPuComp(df,Plotting,Name,NumOfPoints):
     fig.suptitle(Title,fontsize=TitleFontSize,
                  fontweight=TitleFontWeight,fontdict=font,ha='center')
     #Set X and y labels
-    ax.set_xlabel(Xlabel,
-                  fontsize=XFontSize,fontweight=XFontWeight,
-                  fontdict=font)
+    #ax.set_xlabel(Xlabel,
+    #              fontsize=XFontSize,fontweight=XFontWeight,
+    #              fontdict=font)
     ax.set_ylabel(Ylabel,
                   fontsize=YFontSize,
                   fontweight=YFontWeight,
@@ -735,9 +735,9 @@ def plotburnPuComp(df,Plotting,Name,NumOfPoints):
     #fig.suptitle(Title,fontsize=TitleFontSize,
     #             fontweight=TitleFontWeight,fontdict=font,ha='center')
     #Set X and y labels
-    #ax.set_xlabel(XlabelBurn,
-    #              fontsize=XFontSize,fontweight=XFontWeight,
-    #              fontdict=font)
+    ax.set_xlabel(XlabelBurn,
+                  fontsize=XFontSize,fontweight=XFontWeight,
+                  fontdict=font)
     ax2.set_ylabel(YlabelBurn,
                   fontsize=YFontSize,
                   fontweight=YFontWeight,

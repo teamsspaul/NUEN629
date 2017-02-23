@@ -16,8 +16,8 @@ import Functions as f
 ################################################################
 
 NumOfPoints=30          # Max Number of points for plots
-PlottingG1=["942380","942390","942400","942410","942420"]  #List elements you want to Plot
-CompareG1=["942380","942390","942400","942410","942420"]
+PlottingG1=["942390","942400","942410","942420"]  #List elements you want to Plot
+CompareG1=["942390","942400","942410","942420"]
 
 #########################################################
 ############# Initialize Matrix #########################

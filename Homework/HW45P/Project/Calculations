@@ -64,6 +64,9 @@ if not f.os.path.isfile('Saved_Variables/Decay_Consts.npy'):
 else:
     Decay_Conts=f.np.load('Saved_Variables/Decay_Consts.npy')
 
+print(len(Decay_Conts))
+quit()
+    
 #load up A and b with phi
 #f.os.system("rm Saved_Variables/Amatrix.npy") #To start over
 #f.os.system("rm Saved_Variables/n0vector.npy") #to start over
