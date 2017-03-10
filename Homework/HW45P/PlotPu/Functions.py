@@ -79,7 +79,7 @@ Xlabel='Time [years]'
 Ylabel="Mass $\\left[\\frac{g}{\\text{tHM}}\\right]$"
 
 XlabelBurn='Burnup $\\left[\\frac{\\text{MWd}}{\\text{tHM}}\\right]$'
-YlabelBurn='$^{239}$Pu Mass Percentage'
+YlabelBurn='$^{239}$Pu Mass Fraction'
 
 Na=6.0221409E23
 
@@ -724,7 +724,7 @@ def plotburnPuComp(df,Plotting,Name,NumOfPoints):
               color=loop_values(Colors,Check),
               markersize=loop_values(MarkSize,Check),
               alpha=loop_values(Alpha_Value,Check),
-              label='$^{239}$Pu Mass Percent')
+              label='$^{239}$Pu Mass Fraction')
     Check=Check+1
 
 
